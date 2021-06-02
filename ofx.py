@@ -96,7 +96,7 @@ def logcritical(message):
 def main():
 
     parser = argparse.ArgumentParser(description="ofx v2.0.2",
-    usage="略")
+    usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
 
     target = parser.add_argument_group("TARGET")
     target.add_argument("-u","--url",type=str,help="scan a single target url (e.g. www.baidu.com)")
@@ -109,6 +109,8 @@ def main():
     system.add_argument("--thread",default=10,type=int,help="线程数，默认10")
     system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080")
     system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名，目前只有html格式，别的格式别想了，懒得写")
+    if len(sys.argv) == 1:
+        sys.argv.append("-h")
     args=parser.parse_args()
 
     # 扫描模式校验
