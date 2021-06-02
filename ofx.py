@@ -8,7 +8,38 @@ import time
 from com.htmloutput import *
 from com.title import *
 
+logo = """
+                .-'''-.                          
+            '   _    \                        
+            /   /` '.   \                       
+            .   |     \  '  _.._                 
+            |   '      |  .' .._|                
+            \    \     / /| '  ____     _____    
+            `.   ` ..' __| |_`.   \  .'    /    
+                '-...-'|__   __|`.  `'    .'     
+                        | |     '.    .'       
+                        | |     .'     `.      
+                        | |   .'  .'`.   `.    
+                        | | .'   /    `.   `.  
+                        |_|'----'       '----' 
+    #################################################
+    * & @ !         author : %s             * * 耶**
+    -+_+__==_     version : %s       --__--__
+    #################################################
+"""
+
+
 root_path = os.path.dirname(os.path.realpath(__file__))
+
+print "\033[1;30;43m"
+print logo
+# 启动，路径检查
+output_path = root_path+"/output/"
+if not os.path.exists(output_path):
+    os.makedirs(output_path)
+log_path = root_path+"/log/"
+if not os.path.exists(log_path):
+    os.makedirs(log_path)
 
 ######
 # 下面代码不要动
@@ -61,36 +92,8 @@ def logcritical(message):
 # 上面代码不要动
 ######
 
-logo = """
-                .-'''-.                          
-            '   _    \                        
-            /   /` '.   \                       
-            .   |     \  '  _.._                 
-            |   '      |  .' .._|                
-            \    \     / /| '  ____     _____    
-            `.   ` ..' __| |_`.   \  .'    /    
-                '-...-'|__   __|`.  `'    .'     
-                        | |     '.    .'       
-                        | |     .'     `.      
-                        | |   .'  .'`.   `.    
-                        | | .'   /    `.   `.  
-                        |_|'----'       '----' 
-    #################################################
-    * & @ !         author : %s             * * 耶**
-    -+_+__==_     version : %s       --__--__
-    #################################################
-"""
 
 def main():
-    print "\033[1;30;43m"
-    print logo
-    # 启动，路径检查
-    output_path = root_path+"/output/"
-    if not os.path.exists(output_path):
-        os.makedirs(output_path)
-    log_path = root_path+"/log/"
-    if not os.path.exists(log_path):
-        os.makedirs(log_path)
 
     parser = argparse.ArgumentParser(description="ofx v2.0.2",
     usage="略")
