@@ -5,8 +5,11 @@ import sys
 import argparse
 import logging 
 import time
+import threading
+import queue
 from com.htmloutput import *
 from com.title import *
+
 
 logo = """
                 .-'''-.                          
@@ -30,6 +33,8 @@ logo = """
 
 
 root_path = os.path.dirname(os.path.realpath(__file__))
+
+lock=threading.Lock()
 
 print "\033[1;30;43m"
 print logo
@@ -91,6 +96,41 @@ def logcritical(message):
 ######
 # 上面代码不要动
 ######
+vulnoutput=list()
+unvulnoutput=[]
+unreachoutput=[]
+vulnn=0
+target_list=[]
+
+def run(scan_func,target,proxy=False,output=True):
+    """
+
+    """
+    global vulnoutput,unvulnoutput,unreachoutput,vulnn
+    while not target.empty():
+
+        try:
+            target_url = target.get()
+            vuln = scan_func(target_url,proxy)
+            if vuln[0] == True:
+                # print vuln[1]
+                vulntitle=get_title(vuln[1])
+                lock.acquire()
+                vulnn+=1
+                logvuln("[+ %d +]存在漏洞 %s 网站Title：%s "%(target.qsize(),target_url,vulntitle))
+                vulnoutput.append(target_url+" || 网站Title： "+vulntitle)
+                lock.release()
+            else:
+                lock.acquire()
+                logunvuln("[_ %d _]不存在漏洞 %s "%(target.qsize(),target_url))
+                unvulnoutput.append(target_url)
+                lock.release()
+                
+        except Exception as e:
+            lock.acquire()
+            logverifyerror("[! %d !]目标不可达 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            lock.release()
 
 
 def main():
@@ -141,34 +181,18 @@ def main():
             print "%s %s 漏洞存在"%(args.url,args.script)
         else:
             print "%s %s 漏洞不存在"%(args.url,args.script)
-            
+
     elif scan_mode == 2:
         with open(args.file,"r") as f:
             target_list = [i.strip() for i in f.readlines()]
-        vulnoutput=list()
-        unvulnoutput=[]
-        unreachoutput=[]
-        vulnn=0
-        scaned=0
+        qu = queue.Queue()
         for i in target_list:
-            scaned+=1
-            try:
-                vuln = verify(i,args.proxy)
-                if vuln[0] == True:
-                    # print vuln[1]
-                    vulntitle=get_title(vuln[1])
-                    logvuln("[+ %d/%d +]存在漏洞 %s 网站Title：%s "%(scaned,len(target_list),i,vulntitle))
-                    vulnn+=1
-                    if args.output != False:
-                        vulnoutput.append(i+" "+vulntitle)
-                else:
-                    logunvuln("[_ %d/%d _]不存在漏洞 %s "%(scaned,len(target_list),i))
-                    if args.output != False:
-                        unvulnoutput.append(i)
-                    
-            except Exception as e:
-                logverifyerror("[! %d/%d !]目标不可达 %s 错误详情：%s "%(scaned,len(target_list),i,str(e)))
-                unreachoutput.append(i+" "+str(e))
+            qu.put(i) 
+        # run(verify,qu)
+        for i in range(10):
+            t=threading.Thread(target=run,args=(verify,qu,))
+            t.start()
+        t.join()
         if args.output != False:
             args.output = now+".html" if args.output == True else args.output+".html"
             # args.output = args.output+".html"

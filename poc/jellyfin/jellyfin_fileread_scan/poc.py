@@ -4,7 +4,7 @@ import urllib3
 # ...
 urllib3.disable_warnings()
 
-def verify(host,proxy=False):
+def verify(host,proxy):
     """
     Jellyfin任意文件读取  
     CVE-2021-21402  
