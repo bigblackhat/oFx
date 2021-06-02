@@ -123,12 +123,15 @@ def main():
         exit()
 
     # 插件校验
-    if os.path.isfile(root_path+"/"+args.script):
-        # print str(root_path+"/"+args.script)[:-6]
-        sys.path.append(str(root_path+"/"+args.script)[:-6])
+
+    args.script = args.script[:-6] if args.script.endswith("poc.py") else args.script
+    if os.path.exists(root_path+"/"+args.script):
+        sys.path.append(str(root_path+"/"+args.script))
         from poc import verify
+        print "脚本文件加载完毕"
+
     else:
-        print "脚本文件不存在"
+        print "脚本文件不存在，请确认后重新指定"
         exit()
 
     if scan_mode == 1:
@@ -138,6 +141,7 @@ def main():
             print "%s %s 漏洞存在"%(args.url,args.script)
         else:
             print "%s %s 漏洞不存在"%(args.url,args.script)
+            
     elif scan_mode == 2:
         with open(args.file,"r") as f:
             target_list = [i.strip() for i in f.readlines()]
