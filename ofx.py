@@ -7,8 +7,17 @@ import logging
 import time
 import threading
 import queue
+
+try:
+    os.path.dirname(os.path.realpath(__file__))
+except Exception:
+    err_msg = "your system does not properly handdle non-Ascii path"
+    err_msg += "please move this ofx's directory to other location"
+    exit(err_msg)
+
 from com.htmloutput import *
 from com.title import *
+# from ofx.com.title import *
 
 
 logo = """
@@ -34,8 +43,6 @@ logo = """
 
 root_path = os.path.dirname(os.path.realpath(__file__))
 
-lock=threading.Lock()
-
 print "\033[1;30;43m"
 print logo
 # 启动，路径检查
@@ -45,6 +52,10 @@ if not os.path.exists(output_path):
 log_path = root_path+"/log/"
 if not os.path.exists(log_path):
     os.makedirs(log_path)
+
+lock=threading.Lock()
+
+
 
 ######
 # 下面代码不要动
@@ -96,6 +107,22 @@ def logcritical(message):
 ######
 # 上面代码不要动
 ######
+
+def get_module():
+    return os.path.dirname(os.path.realpath(__file__))
+
+def check_environment():
+    
+    PYVERSION = sys.version.split()[0]
+
+    if PYVERSION.split(".")[0] != "2":
+        err_msg = "incompatible Python version detected ('%s'). To successfully run sqlmap you'll have to use version 2.x"%(PYVERSION)
+        logcritical(err_msg)
+        exit()
+    
+
+
+
 vulnoutput=list()
 unvulnoutput=[]
 unreachoutput=[]
@@ -104,7 +131,14 @@ target_list=[]
 
 def run(scan_func,target,proxy=False,output=True):
     """
+    调用扫描插件对url进行检测  
+    直接打印到控制台和记录到日志中  
 
+    Use: 
+    run(verify,"121.121.121.121:9001","127.0.0.1:8080")
+
+    Return:
+    None
     """
     global vulnoutput,unvulnoutput,unreachoutput,vulnn
     while not target.empty():
@@ -134,7 +168,7 @@ def run(scan_func,target,proxy=False,output=True):
 
 
 def main():
-
+    check_environment()
     parser = argparse.ArgumentParser(description="ofx v2.0.2",
     usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
 
