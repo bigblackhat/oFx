@@ -15,10 +15,15 @@ except Exception:
     err_msg += "please move this ofx's directory to other location"
     exit(err_msg)
 
-from com.htmloutput import *
-from com.title import *
-# from ofx.com.title import *
+root_path = os.path.dirname(os.path.realpath(__file__))
 
+
+sys.path.append(root_path)#os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+from lib.htmloutput import output_html
+from lib.common import get_title
+
+author = "jijue"
+version = "2.1.3"
 
 logo = """
                 .-'''-.                          
@@ -38,10 +43,9 @@ logo = """
     * & @ !         author : %s             * * 耶**
     -+_+__==_     version : %s       --__--__
     #################################################
-"""
+"""%(author,version)
 
 
-root_path = os.path.dirname(os.path.realpath(__file__))
 
 print "\033[1;30;43m"
 print logo
@@ -63,7 +67,7 @@ lock=threading.Lock()
 now=str(int(time.time()))
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter("%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s: %(message)s")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s: %(message)s")
 
 
 # 使用FileHandler输出到文件
@@ -182,7 +186,7 @@ def main():
     system = parser.add_argument_group("SYSTEM")
     system.add_argument("--thread",default=10,type=int,help="线程数，默认10")
     system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080")
-    system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名，目前只有html格式，别的格式别想了，懒得写")
+    system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名，目前只有html格式")
     if len(sys.argv) == 1:
         sys.argv.append("-h")
     args=parser.parse_args()
@@ -196,43 +200,59 @@ def main():
         print "请输入检测目标"
         exit()
 
-    # 插件校验
 
+    # 插件校验
     args.script = args.script[:-6] if args.script.endswith("poc.py") else args.script
     if os.path.exists(root_path+"/"+args.script):
         sys.path.append(str(root_path+"/"+args.script))
-        from poc import verify
-        print "脚本文件加载完毕"
+        from poc import verify,_info
+        print "POC - %s 加载完毕"%(_info["name"])
 
     else:
         print "脚本文件不存在，请确认后重新指定"
         exit()
 
+    # 该模式用于检验POC插件本身的可用性  
     if scan_mode == 1:
         # 扫描
         # print args.url
-        if verify(args.url):
-            print "%s %s 漏洞存在"%(args.url,args.script)
+        if verify(args.url,args.proxy):
+            print "URL: %s  || POC: %s 漏洞存在"%(args.url,args.script)
         else:
-            print "%s %s 漏洞不存在"%(args.url,args.script)
+            print "URL: %s  || POC: %s 漏洞不存在"%(args.url,args.script)
 
+    # 批量检测模式
     elif scan_mode == 2:
+        start_time = time.time()
         with open(args.file,"r") as f:
             target_list = [i.strip() for i in f.readlines()]
         qu = queue.Queue()
         for i in target_list:
             qu.put(i) 
         # run(verify,qu)
-        for i in range(10):
+        for i in range(args.thread):
             t=threading.Thread(target=run,args=(verify,qu,))
             t.start()
         t.join()
+
+        time.sleep(9)
         if args.output != False:
-            args.output = now+".html" if args.output == True else args.output+".html"
+            html_output = now+".html" if args.output == True else args.output+".html"
             # args.output = args.output+".html"
-            output_html(args.output,vulnoutput,unvulnoutput,unreachoutput)
-            loglogo("报告已输出至：%s"%(args.output))
+            output_html(html_output,vulnoutput,unvulnoutput,unreachoutput)
+            loglogo("报告已输出至：%s"%(html_output))
+
+            # print vulnoutput
+            txt_output = now + ".txt" if args.output == True else args.output+".txt"
+            with open(root_path+"/output/"+txt_output,"w") as f:
+                for i in vulnoutput:
+                    f.write(i.split("||")[0].strip()+"\n")
+            loglogo("报告已输出至：%s"%(txt_output))
+        
         print "共计url %d 条， %d 条存在漏洞"%(len(target_list),vulnn)
+        end_time = time.time()
+        print "本次扫描耗时:  %d秒"%(end_time-start_time)
+    
 
     
 if __name__ == "__main__":
