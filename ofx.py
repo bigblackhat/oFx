@@ -26,7 +26,7 @@ from lib.common import get_title
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
-version = "2.2.1"
+version = "2.2.4"
 
 logo = """
                 .-'''-.                          
@@ -226,10 +226,11 @@ def main():
         if scan_mode == 1:
             # 扫描
             # print args.url
-            if verify(args.url,args.proxy):
-                print "URL: %s  || POC: %s 漏洞存在"%(args.url,args.script)
+            single_verify = verify(args.url,args.proxy)
+            if single_verify[0] == True:
+                print "URL: {url}  || POC: {script} 漏洞存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1])
             else:
-                print "URL: %s  || POC: %s 漏洞不存在"%(args.url,args.script)
+                print "URL: %s  || POC: %s 漏洞不存在\n服务端返回信息: %s\n"%(args.url,args.script,single_verify[1])
 
         # 批量检测模式
         elif scan_mode == 2:

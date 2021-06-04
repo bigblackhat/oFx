@@ -57,6 +57,8 @@ def verify(host,proxy):
             req = requests.get(url,timeout = 6,verify = False)
         if req.status_code == 200 and req.text is not None:
             vuln = [True,req.text]
+        else:
+            vuln = [False,req.text]
     except Exception as e:
         raise e
     

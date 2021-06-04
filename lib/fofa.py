@@ -18,7 +18,7 @@ def fofa_login(user,key):
         else:
             while _login == False:
                 err_msg = "登陆失败，请重新确认并在下方输入user和key"
-                # logwarning(err_msg)
+                print err_msg
                 user = raw_input("Fofa 账号：")
                 key = raw_input("Fofa key：")
                 # print user,key
