@@ -26,7 +26,7 @@ from lib.common import get_title
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
-version = "2.1.3"
+version = "2.2.1"
 
 logo = """
                 .-'''-.                          
@@ -181,8 +181,8 @@ def main():
     usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
 
     searchengine = parser.add_argument_group("SearchEngine")
-    searchengine.add_argument("--fofa-search",type=str,help="fofa搜索语句")
-    searchengine.add_argument("--fofa-output",type=str,help="fofa搜索结果保存，默认scan目录，改不了")
+    searchengine.add_argument("--fofa-search",action="store_true",help="不必输入参数值")#type=str,help="fofa搜索语句(空格用下划线代替)")
+    # searchengine.add_argument("--fofa-output",type=str,help="fofa搜索结果保存，默认scan目录，改不了")
 
     # target = parser.add_argument_group("TARGET")
     target = parser.add_mutually_exclusive_group()
@@ -279,7 +279,7 @@ def main():
             # 再次登陆校验，循环
         # 登陆成功，
             fofa_save_path = root_path + "/scan/" + raw_input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
-            FofaDork = args.fofa_search#.replace("_"," ")
+            FofaDork = raw_input("请输入搜索语句：")
             loglogo("Fofa搜索语句为：{fofadork}，开始与Fofa Api对接".format(fofadork = FofaDork))
             FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,fofa_save_path)
             if type(FofaResultNum) == int:
