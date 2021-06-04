@@ -28,7 +28,9 @@ _info = {
 
     "fofa-dork":"title=\"Jellyfin\"",
     "example" : "34.95.215.4",
-    "exp_img" : ""
+    "exp_img" : "",
+
+    "timeout" : 5,
 }
 
 def verify(host,proxy):
@@ -50,7 +52,7 @@ def verify(host,proxy):
         }
     try:
         if proxy:
-            req = requests.get(url,timeout = 6,proxies=proxies,verify = False)
+            req = requests.get(url,timeout = _info["timeout"],proxies=proxies,verify = False)
         else:
             req = requests.get(url,timeout = 6,verify = False)
         if req.status_code == 200 and req.text is not None:

@@ -15,6 +15,14 @@
 黑底青字目标不可达  
 ![show](img/2.png)
 
+网速尚可情况下，测试10个线程的速度：
+![show](img/5.png)
+也就是4分钟1000条  
+
+网速尚可情况下，测试20个线程的速度：
+![show](img/6.png)
+两分钟跑完1000条  
+
 
 
 TODO  
@@ -29,7 +37,7 @@ TODO
 ~~加入计时功能~~  
 poc全面拥抱urllib2  
 ~~插件模版制作~~  
-添加按键退出功能，参考start函数    
+~~添加按键退出功能~~    
 添加fofa-api接口，参考pocsuite3/plugins/target_from_fofa.py  
 html报告版面优化，参考pocsuite3/plugins/html_report.py  
 添加自动更新功能，该功能放弃广大win用户，请见谅，参考pocsuite3/lib/core/update.py  
