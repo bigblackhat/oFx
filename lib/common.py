@@ -28,10 +28,33 @@ def url_handle(url):
     return:
     dict urldict  
     """
-    url = "http://" + url if not url.startswith("http") else url
-    p = urlparse.urlparse(url)
+    # 以http开头
+        # 放行
+    if url.startswith("http"):
+        p = urlparse.urlparse(url)
+        # pass
+    # 否则，默认加http
+        # 有端口号
+            # 443，改成https
+            # 否则，放行
+        # 否则，放行
+    else:
+        url = "http://" + url 
+        p = urlparse.urlparse(url)
+        if ":" in p.netloc:
+            if "443" in p.netloc.split(":")[1]:
+                url = url.replace("http://","https://")
+                p = urlparse.urlparse(url)
+
+            else:
+                pass
+        else:
+            pass
+        
+    # url = "http://" + url if not url.startswith("http") else url
+    # print p
     return urlparse.urlunsplit([p.scheme, p.netloc, '', '', ''])
 
 if __name__ == "__main__":
-    print url_handle("www.bshine.cn")
+    print url_handle("www.bshine.cn:443")
     # print reip()

@@ -61,7 +61,7 @@ def fofa_search(user,key,dork,save_path):
         elif "443" in i[2]:
             url = "https://" + i[1] + ":" + i[2]
         else:
-            url = i[1] + ":" + i[2]
+            url = "http://" + i[1] + ":" + i[2]
         url_list.append(url)
     # print len(url_list)
     url_list = set(url_list)

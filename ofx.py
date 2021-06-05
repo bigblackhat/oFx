@@ -22,11 +22,11 @@ root_path = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.append(root_path)#os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from lib.htmloutput import output_html
-from lib.common import get_title
+from lib.common import get_title,url_handle
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
-version = "2.2.4"
+version = "2.2.5"
 
 logo = """
                 .-'''-.                          
@@ -219,18 +219,19 @@ def main():
             print "POC - %s 加载完毕"%(_info["name"])
 
         else:
-            print "脚本文件不存在，请确认后重新指定"
+            print "POC加载失败，请确认路径后重新指定"
             exit()
 
         # 该模式用于检验POC插件本身的可用性  
         if scan_mode == 1:
             # 扫描
             # print args.url
+            args.url = url_handle(args.url)
             single_verify = verify(args.url,args.proxy)
             if single_verify[0] == True:
                 print "URL: {url}  || POC: {script} 漏洞存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1])
             else:
-                print "URL: %s  || POC: %s 漏洞不存在\n服务端返回信息: %s\n"%(args.url,args.script,single_verify[1])
+                print "URL: {url}  || POC: {script} 漏洞不存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1])
 
         # 批量检测模式
         elif scan_mode == 2:
