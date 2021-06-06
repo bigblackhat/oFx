@@ -26,7 +26,7 @@ from lib.common import get_title,url_handle
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
-version = "2.2.5"
+version = "2.2.8"
 
 logo = """
                 .-'''-.                          
@@ -247,7 +247,7 @@ def main():
                 t.start()
             t.join()
 
-            time.sleep(_info["timeout"]+0.1)
+            time.sleep(int(_info["timeout"]+3))
             if args.output != False:
                 html_output = now+".html" if args.output == True else args.output+".html"
                 # args.output = args.output+".html"

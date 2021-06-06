@@ -2,6 +2,9 @@
 import requests
 import configparser
 from base64 import b64encode
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 def get_ukey(cfg_path):
     cp = configparser.ConfigParser()
