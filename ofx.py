@@ -11,6 +11,8 @@ import configparser
 import requests
 import ctypes
 import inspect
+import subprocess
+import re
 
 try:
     os.path.dirname(os.path.realpath(__file__))
@@ -24,11 +26,13 @@ root_path = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.append(root_path)#os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from lib.htmloutput import output_html
-from lib.common import get_title,url_handle
+from lib.common import get_title,url_handle,get_latest_revision,get_local_version,poll_process,get_revision_number
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
 version = "2.3.1"
+IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
+
 
 logo = """
                 .-'''-.                          
@@ -218,7 +222,9 @@ def main():
     system = parser.add_argument_group("System")
     system.add_argument("--thread",default=10,type=int,help="线程数，默认10")
     system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080")
-    system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名，目前只有html格式")
+    system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名同时输出html和txt两种格式的报告")
+    system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")
+    
     if len(sys.argv) == 1:
         sys.argv.append("-h")
     args=parser.parse_args()
@@ -315,7 +321,58 @@ def main():
                 logvuln(log_msg)
             # 获取搜索结果并保存到scan
         pass
-
+    
+    if args.update:
+        if not os.path.exists(os.path.join(root_path, ".git")):
+            warn_msg = "not a git repository. It is recommended to clone the 'bigblackhat/oFx' repository "
+            warn_msg += "from GitHub (e.g. 'git clone --depth 1 https://github.com/bigblackhat/oFx.git pocsuite3')"
+            loglogo(warn_msg)
+            if get_latest_revision() == get_local_version(root_path+"/info.ini"):
+                logvuln("already at the latest revision '{}'".format(get_local_version(root_path+"/info.ini")))
+                exit()
+        else:
+            info_msg = "updating ofx to the latest development revision from the "
+            info_msg += "GitHub repository"
+            logvuln(info_msg)
+            debug_msg = "ofx will try to update itself using 'git' command"
+            logvuln(debug_msg)
+            # data_to_stdout("\r[{0}] [INFO] update in progress ".format(time.strftime("%X")))
+            cwd_path = os.path.join(root_path, "../")
+            try:
+                process = subprocess.Popen("git checkout . && git pull https://github.com/bigblackhat/oFx.git HEAD" ,
+                                        shell=True,
+                                        stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        cwd=cwd_path.encode(
+                                            sys.getfilesystemencoding() or "utf-8"))
+                poll_process(process, True)
+                stdout, stderr = process.communicate()
+                success = not process.returncode
+            except (IOError, OSError) as e:
+                success = False
+                stderr = str(e)
+            if success:
+                logvuln("{0} the latest revision '{1}'".format("already at" if b"Already" in stdout else "updated to",
+                                                                get_revision_number()))
+            else:
+                if "Not a git repository" in stderr:
+                    err_msg = "not a valid git repository. Please checkout the 'knownsec/pocsuite3' repository "
+                    err_msg += "from GitHub (e.g. 'git clone --depth 1 https://github.com/bigblackhat/oFx.git pocsuite3')"
+                    logvuln(err_msg)
+                else:
+                    logvuln("update could not be completed ('%s')" % re.sub(r"\W+", " ", stderr).strip())
+            if not success:
+                if IS_WIN:
+                    info_msg = "for Windows platform it's recommended "
+                    info_msg += "to use a GitHub for Windows client for updating "
+                    info_msg += "purposes (http://windows.github.com/) or just "
+                    info_msg += "download the latest snapshot from "
+                    info_msg += "https://github.com/knownsec/pocsuite3/downloads"
+                else:
+                    info_msg = "for Linux platform it's recommended "
+                    info_msg += "to install a standard 'git' package (e.g.: 'sudo apt-get install git')"
+                logvuln(info_msg)
+            sys.exit()
     
 if __name__ == "__main__":
     main()
