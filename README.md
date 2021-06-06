@@ -68,19 +68,4 @@
 |[sqlmap]()|
 |[pocsuite3]()|
 
-## TODO  
-~~插件调用~~  
-~~html报告导出~~  
-~~log记录与打印~~   
-~~多线程~~   
-~~添加启动时环境监测机制~~    
-~~添加系统目录初始化操作~~  
-~~添加系统参数初始化操作~~  
-~~调整模块导入细节~~   
-~~加入计时功能~~  
-poc全面拥抱urllib2  
-~~插件模版制作~~  
-~~添加按键退出功能~~    
-~~添加fofa-api接口~~   
-html报告版面优化，参考pocsuite3/plugins/html_report.py  
-添加自动更新功能，该功能放弃广大win用户，请见谅，参考pocsuite3/lib/core/update.py  
+
