@@ -1,7 +1,7 @@
 # coding:utf-8
 from bs4 import BeautifulSoup
 import urlparse  
-
+import random
 def get_title(htmlcode):
     """
     获取网站title  
@@ -55,6 +55,14 @@ def url_handle(url):
     # print p
     return urlparse.urlunsplit([p.scheme, p.netloc, '', '', ''])
 
+def get_random_ua():
+    with open("./data/user_agents.txt","r") as f:
+        UAs = [i.strip() for i in f.readlines()]
+    return random.choice(UAs)
+    # pass
+
+
 if __name__ == "__main__":
-    print url_handle("www.bshine.cn:443")
+    # print url_handle("www.bshine.cn:443")
     # print reip()
+    print get_random_ua()

@@ -5,7 +5,7 @@ import sys
 # ...
 urllib3.disable_warnings()
 # sys.path.append(root_path)
-from lib.common import url_handle
+from lib.common import url_handle,get_random_ua
 
 _info = {
     "version" : "1",
@@ -50,9 +50,15 @@ def verify(host,proxy):
         "http": "http://%s"%(proxy),
         "https": "http://%s"%(proxy),
         }
+
+    headers = {"User-Agent":get_random_ua(),
+                "Connection":"close",
+                # "Content-Type": "application/x-www-form-urlencoded",
+                }
+
     try:
         if proxy:
-            req = requests.get(url,timeout = _info["timeout"],proxies=proxies,verify = False)
+            req = requests.get(url,timeout = _info["timeout"],headers = headers,proxies=proxies,verify = False)
         else:
             req = requests.get(url,timeout = 6,verify = False)
         if req.status_code == 200 and req.text is not None:

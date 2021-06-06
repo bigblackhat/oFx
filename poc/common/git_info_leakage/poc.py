@@ -1,6 +1,6 @@
 # coding:utf-8  
 import requests
-from lib.common import url_handle
+from lib.common import url_handle,get_random_ua
 # ...
 import urllib3
 urllib3.disable_warnings()
@@ -45,7 +45,7 @@ def verify(host,proxy):
         "http": "http://%s"%(proxy),
         "https": "http://%s"%(proxy),
         }
-    headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
+    headers = {"User-Agent":get_random_ua(),
                 "Connection":"close",
                 # "Content-Type": "application/x-www-form-urlencoded",
                 }
@@ -64,5 +64,3 @@ def verify(host,proxy):
     
     return vuln
 
-# add user
-# POST /v1/auth/users?username=ttt&password=ttt

@@ -9,6 +9,8 @@ import threading
 import queue
 import configparser
 import requests
+import ctypes
+import inspect
 
 try:
     os.path.dirname(os.path.realpath(__file__))
@@ -26,7 +28,7 @@ from lib.common import get_title,url_handle
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
-version = "2.2.8"
+version = "2.3.1"
 
 logo = """
                 .-'''-.                          
@@ -173,6 +175,27 @@ def run(scan_func,target,proxy=False,output=True):
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
+##########
+def _async_raise(tid, exctype):
+    """raises the exception, performs cleanup if needed"""
+    tid = ctypes.c_long(tid)
+    if not inspect.isclass(exctype):
+        exctype = type(exctype)
+    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, ctypes.py_object(exctype))
+    if res == 0:
+        raise ValueError("invalid thread id")
+    elif res != 1:
+        # """if it returns a number greater than one, you're in trouble,
+        # and you should call it again with exc=NULL to revert the effect"""
+        ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, None)
+        raise SystemError("PyThreadState_SetAsyncExc failed")
+
+def stop_thread(thread):
+    _async_raise(thread.ident, SystemExit)
+
+
+
+##########
 
 
 def main():
@@ -226,7 +249,7 @@ def main():
         if scan_mode == 1:
             # 扫描
             # print args.url
-            args.url = url_handle(args.url)
+            # args.url = url_handle(args.url)
             single_verify = verify(args.url,args.proxy)
             if single_verify[0] == True:
                 print "URL: {url}  || POC: {script} 漏洞存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1])
@@ -247,7 +270,9 @@ def main():
                 t.start()
             t.join()
 
-            time.sleep(int(_info["timeout"]+3))
+            time.sleep(int(_info["timeout"]+1))
+            if t.isAlive():
+                stop_thread(t)
             if args.output != False:
                 html_output = now+".html" if args.output == True else args.output+".html"
                 # args.output = args.output+".html"
@@ -264,6 +289,7 @@ def main():
             loglogo("共计url %d 条， %d 条存在漏洞"%(len(target_list),vulnn))
             end_time = time.time()
             loglogo("本次扫描耗时:  %d秒"%(end_time-start_time))
+            # sys.exit()
 
 
     if args.fofa_search:
