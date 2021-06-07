@@ -56,9 +56,14 @@ print(logo)
 output_path = root_path+"/output/"
 if not os.path.exists(output_path):
     os.makedirs(output_path)
+
 log_path = root_path+"/log/"
 if not os.path.exists(log_path):
     os.makedirs(log_path)
+
+scan_path = root_path + "/scan/"
+if not os.path.exists(scan_path):
+    os.makedirs(scan_path)
 
 lock=threading.Lock()
 
@@ -294,7 +299,7 @@ def main():
                 fofa_save_path = root_path + "/scan/" + raw_input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
                 FofaDork = raw_input("请输入搜索语句：")
             else:
-                fofa_save_path = root_path + "/scan/" + input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
+                fofa_save_path = scan_path + input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
                 FofaDork = input("请输入搜索语句：")
             loglogo("Fofa搜索语句为：{fofadork}，开始与Fofa Api对接".format(fofadork = FofaDork))
             FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,fofa_save_path)

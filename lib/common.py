@@ -2,10 +2,12 @@
 from __future__ import print_function
 from bs4 import BeautifulSoup
 import sys
+
 if sys.version.split()[0].split(".")[0] == 2:
     from urlparse import urlparse  
 else :
     from urllib.parse import urlparse
+    
 import random
 import configparser
 import requests
