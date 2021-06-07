@@ -101,12 +101,18 @@ Alibaba Nacos未授权访问
 ## version 2.3.3
 -----------------
 回退2.3.1  
+
 添加两条POC：  
+phpv8后门检测POC   
+
+优化svn信息泄露POC  
+
 优化help文字描述  
 
 
-## version 2.3.5
+## version 2.3.6
 -----------------
 出于存储考虑，添加日志与报告的自动clear功能  
 readme中新增当前已支持的POC列表  
 整合version与author信息到info.ini中  
+优化proxy的url处理  

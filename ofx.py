@@ -35,24 +35,17 @@ IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else F
 
 
 logo = """
-                .-'''-.                          
-            '   _    \                        
-            /   /` '.   \                       
-            .   |     \  '  _.._                 
-            |   '      |  .' .._|                
-            \    \     / /| '  ____     _____    
-            `.   ` ..' __| |_`.   \  .'    /    
-                '-...-'|__   __|`.  `'    .'     
-                        | |     '.    .'       
-                        | |     .'     `.      
-                        | |   .'  .'`.   `.    
-                        | | .'   /    `.   `.  
-                        |_|'----'       '----' 
-    #################################################
-    * & @ !         author : %s             * * 耶**
-    -+_+__==_     version : %s       --__--__
-    #################################################
-"""%(author,version)
+        _  ______      
+    ___ |  ___|_  __
+    / _ \| |_  \ \/ /
+    | (_) |  _|  >  <__ _Author : {author}
+    \___/|_| __/_/\_\__ __ __Version : {version}
+
+    #*#*#  https://github.com/bigblackhat/oFx  #*#*#
+
+        _______________________________________
+                
+""".format(author=author,version=version)
 
 
 
@@ -193,7 +186,7 @@ def main():
     usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
 
     searchengine = parser.add_argument_group("SearchEngine")
-    searchengine.add_argument("--fofa-search",action="store_true",help="不必输入参数值")#type=str,help="fofa搜索语句(空格用下划线代替)")
+    searchengine.add_argument("--fofa-search",action="store_true",help="fofa搜索模式，此选项不必输入参数值")#type=str,help="fofa搜索语句(空格用下划线代替)")
     # searchengine.add_argument("--fofa-output",type=str,help="fofa搜索结果保存，默认scan目录，改不了")
 
     # target = parser.add_argument_group("TARGET")
@@ -205,7 +198,7 @@ def main():
     script.add_argument("-s","--script",type=str,help="load script by name (e.g. -s poc/jellyfin/jellyfin_fileread_scan/poc.py)")
     
     system = parser.add_argument_group("System")
-    system.add_argument("--thread",default=10,type=int,help="线程数，默认10")
+    system.add_argument("--thread",default=10,type=int,help="线程数，不加此选项时默认10线程")
     system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080")
     system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名同时输出html和txt两种格式的报告")
     # system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")

