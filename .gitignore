@@ -19,7 +19,8 @@ log/
 scan/
 .vscode/
 漏洞报告alpha版/
-reference.md
+reference.md  
+.DS_Store
 
 
 
