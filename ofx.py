@@ -26,7 +26,7 @@ root_path = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.append(root_path)#os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from lib.htmloutput import output_html
-from lib.common import get_title,url_handle,get_latest_revision,get_local_version,poll_process,get_revision_number
+from lib.common import get_title,url_handle,get_latest_revision,get_local_version
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
@@ -180,22 +180,7 @@ def run(scan_func,target,proxy=False,output=True):
             lock.release()
 
 ##########
-def _async_raise(tid, exctype):
-    """raises the exception, performs cleanup if needed"""
-    tid = ctypes.c_long(tid)
-    if not inspect.isclass(exctype):
-        exctype = type(exctype)
-    res = ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, ctypes.py_object(exctype))
-    if res == 0:
-        raise ValueError("invalid thread id")
-    elif res != 1:
-        # """if it returns a number greater than one, you're in trouble,
-        # and you should call it again with exc=NULL to revert the effect"""
-        ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, None)
-        raise SystemError("PyThreadState_SetAsyncExc failed")
 
-def stop_thread(thread):
-    _async_raise(thread.ident, SystemExit)
 
 
 
@@ -223,7 +208,7 @@ def main():
     system.add_argument("--thread",default=10,type=int,help="线程数，默认10")
     system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080")
     system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名同时输出html和txt两种格式的报告")
-    system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")
+    # system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")
     
     if len(sys.argv) == 1:
         sys.argv.append("-h")
@@ -277,8 +262,7 @@ def main():
             t.join()
 
             time.sleep(int(_info["timeout"]+1))
-            if t.isAlive():
-                stop_thread(t)
+            
             if args.output != False:
                 html_output = now+".html" if args.output == True else args.output+".html"
                 # args.output = args.output+".html"
@@ -322,57 +306,7 @@ def main():
             # 获取搜索结果并保存到scan
         pass
     
-    if args.update:
-        if not os.path.exists(os.path.join(root_path, ".git")):
-            warn_msg = "not a git repository. It is recommended to clone the 'bigblackhat/oFx' repository "
-            warn_msg += "from GitHub (e.g. 'git clone --depth 1 https://github.com/bigblackhat/oFx.git pocsuite3')"
-            loglogo(warn_msg)
-            if get_latest_revision() == get_local_version(root_path+"/info.ini"):
-                logvuln("already at the latest revision '{}'".format(get_local_version(root_path+"/info.ini")))
-                exit()
-        else:
-            info_msg = "updating ofx to the latest development revision from the "
-            info_msg += "GitHub repository"
-            logvuln(info_msg)
-            debug_msg = "ofx will try to update itself using 'git' command"
-            logvuln(debug_msg)
-            # data_to_stdout("\r[{0}] [INFO] update in progress ".format(time.strftime("%X")))
-            cwd_path = os.path.join(root_path, "../")
-            try:
-                process = subprocess.Popen("git checkout . && git pull https://github.com/bigblackhat/oFx.git HEAD" ,
-                                        shell=True,
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        cwd=cwd_path.encode(
-                                            sys.getfilesystemencoding() or "utf-8"))
-                poll_process(process, True)
-                stdout, stderr = process.communicate()
-                success = not process.returncode
-            except (IOError, OSError) as e:
-                success = False
-                stderr = str(e)
-            if success:
-                logvuln("{0} the latest revision '{1}'".format("already at" if b"Already" in stdout else "updated to",
-                                                                get_revision_number()))
-            else:
-                if "Not a git repository" in stderr:
-                    err_msg = "not a valid git repository. Please checkout the 'knownsec/pocsuite3' repository "
-                    err_msg += "from GitHub (e.g. 'git clone --depth 1 https://github.com/bigblackhat/oFx.git pocsuite3')"
-                    logvuln(err_msg)
-                else:
-                    logvuln("update could not be completed ('%s')" % re.sub(r"\W+", " ", stderr).strip())
-            if not success:
-                if IS_WIN:
-                    info_msg = "for Windows platform it's recommended "
-                    info_msg += "to use a GitHub for Windows client for updating "
-                    info_msg += "purposes (http://windows.github.com/) or just "
-                    info_msg += "download the latest snapshot from "
-                    info_msg += "https://github.com/knownsec/pocsuite3/downloads"
-                else:
-                    info_msg = "for Linux platform it's recommended "
-                    info_msg += "to install a standard 'git' package (e.g.: 'sudo apt-get install git')"
-                logvuln(info_msg)
-            sys.exit()
+    
     
 if __name__ == "__main__":
     main()

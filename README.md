@@ -31,6 +31,13 @@
 
 ## 使用方法  
 
+
+### 部署
+
+```
+git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
+```
+
 ### 单个url扫描模式
 
 单个url扫描模式的使用场景：
