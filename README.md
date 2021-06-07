@@ -66,6 +66,17 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key    
 
 
+## POC支持清单
+|应用|漏洞名称|POC路径|
+|-|-|-|
+|-|URL存活检测|``poc/common/url_alive/poc.py``|
+|git|git信息泄露|``poc/common/git_info_leakage/poc.py``|
+|svn|svn信息泄露|``poc/common/svn_info_leakage/poc.py``|
+|Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/druid_access/poc.py``|
+|Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Alibaba_Nacos_access/poc.py``|
+|Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/jellyfin_fileread_scan/poc.py``|
+|PHP|php v8.1开发版后门检测|``poc/php/php_v8dev_backdoor/poc.py``|
+
 ## 致谢清单
 
 以下清单中的项目笔者都有参考，排名不分先后顺序，仅按照中文全拼首字母顺序排列  

@@ -30,7 +30,7 @@ from lib.common import get_title,url_handle,get_latest_revision,get_local_versio
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
 author = "jijue"
-version = "2.3.1"
+version = "2.3.3"
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
 
 

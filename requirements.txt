@@ -1,0 +1,5 @@
+Queue
+configparser
+requests
+urlparse
+bs4
