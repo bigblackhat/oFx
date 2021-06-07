@@ -69,7 +69,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ## POC支持清单
 |应用|漏洞名称|POC路径|
 |-|-|-|
-|-|URL存活检测|``poc/common/url_alive/poc.py``|
+|通用|URL存活检测|``poc/common/url_alive/poc.py``|
 |git|git信息泄露|``poc/common/git_info_leakage/poc.py``|
 |svn|svn信息泄露|``poc/common/svn_info_leakage/poc.py``|
 |Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/druid_access/poc.py``|

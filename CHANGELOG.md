@@ -112,9 +112,10 @@ phpv8后门检测POC
 -----以上为当前版本-----
 =======
 ```
-## version 2.3.6
+## version 2.3.8
 -----------------
 出于存储考虑，添加日志与报告的自动clear功能  
+添加对python3的支持  
 readme中新增当前已支持的POC列表  
 整合version与author信息到info.ini中  
-优化proxy的url处理  
+优化proxy的url处理   

@@ -1,4 +1,5 @@
 # coding: utf-8
+from __future__ import print_function
 
 import os
 import sys
@@ -13,7 +14,6 @@ import ctypes
 import inspect
 import subprocess
 import re
-
 try:
     os.path.dirname(os.path.realpath(__file__))
 except Exception:
@@ -32,6 +32,7 @@ from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 author = "jijue"
 version = "2.3.3"
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
+PYVERSION = sys.version.split()[0].split(".")[0]
 
 
 logo = """
@@ -49,8 +50,8 @@ logo = """
 
 
 
-print "\033[1;30;43m"
-print logo
+print("\033[1;30;43m")
+print(logo)
 # 启动，路径检查
 output_path = root_path+"/output/"
 if not os.path.exists(output_path):
@@ -87,27 +88,27 @@ logger.addHandler(ch)
 logger.addHandler(fh)
 
 def loglogo(message):
-    print "\033[1;30;43m"
+    print("\033[1;30;43m")
     logger.info(message)
 
 def logvuln(message):
-    print "\033[1;32;40m" # 黑底绿字
+    print("\033[1;32;40m") # 黑底绿字
     logger.info(message)
 
 def logunvuln(message):
-    print "\033[1;34;40m" # 黑底蓝字
+    print("\033[1;34;40m") # 黑底蓝字
     logger.info(message)
 
 def logverifyerror(message):
-    print "\033[1;36;40m" # 黑底青字
+    print("\033[1;36;40m") # 黑底青字
     logger.info(message)
 
 def logwarning(message):
-    print "\033[1;37;41m"
+    print("\033[1;37;41m")
     logger.warning(message)
 
 def logcritical(message):
-    print "\033[1;31;40m"
+    print("\033[1;31;40m")
     logger.critical(message)
 
 ######
@@ -119,7 +120,7 @@ def get_module():
 
 def check_environment():
     
-    PYVERSION = sys.version.split()[0]
+    
 
     if PYVERSION.split(".")[0] != "2":
         err_msg = "incompatible Python version detected ('%s'). To successfully run sqlmap you'll have to use version 2.x"%(PYVERSION)
@@ -181,7 +182,7 @@ def run(scan_func,target,proxy=False,output=True):
 
 
 def main():
-    check_environment()
+    # check_environment()
     parser = argparse.ArgumentParser(description="ofx v2.0.2",
     usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
 
@@ -214,7 +215,7 @@ def main():
         elif args.file:
             scan_mode=2
         else:
-            print "请输入检测目标"
+            print("请确认检测模式，-f为批量检测模式，-u为单个检测模式")
             exit()
 
 
@@ -223,10 +224,10 @@ def main():
         if os.path.exists(root_path+"/"+args.script):
             sys.path.append(str(root_path+"/"+args.script))
             from poc import verify,_info
-            print "POC - %s 加载完毕"%(_info["name"])
+            logvuln("POC - %s 加载完毕"%(_info["name"]))
 
         else:
-            print "POC加载失败，请确认路径后重新指定"
+            logvuln("POC加载失败，请确认路径后重新指定")
             exit()
 
         # 该模式用于检验POC插件本身的可用性  
@@ -236,9 +237,9 @@ def main():
             # args.url = url_handle(args.url)
             single_verify = verify(args.url,args.proxy)
             if single_verify[0] == True:
-                print "URL: {url}  || POC: {script} 漏洞存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1])
+                print("URL: {url}  || POC: {script} 漏洞存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1]))
             else:
-                print "URL: {url}  || POC: {script} 漏洞不存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1])
+                print("URL: {url}  || POC: {script} 漏洞不存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1]))
 
         # 批量检测模式
         elif scan_mode == 2:

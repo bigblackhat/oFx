@@ -1,10 +1,13 @@
 # coding:utf-8
+from __future__ import print_function
 import requests
 import configparser
 from base64 import b64encode
+
 import sys
-reload(sys)
-sys.setdefaultencoding("utf-8")
+if sys.version.split()[0].split(".")[0] == 2:
+    reload(sys)
+    sys.setdefaultencoding("utf-8")
 
 def get_ukey(cfg_path):
     cp = configparser.ConfigParser()
@@ -21,7 +24,7 @@ def fofa_login(user,key):
         else:
             while _login == False:
                 err_msg = "登陆失败，请重新确认并在下方输入user和key"
-                print err_msg
+                print(err_msg)
                 user = raw_input("Fofa 账号：")
                 key = raw_input("Fofa key：")
                 # print user,key
@@ -52,9 +55,9 @@ def fofa_search(user,key,dork,save_path):
             # print len(content['results'])
             for match in content['results']:
                 search_result.append(match)
-            print "第{page}页获取成功".format(page = i)
+            print("第{page}页获取成功".format(page = i))
         else:
-            print "[PLUGIN] Fofa:{}".format(req.text)
+            print("[PLUGIN] Fofa:{}".format(req.text))
             continue
 
     # print len(search_result)
