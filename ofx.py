@@ -290,12 +290,16 @@ def main():
         # 无或登陆失败，raw_input函数获取用户输入，
             # 再次登陆校验，循环
         # 登陆成功，
-            fofa_save_path = root_path + "/scan/" + raw_input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
-            FofaDork = raw_input("请输入搜索语句：")
+            if PYVERSION == 2:
+                fofa_save_path = root_path + "/scan/" + raw_input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
+                FofaDork = raw_input("请输入搜索语句：")
+            else:
+                fofa_save_path = root_path + "/scan/" + input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
+                FofaDork = input("请输入搜索语句：")
             loglogo("Fofa搜索语句为：{fofadork}，开始与Fofa Api对接".format(fofadork = FofaDork))
             FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,fofa_save_path)
             if type(FofaResultNum) == int:
-                log_msg = "搜索完毕，结果保存至{path}，共计{FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
+                log_msg = "搜索完毕，结果保存至{path}，经去重共计{FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
                 logvuln(log_msg)
             # 获取搜索结果并保存到scan
         pass

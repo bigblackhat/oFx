@@ -95,7 +95,7 @@ def get_latest_revision():
 
 
 
-if __name__ == "__main__":
-    print(url_handle("www.bshine.cn:443"))
-    # print reip()
-    # print(get_random_ua())
+# if __name__ == "__main__":
+#     # print(url_handle("www.bshine.cn:443"))
+#     # print reip()
+#     # print(get_random_ua())

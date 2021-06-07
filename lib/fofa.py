@@ -25,8 +25,12 @@ def fofa_login(user,key):
             while _login == False:
                 err_msg = "登陆失败，请重新确认并在下方输入user和key"
                 print(err_msg)
-                user = raw_input("Fofa 账号：")
-                key = raw_input("Fofa key：")
+                if sys.version.split()[0].split(".")[0] == 2:
+                    user = raw_input("Fofa 账号：")
+                    key = raw_input("Fofa key：")
+                else:
+                    user = input("Fofa 账号：")
+                    key = input("Fofa key：")
                 # print user,key
                 _login = fofa_login(user,key)[0]
     except KeyboardInterrupt:
@@ -50,7 +54,11 @@ def fofa_search(user,key,dork,save_path):
         url = "https://fofa.so/api/v1/search/all?email={user}&key={key}&qbase64={dork}&fields={resource}&page={page}".format(
                         user=user, key=key, dork=b64encode(dork.encode()).decode(), resource=resource, page=i)
         req = requests.get(url,timeout=80)
-        if req and req.status_code == 200 and "results" in req.json():
+        if "\"results\":[],\"size\":0" in req.text:
+            err_msg = "搜索语句{dork}已无返回结果：{error}\n请前往fofa web端测试搜索语句的有效性"
+            print(err_msg)
+            return
+        elif req and req.status_code == 200 and "results" in req.json():
             content = req.json()
             # print len(content['results'])
             for match in content['results']:

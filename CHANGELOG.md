@@ -107,6 +107,10 @@ phpv8后门检测POC
 添加requirements.txt  
 
 
+## version 2.3.5
+-----------------
+添加对python3的基本支持  
+readme中新增当前已支持的POC列表  
 ```
 =======
 -----以上为当前版本-----
@@ -115,7 +119,5 @@ phpv8后门检测POC
 ## version 2.3.8
 -----------------
 出于存储考虑，添加日志与报告的自动clear功能  
-添加对python3的支持  
-readme中新增当前已支持的POC列表  
 整合version与author信息到info.ini中  
 优化proxy的url处理   
