@@ -35,21 +35,21 @@ PYVERSION = sys.version.split()[0].split(".")[0]
 
 
 logo = """
-        _  ______      
-    ___ |  ___|_  __
-    / _ \| |_  \ \/ /
-    | (_) |  _|  >  <__ _Author : jijue
-    \___/|_| __/_/\_\__ __ __Version : {version}
+\033[33m        _  ______      
+\033[33m    ___ |  ___|_  __
+\033[31m    / _ \| |_  \ \/ /\033[0m
+\033[35m    | (_) |  _|  >  <__ _Author : jijue\033[0m
+\033[32m    \___/|_| __/_/\_\__ __ __Version : {version}\033[0m
 
-    #*#*#  https://github.com/bigblackhat/oFx  #*#*#
+\033[32m    #*#*#  https://github.com/bigblackhat/oFx  #*#*#
 
-        _______________________________________
+\033[33m        _______________________________________
                 
-""".format(version=get_local_version(root_path+"/info.ini"))
+\033[0m""".format(version=get_local_version(root_path+"/info.ini"))
 
 
 
-print("\033[1;30;43m")
+# print("\033[1;30;43m")
 print(logo)
 # 启动，路径检查
 output_path = root_path+"/output/"
@@ -92,27 +92,27 @@ logger.addHandler(ch)
 logger.addHandler(fh)
 
 def loglogo(message):
-    print("\033[1;30;43m")
+    print("\033[33m")
     logger.info(message)
 
 def logvuln(message):
-    print("\033[1;32;40m") # 黑底绿字
+    print("\033[32m") # 黑底绿字
     logger.info(message)
 
 def logunvuln(message):
-    print("\033[1;34;40m") # 黑底蓝字
+    print("\033[34m") # 黑底蓝字
     logger.info(message)
 
 def logverifyerror(message):
-    print("\033[1;36;40m") # 黑底青字
+    print("\033[36m") # 黑底青字
     logger.info(message)
 
 def logwarning(message):
-    print("\033[1;37;41m")
+    print("\033[35m")
     logger.warning(message)
 
 def logcritical(message):
-    print("\033[1;31;40m")
+    print("\033[31m")
     logger.critical(message)
 
 ######
@@ -203,8 +203,8 @@ def clear_relog():
 def main():
     # check_environment()
     clear_relog()
-    parser = argparse.ArgumentParser(description="ofx v2.0.2",
-    usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
+    parser = argparse.ArgumentParser(description="ofx framewark of POC test",
+    usage="python ofx.py -f [path] / -u [url] -s [poc_path] ")
 
     searchengine = parser.add_argument_group("SearchEngine")
     searchengine.add_argument("--fofa-search",action="store_true",help="fofa搜索模式，此选项不必输入参数值")#type=str,help="fofa搜索语句(空格用下划线代替)")
