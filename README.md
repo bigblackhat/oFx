@@ -49,11 +49,16 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很  
 
+
 ### 单个url扫描模式
 
 单个url扫描模式的使用场景：
 > POC功能性测试
 
+使用方法  
+```sh
+➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -u xxx.xxx.xxx.xxx:xx
+```
 > 单个目标的漏洞验证详情(取决于POC)  
 
 ![show](img/8.png)
@@ -68,14 +73,38 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 > 有RCE漏洞的POC的话，就可以刷肉鸡  
 
+使用方法  
+```sh
+➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -f scan/jboss001.txt --thread 30
+```
+
 ### fofa api 资产获取
 
 通过fofa提供的api接口获取资产清单  
 
 ![show](img/9.png)
 
+```sh
+➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
+
+20xx-xx-xx xx:xx:xx,xxx - INFO: User : xxx@163.com | Key : xxx | 登陆成功
+请输入结果保存文件名(不必加文件后缀)：jboss001
+请输入搜索语句：app="Jboss"
+
+20xx-xx-xx xx:xx:xx,xxx - INFO: Fofa搜索语句为：app="Jboss"，开始与Fofa Api对接
+第1页获取成功
+第2页获取成功
+第3页获取成功
+...
+第99页获取成功
+第100页获取成功
+
+20xx-xx-xx xx:xx:xx,xxx - INFO: 搜索完毕，结果保存至/root/oFx/scan/jboss001.txt，经去重共计9748条
+```
+
 可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key    
 
+fofa search模式会将从api中获取到的结果进行去重并重新排序，因此大部分情况下都不会是正好10000条结果，往往只有6-7k也是合情合理的，请放心食用  
 
 ## POC支持清单
 |应用|漏洞名称|POC路径|
