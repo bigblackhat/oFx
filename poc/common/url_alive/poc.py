@@ -24,24 +24,28 @@ _info = {
 
     "fofa-dork":"略",                     # fofa搜索语句
     "example" : "",                     # 存在漏洞的演示url，写一个就可以了
-    "exp_img" : ""                      # 先不管
+    "exp_img" : "",                      # 先不管
+
+    "timeout" : 8,
 }
 
 def verify(host,proxy):
     vuln = [False,""]
     url = url_handle(host)  # url自己按需调整
 
+    # proxies = None
     if proxy:
         proxies = {
         "http": "http://%s"%(proxy),
         "https": "http://%s"%(proxy),
         }
+
     headers = {"User-Agent":get_random_ua(),}
     try:
         if proxy:
             req = requests.get(url,headers = headers,proxies = proxies,verify=False,timeout = 8)  
         else:
-            req = requests.get(url,headers = headers,verify=False,timeout = 8)  
+            req = requests.get(url,headers = headers,verify=False,timeout = _info["timeout"])  
 
         if str(req.status_code)[0] !=4 and str(req.status_code)[0] !=5:
             vuln = [True,req.text]

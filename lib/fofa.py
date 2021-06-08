@@ -3,6 +3,7 @@ from __future__ import print_function
 import requests
 import configparser
 from base64 import b64encode
+import base64
 
 import sys
 if sys.version.split()[0].split(".")[0] == 2:
@@ -50,6 +51,7 @@ def fofa_search(user,key,dork,save_path):
     url_list = list()
     resource = 'protocol,ip,port'
     page = 100
+    # dork = str(base64.b64decode(dork),encoding = "utf-8")
     for i in range(1,page+1):
         url = "https://fofa.so/api/v1/search/all?email={user}&key={key}&qbase64={dork}&fields={resource}&page={page}".format(
                         user=user, key=key, dork=b64encode(dork.encode()).decode(), resource=resource, page=i)

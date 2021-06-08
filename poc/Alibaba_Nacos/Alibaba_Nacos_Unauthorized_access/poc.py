@@ -38,7 +38,8 @@ def verify(host,proxy):
     """
     vuln = [False,""]
     url = url_handle(host) + "/v1/auth/users?pageNo=1&pageSize=100" # url自己按需调整
-
+    
+    proxies = None
     if proxy:
         proxies = {
         "http": "http://%s"%(proxy),
@@ -52,7 +53,7 @@ def verify(host,proxy):
         """
         检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
         """
-        req = requests.get(url,headers = headers , timeout = _info["timeout"],verify = False)
+        req = requests.get(url,headers = headers , proxies = proxies , timeout = _info["timeout"],verify = False)
         if req.status_code == 200 and "username" in req.text and "pageItems" in req.text:
             vuln = [True,req.text]
         else:

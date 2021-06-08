@@ -1,9 +1,19 @@
 # oFx
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 
 ## 简介
 一个应用于web安全领域的漏洞扫描框架，刷洞，刷肉鸡用（取决于你的漏洞）  
 
 虽说是框架，但目前的规模仅是笔者自用及与身边小伙伴分享的工具  
+
+#### Legal Disclaimer
+
+Usage of oFx for attacking targets without prior mutual consent is illegal.
+oFx is for security testing purposes only
+
+#### 法律免责声明
+未经事先双方同意，使用oFx攻击目标是非法的。
+oFx仅用于安全测试目的
 
 ![show](img/3.png)
 
@@ -37,6 +47,7 @@
 ```
 git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
+使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很  
 
 ### 单个url扫描模式
 
@@ -75,6 +86,8 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 |Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/druid_access/poc.py``|
 |Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Alibaba_Nacos_access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/jellyfin_fileread_scan/poc.py``|
+|Jenkins|Jenkins未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
+|Jboss|Jboss未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/php_v8dev_backdoor/poc.py``|
 
 ## 致谢清单

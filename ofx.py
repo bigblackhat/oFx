@@ -29,8 +29,7 @@ from lib.htmloutput import output_html
 from lib.common import get_title,url_handle,get_latest_revision,get_local_version
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
 
-author = "jijue"
-version = "2.3.3"
+
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
 PYVERSION = sys.version.split()[0].split(".")[0]
 
@@ -39,14 +38,14 @@ logo = """
         _  ______      
     ___ |  ___|_  __
     / _ \| |_  \ \/ /
-    | (_) |  _|  >  <__ _Author : {author}
+    | (_) |  _|  >  <__ _Author : jijue
     \___/|_| __/_/\_\__ __ __Version : {version}
 
     #*#*#  https://github.com/bigblackhat/oFx  #*#*#
 
         _______________________________________
                 
-""".format(author=author,version=version)
+""".format(version=get_local_version(root_path+"/info.ini"))
 
 
 
@@ -180,7 +179,22 @@ def run(scan_func,target,proxy=False,output=True):
 
 ##########
 
-
+def clear_relog():
+    deadline = int(now) - 12*60*60
+    for i in os.listdir(output_path):
+        try:
+            if int(i.split(".")[0]) <= deadline :
+                os.remove(output_path+i)
+        except:
+            pass
+    for i in os.listdir(log_path):
+        try:
+            if int(i.split(".")[0]) <= deadline :
+                os.remove(log_path+i)
+        except:
+            pass
+    
+    # pass
 
 
 ##########
@@ -188,6 +202,7 @@ def run(scan_func,target,proxy=False,output=True):
 
 def main():
     # check_environment()
+    clear_relog()
     parser = argparse.ArgumentParser(description="ofx v2.0.2",
     usage="python ofx.py -f scan.txt -s poc/jellyfin/jellyfin_fileread_scan/poc.py ")
 
@@ -205,13 +220,21 @@ def main():
     
     system = parser.add_argument_group("System")
     system.add_argument("--thread",default=10,type=int,help="线程数，不加此选项时默认10线程")
-    system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080")
+    system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080 或 http://127.0.0.1:8080")
     system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名同时输出html和txt两种格式的报告")
     # system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")
     
     if len(sys.argv) == 1:
         sys.argv.append("-h")
     args=parser.parse_args()
+
+    if args.proxy != False:
+        if args.proxy.startswith("http://"):
+            args.proxy = args.proxy[7:]
+        elif args.proxy.startswith("https://"):
+            args.proxy = args.proxy[8:]
+        else:
+            pass
 
     if args.url or args.file:
         # 扫描模式校验
@@ -242,9 +265,9 @@ def main():
             # args.url = url_handle(args.url)
             single_verify = verify(args.url,args.proxy)
             if single_verify[0] == True:
-                print("URL: {url}  || POC: {script} 漏洞存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1]))
+                print("URL: {url}  || POC: {script} \n服务端返回信息: \n{text} \n漏洞存在\n".format(url = args.url,script = args.script,text = single_verify[1]))
             else:
-                print("URL: {url}  || POC: {script} 漏洞不存在\n服务端返回信息: \n{text}".format(url = args.url,script = args.script,text = single_verify[1]))
+                print("URL: {url}  || POC: {script} \n服务端返回信息: \n{text} \n漏洞不存在\n".format(url = args.url,script = args.script,text = single_verify[1]))
 
         # 批量检测模式
         elif scan_mode == 2:
@@ -256,7 +279,7 @@ def main():
                 qu.put(i) 
             # run(verify,qu)
             for i in range(args.thread):
-                t=threading.Thread(target=run,args=(verify,qu,))
+                t=threading.Thread(target=run,args=(verify,qu,args.proxy))
                 t.start()
             t.join()
 

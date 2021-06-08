@@ -40,11 +40,13 @@ def verify(host,proxy):
     url = url_handle(host) + "/.svn/entries" # url自己按需调整
     url1 = url_handle(host) + "/cdn/test1?ids1=127&ids2=0&ids3=0&id4=1"
 
+    proxies = None
     if proxy:
         proxies = {
         "http": "http://%s"%(proxy),
         "https": "http://%s"%(proxy),
         }
+        
     headers = {"User-Agent":get_random_ua(),
                 "Connection":"close",
                 # "Content-Type": "application/x-www-form-urlencoded",
@@ -54,8 +56,8 @@ def verify(host,proxy):
         """
         检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
         """
-        req = requests.get(url,headers = headers , timeout = _info["timeout"],verify = False)
-        req1 = requests.get(url1,headers = headers , timeout = _info["timeout"],verify = False)
+        req = requests.get(url,headers = headers ,  proxies = proxies if proxies else None , timeout = _info["timeout"],verify = False)#nopro 268
+        req1 = requests.get(url1,headers = headers ,  proxies = proxies if proxies else None , timeout = _info["timeout"],verify = False)
         # print req1.text
         if req.status_code == 200 and len(str(int(req.text.strip()))) == len(req.text.strip()) and req1.text != req.text:
             vuln = [True,req.text]
