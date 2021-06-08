@@ -43,7 +43,7 @@ logo = """
 
 \033[32m    #*#*#  https://github.com/bigblackhat/oFx  #*#*#
 
-\033[33m        _______________________________________
+\033[33m       _-___________________________________-_
                 
 \033[0m""".format(version=get_local_version(root_path+"/info.ini"))
 
