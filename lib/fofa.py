@@ -56,10 +56,27 @@ def fofa_search(user,key,dork,save_path):
         url = "https://fofa.so/api/v1/search/all?email={user}&key={key}&qbase64={dork}&fields={resource}&page={page}".format(
                         user=user, key=key, dork=b64encode(dork.encode()).decode(), resource=resource, page=i)
         req = requests.get(url,timeout=80)
+        # 返回结果为空
         if "\"results\":[],\"size\":0" in req.text:
-            err_msg = "搜索语句{dork}已无返回结果：{error}\n请前往fofa web端测试搜索语句的有效性"
+            err_msg = "\033[31m"
+            err_msg += "搜索语句{dork}无任何返回结果\n请前往fofa web端测试搜索语句的有效性"
+            err_msg += "\033[0m"
+            exit(err_msg.format(dork=dork,))
+            # break
+        # 语法错误
+        elif "\"errmsg\":\"query statement error\",\"error\":true" in req.text:
+            print("[PLUGIN] Fofa:{}".format(req.text))
+            err_msg = "\033[31m"
+            err_msg += "搜索语句{dork}疑似存在语法错误\n请前往fofa web端测试搜索语句的有效性"
+            err_msg += "\033[0m"
+            exit(err_msg.format(dork=dork,))
+        elif "\"results\":[]," in req.text:
+            err_msg = "\n\033[35m"
+            err_msg += "已无更多搜索结果\n开始保存文件"
+            err_msg += "\033[0m"
             print(err_msg)
-            return
+            break
+        # 正常情况下
         elif req and req.status_code == 200 and "results" in req.json():
             content = req.json()
             # print len(content['results'])
