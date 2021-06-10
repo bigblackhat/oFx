@@ -39,12 +39,7 @@ def verify(host,proxy):
     vuln = [False,""]
     url = url_handle(host) + "" # url自己按需调整
 
-    proxies = None
-    if proxy:
-        proxies = {
-        "http": "http://%s"%(proxy),
-        "https": "http://%s"%(proxy),
-        }
+    
 
     headers = {"User-Agent":get_random_ua(),
                 "Connection":"close",
@@ -55,7 +50,7 @@ def verify(host,proxy):
         """
         检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
         """
-        req = requests.get(url,headers = headers , proxies = proxies ,timeout = _info["timeout"],verify = False)
+        req = requests.get(url,headers = headers , proxies = proxy ,timeout = _info["timeout"],verify = False)
         if req.status_code == 200 and "自己调整":
             vuln = [True,req.text]
         else:

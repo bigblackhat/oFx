@@ -20,7 +20,7 @@ scan/
 .vscode/
 漏洞报告alpha版/
 
-reference.md  
+reference.*  
 reference*.png
 
 .DS_Store

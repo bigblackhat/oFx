@@ -25,7 +25,7 @@ _info = {
     "example" : "210.212.62.107:8080",                     # 存在漏洞的演示url，写一个就可以了
     "exp_img" : "",                      # 先不管  
 
-    "timeout" : 8,                      # 超时设定
+    "timeout" : 10,                      # 超时设定
 }
 
 def verify(host,proxy):
@@ -55,7 +55,7 @@ def verify(host,proxy):
         """
         检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
         """
-        req = requests.get(url,headers = headers , proxies = proxies ,timeout = _info["timeout"],verify = False)
+        req = requests.get(url,headers = headers , proxies = proxy ,timeout = _info["timeout"],verify = False)
         if req.status_code == 200 and "Catalina" in req.text:
             vuln = [True,req.text]
         else:

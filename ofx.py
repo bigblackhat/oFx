@@ -228,13 +228,25 @@ def main():
         sys.argv.append("-h")
     args=parser.parse_args()
 
+    proxyhost = None
     if args.proxy != False:
         if args.proxy.startswith("http://"):
-            args.proxy = args.proxy[7:]
+            proxyhost = args.proxy[7:]
         elif args.proxy.startswith("https://"):
-            args.proxy = args.proxy[8:]
+            proxyhost = args.proxy[8:]
         else:
-            pass
+            proxyhost = args.proxy
+
+        if proxyhost:
+            if proxyhost.endswith("/"):
+                proxyhost = proxyhost[:-1]
+            else:
+                pass
+            args.proxy = {
+            "http": "http://%s"%(proxyhost),
+            "https": "http://%s"%(proxyhost),
+            }
+
 
     if args.url or args.file:
         # 扫描模式校验

