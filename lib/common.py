@@ -87,7 +87,7 @@ def get_latest_revision():
     lv = None
     cp = configparser.ConfigParser()
     try:
-        req = requests.get("https://raw.githubusercontent.com/bigblackhat/oFx/master/info.ini")
+        req = requests.get("https://raw.githubusercontent.com/bigblackhat/oFx/master/info.ini",timeout = 15)
         cp.read_string(req.text)
 
         lv = cp["info"]["version"]

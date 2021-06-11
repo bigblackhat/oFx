@@ -141,19 +141,33 @@ jboss未授权访问
 
 ## version 2.4.7
 -----------------
-添加四个POC：  
+>添加四个POC：  
 
-ElasticSearch 未授权访问   
-ElasticSearch 命令执行漏洞（CVE-2014-3120）  
-ElasticSearch 代码执行漏洞（CVE-2015-1427）   
-ElasticSearch 目录穿越漏洞（CVE-2015-5531）   
+* ElasticSearch 未授权访问   
+* ElasticSearch 命令执行漏洞（CVE-2014-3120）  
+* ElasticSearch 代码执行漏洞（CVE-2015-1427）   
+* ElasticSearch 目录穿越漏洞（CVE-2015-5531）   
 
-修改proxy的位置和调用逻辑，使之更优雅  
+>修改proxy的位置和调用逻辑，使之更优雅  
 
-修改jellyfin文件读取POC的检测逻辑，降低误报率  
+>修改jellyfin文件读取POC的检测逻辑，降低误报率  
+
+
+## version 2.5.1
+-----------------
+>添加四个POC：  
+
+* 360天擎未授权访问  
+* Elasticsearch写任意文件漏洞（WooYun-2015-110216）  
+* Apache Couchdb 远程权限提升 (CVE-2017-12635)
+* Apache Flink目录穿透 (CVE-2020-17519)
+
+>收录F5 Big-IP蜜罐的前端源码，仅做展示用  
+
+>添加tab级功能：--version
+
 ```
 =======
 -----以上为当前版本-----
 =======
 ```
-

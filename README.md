@@ -107,21 +107,33 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 fofa search模式会将从api中获取到的结果进行去重并重新排序，因此大部分情况下都不会是正好10000条结果，往往只有6-7k也是合情合理的，请放心食用  
 
 ## POC支持清单
+
+<br>
+
+oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的后续利用，以下漏洞目前已支持检测  
+
+<br>
+
+
 |应用|漏洞名称|POC路径|
 |-|-|-|
 |通用|URL存活检测|``poc/common/url_alive/poc.py``|
 ||git信息泄露|``poc/common/git_info_leakage/poc.py``|
 ||svn信息泄露|``poc/common/svn_info_leakage/poc.py``|
+|Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/druid_access/poc.py``|
+|Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Alibaba_Nacos_access/poc.py``|
+|Apache CouchDB|Apache Couchdb 远程权限提升 (CVE-2017-12635)|``poc/Apache_CouchDB/CVE-2017-12635/poc.py``|
+|Apache Flink|Apache Flink目录穿透 (CVE-2020-17519)|``poc/Apache_Flink/CVE-2020-17519/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauthorized_access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Groovy_RCE_CVE-2015-1427/poc.py``|
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/MVEL_RCE_CVE-2014-3120/poc.py``|
 ||ElasticSearch 目录穿越漏洞（CVE-2015-5531）|``poc/Elasticsearch/CVE-2015-5531/poc.py``|
-|Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/druid_access/poc.py``|
-|Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Alibaba_Nacos_access/poc.py``|
+||Elasticsearch写任意文件漏洞（WooYun-2015-110216）|``poc/Elasticsearch/WooYun-2015-110216/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/jellyfin_fileread_scan/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/php_v8dev_backdoor/poc.py``|
+|360|360天擎数据库未授权访问|``poc/360/TianQing_Unauthorized_acceess/poc.py``|
 
 ## 致谢清单
 
@@ -133,3 +145,10 @@ fofa search模式会将从api中获取到的结果进行去重并重新排序，
 |[sqlmap]()|
 
 
+<br>
+<br>
+<br>
+
+~~都看到这儿了，点个star再走呗~~
+
+![show](img/10.jpg)

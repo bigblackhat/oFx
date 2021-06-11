@@ -222,11 +222,27 @@ def main():
     system.add_argument("--thread",default=10,type=int,help="线程数，不加此选项时默认10线程")
     system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080 或 http://127.0.0.1:8080")
     system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名同时输出html和txt两种格式的报告")
+    system.add_argument("--version",action="store_true",help="显示本地当前使用的oFx版本，并视网络状况给出最新的版本号")
     # system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")
     
     if len(sys.argv) == 1:
         sys.argv.append("-h")
     args=parser.parse_args()
+
+    if args.version == True:
+        LocalVer = get_local_version(root_path + "/info.ini")
+        print("当前本地版本为 {localv}".format(localv = LocalVer))
+        print("正在获取github仓库信息，请等待.......")
+        LatestVer = get_latest_revision()
+        if LatestVer == None:
+            print("当前网络状况不佳，无法获取最新的版本信息")
+            exit()
+        elif LatestVer and LocalVer != LatestVer:
+            print("最新版本为 {latestv}".format(latestv = LatestVer))
+            exit()
+        else:
+            print("当前使用的ofx为最新版")
+            exit()
 
     proxyhost = None
     if args.proxy != False:
