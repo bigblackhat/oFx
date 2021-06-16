@@ -1,12 +1,12 @@
 # oFx
 
-``中文名：三千雷``  
-
-
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 
+
 ## 简介
+``中文名：三千雷``  
+
 一个应用于web安全领域的漏洞扫描框架，刷洞，刷肉鸡用（取决于你的漏洞）  
 
 虽说是框架，但目前的规模仅是笔者自用及与身边小伙伴分享的工具  
@@ -34,17 +34,11 @@ oFx仅用于安全测试与研究目的
 黑底青字目标不可达  
 ![show](img/2.png)
 
-网速尚可情况下，测试10个线程的速度：
-![show](img/5.png)
-也就是4分钟1000条  
 
-网速尚可情况下，测试20个线程的速度：
-![show](img/6.png)
-两分钟跑完1000条  
 
-网速尚可情况下，测试25个线程的速度：
-![show](img/7.png)
-约22分钟跑完一万条  
+网速尚可情况下，测试30个线程的速度：
+![show](img/11.png)
+约11分钟跑完一万条  
 
 
 ## 使用方法  
@@ -55,6 +49,8 @@ oFx仅用于安全测试与研究目的
 ```
 git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
+
+### 用前提醒
 使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很  
 
 
@@ -86,7 +82,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -f scan/jboss001.txt --thread 30
 ```
 
-### fofa api 资产获取
+### Fofa api 资产获取
 
 通过fofa提供的api接口获取资产清单  
 
