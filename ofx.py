@@ -14,6 +14,10 @@ import ctypes
 import inspect
 import subprocess
 import re
+from requests.exceptions import ConnectTimeout
+from requests.exceptions import ConnectionError
+from requests.exceptions import HTTPError
+from requests.exceptions import TooManyRedirects
 try:
     os.path.dirname(os.path.realpath(__file__))
 except Exception:
@@ -140,7 +144,7 @@ unreachoutput=[]
 vulnn=0
 target_list=[]
 
-def run(scan_func,target,proxy=False,output=True):
+def run(POC_Class,target,proxy=False,output=True):
     """
     调用扫描插件对url进行检测  
     直接打印到控制台和记录到日志中  
@@ -156,7 +160,9 @@ def run(scan_func,target,proxy=False,output=True):
 
         try:
             target_url = target.get()
-            vuln = scan_func(target_url,proxy)
+            # vuln = scan_func(target_url,proxy)
+            rVerify = POC_Class(target_url,proxy)
+            vuln = rVerify._verify()
             if vuln[0] == True:
                 # print vuln[1]
                 vulntitle=get_title(vuln[1])
@@ -170,10 +176,40 @@ def run(scan_func,target,proxy=False,output=True):
                 logunvuln("[_ %d _]不存在漏洞 %s "%(target.qsize(),target_url))
                 unvulnoutput.append(target_url)
                 lock.release()
-                
-        except Exception as e:
+        
+        except NotImplementedError as e :
             lock.acquire()
-            logverifyerror("[! %d !]目标不可达 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("[! %d !]该POC不支持virefy批量扫描模式  错误详情：%s "%(target.qsize(),str(e)))
+            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            lock.release()
+
+        except TimeoutError as e:
+            lock.acquire()
+            logverifyerror("[! %d !]连接超时 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            lock.release()
+
+        except HTTPError as e:
+            lock.acquire()
+            logverifyerror("[! %d !]发生HTTPError %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            lock.release()
+
+        except ConnectionError as e:
+            lock.acquire()
+            logverifyerror("[! %d !]连接错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            lock.release()
+
+        except TooManyRedirects as e:
+            lock.acquire()
+            logverifyerror("[! %d !]重定次数超过限额，抛弃该目标 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            lock.release()
+
+        except BaseException as e:
+            lock.acquire()
+            logverifyerror("[! %d !]未知错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
@@ -228,7 +264,7 @@ def main():
     if len(sys.argv) == 1:
         sys.argv.append("-h")
     args=parser.parse_args()
-
+    
     if args.version == True:
         LocalVer = get_local_version(root_path + "/info.ini")
         print("当前本地版本为 {localv}".format(localv = LocalVer))
@@ -279,8 +315,8 @@ def main():
         args.script = args.script[:-6] if args.script.endswith("poc.py") else args.script
         if os.path.exists(root_path+"/"+args.script):
             sys.path.append(str(root_path+"/"+args.script))
-            from poc import verify,_info
-            logvuln("POC - %s 加载完毕"%(_info["name"]))
+            from poc import POC#,_info#verify
+            logvuln("POC - %s 加载完毕"%(POC._info["name"]))
 
         else:
             logvuln("POC加载失败，请确认路径后重新指定")
@@ -291,7 +327,8 @@ def main():
             # 扫描
             # print args.url
             # args.url = url_handle(args.url)
-            single_verify = verify(args.url,args.proxy)
+            single_mode = POC(args.url,args.proxy)
+            single_verify = single_mode._verify()
             if single_verify[0] == True:
                 print("URL: {url}  || POC: {script} \n服务端返回信息: \n{text} \n漏洞存在\n".format(url = args.url,script = args.script,text = single_verify[1]))
             else:
@@ -305,14 +342,17 @@ def main():
             qu = queue.Queue()
             for i in target_list:
                 qu.put(i) 
-            # run(verify,qu)
+            # run(POC,qu,args.proxy)
             for i in range(args.thread):
-                t=threading.Thread(target=run,args=(verify,qu,args.proxy))
+                t=threading.Thread(target=run,args=(POC,qu,args.proxy))
                 t.start()
             t.join()
 
-            time.sleep(int(_info["timeout"]+1))
+            # time.sleep(int(POC.timeout+1))
             
+            while len(threading.enumerate()) != 1:
+                time.sleep(1)
+
             if args.output != False:
                 html_output = now+".html" if args.output == True else args.output+".html"
                 # args.output = args.output+".html"

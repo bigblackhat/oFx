@@ -1,4 +1,9 @@
 # oFx
+
+``中文名：三千雷``  
+
+
+
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 
 ## 简介
@@ -7,13 +12,16 @@
 虽说是框架，但目前的规模仅是笔者自用及与身边小伙伴分享的工具  
 
 #### Legal Disclaimer
-
+```
 Usage of oFx for attacking targets without prior mutual consent is illegal.
 oFx is for security testing purposes only
+```
 
 #### 法律免责声明
+```
 未经事先双方同意，使用oFx攻击目标是非法的。
-oFx仅用于安全测试目的
+oFx仅用于安全测试与研究目的
+```
 
 ![show](img/3.png)
 
@@ -129,9 +137,11 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/MVEL_RCE_CVE-2014-3120/poc.py``|
 ||ElasticSearch 目录穿越漏洞（CVE-2015-5531）|``poc/Elasticsearch/CVE-2015-5531/poc.py``|
 ||Elasticsearch写任意文件漏洞（WooYun-2015-110216）|``poc/Elasticsearch/WooYun-2015-110216/poc.py``|
+|F5|F5 BIG-IP任意文件读取(CVE-2020-5902)|``poc/F5_BIG_IP/FileRead_CVE_2020_5902/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/jellyfin_fileread_scan/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
+|MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/F5_BIG_IP/FileRead_CVE_2020_5902/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/php_v8dev_backdoor/poc.py``|
 |360|360天擎数据库未授权访问|``poc/360/TianQing_Unauthorized_acceess/poc.py``|
 
@@ -141,6 +151,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 
 |项目地址|
 |-|
+|[AngelSword](https://github.com/Lucifer1993/AngelSword)|
 |[pocsuite3]()|
 |[sqlmap]()|
 
