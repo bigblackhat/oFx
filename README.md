@@ -65,7 +65,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 > 单个目标的漏洞验证详情(取决于POC)  
 
-![show](img/8.png)
+![show](img/008.png)
 
 ### 批量扫描模式
 
@@ -86,7 +86,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 通过fofa提供的api接口获取资产清单  
 
-![show](img/9.png)
+![show](img/009.png)
 
 ```sh
 ➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
