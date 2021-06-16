@@ -20,7 +20,13 @@ class POC(POCBase):
         "name" : "F5 BIG-IP任意文件读取",                        # 漏洞名称
         "VulnID" : "CVE-2020-5902",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "F5 BIG-IP",                     # 漏洞应用名称
-        "AppVersion" : "",                  # 漏洞应用版本
+        "AppVersion" : """
+        F5 BIG-IP < 15.1.0.4
+        F5 BIG-IP < 14.1.2.6
+        F5 BIG-IP < 13.1.3.4
+        F5 BIG-IP < 12.1.5.2
+        F5 BIG-IP < 11.6.5.2
+        """,                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
         

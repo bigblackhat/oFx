@@ -139,6 +139,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Jboss|Jboss未授权访问|``poc/Jenkins/Jenkins_Unauthorized_access/poc.py``|
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/F5_BIG_IP/FileRead_CVE_2020_5902/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/php_v8dev_backdoor/poc.py``|
+|Redis|Redis未授权访问|``poc/Redis/Unauthorized_access/poc.py``|
 |360|360天擎数据库未授权访问|``poc/360/TianQing_Unauthorized_acceess/poc.py``|
 
 ## 致谢清单
