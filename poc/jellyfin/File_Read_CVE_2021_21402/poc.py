@@ -21,7 +21,7 @@ class POC(POCBase):
         """,
 
         "name" : "Jellyfin任意文件读取",
-        "VulnID" : "",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "VulnID" : "CVE-2021-21402",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
 
         "AppName" : "Jellyfin",
         "AppVersion" : "Jellyfin < 10.7.1",
