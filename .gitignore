@@ -25,6 +25,7 @@ reference*.png
 
 .DS_Store
 # CODING.md
+FETURE.md
 
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`

@@ -8,6 +8,7 @@
 
 POC打包后，通过邮件发送至笔者的邮箱(ronginus@qq.com)，POC包内目录结构见下文[POC提交规范](#POCSubmitRule)
 
+邮件标题为：``oFx_POC提交贡献：APP_NAME/VULN_NAME``
 
 ## POC编写规范<div id="PoCstandard"></div>
 
