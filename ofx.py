@@ -288,11 +288,11 @@ def main():
             qu = queue.Queue()
             for i in target_list:
                 qu.put(i) 
-            # run(POC,qu,args.proxy)
-            for i in range(args.thread):
-                t=threading.Thread(target=run,args=(POC,qu,args.proxy))
-                t.start()
-            t.join()
+            run(POC,qu,args.proxy)
+            # for i in range(args.thread):
+            #     t=threading.Thread(target=run,args=(POC,qu,args.proxy))
+            #     t.start()
+            # t.join()
 
             # time.sleep(int(POC.timeout+1))
             

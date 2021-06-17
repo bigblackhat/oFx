@@ -57,7 +57,7 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy , timeout = _info["timeout"],verify = False)
+            req = requests.get(url,headers = headers , proxies = self.proxy , timeout = self.timeout,verify = False)
             if req.status_code == 200 and "repositoryformatversion" in req.text:
                 vuln = [True,req.text]
             else:
