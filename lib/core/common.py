@@ -14,7 +14,6 @@ import configparser
 import requests
 import time
 import os
-# import subprocess
 import re
 
 
@@ -32,11 +31,7 @@ def get_title(htmlcode):
     soup = BeautifulSoup(htmlcode, 'html.parser')
     return str(soup.title)[7:-8]
 
-# def reip():
-#     import re
-#     ip ='192.168.1'
-#     trueIp =re.search(r'(([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])\.){3}([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])',ip)
-#     return trueIp
+
 
 def url_handle(url):
     """
@@ -45,16 +40,11 @@ def url_handle(url):
     return:
     dict urldict  
     """
-    # 以http开头
-        # 放行
+
     if url.startswith("http"):
         p = urlparse(url)
         # pass
-    # 否则，默认加http
-        # 有端口号
-            # 443，改成https
-            # 否则，放行
-        # 否则，放行
+
     else:
         url = "http://" + url 
         p = urlparse(url)
@@ -68,15 +58,14 @@ def url_handle(url):
         else:
             pass
         
-    # url = "http://" + url if not url.startswith("http") else url
-    # print(p)
+
     return p.scheme+"://"+p.netloc
 
 def get_random_ua():
     with open("./data/user_agents.txt","r") as f:
         UAs = [i.strip() for i in f.readlines()]
     return random.choice(UAs)
-    # pass
+
 
 def random_str(length=10, chars=string.ascii_letters + string.digits):
     return ''.join(random.sample(chars, length))
@@ -101,7 +90,3 @@ def get_latest_revision():
 
 
 
-# if __name__ == "__main__":
-#     # print(url_handle("www.bshine.cn:443"))
-#     # print reip()
-#     # print(get_random_ua())

@@ -35,6 +35,11 @@ sys.path.append(root_path)
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
 PYVERSION = sys.version.split()[0].split(".")[0]
 
+vulnoutput=list()
+unvulnoutput=[]
+unreachoutput=[]
+vulnn=0
+target_list=[]
 
 logo = """
 \033[33m        _  ______      
@@ -51,7 +56,7 @@ logo = """
 
 
 print(logo)
-# 启动，路径检查
+# start and check envirement
 output_path = root_path+"/output/"
 if not os.path.exists(output_path):
     os.makedirs(output_path)
@@ -77,33 +82,18 @@ def check_environment():
         err_msg = "incompatible Python version detected ('%s'). To successfully run sqlmap you'll have to use version 2.x"%(PYVERSION)
         logcritical(err_msg)
         exit()
-    
 
 
 
-vulnoutput=list()
-unvulnoutput=[]
-unreachoutput=[]
-vulnn=0
-target_list=[]
+
 
 def run(POC_Class,target,proxy=False,output=True):
-    """
-    调用扫描插件对url进行检测  
-    直接打印到控制台和记录到日志中  
 
-    Use: 
-    run(verify,"121.121.121.121:9001","127.0.0.1:8080")
-
-    Return:
-    None
-    """
     global vulnoutput,unvulnoutput,unreachoutput,vulnn
     while not target.empty():
 
         try:
             target_url = target.get()
-            # vuln = scan_func(target_url,proxy)
             rVerify = POC_Class(target_url,proxy)
             vuln = rVerify._verify()
             if vuln[0] == True:
@@ -114,49 +104,49 @@ def run(POC_Class,target,proxy=False,output=True):
                     vulntitle = ""
                 lock.acquire()
                 vulnn+=1
-                logvuln("╭☞ %d 存在漏洞 %s 网站Title：%s "%(target.qsize(),target_url,vulntitle))
+                logvuln("╭☞ %d Vuln %s WebSite Title：%s "%(target.qsize(),target_url,vulntitle))
                 vulnoutput.append(target_url+" || 网站Title： "+vulntitle)
                 lock.release()
             else:
                 lock.acquire()
-                logunvuln("╭☞ %d 不存在漏洞 %s "%(target.qsize(),target_url))
+                logunvuln("╭☞ %d UnVuln %s "%(target.qsize(),target_url))
                 unvulnoutput.append(target_url)
                 lock.release()
         
         except NotImplementedError as e :
             lock.acquire()
-            logverifyerror("╭☞ %d 该POC不支持virefy批量扫描模式  错误详情：%s "%(target.qsize(),str(e)))
-            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            logverifyerror("╭☞ %d The POC does not support virtualized depiction scan mode  Error details：%s "%(target.qsize(),str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
 
         except TimeoutError as e:
             lock.acquire()
-            logverifyerror("╭☞ %d 连接超时 %s 错误详情：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            logverifyerror("╭☞ %d Connection timed out %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
 
         except HTTPError as e:
             lock.acquire()
-            logverifyerror("╭☞ %d 发生HTTPError %s 错误详情：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            logverifyerror("╭☞ %d HTTPError occurred %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
 
         except ConnectionError as e:
             lock.acquire()
-            logverifyerror("╭☞ %d 连接错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            logverifyerror("╭☞ %d Connection error %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
 
         except TooManyRedirects as e:
             lock.acquire()
-            logverifyerror("╭☞ %d 重定次数超过限额，抛弃该目标 %s 错误详情：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            logverifyerror("╭☞ %d The number of resets exceeds the limit, and the goal is discarded %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
 
         except BaseException as e:
             lock.acquire()
-            logverifyerror("╭☞ %d 未知错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || 错误详情"+str(e))
+            logverifyerror("╭☞ %d unknown mistake %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
 
 ##########
@@ -183,14 +173,13 @@ def clear_relog():
 
 
 def main():
-    # check_environment()
+
     clear_relog()
     parser = argparse.ArgumentParser(description="ofx framewark of POC test",
     usage="python ofx.py -f [path] / -u [url] -s [poc_path] ")
 
     searchengine = parser.add_argument_group("SearchEngine")
-    searchengine.add_argument("--fofa-search",action="store_true",help="fofa搜索模式，此选项不必输入参数值")#type=str,help="fofa搜索语句(空格用下划线代替)")
-    # searchengine.add_argument("--fofa-output",type=str,help="fofa搜索结果保存，默认scan目录，改不了")
+    searchengine.add_argument("--fofa-search",action="store_true",help="Fofa Search Mode, This option does not need to enter the parameter value")#type=str,help="fofa搜索语句(空格用下划线代替)")
 
     # target = parser.add_argument_group("TARGET")
     target = parser.add_mutually_exclusive_group()
@@ -201,11 +190,11 @@ def main():
     script.add_argument("-s","--script",type=str,help="load script by name (e.g. -s poc/jellyfin/jellyfin_fileread_scan/poc.py)")
     
     system = parser.add_argument_group("System")
-    system.add_argument("--thread",default=10,type=int,help="线程数，不加此选项时默认10线程")
-    system.add_argument("--proxy",default=False,help="http代理，例：127.0.0.1:8080 或 http://127.0.0.1:8080")
-    system.add_argument("--output",default=True,help="扫描报告，默认以当前时间戳命名同时输出html和txt两种格式的报告")
-    system.add_argument("--version",action="store_true",help="显示本地当前使用的oFx版本，并视网络状况给出最新的版本号")
-    # system.add_argument("--update",action="store_true",help="更新ofx的版本，不支持windows系统")
+    system.add_argument("--thread",default=10,type=int,help="Number of threads, the default is 10 threads")
+    system.add_argument("--proxy",default=False,help="Http Proxy，Example：127.0.0.1:8080 OR http://127.0.0.1:8080")
+    system.add_argument("--output",default=True,help="Scan report")
+    system.add_argument("--version",action="store_true",help="Display the local oFx version, and give the latest version number depending on the network status")
+
     
     if len(sys.argv) == 1:
         sys.argv.append("-h")
@@ -213,17 +202,17 @@ def main():
     
     if args.version == True:
         LocalVer = get_local_version(root_path + "/info.ini")
-        print("当前本地版本为 {localv}".format(localv = LocalVer))
-        print("正在获取github仓库信息，请等待.......")
+        print("The current local version is {localv}".format(localv = LocalVer))
+        print("Obtaining github warehouse information, please wait.......")
         LatestVer = get_latest_revision()
         if LatestVer == None:
-            print("当前网络状况不佳，无法获取最新的版本信息")
+            print("The current network condition is not good, unable to obtain the latest version information")
             exit()
         elif LatestVer and LocalVer != LatestVer:
-            print("最新版本为 {latestv}".format(latestv = LatestVer))
+            print("The latest version is {latestv}".format(latestv = LatestVer))
             exit()
         else:
-            print("当前使用的ofx为最新版")
+            print("The currently used ofx is the latest version")
             exit()
 
     proxyhost = None
@@ -247,40 +236,38 @@ def main():
 
 
     if args.url or args.file:
-        # 扫描模式校验
+        # mode verify
         if args.url:
             scan_mode=1
         elif args.file:
             scan_mode=2
         else:
-            print("请确认检测模式，-f为批量检测模式，-u为单个检测模式")
+            print("Please confirm the detection mode, -f is batch detection mode, -u is single detection mode")
             exit()
 
 
-        # 插件校验
+        # POC verify
         args.script = args.script[:-6] if args.script.endswith("poc.py") else args.script
         if os.path.exists(root_path+"/"+args.script):
             sys.path.append(str(root_path+"/"+args.script))
             from poc import POC#,_info#verify
-            logvuln("POC - %s 加载完毕"%(POC._info["name"]))
+            logvuln("POC - %s Loaded"%(POC._info["name"]))
 
         else:
-            logvuln("POC加载失败，请确认路径后重新指定")
+            logvuln("POC failed to load, please confirm the path and re-specify")
             exit()
 
-        # 该模式用于检验POC插件本身的可用性  
+        # single mode
         if scan_mode == 1:
-            # 扫描
-            # print args.url
-            # args.url = url_handle(args.url)
+            
             single_mode = POC(args.url,args.proxy)
             single_verify = single_mode._verify()
             if single_verify[0] == True:
-                print("URL: {url}  || POC: {script} \n服务端返回信息: \n{text} \n漏洞存在\n".format(url = args.url,script = args.script,text = single_verify[1]))
+                print("URL: {url}  || POC: {script} \nServer return information: \n{text} \n【Vuln】\n".format(url = args.url,script = args.script,text = single_verify[1]))
             else:
-                print("URL: {url}  || POC: {script} \n服务端返回信息: \n{text} \n漏洞不存在\n".format(url = args.url,script = args.script,text = single_verify[1]))
+                print("URL: {url}  || POC: {script} \nServer return information: \n{text} \n【UnVuln】\n".format(url = args.url,script = args.script,text = single_verify[1]))
 
-        # 批量检测模式
+        # enum mode
         elif scan_mode == 2:
             start_time = time.time()
             with open(args.file,"r") as f:
@@ -303,47 +290,47 @@ def main():
                 html_output = now+".html" if args.output == True else args.output+".html"
                 # args.output = args.output+".html"
                 output_html(html_output,vulnoutput,unvulnoutput,unreachoutput)
-                loglogo("报告已输出至：%s"%(html_output))
+                loglogo("The report has been output to：%s"%(html_output))
 
                 # print vulnoutput
                 txt_output = now + ".txt" if args.output == True else args.output+".txt"
                 with open(root_path+"/output/"+txt_output,"w") as f:
                     for i in vulnoutput:
                         f.write(i.split("||")[0].strip()+"\n")
-                loglogo("报告已输出至：%s"%(txt_output))
+                loglogo("The report has been output to：%s"%(txt_output))
             
-            loglogo("共计url %d 条， %d 条存在漏洞"%(len(target_list),vulnn))
+            loglogo("Total url %d 条， %d loophole"%(len(target_list),vulnn))
             end_time = time.time()
-            loglogo("本次扫描耗时:  %d秒"%(end_time-start_time))
+            loglogo("This scan takes :  %d Second"%(end_time-start_time))
             # sys.exit()
 
 
     if args.fofa_search:
-        # 检查并获取user和key的配置
+        # verify and get user and key
         fofa_user,fofa_key = get_ukey(root_path+"/lib/fofa.ini")
 
-        # 登陆校验
+        # logincheck
         FofaLogin = fofa_login(fofa_user,fofa_key)
         if FofaLogin[0]:
             log_msg = "User : {user} | Key : {key}".format(user = FofaLogin[1],key = FofaLogin[2])
-            log_msg += " | 登陆成功"
+            log_msg += " | Login Success"
             logvuln(log_msg)
             ukey_save(FofaLogin[1],FofaLogin[2],root_path+"/lib/fofa.ini")
-        # 无或登陆失败，raw_input函数获取用户输入，
-            # 再次登陆校验，循环
-        # 登陆成功，
+        # No or login failure, raw_input function gets user input,
+            # Login repeat, loop
+        # Login success
             if PYVERSION == 2:
-                fofa_save_path = root_path + "/scan/" + raw_input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
-                FofaDork = raw_input("请输入搜索语句：")
+                fofa_save_path = root_path + "/scan/" + raw_input("Please enter the name of the file to save the result (no need to add file suffix)： ") + ".txt"
+                FofaDork = raw_input("Please enter the search sentence：")
             else:
-                fofa_save_path = scan_path + input("请输入结果保存文件名(不必加文件后缀)： ") + ".txt"
-                FofaDork = input("请输入搜索语句：")
-            loglogo("Fofa搜索语句为：{fofadork}，开始与Fofa Api对接".format(fofadork = FofaDork))
+                fofa_save_path = scan_path + input("Please enter the name of the file to save the result (no need to add file suffix)： ") + ".txt"
+                FofaDork = input("Please enter the search sentence：")
+            loglogo("The Fofa search sentence is：{fofadork}，Start docking with Fofa Api".format(fofadork = FofaDork))
             FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,fofa_save_path)
             if type(FofaResultNum) == int:
-                log_msg = "搜索完毕，结果保存至{path}，经去重共计{FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
+                log_msg = "The search is complete and the results are saved to{path}，After the process, remove the weight, a total of {FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
                 logvuln(log_msg)
-            # 获取搜索结果并保存到scan
+            # Get search results and save to scan directory
         pass
     
     

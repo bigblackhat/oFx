@@ -18,8 +18,6 @@ class POCBase(object):
         elif self.target.count(":") == 0:
             self.target = "http://" + self.target + ":80"
         else:
-            # err_msg = "url格式存在缺陷，请确认格式为：\n[protocol]://[host]:[port] \nOR \n[protocol]://[host] \nOR \n[host]:[port] \nOR \n[host]"
-            # logcritical(err_msg)
             exit()
 
         self.protocol = self.target.split("://")[0]+"://"

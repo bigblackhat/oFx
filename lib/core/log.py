@@ -1,7 +1,4 @@
 #coding:utf-8
-#安全人的事能叫抄么，这是致敬经典
-#此处向sqlmap致敬
-
 
 import logging 
 from lib.core.data import now,root_path
@@ -17,12 +14,12 @@ logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter("%(asctime)s - %(levelname)s: %(message)s")
 
 
-# 使用FileHandler输出到文件
+# use filehandler
 FILE_HANDLE = logging.FileHandler("%s.log" % (root_path + "/log/" + now))
 FILE_HANDLE.setLevel(logging.DEBUG)
 FILE_HANDLE.setFormatter(formatter)
 
-# 使用StreamHandler输出到屏幕
+# use streamhandler
 STREAM_HANDLE = None
 try:
     from lib.thirdparty.ansistrm.ansistrm import ColorizingStreamHandler
@@ -43,7 +40,7 @@ except:
 STREAM_HANDLE.setLevel(logging.DEBUG)
 STREAM_HANDLE.setFormatter(formatter)
 
-# 添加两个Handler
+# add Handler
 logger.addHandler(FILE_HANDLE)
 logger.addHandler(STREAM_HANDLE)
 
@@ -52,15 +49,15 @@ def loglogo(message):
     logger.log(CUSTOM_LOGGING.LOGO,message)
 
 def logvuln(message):
-    print("\033[32m") # 黑底绿字
+    print("\033[32m") 
     logger.log(CUSTOM_LOGGING.VULN,message)
 
 def logunvuln(message):
-    print("\033[34m") # 黑底蓝字
+    print("\033[34m") 
     logger.log(CUSTOM_LOGGING.UNVULN,message)
 
 def logverifyerror(message):
-    print("\033[36m") # 黑底青字
+    print("\033[36m") 
     logger.log(CUSTOM_LOGGING.NETEERROR,message)
 
 def logwarning(message):
