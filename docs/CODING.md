@@ -4,7 +4,7 @@
 
 本文档为oFx的PoC脚本编写规范及要求说明，包含了PoC脚本编写的步骤以及相关的一些说明。一个优秀的 PoC 离不开反复的调试、测试。  
 
-目前oFx的POC编写为邀请制，仅笔者邀请者提交的POC贡献可被接受  
+目前oFx的POC编写为邀请制，仅笔者邀请者提交的POC贡献可被接受，其他有兴趣的小伙伴也可以提交代码贡献，笔者空闲时会抽时间阅读并测试，根据代码质量、漏洞危害程度等综合考量是否使用，POC通过者将会列入贡献感谢列表    
 
 POC打包后，通过邮件发送至笔者的邮箱(ronginus@qq.com)，POC包内目录结构见下文[POC提交规范](#POCSubmitRule)
 
@@ -26,7 +26,7 @@ else:
 
 ### POC_info信息<div id="POCinfoWrite"></div>
 每一个POC都必须写好_info属性的值，具体细节见注释处内容  
-```
+```python
 _info = {
     "author" : "jijue",                      # POC作者
     "version" : "1",                    # POC版本，默认是1  
@@ -126,10 +126,10 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 __________POC提交文件夹必须包含以下文件__________
 |__ APP_NAME
     |__ VULN_NAME
-        |__ ``poc.py``
+        |__ poc.py
 |__ test_num_1w.txt
 |__ success_30.txt
 |__ reference
-    |__ ``reference.md``
+    |__ reference.md
     |__ other file
 ```
