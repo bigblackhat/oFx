@@ -144,13 +144,14 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 
 ## 致谢清单
 
-以下清单中的项目笔者都有参考，排名不分先后顺序，仅按照中文全拼首字母顺序排列  
+以下清单中的项目笔者都有参考或对笔者提供一定程度上的帮助，排名不分先后顺序，仅按照中文全拼首字母顺序排列  
 
 |项目地址|
 |-|
 |[AngelSword](https://github.com/Lucifer1993/AngelSword)|
 |[pocsuite3]()|
 |[sqlmap]()|
+|[vulhub](https://vulhub.org/)|
 
 
 <br>

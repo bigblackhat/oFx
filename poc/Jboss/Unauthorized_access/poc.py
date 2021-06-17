@@ -1,7 +1,7 @@
 # coding:utf-8  
 import requests
-from lib.common import url_handle,get_random_ua
-from lib.poc import POCBase
+from lib.core.common import url_handle,get_random_ua
+from lib.core.poc import POCBase
 
 # ...
 import urllib3
@@ -45,7 +45,7 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.host + "/jmx-console" # url自己按需调整
+        url = self.target + "/jmx-console" # url自己按需调整
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",

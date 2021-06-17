@@ -1,7 +1,7 @@
 # coding:utf-8  
 import requests
-from lib.common import url_handle,get_random_ua
-from lib.poc import POCBase
+from lib.core.common import url_handle,get_random_ua
+from lib.core.poc import POCBase
 
 # ...
 import urllib3
@@ -46,7 +46,7 @@ class POC(POCBase):
         """
         vuln = [False,""]
 
-        host = self.host.replace("elastic://","http://")
+        host = self.target.replace("elastic://","http://")
         url = host + "/_cat" # url自己按需调整
         url1 = host + "/_plugin/head/"
 

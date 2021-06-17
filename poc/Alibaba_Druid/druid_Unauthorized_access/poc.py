@@ -1,7 +1,7 @@
 # coding:utf-8  
 import requests
-from lib.common import url_handle
-from lib.poc import POCBase
+from lib.core.common import url_handle
+from lib.core.poc import POCBase
 # ...
 import urllib3
 urllib3.disable_warnings()
@@ -46,7 +46,7 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.host + "/druid/index.html" # url自己按需调整
+        url = self.target + "/druid/index.html" # url自己按需调整
 
         headers = {"User-Agent":"Mozilla/5.0 (Windows ME; U; en) Opera 8.51",
                     "Connection":"close"}

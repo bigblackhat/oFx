@@ -26,11 +26,10 @@ except Exception:
     exit(err_msg)
 
 
-from lib.htmloutput import output_html
-from lib.common import get_title,url_handle,get_latest_revision,get_local_version
+from lib.core.htmloutput import output_html
+from lib.core.common import get_title,url_handle,get_latest_revision,get_local_version
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
-from lib.data import now,root_path
-from lib.log import loglogo,logvuln,logunvuln,logverifyerror,logwarning,logcritical
+from lib.core.data import now,root_path
 sys.path.append(root_path)
 
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
@@ -67,6 +66,7 @@ if not os.path.exists(scan_path):
 
 lock=threading.Lock()
 
+from lib.core.log import loglogo,logvuln,logunvuln,logverifyerror,logwarning,logcritical
 
 def get_module():
     return os.path.dirname(os.path.realpath(__file__))
@@ -114,48 +114,48 @@ def run(POC_Class,target,proxy=False,output=True):
                     vulntitle = ""
                 lock.acquire()
                 vulnn+=1
-                logvuln("[+ %d +]存在漏洞 %s 网站Title：%s "%(target.qsize(),target_url,vulntitle))
+                logvuln("╭☞ %d 存在漏洞 %s 网站Title：%s "%(target.qsize(),target_url,vulntitle))
                 vulnoutput.append(target_url+" || 网站Title： "+vulntitle)
                 lock.release()
             else:
                 lock.acquire()
-                logunvuln("[_ %d _]不存在漏洞 %s "%(target.qsize(),target_url))
+                logunvuln("╭☞ %d 不存在漏洞 %s "%(target.qsize(),target_url))
                 unvulnoutput.append(target_url)
                 lock.release()
         
         except NotImplementedError as e :
             lock.acquire()
-            logverifyerror("[! %d !]该POC不支持virefy批量扫描模式  错误详情：%s "%(target.qsize(),str(e)))
+            logverifyerror("╭☞ %d 该POC不支持virefy批量扫描模式  错误详情：%s "%(target.qsize(),str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
         except TimeoutError as e:
             lock.acquire()
-            logverifyerror("[! %d !]连接超时 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("╭☞ %d 连接超时 %s 错误详情：%s "%(target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
         except HTTPError as e:
             lock.acquire()
-            logverifyerror("[! %d !]发生HTTPError %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("╭☞ %d 发生HTTPError %s 错误详情：%s "%(target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
         except ConnectionError as e:
             lock.acquire()
-            logverifyerror("[! %d !]连接错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("╭☞ %d 连接错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
         except TooManyRedirects as e:
             lock.acquire()
-            logverifyerror("[! %d !]重定次数超过限额，抛弃该目标 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("╭☞ %d 重定次数超过限额，抛弃该目标 %s 错误详情：%s "%(target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 
         except BaseException as e:
             lock.acquire()
-            logverifyerror("[! %d !]未知错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("╭☞ %d 未知错误 %s 错误详情：%s "%(target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || 错误详情"+str(e))
             lock.release()
 

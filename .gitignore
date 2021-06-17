@@ -24,7 +24,7 @@ reference.*
 reference*.png
 
 .DS_Store
-
+CODING.md
 
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`

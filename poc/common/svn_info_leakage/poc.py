@@ -1,7 +1,7 @@
 # coding:utf-8  
 import requests
-from lib.common import url_handle,get_random_ua
-from lib.poc import POCBase
+from lib.core.common import url_handle,get_random_ua
+from lib.core.poc import POCBase
 
 # ...
 import urllib3
@@ -44,8 +44,8 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.host + "/.svn/entries" # url自己按需调整
-        url1 = self.host + "/cdn/test1?ids1=127&ids2=0&ids3=0&id4=1"
+        url = self.target + "/.svn/entries" # url自己按需调整
+        url1 = self.target + "/cdn/test1?ids1=127&ids2=0&ids3=0&id4=1"
 
             
         headers = {"User-Agent":get_random_ua(),

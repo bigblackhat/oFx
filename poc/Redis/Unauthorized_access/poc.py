@@ -1,7 +1,7 @@
 # coding:utf-8  
 import redis
-from lib.common import url_handle,get_random_ua
-from lib.poc import POCBase
+from lib.core.common import url_handle,get_random_ua
+from lib.core.poc import POCBase
 # ...
 import urllib3
 urllib3.disable_warnings()
@@ -10,9 +10,9 @@ class POC(POCBase):
 
     def __init__(self, host, proxy=None):
         if host.startswith("redis://"):
-            self.host = host[8:]
+            self.target = host[8:]
         else:
-            self.host = host
+            self.target = host
         
         self.proxy = None
 
@@ -54,8 +54,8 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        redis_host = self.host.split(":")[0]  # url自己按需调整
-        redis_port = self.host.split(":")[1]
+        redis_host = self.target.split(":")[0]  # url自己按需调整
+        redis_port = self.target.split(":")[1]
 
         
         try:

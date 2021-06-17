@@ -1,10 +1,31 @@
 #coding : utf-8
-from lib.common import url_handle
+from lib.core.common import url_handle
+# from lib.core.log import logcritical
+# import sys
 
 class POCBase(object):
 
-    def __init__(self,host,proxy = None):
-        self.host = url_handle(host)
+    def __init__(self,target,proxy = None):
+
+        self.target = target
+
+        if "://" in self.target and self.target.count(":") == 2:
+            pass
+        elif "://" not in self.target and self.target.count(":") == 1:
+            self.target = url_handle(target)
+        elif "://" in self.target and self.target.count(":") == 1:
+            self.target = target+":80"
+        elif self.target.count(":") == 0:
+            self.target = "http://" + self.target + ":80"
+        else:
+            # err_msg = "url格式存在缺陷，请确认格式为：\n[protocol]://[host]:[port] \nOR \n[protocol]://[host] \nOR \n[host]:[port] \nOR \n[host]"
+            # logcritical(err_msg)
+            exit()
+
+        self.protocol = self.target.split("://")[0]+"://"
+        self.host = self.target.split("://")[1].split(":")[0]
+        self.port = self.target.split("://")[1].split(":")[1]
+
         self.proxy = proxy
         self.timeout = 10
 

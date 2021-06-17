@@ -2,6 +2,7 @@
 from __future__ import print_function
 from bs4 import BeautifulSoup
 import sys
+import string
 
 if sys.version.split()[0].split(".")[0] == 2:
     from urlparse import urlparse  
@@ -76,6 +77,9 @@ def get_random_ua():
         UAs = [i.strip() for i in f.readlines()]
     return random.choice(UAs)
     # pass
+
+def random_str(length=10, chars=string.ascii_letters + string.digits):
+    return ''.join(random.sample(chars, length))
 
 def get_local_version(path):
     cp = configparser.ConfigParser()

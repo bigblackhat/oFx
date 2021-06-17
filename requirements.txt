@@ -1,6 +1,0 @@
-Queue
-configparser
-requests
-urlparse
-bs4
-redis
