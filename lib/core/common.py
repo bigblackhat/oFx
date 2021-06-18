@@ -16,7 +16,13 @@ import time
 import os
 import re
 
+from lib.core.data import vulnoutput,unvulnoutput,unreachoutput,lock
+from lib.core.log import logverifyerror,logvuln,logunvuln
 
+from requests.exceptions import ConnectTimeout
+from requests.exceptions import ConnectionError
+from requests.exceptions import HTTPError
+from requests.exceptions import TooManyRedirects
 
 def get_title(htmlcode):
     """
@@ -90,3 +96,63 @@ def get_latest_revision():
 
 
 
+
+def run(POC_Class,target,proxy=False,output=True):
+
+    global vulnoutput,unvulnoutput,unreachoutput
+    while not target.empty():
+
+        try:
+            target_url = target.get()
+            rVerify = POC_Class(target_url,proxy)
+            vuln = rVerify._verify()
+            if vuln[0] == True:
+                try:
+                    vulntitle=get_title(vuln[1])
+                except:
+                    vulntitle = ""
+                lock.acquire()
+                logvuln("╭☞ %d Vuln %s WebSite Title：%s "%(target.qsize(),target_url,vulntitle))
+                vulnoutput.append(target_url+" || 网站Title： "+vulntitle)
+                lock.release()
+            else:
+                lock.acquire()
+                logunvuln("╭☞ %d UnVuln %s "%(target.qsize(),target_url))
+                unvulnoutput.append(target_url)
+                lock.release()
+        
+        except NotImplementedError as e :
+            lock.acquire()
+            logverifyerror("╭☞ %d The POC does not support virtualized depiction scan mode  Error details：%s "%(target.qsize(),str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
+            lock.release()
+
+        except TimeoutError as e:
+            lock.acquire()
+            logverifyerror("╭☞ %d Connection timed out %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
+            lock.release()
+
+        except HTTPError as e:
+            lock.acquire()
+            logverifyerror("╭☞ %d HTTPError occurred %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
+            lock.release()
+
+        except ConnectionError as e:
+            lock.acquire()
+            logverifyerror("╭☞ %d Connection error %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
+            lock.release()
+
+        except TooManyRedirects as e:
+            lock.acquire()
+            logverifyerror("╭☞ %d The number of resets exceeds the limit, and the goal is discarded %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
+            lock.release()
+
+        except BaseException as e:
+            lock.acquire()
+            logverifyerror("╭☞ %d unknown mistake %s Error details：%s "%(target.qsize(),target,str(e)))
+            unreachoutput.append(target_url+" || Error details"+str(e))
+            lock.release()

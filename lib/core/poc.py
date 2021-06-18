@@ -31,7 +31,6 @@ class POCBase(object):
     def _honeypot_check(self,text):
         _HoneyPot = False
 
-        # F5 BIG-IP code
         honeycode = """
      <title>NETZEN</title>
      <title>NOVIcam WEB</title>

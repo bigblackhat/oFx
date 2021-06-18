@@ -6,6 +6,9 @@ from base64 import b64encode
 import base64
 
 import sys
+
+from lib.core.log import loglogo
+
 if sys.version.split()[0].split(".")[0] == 2:
     reload(sys)
     sys.setdefaultencoding("utf-8")
@@ -82,12 +85,11 @@ def fofa_search(user,key,dork,save_path):
             # print len(content['results'])
             for match in content['results']:
                 search_result.append(match)
-            print("第{page}页获取成功".format(page = i))
+            loglogo("第{page}页获取成功".format(page = i))
         else:
             print("[PLUGIN] Fofa:{}".format(req.text))
             continue
 
-    # print len(search_result)
     for i in search_result:
         if i[0] != "":
             url = i[0]+"://"+i[1]+":"+i[2]

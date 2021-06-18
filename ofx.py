@@ -7,17 +7,12 @@ import argparse
 import logging 
 import time
 import threading
-import queue
 import configparser
 import requests
 import ctypes
 import inspect
 import subprocess
 import re
-from requests.exceptions import ConnectTimeout
-from requests.exceptions import ConnectionError
-from requests.exceptions import HTTPError
-from requests.exceptions import TooManyRedirects
 try:
     os.path.dirname(os.path.realpath(__file__))
 except Exception:
@@ -27,18 +22,15 @@ except Exception:
 
 
 from lib.core.htmloutput import output_html
-from lib.core.common import get_title,url_handle,get_latest_revision,get_local_version
+from lib.core.common import get_title,url_handle,get_latest_revision,get_local_version,run
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
-from lib.core.data import now,root_path
+from lib.core.data import now,root_path,qu,vulnoutput,unvulnoutput,unreachoutput
+from lib.core.threads import run_threads
 sys.path.append(root_path)
 
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
 PYVERSION = sys.version.split()[0].split(".")[0]
 
-vulnoutput=list()
-unvulnoutput=[]
-unreachoutput=[]
-vulnn=0
 target_list=[]
 
 logo = """
@@ -69,8 +61,6 @@ scan_path = root_path + "/scan/"
 if not os.path.exists(scan_path):
     os.makedirs(scan_path)
 
-lock=threading.Lock()
-
 from lib.core.log import loglogo,logvuln,logunvuln,logverifyerror,logwarning,logcritical
 
 def get_module():
@@ -82,74 +72,6 @@ def check_environment():
         err_msg = "incompatible Python version detected ('%s'). To successfully run sqlmap you'll have to use version 2.x"%(PYVERSION)
         logcritical(err_msg)
         exit()
-
-
-
-
-
-def run(POC_Class,target,proxy=False,output=True):
-
-    global vulnoutput,unvulnoutput,unreachoutput,vulnn
-    while not target.empty():
-
-        try:
-            target_url = target.get()
-            rVerify = POC_Class(target_url,proxy)
-            vuln = rVerify._verify()
-            if vuln[0] == True:
-                # print vuln[1]
-                try:
-                    vulntitle=get_title(vuln[1])
-                except:
-                    vulntitle = ""
-                lock.acquire()
-                vulnn+=1
-                logvuln("╭☞ %d Vuln %s WebSite Title：%s "%(target.qsize(),target_url,vulntitle))
-                vulnoutput.append(target_url+" || 网站Title： "+vulntitle)
-                lock.release()
-            else:
-                lock.acquire()
-                logunvuln("╭☞ %d UnVuln %s "%(target.qsize(),target_url))
-                unvulnoutput.append(target_url)
-                lock.release()
-        
-        except NotImplementedError as e :
-            lock.acquire()
-            logverifyerror("╭☞ %d The POC does not support virtualized depiction scan mode  Error details：%s "%(target.qsize(),str(e)))
-            unreachoutput.append(target_url+" || Error details"+str(e))
-            lock.release()
-
-        except TimeoutError as e:
-            lock.acquire()
-            logverifyerror("╭☞ %d Connection timed out %s Error details：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || Error details"+str(e))
-            lock.release()
-
-        except HTTPError as e:
-            lock.acquire()
-            logverifyerror("╭☞ %d HTTPError occurred %s Error details：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || Error details"+str(e))
-            lock.release()
-
-        except ConnectionError as e:
-            lock.acquire()
-            logverifyerror("╭☞ %d Connection error %s Error details：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || Error details"+str(e))
-            lock.release()
-
-        except TooManyRedirects as e:
-            lock.acquire()
-            logverifyerror("╭☞ %d The number of resets exceeds the limit, and the goal is discarded %s Error details：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || Error details"+str(e))
-            lock.release()
-
-        except BaseException as e:
-            lock.acquire()
-            logverifyerror("╭☞ %d unknown mistake %s Error details：%s "%(target.qsize(),target,str(e)))
-            unreachoutput.append(target_url+" || Error details"+str(e))
-            lock.release()
-
-##########
 
 def clear_relog():
     deadline = int(now) - 12*60*60
@@ -166,8 +88,6 @@ def clear_relog():
         except:
             pass
     
-    # pass
-
 
 ##########
 
@@ -272,37 +192,25 @@ def main():
             start_time = time.time()
             with open(args.file,"r") as f:
                 target_list = [i.strip() for i in f.readlines()]
-            qu = queue.Queue()
+            # qu = queue.Queue()
             for i in target_list:
                 qu.put(i) 
-
-            for i in range(args.thread):
-                t=threading.Thread(target=run,args=(POC,qu,args.proxy))
-                t.start()
-            t.join()
-
-            # time.sleep(int(POC.timeout+1))
+            run_threads(num_threads = args.thread,thread_function = run,args=(POC,qu,args.proxy))
             
-            while len(threading.enumerate()) != 1:
-                time.sleep(1)
-
             if args.output != False:
                 html_output = now+".html" if args.output == True else args.output+".html"
-                # args.output = args.output+".html"
                 output_html(html_output,vulnoutput,unvulnoutput,unreachoutput)
                 loglogo("The report has been output to：%s"%(html_output))
 
-                # print vulnoutput
                 txt_output = now + ".txt" if args.output == True else args.output+".txt"
                 with open(root_path+"/output/"+txt_output,"w") as f:
                     for i in vulnoutput:
                         f.write(i.split("||")[0].strip()+"\n")
                 loglogo("The report has been output to：%s"%(txt_output))
             
-            loglogo("Total url %d 条， %d loophole"%(len(target_list),vulnn))
+            loglogo("Total url %d 条， %d loophole"%(len(target_list),len(vulnoutput)))
             end_time = time.time()
             loglogo("This scan takes :  %d Second"%(end_time-start_time))
-            # sys.exit()
 
 
     if args.fofa_search:
