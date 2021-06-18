@@ -20,11 +20,15 @@ except Exception:
     err_msg += "please move this ofx's directory to other location"
     exit(err_msg)
 
+from lib.core.data import now,root_path,qu,vulnoutput,unvulnoutput,unreachoutput
+
+log_path = root_path+"/log/"
+if not os.path.exists(log_path):
+    os.makedirs(log_path)
 
 from lib.core.htmloutput import output_html
 from lib.core.common import get_title,url_handle,get_latest_revision,get_local_version,run
 from lib.fofa import fofa_login,ukey_save,get_ukey,fofa_search
-from lib.core.data import now,root_path,qu,vulnoutput,unvulnoutput,unreachoutput
 from lib.core.threads import run_threads
 sys.path.append(root_path)
 
@@ -52,10 +56,6 @@ print(logo)
 output_path = root_path+"/output/"
 if not os.path.exists(output_path):
     os.makedirs(output_path)
-
-log_path = root_path+"/log/"
-if not os.path.exists(log_path):
-    os.makedirs(log_path)
 
 scan_path = root_path + "/scan/"
 if not os.path.exists(scan_path):
