@@ -22,6 +22,7 @@ scan/
 
 reference.*  
 reference*.png
+reference/
 
 .DS_Store
 # CODING.md

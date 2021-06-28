@@ -16,7 +16,7 @@ from lib.core.common import run
 from lib.core.log import loglogo
 from lib.core.htmloutput import output_html
 from lib.fofa import get_ukey,fofa_login,ukey_save,fofa_search
-
+from lib.core.output import Mkdn_output,Txt_output
 
 def GetCommand():
     parser = argparse.ArgumentParser(description="ofx framewark of POC test",
@@ -246,15 +246,14 @@ class oFxCenter():
                     loglogo("扫描结束，结果汇报")
                     if len(vulnoutput) >= 1:
                         txt_output = now + ".txt" if self.CMD_ARGS.output == True else self.CMD_ARGS.output+".txt"
-                        with open(root_path+"/output/"+txt_output,"w") as f:
-                            for vuln_name in vulnoutput:
-                                loglogo("漏洞名：%s"%(vuln_name))
-                                f.write(vuln_name+"\n")
-                                loglogo("Total url %d 条， %d loophole"%(len(target_list),len(vulnoutput[vuln_name])))
-                                for vuln_url in vulnoutput[vuln_name]:
-                                    f.write(vuln_url.split("||")[0].strip()+"\n")
-                                f.write("\n\n")
-                        loglogo("The report has been output to：%s"%(txt_output))
+                        txt_output = root_path+"/output/"+txt_output
+                        Txt_output(txt_output,vulnoutput,target_list)
+                        
+                        md_output = now + ".md" if self.CMD_ARGS.output == True else self.CMD_ARGS.output + ".md"
+                        md_output = root_path+"/output/"+md_output
+                        Mkdn_output(md_output,vulnoutput)
+                        
+            
                     else:
                         logverifyerror("目标文件中的url未匹配POC检测逻辑，疑似无漏洞")
                 
