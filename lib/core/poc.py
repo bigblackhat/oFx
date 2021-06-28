@@ -29,7 +29,6 @@ class POCBase(object):
 
 
     def _honeypot_check(self,text):
-        _HoneyPot = False
 
         honeycode = """
      <title>NETZEN</title>
@@ -55,7 +54,9 @@ class POCBase(object):
      <title>torservers.net - Anonymizer Tor Exit Router</title>
 """
         if honeycode in text:
-            _HoneyPot = True
+            return True
+
+
 
         honeycode = """
 windows--2017
@@ -69,9 +70,16 @@ www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
 """
 
         if honeycode in text:
-            _HoneyPot = True
+            return True
 
-        return _HoneyPot
+
+        if "www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin" in text \
+            and "var DEFAULT_PASSWD = \"admin\";" in text \
+                and "HDS-7204TVI-HDMI/K 192.168.100.89,Digital Video Recorder" in text\
+                    and "\"tagline\" : \"You Know, for Search\"" in text:
+            return True
+
+        return False
 
     def _verify(self):
 

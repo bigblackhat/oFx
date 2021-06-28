@@ -1,8 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
-
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
 
 ## 简介
 ``中文名：三千雷``  
@@ -53,6 +52,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ### 用前提醒
 使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很  
 
+另外，oFx如今可以良好的运行于Mac和Kali系统，相信其他linux也可以正常运行，但由于笔者没有Windows测试环境，因此在Windows上运行oFx可能会发生一些不可预测的错误，请避免在Windows上运行oFx  
 
 ### 单个url扫描模式
 
@@ -81,6 +81,17 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```sh
 ➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -f scan/jboss001.txt --thread 30
 ```
+也可以通过``,``分隔同时指定多个poc
+```sh
+➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py,poc/Jenkins/Unauth_Access/poc.py,poc/Alibaba_Druid/Unauth_Access/poc.py -f scan/jboss001.txt --thread 30
+```
+最后还可以通过``-s all``指定全量POC进行测试
+```sh
+➜  oFx git:(main) ✗ python3 ofx.py -s all -f scan/jboss001.txt --thread 50
+```
+全量POC下测试时常较久，建议食用方式：
+* 根据自己电脑性能和带宽给到50个或更多的线程数  
+* 睡前开始扫描或出门玩儿之前打开oFx进行全量POC测试  
 
 ### Fofa api 资产获取
 
@@ -129,19 +140,25 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |common(通用)|URL存活检测|``poc/common/Url_Alive/poc.py``|
 ||git信息泄露|``poc/common/Git_Info_Disclosure/poc.py``|
 ||svn信息泄露|``poc/common/Svn_Info_Disclosure/poc.py``|
+|Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/Code_Exec_Groovy_CVE-2015-1427/poc.py``|
 ||ElasticSearch 目录穿越漏洞（CVE-2015-5531）|``poc/Elasticsearch/Dir_Traversal_CVE-2015-5531/poc.py``|
 ||Elasticsearch写任意文件漏洞（WooYun-2015-110216）|``poc/Elasticsearch/File_Create_WooYun-2015-110216/poc.py``|
+|Eyou 亿邮电子邮件系统|亿邮电子邮件系统 远程命令执行|``poc/Eyou_亿邮/RCE_moni_detail/poc.py``|
 |F5|F5 BIG-IP任意文件读取(CVE-2020-5902)|``poc/F5_BIG_IP/File_Read_CVE_2020_5902/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jboss/Unauth_Access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
 |Kyan网络监控设备|Kyan网络监控设备信息泄露|``poc/Kyan/Info_Disclosure/poc.py``|
+|迈普 ISG1000安全网关|迈普 ISG1000安全网关 任意文件下载漏洞|``poc/MaiPu_迈普/File_Download_webui/poc.py``|
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/MessageSolution/Info_Disclosure/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
+|Samsung|三星路由器本地文件包含|``poc/Samsung/Samsung_Wlan_AP_Lfi/poc.py``|
+|SonarQube|SonarQube api 信息泄露漏洞|``poc/SonarQube/Info_Disclosure_CVE_2020_27986/poc.py``|
+|用友NC|用友NC6.5 BeanShell RCE|``poc/yonyou_NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 
 ## 致谢清单
 

@@ -7,7 +7,7 @@ import base64
 
 import sys
 
-from lib.core.log import loglogo
+from lib.core.log import loglogo,logcritical
 
 if sys.version.split()[0].split(".")[0] == 2:
     reload(sys)
@@ -28,7 +28,7 @@ def fofa_login(user,key):
         else:
             while _login == False:
                 err_msg = "登陆失败，请重新确认并在下方输入user和key"
-                print(err_msg)
+                logcritical(err_msg)
                 if sys.version.split()[0].split(".")[0] == 2:
                     user = raw_input("Fofa 账号：")
                     key = raw_input("Fofa key：")
@@ -77,7 +77,7 @@ def fofa_search(user,key,dork,save_path):
             err_msg = "\n\033[35m"
             err_msg += "已无更多搜索结果\n开始保存文件"
             err_msg += "\033[0m"
-            print(err_msg)
+            logcritical(err_msg)
             break
         # 正常情况下
         elif req and req.status_code == 200 and "results" in req.json():

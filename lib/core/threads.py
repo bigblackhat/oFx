@@ -40,6 +40,8 @@ def run_threads(num_threads, thread_function, args: tuple = (), forward_exceptio
                                       args=(thread_function, args))
             try:
                 thread.start()
+            except KeyboardInterrupt as e:
+                raise KeyboardInterrupt
             except Exception as ex:
                 err_msg = "error occurred while starting new thread ('{0}')".format(str(ex))
                 logwarning(err_msg)

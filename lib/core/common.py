@@ -97,7 +97,7 @@ def get_latest_revision():
 
 
 
-def run(POC_Class,target,proxy=False,output=True):
+def run(POC_Class,target,proxy=False,output=True,PocRemain=""):
 
     global vulnoutput,unvulnoutput,unreachoutput
     while not target.empty():
@@ -105,6 +105,8 @@ def run(POC_Class,target,proxy=False,output=True):
         try:
             target_url = target.get()
             rVerify = POC_Class(target_url,proxy)
+            poc_name = rVerify._info["name"]
+            # print(poc_name)
             vuln = rVerify._verify()
             if vuln[0] == True:
                 try:
@@ -112,47 +114,58 @@ def run(POC_Class,target,proxy=False,output=True):
                 except:
                     vulntitle = ""
                 lock.acquire()
-                logvuln("╭☞ %d Vuln %s WebSite Title：%s "%(target.qsize(),target_url,vulntitle))
-                vulnoutput.append(target_url+" || 网站Title： "+vulntitle)
+                logvuln("POC Remain : %s ╭☞ Target Remain : %d Vuln %s | WebSite Title：%s "%(PocRemain,target.qsize(),target_url,vulntitle))
+                # logvuln("%s ╭☞ %d Vuln %s | WebSite Title：%s | Server Response : %s"%(PocRemain,target.qsize(),target_url,vulntitle,vuln[1]))
+                if poc_name in vulnoutput:
+                    vulnoutput[poc_name].append(target_url+" || 网站Title： "+vulntitle)
+                else:
+                    vulnoutput.update({poc_name:list()})
+                    vulnoutput[poc_name].append(target_url+" || 网站Title： "+vulntitle)
                 lock.release()
             else:
                 lock.acquire()
-                logunvuln("╭☞ %d UnVuln %s "%(target.qsize(),target_url))
+                logunvuln("POC Remain : %s ╭☞ Target Remain : %d UnVuln %s "%(PocRemain,target.qsize(),target_url))
                 unvulnoutput.append(target_url)
                 lock.release()
         
         except NotImplementedError as e :
             lock.acquire()
-            logverifyerror("╭☞ %d The POC does not support virtualized depiction scan mode  Error details：%s "%(target.qsize(),str(e)))
+            logverifyerror("POC Remain : %s ╭☞ %d The POC does not support virtualized depiction scan mode  Error details：%s "%(PocRemain,target.qsize(),str(e)))
             unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
+            pass
 
         except TimeoutError as e:
             lock.acquire()
-            logverifyerror("╭☞ %d Connection timed out %s Error details：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("POC Remain : %s ╭☞ %d Connection timed out %s Error details：%s "%(PocRemain,target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
+            pass
 
         except HTTPError as e:
             lock.acquire()
-            logverifyerror("╭☞ %d HTTPError occurred %s Error details：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("POC Remain : %s ╭☞ %d HTTPError occurred %s Error details：%s "%(PocRemain,target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
+            pass
 
         except ConnectionError as e:
             lock.acquire()
-            logverifyerror("╭☞ %d Connection error %s Error details：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("POC Remain : %s ╭☞ %d Connection error %s Error details：%s "%(PocRemain,target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
+            pass
 
         except TooManyRedirects as e:
             lock.acquire()
-            logverifyerror("╭☞ %d The number of resets exceeds the limit, and the goal is discarded %s Error details：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("POC Remain : %s ╭☞ %d The number of resets exceeds the limit, and the goal is discarded %s Error details：%s "%(PocRemain,target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
+            pass
 
         except BaseException as e:
             lock.acquire()
-            logverifyerror("╭☞ %d unknown mistake %s Error details：%s "%(target.qsize(),target,str(e)))
+            logverifyerror("POC Remain : %s ╭☞ %d unknown mistake %s Error details：%s "%(PocRemain,target.qsize(),target,str(e)))
             unreachoutput.append(target_url+" || Error details"+str(e))
             lock.release()
+            pass

