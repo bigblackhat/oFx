@@ -77,9 +77,9 @@ _info = {
 
 ### POC第三方依赖说明<div id="requires"></div>
 
-写POC尽量不要使用第三方模块，如果一定要用，请联系笔者  
+写POC尽量不要使用第三方模块，如果一定要用，请在``_info``的``PocDesc``中注明    
 
-如果笔者说不能用，那就换个洞吧  
+如果经笔者考量该POC不适合oFx，则该POC将会被废弃  
 
 ### POC命名规范<div id="POCNameRule"></div>
 
@@ -146,12 +146,12 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 目录结构大致如下：
 ```
 __________POC提交文件夹必须包含以下文件__________
-|__ APP_NAME
-    |__ VULN_NAME
+|__ APP_NAME/
+    |__ VULN_NAME/
         |__ poc.py
-|__ test_num_1w.txt
-|__ success_30.txt
-|__ reference
-    |__ reference.md
-    |__ other file
+        |__ reference/
+            |__ reference.md
+            |__ other file
+            |__ test_num_1w.txt
+            |__ success_30.txt
 ```
