@@ -19,8 +19,6 @@ from lib.fofa import get_ukey,fofa_login,ukey_save,fofa_search
 
 
 def GetCommand():
-    # -f -u 
-    # -s / --all-poc 
     parser = argparse.ArgumentParser(description="ofx framewark of POC test",
     usage="python ofx.py -f [path] / -u [url] -s [poc_path] ")
 
@@ -53,16 +51,6 @@ ScanMode = {
     }
 class oFxCenter():
     def __init__(self):
-        # 扫描模式分两种，单个poc模式，全poc的模糊扫描模式
-            # 检测是否提供--poc参数，如果是
-                # 判断该参数值是否为all，如果是
-                    # 则导入poc目录下所有的poc文件
-            
-        # 目标获取方式分两种，一个url和一个txt文件
-            # 检查是否提供这两个参数的任意一个，如果有  if url or txt:
-                # pass
-            # 否则，退出，警告用户必须提供至少一个目标  else:
-                                                    # exit("必须提供至少一个目标")
         self.Mode = None
         self.__version = None
         self.__threads = 10
@@ -153,9 +141,6 @@ class oFxCenter():
         pass
 
     def Load_POC(self,poc_path):
-        # POC verify
-        # poc_path = poc_path[:-7] if poc_path.endswith("poc.py") else poc_path
-        # poc_path = root_path+"/"+poc_path
         sys.path.append(str(poc_path))
         from poc import POC
         logvuln("POC - %s Loaded"%(POC._info["name"]))
@@ -191,7 +176,6 @@ class oFxCenter():
                 vuln_path = app_path + "/" +vulnname
                 vuln_path = vuln_path.split("/oFx/")[1]
                 self.addpoc(vuln_path)
-                # print(vuln_path)
 
                 
 
@@ -240,7 +224,6 @@ class oFxCenter():
                 elif "," in self.CMD_ARGS.script:
                     for i in self.CMD_ARGS.script.split(","):
                         self.get_some_poc(i)
-                    # pass
                 else:
                     self.get_some_poc(self.CMD_ARGS.script)
                 start_time = time.time()
@@ -252,8 +235,6 @@ class oFxCenter():
                     for i in target_list:
                         if i.strip() == "":
                             target_list.remove(i)
-                    # print(target_list)
-                    # qu = queue.Queue()
                     for i in target_list:
                         qu.put(i) 
                     run_threads(num_threads = self.CMD_ARGS.thread,thread_function = run,args=(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize())))

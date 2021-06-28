@@ -38,8 +38,6 @@ logo = """
 \033[0m""".format(version=get_local_version(root_path+"/info.ini"))
 
 
-##########
-
 
 def main():
 
