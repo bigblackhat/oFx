@@ -176,7 +176,7 @@ class oFxCenter():
                 if vulnname.startswith("Url_Alive"):
                     continue
                 vuln_path = app_path + "/" +vulnname
-                vuln_path = vuln_path.split("/oFx/")[1]
+                vuln_path = vuln_path.split(root_path)[1][1:]
                 self.addpoc(vuln_path)
 
                 
@@ -212,7 +212,7 @@ class oFxCenter():
 
             # single mode
             if self.getmode() == 1:
-                
+
                 if self.CMD_ARGS.script == "all":
                     err_msg = "single 模式不支持全量POC，如果有需求，请将单个url保存到一个文件中，再用-f去检测"
                     exit(err_msg)
