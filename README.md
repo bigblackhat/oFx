@@ -153,12 +153,15 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
 |Kyan网络监控设备|Kyan网络监控设备信息泄露|``poc/Kyan/Info_Disclosure/poc.py``|
+|蓝凌OA|蓝凌OA前台任意文件读取漏洞|``poc/Landray_蓝凌OA/File_Read_CNVD_2021_28277/poc.py``|
 |迈普 ISG1000安全网关|迈普 ISG1000安全网关 任意文件下载漏洞|``poc/MaiPu_迈普/File_Download_webui/poc.py``|
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/MessageSolution/Info_Disclosure/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
 |Samsung|三星路由器本地文件包含|``poc/Samsung/Samsung_Wlan_AP_Lfi/poc.py``|
 |SonarQube|SonarQube api 信息泄露漏洞|``poc/SonarQube/Info_Disclosure_CVE_2020_27986/poc.py``|
+|电信天翼|电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞|``poc/TianYi_天翼/RCE_F460_web_shell_cmd/poc.py``|
+|泛微 OA|泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/yonyou_NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 
 ## 致谢清单

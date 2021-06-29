@@ -40,7 +40,7 @@ def GetCommand():
     system.add_argument("--version",action="store_true",help="Display the local oFx version, and give the latest version number depending on the network status")
 
     developer = parser.add_argument_group("Developer(POC开发者工具箱)")
-    developer.add_argument("--gen-poc",action="store_true",help="生成POC标准目录结构，该参数不需要跟值")
+    developer.add_argument("--add-poc",action="store_true",help="生成POC标准目录结构，该参数不需要跟值")
     
     if len(sys.argv) == 1:
         sys.argv.append("-h")
@@ -192,7 +192,7 @@ class oFxCenter():
         if self.CMD_ARGS.fofa_search:
             self.fromfofa()
 
-        if self.CMD_ARGS.gen_poc:
+        if self.CMD_ARGS.add_poc:
             app_name = input("请输入受漏洞影响的应用名")
             vuln_name = input("请输入漏洞名")
 

@@ -29,7 +29,7 @@ class POCBase(object):
 
 
     def _honeypot_check(self,text):
-
+        text = str(text)
         honeycode = """
      <title>NETZEN</title>
      <title>NOVIcam WEB</title>
