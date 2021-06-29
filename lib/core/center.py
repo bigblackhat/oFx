@@ -39,6 +39,8 @@ def GetCommand():
     system.add_argument("--output",default=True,help="Scan report")
     system.add_argument("--version",action="store_true",help="Display the local oFx version, and give the latest version number depending on the network status")
 
+    developer = parser.add_argument_group("Developer(POC开发者工具箱)")
+    developer.add_argument("--gen-poc",action="store_true",help="生成POC标准目录结构，该参数不需要跟值")
     
     if len(sys.argv) == 1:
         sys.argv.append("-h")
@@ -190,6 +192,10 @@ class oFxCenter():
         if self.CMD_ARGS.fofa_search:
             self.fromfofa()
 
+        if self.CMD_ARGS.gen_poc:
+            # app_name = input("")
+            pass
+
         if self.CMD_ARGS.url or self.CMD_ARGS.file:
             # mode verify
             if self.CMD_ARGS.url and self.CMD_ARGS.script:
@@ -206,6 +212,14 @@ class oFxCenter():
 
             # single mode
             if self.getmode() == 1:
+                
+                if self.CMD_ARGS.script == "all":
+                    err_msg = "single 模式不支持全量POC，如果有需求，请将单个url保存到一个文件中，再用-f去检测"
+                    exit(err_msg)
+                elif "," in self.CMD_ARGS.script:
+                    err_msg = "single 模式不支持多POC，如果有需求，请将单个url保存到一个文件中，再用-f去检测"
+                    exit(err_msg)
+
                 self.get_some_poc(self.CMD_ARGS.script)
                 POC,POC_Path = self.Load_POC(allpoc.get())
                 
