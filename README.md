@@ -4,7 +4,7 @@
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
 
 ## 简介
-``中文名：三千雷``  
+``中文名：奥夫叉(谐音哈哈🦉)``  
 
 一个应用于web安全领域的漏洞扫描框架，可被应用于但不限于如下场景：
 ```
