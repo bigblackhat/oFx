@@ -1,6 +1,5 @@
 #coding:utf-8
 
-import argparse
 import sys
 import queue
 import os
@@ -12,45 +11,20 @@ from lib.core.common import get_local_version,get_latest_revision
 from lib.core.log import logvuln,logwarning,logunvuln,logverifyerror,logcritical  
 from lib.core.data import qu,allpoc,now,vulnoutput,unvulnoutput,unreachoutput,scan_path,poc_path
 from lib.core.threads import run_threads
-from lib.core.common import run
+from lib.core.common import run,GetCommand
 from lib.core.log import loglogo
 from lib.core.htmloutput import output_html
 from lib.fofa import get_ukey,fofa_login,ukey_save,fofa_search
 from lib.core.output import Mkdn_output,Txt_output
 
-def GetCommand():
-    parser = argparse.ArgumentParser(description="ofx framewark of POC test",
-    usage="python ofx.py -f [path] / -u [url] -s [poc_path] ")
 
-    searchengine = parser.add_argument_group("SearchEngine")
-    searchengine.add_argument("--fofa-search",action="store_true",help="Fofa Search Mode, This option does not need to enter the parameter value")
 
-    # target = parser.add_argument_group("TARGET")
-    target = parser.add_mutually_exclusive_group()
-    target.add_argument("-u","--url",type=str,help="scan a single target url (e.g. www.baidu.com)")
-    target.add_argument("-f","--file",type=str,help="load target from file (e.g. /root/urllist.txt)")
-
-    script = parser.add_argument_group("Script")
-    script.add_argument("-s","--script",type=str,help="load script by name (e.g. -s poc/jellyfin/jellyfin_fileread_scan/poc.py OR -s all)")
-    
-    system = parser.add_argument_group("System")
-    system.add_argument("--thread",default=10,type=int,help="Number of threads, the default is 10 threads")
-    system.add_argument("--proxy",default=False,help="Http Proxy，Example：127.0.0.1:8080 OR http://127.0.0.1:8080")
-    system.add_argument("--output",default=True,help="Scan report")
-    system.add_argument("--version",action="store_true",help="Display the local oFx version, and give the latest version number depending on the network status")
-
-    developer = parser.add_argument_group("Developer(POC开发者工具箱)")
-    developer.add_argument("--add-poc",action="store_true",help="生成POC标准目录结构，该参数不需要跟值")
-    
-    if len(sys.argv) == 1:
-        sys.argv.append("-h")
-    args=parser.parse_args()
-    return args 
-    # pass
 ScanMode = {
     "Single_Verify":1,
     "File_Verify":2,
     }
+
+
 class oFxCenter():
     def __init__(self):
         self.Mode = None
@@ -68,17 +42,17 @@ class oFxCenter():
 
     def show_version(self):
         LocalVer = get_local_version(root_path + "/info.ini")
-        print("The current local version is {localv}".format(localv = LocalVer))
-        print("Obtaining github warehouse information, please wait.......")
+        print("当前的本地版本是 {localv}".format(localv = LocalVer))
+        print("获取github仓库信息，请稍等.......")
         LatestVer = get_latest_revision()
         if LatestVer == None:
-            print("The current network condition is not good, unable to obtain the latest version information")
+            print("当前网络状况不佳，无法获取最新版本信息")
             exit()
         elif LatestVer and LocalVer != LatestVer:
-            print("The latest version is {latestv}".format(latestv = LatestVer))
+            print("最新版本是 {latestv}".format(latestv = LatestVer))
             exit()
         else:
-            print("The currently used ofx is the latest version")
+            print("目前使用的ofx是最新版本")
             exit()
 
     def setproxy(self):
@@ -124,12 +98,12 @@ class oFxCenter():
             # Login repeat, loop
         # Login success
 
-            fofa_save_path = scan_path + input("Please enter the name of the file to save the result (no need to add file suffix)： ") + ".txt"
-            FofaDork = input("Please enter the search sentence：")
-            loglogo("The Fofa search sentence is：{fofadork}，Start docking with Fofa Api".format(fofadork = FofaDork))
+            fofa_save_path = scan_path + input("请输入文件名保存结果（不要添加文件后缀）： ") + ".txt"
+            FofaDork = input("请输入搜索语句：")
+            loglogo("Fofa搜索语句是：{fofadork}，开始对接 Fofa Api".format(fofadork = FofaDork))
             FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,fofa_save_path)
             if type(FofaResultNum) == int:
-                log_msg = "The search is complete and the results are saved to{path}，After the process, remove the weight, a total of {FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
+                log_msg = "搜索完成，结果保存到 {path}，去重后，一共 {FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
                 logvuln(log_msg)
             # Get search results and save to scan directory
         
@@ -145,7 +119,7 @@ class oFxCenter():
     def Load_POC(self,poc_path):
         sys.path.append(str(poc_path))
         from poc import POC
-        logvuln("POC - %s Loaded"%(POC._info["name"]))
+        logvuln("POC - %s 加载完毕"%(POC._info["name"]))
         return POC,poc_path
 
     def Unload_POC(self,poc_path):
@@ -156,10 +130,10 @@ class oFxCenter():
         poc_path = poc_path[:-7] if poc_path.endswith("poc.py") else poc_path
         poc_path = root_path+"/"+poc_path
         if os.path.exists(poc_path):
-            loglogo("POC - %s Exist"%(poc_path))
+            loglogo("POC - %s 有效"%(poc_path))
             self.addpoc(poc_path)
         else:
-            logvuln("POC - %s Does Not Exist, please confirm the path and re-specify"%(poc_path))
+            logvuln("POC - %s 不存在，请确认路径并重新指定"%(poc_path))
             exit()
         pass
 
@@ -270,13 +244,13 @@ POC路径为{VULN_PATH}
                 single_mode = POC(self.CMD_ARGS.url,self.getproxy())
                 single_verify = single_mode._attack()
                 if single_verify[0] == True:
-                    print("URL: {url}  || POC: {script} \nServer return information: \n{text} \n【Vuln】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
+                    print("URL: {url}  || POC: {script} \n服务器返回信息: \n{text} \n【漏洞存在】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
                 else:
-                    print("URL: {url}  || POC: {script} \nServer return information: \n{text} \n【UnVuln】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
+                    print("URL: {url}  || POC: {script} \n服务器返回信息: \n{text} \n【漏洞不存在】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
             
             # enum mode
             elif self.getmode() == 2:
-                loglogo("poc parser,waiting....")
+                loglogo("POC 解析中,请稍后....")
                 if self.CMD_ARGS.script == "all":
                     self.get_all_poc()
                 elif "," in self.CMD_ARGS.script:
@@ -316,7 +290,7 @@ POC路径为{VULN_PATH}
                         logverifyerror("目标文件中的url未匹配POC检测逻辑，疑似无漏洞")
                 
                 end_time = time.time()
-                loglogo("This scan takes :  %d Second"%(end_time-start_time))
+                loglogo("本次扫描消耗了: %d 秒"%(end_time-start_time))
 
 
             

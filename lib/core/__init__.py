@@ -23,7 +23,7 @@ def oFx_Refuse_Win():
     if IS_WIN:
         err_msg = "oFx does not support windows system, Kali Linux is recommended"
         exit(err_msg)
-oFx_Refuse_Win()
+# oFx_Refuse_Win()
 
 
 def oFx_Init():
