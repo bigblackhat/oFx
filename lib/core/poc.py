@@ -1,20 +1,21 @@
 #coding : utf-8
 from lib.core.common import url_handle
-# from lib.core.log import logcritical
-# import sys
+# import re
 
 class POCBase(object):
 
     def __init__(self,target,proxy = None):
 
-        self.target = target
+        self.target = target[:-1] if target.endswith("/") else target
 
         if "://" in self.target and self.target.count(":") == 2:
             pass
         elif "://" not in self.target and self.target.count(":") == 1:
             self.target = url_handle(target)
-        elif "://" in self.target and self.target.count(":") == 1:
-            self.target = target+":80"
+            
+        elif "://" in self.target and self.target.count(":") == 1 :
+            # self.target = target+":80"
+            pass
         elif self.target.count(":") == 0:
             self.target = "http://" + self.target + ":80"
         else:
@@ -22,7 +23,9 @@ class POCBase(object):
 
         self.protocol = self.target.split("://")[0]+"://"
         self.host = self.target.split("://")[1].split(":")[0]
-        self.port = self.target.split("://")[1].split(":")[1]
+        if self.target.count(":") == 2:
+            self.port = self.target.split("://")[1].split(":")[1]
+        else: self.port = None
 
         self.proxy = proxy
         self.timeout = 10
