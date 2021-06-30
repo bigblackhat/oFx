@@ -268,7 +268,7 @@ POC路径为{VULN_PATH}
                 POC,POC_Path = self.Load_POC(allpoc.get())
                 
                 single_mode = POC(self.CMD_ARGS.url,self.getproxy())
-                single_verify = single_mode._verify()
+                single_verify = single_mode._attack()
                 if single_verify[0] == True:
                     print("URL: {url}  || POC: {script} \nServer return information: \n{text} \n【Vuln】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
                 else:

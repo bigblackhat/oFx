@@ -6,7 +6,16 @@
 ## 简介
 ``中文名：三千雷``  
 
-一个应用于web安全领域的漏洞扫描框架，刷洞，刷肉鸡用（取决于你的漏洞）  
+一个应用于web安全领域的漏洞扫描框架，可被应用于但不限于如下场景：
+```
+0Day/1Day全网概念验证(在没有懒得测试环境的情况下，直接写POC全网扫描，亲测很爽)
+
+刷肉鸡(需要使用RCE/写文件等漏洞的POC)    
+
+企业内网或对外开放资产的安全评估  
+
+简单的拒绝服务攻击(用Url存活检测POC)
+```
 
 虽说是框架，但目前的规模仅是笔者自用及与身边小伙伴分享的工具  
 
@@ -37,7 +46,7 @@ oFx仅用于安全测试与研究目的
 
 网速尚可情况下，测试30个线程的速度：
 ![show](img/11.png)
-约11分钟跑完一万条  
+Fofa会员一条搜索语句能提取一万条url，约11分钟跑完  
 
 
 ## 使用方法  
@@ -63,9 +72,10 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```sh
 ➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -u xxx.xxx.xxx.xxx:xx
 ```
-> 单个目标的漏洞验证详情(取决于POC)  
+> 单个目标的漏洞验证详情(返回取决于漏洞本身，目前所有POC都是为了批量验证而设计的，single检测模式尚没有对返回结果做优化，后续会有调整)  
 
 ![show](img/008.png)
+漏洞存在与否见最后一行  
 
 ### 批量扫描模式
 
@@ -75,7 +85,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 > 刷CNVD之类的漏洞平台的积分或排名  
 
-> 有RCE漏洞的POC的话，就可以刷肉鸡  
+> 有RCE漏洞的POC的话，就可以刷肉鸡(见下方的[POC支持清单](#PocSupport))  
 
 使用方法  
 ```sh
@@ -121,7 +131,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 fofa search模式会将从api中获取到的结果进行去重并重新排序，因此大部分情况下都不会是正好10000条结果，往往只有6-7k也是合情合理的，请放心食用  
 
-## POC支持清单
+## POC支持清单<div id="PocSupport"></div>
 
 <br>
 
@@ -162,7 +172,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |SonarQube|SonarQube api 信息泄露漏洞|``poc/SonarQube/Info_Disclosure_CVE_2020_27986/poc.py``|
 |电信天翼|电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞|``poc/TianYi_天翼/RCE_F460_web_shell_cmd/poc.py``|
 |泛微 OA|泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
-|用友NC|用友NC6.5 BeanShell RCE|``poc/yonyou_NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
+|用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
+||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
 
 ## 致谢清单
 
