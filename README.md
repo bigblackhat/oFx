@@ -129,7 +129,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key    
 
-fofa search模式会将从api中获取到的结果进行去重并重新排序，因此大部分情况下都不会是正好10000条结果，往往只有6-7k也是合情合理的，请放心食用  
+fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url但大部分情况下都不会是正好一万条结果，请放心食用  
 
 ## POC支持清单<div id="PocSupport"></div>
 
@@ -182,8 +182,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |项目地址|
 |-|
 |[AngelSword](https://github.com/Lucifer1993/AngelSword)|
-|[pocsuite3]()|
-|[sqlmap]()|
+|[pocsuite3](https://github.com/knownsec/pocsuite3)|
+|[sqlmap](https://github.com/sqlmapproject/sqlmap) yyds|
 |[vulhub](https://vulhub.org/)|
 
 
