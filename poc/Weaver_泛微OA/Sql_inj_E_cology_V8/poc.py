@@ -14,7 +14,7 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+        全量POC模式下误报率较高  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "泛微 OA 8 前台SQL注入",                        # 漏洞名称

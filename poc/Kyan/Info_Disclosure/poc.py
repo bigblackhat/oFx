@@ -10,12 +10,12 @@ urllib3.disable_warnings()
 class POC(POCBase):
 
     _info = {
-        "author" : "hansi",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "author" : "hansi & jijue",                      # POC作者
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-18",        # POC创建时间
         "UpdateDate" : "2021-06-18",        # POC创建时间
         "PocDesc" : """
-        略
+        原POC逻辑过于简单存在大量误报，现已优化
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "Kyan网络监控设备信息泄露",                        # 漏洞名称
@@ -28,8 +28,8 @@ class POC(POCBase):
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-                        title="platform - Login"
-                    """,                     # fofa搜索语句
+        title="platform - Login"
+        """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
 
@@ -57,7 +57,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy , timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "UserName" in req.text:
+            if req.status_code == 200 and "UserName=" in req.text and "Password=":
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

@@ -168,7 +168,7 @@ def run(POC_Class,target,proxy=False,output=True,PocRemain=""):
             pass
 
 def GetCommand():
-    parser = argparse.ArgumentParser(description="ofx framewark of POC test",
+    parser = argparse.ArgumentParser(description="oFx framewark of POC test",
     usage="python3 ofx.py -f [target_path] / -u [url]   -s [poc_path]  --thread 50\n\
        python3 ofx.py --fofa-search")
 

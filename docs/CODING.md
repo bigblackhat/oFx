@@ -24,6 +24,19 @@ if req.status_code == 200 and "自己设计规则":
 else:
     vuln = [False,req.text]
 ```
+杜绝垃圾规则，人人有责，包括但不限于如下用例的检测规则都属于垃圾规则：
+```py
+if req.status_code == 200 and "" in req.text:
+```
+```py
+if req.status_code == 200 and "Administrator" in req.text:
+```
+```py
+if req.status_code != 500:
+```
+在FoFa、Shodan等工具的帮助下，我们能够搜索到大量适合某某POC测试的目标，因此上面的逻辑很可能在专项测试的时候可以良好的运行，但如果是一个测试文件中包含了大量的完全不受控制的未知的目标(别不信，互联网上什么样的网站都有)，那么上面的检测逻辑将会产生大量的误报，俗称白给。  
+
+言而总之，检测逻辑越苛刻越好  
 
 ### POC_info信息<div id="POCinfoWrite"></div>
 每一个POC都必须写好_info属性的值，具体细节见注释处内容  

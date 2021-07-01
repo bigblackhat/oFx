@@ -23,6 +23,7 @@ scan/
 reference.*  
 reference*.png
 reference/
+secret/
 
 .DS_Store
 # CODING.md
