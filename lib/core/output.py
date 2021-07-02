@@ -6,7 +6,7 @@ def Txt_output(filename,output_dict,target_list):
         for vuln_name in output_dict:
             loglogo("漏洞名：%s"%(vuln_name))
             f.write(vuln_name+"\n")
-            loglogo("共测试url %d 条， %d loophole"%(len(target_list),len(output_dict[vuln_name])))
+            loglogo("共测试url %d 条， %d 条存在漏洞"%(len(target_list),len(output_dict[vuln_name])))
             for vuln_url in output_dict[vuln_name]:
                 f.write(vuln_url.split("||")[0].strip()+"\n")
             f.write("\n\n")
