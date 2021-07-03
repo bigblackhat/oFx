@@ -19,6 +19,7 @@ class POCBase(object):
         elif self.target.count(":") == 0:
             self.target = "http://" + self.target + ":80"
         else:
+            err_msg = "url不符合规则，请输入类似于：http://ip:port 的target"
             exit()
 
         self.protocol = self.target.split("://")[0]+"://"
