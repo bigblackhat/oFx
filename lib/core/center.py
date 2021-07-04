@@ -272,6 +272,10 @@ POC路径为{VULN_PATH}
                     run_threads(num_threads = self.CMD_ARGS.thread,thread_function = run,args=(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize())))
                     # run(POC,qu,self.CMD_ARGS.proxy)
                     self.Unload_POC(POC_Path)
+                
+                end_time = time.time()
+                total_time = int(end_time-start_time)
+
                 if self.CMD_ARGS.output != False:
                     
                     # print(vulnoutput)
@@ -283,14 +287,14 @@ POC路径为{VULN_PATH}
                         
                         md_output = now + ".md" if self.CMD_ARGS.output == True else self.CMD_ARGS.output + ".md"
                         md_output = root_path+"/output/"+md_output
-                        Mkdn_output(md_output,vulnoutput)
+                        Mkdn_output(md_output,vulnoutput,target_list = target_list,total_time = total_time)
                         
             
                     else:
                         logverifyerror("目标文件中的url未匹配POC检测逻辑，疑似无漏洞")
                 
-                end_time = time.time()
-                loglogo("本次扫描消耗了: %d 秒"%(end_time-start_time))
+                # end_time = time.time()
+                loglogo("本次扫描消耗了: %d 秒"%(total_time))
 
 
             
