@@ -13,7 +13,7 @@ import time
 import os
 import re
 
-from lib.core.data import vulnoutput,unvulnoutput,unreachoutput,lock
+from lib.core.data import vulnoutput,unvulnoutput,unreachoutput,lock,AliveList
 from lib.core.log import logverifyerror,logvuln,logunvuln
 
 from requests.exceptions import ConnectTimeout
@@ -94,9 +94,9 @@ def get_latest_revision():
 
 
 
-def run(POC_Class,target,proxy=False,output=True,PocRemain=""):
+def run(POC_Class,target,proxy=False,output=True,PocRemain="",Alive_mode = False):
 
-    global vulnoutput,unvulnoutput,unreachoutput
+    global vulnoutput,unvulnoutput,unreachoutput,AliveList
     while not target.empty():
 
         try:
@@ -105,6 +105,15 @@ def run(POC_Class,target,proxy=False,output=True,PocRemain=""):
             poc_name = rVerify._info["name"]
             # print(poc_name)
             vuln = rVerify._verify()
+            
+            if Alive_mode == True:
+                if vuln[0] == True:
+                    AliveList.add(target_url)
+                    continue
+                    # print("yes")
+                    
+                else:
+                    continue
             if vuln[0] == True:
                 try:
                     vulntitle=get_title(vuln[1])

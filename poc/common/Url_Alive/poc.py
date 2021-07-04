@@ -45,7 +45,11 @@ class POC(POCBase):
         try:
             req = requests.get(url,headers = headers,proxies = self.proxy,verify=False,timeout = self.timeout)  
 
-            if str(req.status_code)[0] !=4 and str(req.status_code)[0] !=5:
+            if str(req.status_code)[0] == "1" or \
+                str(req.status_code)[0] == "2" or \
+                    str(req.status_code)[0] == "3" or \
+                        str(req.status_code)[0] == "4" or \
+                            str(req.status_code)[0] == "5":
                 vuln = [True,req.text]
         except Exception as e:
             raise e

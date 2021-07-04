@@ -9,7 +9,7 @@ import time
 from lib.core.data import root_path,lock
 from lib.core.common import get_local_version,get_latest_revision
 from lib.core.log import logvuln,logwarning,logunvuln,logverifyerror,logcritical  
-from lib.core.data import qu,allpoc,now,vulnoutput,unvulnoutput,unreachoutput,scan_path,poc_path
+from lib.core.data import qu,allpoc,now,vulnoutput,unvulnoutput,unreachoutput,scan_path,poc_path,AliveList,AliveTest
 from lib.core.threads import run_threads
 from lib.core.common import run,GetCommand
 from lib.core.log import loglogo
@@ -156,6 +156,7 @@ class oFxCenter():
                 
 
     def command_parser(self):
+        global AliveList,AliveTest
         self.CMD_ARGS = GetCommand()
         if self.CMD_ARGS.version == True:
             self.show_version()
@@ -258,18 +259,38 @@ POC路径为{VULN_PATH}
                         self.get_some_poc(i)
                 else:
                     self.get_some_poc(self.CMD_ARGS.script)
-                start_time = time.time()
-                while not allpoc.empty():
-                    POC,POC_Path = self.Load_POC(allpoc.get())
 
+                start_time = time.time()
+
+                #### Alpha Future ####
+                if self.CMD_ARGS.script == "all":
                     with open(self.CMD_ARGS.file,"r") as f:
                         target_list = [i.strip() for i in f.readlines() if "." in i]
                     for i in target_list:
                         if i.strip() == "":
                             target_list.remove(i)
+                        else:
+                            AliveTest.put(i)
+                    POC,POC_Path = self.Load_POC(root_path+"/poc/common/Url_Alive/")
+                    run_threads(num_threads = self.CMD_ARGS.thread,thread_function = run,args=(POC,AliveTest,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),True))
+                    # run(POC,AliveTest,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),True)
+                    self.Unload_POC(POC_Path)
+                else:
+                    with open(self.CMD_ARGS.file,"r") as f:
+                        target_list = [i.strip() for i in f.readlines() if "." in i]
                     for i in target_list:
-                        qu.put(i) 
-                    run_threads(num_threads = self.CMD_ARGS.thread,thread_function = run,args=(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize())))
+                        if i.strip() == "":
+                            target_list.remove(i)
+                        else:
+                            AliveList.add(i)
+                #### Alpha Future ####
+
+                while not allpoc.empty():
+                    POC,POC_Path = self.Load_POC(allpoc.get())
+
+                    for i in AliveList:
+                        qu.put(i)
+                    run_threads(num_threads = self.CMD_ARGS.thread,thread_function = run,args=(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),False))
                     # run(POC,qu,self.CMD_ARGS.proxy)
                     self.Unload_POC(POC_Path)
                 

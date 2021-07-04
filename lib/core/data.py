@@ -27,3 +27,5 @@ unreachoutput=[]
 
 lock=threading.Lock()
 
+AliveTest = queue.Queue()
+AliveList = set()

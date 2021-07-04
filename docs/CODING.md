@@ -213,4 +213,4 @@ POC路径为/Users/jijue/Documents/GitHub/oFx/poc/Apache_Example/RCE/
 
 1.单个目标测试，直到检测逻辑正确，具备漏洞检测能力为止，并确保漏报在百分之十以下
 2.fofa搜索结果，批量测试，降低误报
-3.用``docs/__The__One__File__.txt``测试，进一步降低误报
+3.用``data/__The__One__File__.txt``测试，进一步降低误报
