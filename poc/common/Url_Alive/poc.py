@@ -40,19 +40,21 @@ class POC(POCBase):
 
         # proxies = None
         
+        if url.startswith("http://") or url.startswith("https://"):
+            headers = {"User-Agent":get_random_ua(),}
+            try:
+                req = requests.get(url,headers = headers,proxies = self.proxy,verify=False,timeout = self.timeout)  
 
-        headers = {"User-Agent":get_random_ua(),}
-        try:
-            req = requests.get(url,headers = headers,proxies = self.proxy,verify=False,timeout = self.timeout)  
-
-            if str(req.status_code)[0] == "1" or \
-                str(req.status_code)[0] == "2" or \
-                    str(req.status_code)[0] == "3" or \
-                        str(req.status_code)[0] == "4" or \
-                            str(req.status_code)[0] == "5":
-                vuln = [True,req.text]
-        except Exception as e:
-            raise e
+                if str(req.status_code)[0] == "1" or \
+                    str(req.status_code)[0] == "2" or \
+                        str(req.status_code)[0] == "3" or \
+                            str(req.status_code)[0] == "4" or \
+                                str(req.status_code)[0] == "5":
+                    vuln = [True,req.text]
+            except Exception as e:
+                raise e
+        else:
+            vuln = [True,"No HTTP Protocal,Pass"]
         
         return vuln
 
