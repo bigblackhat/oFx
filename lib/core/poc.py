@@ -60,6 +60,32 @@ class POCBase(object):
         if honeycode in text:
             return True
 
+            
+
+        honeycode = """
+WWW-Authenticate: Basic realm="AXIS_00408CD0EC74"
+WWW-Authenticate: Basic realm="NETGEAR DGN2200"
+WWW-Authenticate: Basic realm="NETGEAR D6300B"
+WWW-Authenticate: Basic realm="NETGEAR DGN1000B"
+Www-Authenticate: Basic realm="SickBeard"
+WWW-Authenticate: Basic realm="netcam"
+WWW-Authenticate: Basic realm="NETGEAR R7000"
+WWW-Authenticate: Basic realm="NETGEAR R6400"
+WWW-Authenticate: Basic realm="Broadcom Home Gateway Reference Design"
+WWW-Authenticate: Basic realm="hikvision"
+WWW-Authenticate: Basic realm="NETGEAR WGR614v10"
+WWW-Authenticate: Basic realm="NETGEAR Orbi-mini"
+WWW-Authenticate: Basic realm="NETGEAR Orbi"
+WWW-Authenticate: Basic realm="Linksys-CIT400"
+WWW-Authenticate: Basic realm="Login to the Router Web Configurator"
+WWW-Authenticate: Basic realm="NETGEAR Orbi-micro"
+WWW-Authenticate: Digest realm="IPCamera Login"
+WWW-Authenticate: Basic realm="TP-LINK Wireless Dual Band Gigabit Router WDR4300"
+"""
+
+
+        if honeycode in text:
+            return True
 
 
         honeycode = """
