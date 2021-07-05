@@ -14,13 +14,13 @@ def Txt_output(filename,output_dict,target_list):
 
 doc = ""
 
-def Mkdn_output(filename,output_dict,target_list,total_time):
+def Mkdn_output(filename,output_dict,target_list,actual_list,total_time):
     global doc
     doc += "<div align='center' ><font size='6'>检测报告</font></div>\n\n\n\
 ```\n\
 oFx :: order by jijue\n\
 ```\n\n"
-    doc += "|条目|数值|\n|-|-|\n|测试条数|{target_list_length}|\n|共计耗时|{total_time}秒|\n\n".format(target_list_length = len(target_list),total_time = total_time)
+    doc += "|条目|数值|\n|-|-|\n|预计测试条数|{target_list_length}|\n|实际测试条数|{actual_list_length}|\n|共计耗时|{total_time}秒|\n\n".format(target_list_length = len(target_list),actual_list_length = len(actual_list),total_time = total_time)
     for poc_name in output_dict:
         doc += "### {}\n".format(poc_name)
         doc += "|url|title|\n"

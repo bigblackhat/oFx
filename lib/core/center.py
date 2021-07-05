@@ -266,6 +266,7 @@ POC路径为{VULN_PATH}
                 if self.CMD_ARGS.script == "all":
                     with open(self.CMD_ARGS.file,"r") as f:
                         target_list = [i.strip() for i in f.readlines() if "." in i]
+                        target_list = set(target_list)
                     for i in target_list:
                         if i.strip() == "":
                             target_list.remove(i)
@@ -308,7 +309,7 @@ POC路径为{VULN_PATH}
                         
                         md_output = now + ".md" if self.CMD_ARGS.output == True else self.CMD_ARGS.output + ".md"
                         md_output = root_path+"/output/"+md_output
-                        Mkdn_output(md_output,vulnoutput,target_list = target_list,total_time = total_time)
+                        Mkdn_output(md_output,vulnoutput,target_list = target_list,actual_list = AliveList , total_time = total_time)
                         
             
                     else:
