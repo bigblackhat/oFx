@@ -153,6 +153,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||git信息泄露|``poc/common/Git_Info_Disclosure/poc.py``|
 ||svn信息泄露|``poc/common/Svn_Info_Disclosure/poc.py``|
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
+|DVR|DVR登录绕过漏洞复现|``poc/DVR/Login_Bypass/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/Code_Exec_Groovy_CVE-2015-1427/poc.py``|
@@ -160,6 +161,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||Elasticsearch写任意文件漏洞（WooYun-2015-110216）|``poc/Elasticsearch/File_Create_WooYun-2015-110216/poc.py``|
 |Eyou 亿邮电子邮件系统|亿邮电子邮件系统 远程命令执行|``poc/Eyou_亿邮/RCE_moni_detail/poc.py``|
 |F5|F5 BIG-IP任意文件读取(CVE-2020-5902)|``poc/F5_BIG_IP/File_Read_CVE_2020_5902/poc.py``|
+|Huawei|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jboss/Unauth_Access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
@@ -430,15 +432,68 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-写一个好玩且能用的漏扫类的工具是我一直以来的执念，虽然离完美且好用还很远  
+写一个好玩且能用的漏扫类的工具是我一直以来的执念，虽然离好用且完美还很远  
 
 感谢我的领导(id:``张真人``)给予我时间去自由探索，他也提出了很多前瞻性的idea（比如全量POC模式）
 
 感谢我的同事(id:``hansi``)利用闲暇之余完成的POC贡献（见``changelog.md``）与前期使用体验的反馈  
 
+写oFx之前我的愿景是写一个概念验证工具，在hw等特殊时期网络上会充斥许许多多真真假假的漏洞，如何能仅根据语焉不详的利用描述就写出一个批量验证工具且具备无限的拓展性和复用性，根据这一需求，oFx的初代版本就这样诞生了，随着全量POC功能的实现，oFx更像一个专注于Nday检测的漏扫了，甚至可以用RCE漏洞去全网刷肉鸡(我也确实是这样描述oFx的)，但我仍希望大家能用它来做安全研究工作
+
 接下来的时光我将会沉浸于代码审计的工作，oFx的架构不会有明显的调整，但POC应该会持续的不定期的更新  
 
-出于对萌新使用体验的考虑，我会将核心的输出信息更为中文  
+出于对萌新使用体验的考虑，我会将核心的输出信息更为中文   
 
 感谢读到这里，祝好祝顺  

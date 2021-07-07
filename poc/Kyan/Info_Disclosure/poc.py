@@ -11,11 +11,12 @@ class POC(POCBase):
 
     _info = {
         "author" : "hansi & jijue",                      # POC作者
-        "version" : "2",                    # POC版本，默认是1  
+        "version" : "3",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-18",        # POC创建时间
         "UpdateDate" : "2021-06-18",        # POC创建时间
         "PocDesc" : """
-        原POC逻辑过于简单存在大量误报，现已优化
+        v2 原POC逻辑过于简单存在大量误报，现已优化  
+        v3 v2有缺陷，再次优化
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "Kyan网络监控设备信息泄露",                        # 漏洞名称
@@ -57,7 +58,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy , timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "UserName=" in req.text and "Password=":
+            if req.status_code == 200 and "UserName=" in req.text and "</html>" not in req.text and "Password=" in req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
