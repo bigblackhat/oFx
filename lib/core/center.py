@@ -187,8 +187,10 @@ class oFxCenter():
                 os.mkdir(app_dir+vuln_name+"/")
             vuln_dir = app_dir+vuln_name+"/"
 
+            with open(root_path+"/poc/demo/demo/poc.py","r") as f:
+                poc_content = f.read()
             with open(vuln_dir+"poc.py","w") as f:
-                f.write("#coding:utf-8")
+                f.write(poc_content)
             
             reference_dir = vuln_dir+"reference/"
             os.mkdir(reference_dir)

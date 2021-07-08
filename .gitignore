@@ -19,6 +19,7 @@ log/
 scan/
 .vscode/
 漏洞报告alpha版/
+poc/ACTI_视频监控/
 
 reference.*  
 reference*.png

