@@ -14,10 +14,10 @@ class POC(POCBase):
         "CreateDate" : "2021-03-10",        # POC创建时间
         "UpdateDate" : "2021-03-10",        # POC创建时间
         "PocDesc" : """
-        略  
+            略
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "druid未授权访问",                        # 漏洞名称
+        "name" : "Druid未授权访问",                        # 漏洞名称
         "VulnID" : "",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
 
         "AppName" : "druid",                     # 漏洞应用名称

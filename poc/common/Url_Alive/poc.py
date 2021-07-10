@@ -47,9 +47,10 @@ class POC(POCBase):
 
                 if str(req.status_code)[0] == "1" or \
                     str(req.status_code)[0] == "2" or \
-                        str(req.status_code)[0] == "3" or \
-                            str(req.status_code)[0] == "4" or \
-                                str(req.status_code)[0] == "5":
+                        str(req.status_code)[0] == "3" :
+                            # str(req.status_code)[0] == "4" or \
+                            #     str(req.status_code)[0] == "5"\
+                                    
                     vuln = [True,req.text]
             except Exception as e:
                 raise e

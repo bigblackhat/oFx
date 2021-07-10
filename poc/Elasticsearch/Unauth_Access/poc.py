@@ -28,7 +28,9 @@ class POC(POCBase):
         ElasticSearch 是一款Java编写的企业级搜索服务，启动此服务默认会开放9200端口，可被非法操作数据。
         """,                                # 漏洞简要描述
 
-        "fofa-dork":"title:\"Nacos\"",                     # fofa搜索语句
+        "fofa-dork":"""
+            app="Elasticsearch"
+            """,                     # fofa搜索语句
         "example" : "https://47.108.74.113/v1/auth/users?pageNo=1&pageSize=100",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
 

@@ -26,7 +26,14 @@ oFx :: order by jijue\n\
         doc += "|url|title|\n"
         doc += "|-|-|\n"
         for vuln_url in output_dict[poc_name]:
-            doc += "|{}|{}|\n".format(vuln_url.split("||")[0],vuln_url.split("||")[1])
+
+            web_title = vuln_url.split("||")[1].strip()
+            if "|" in web_title:
+                web_title = web_title.replace("|"," ",100000)
+            
+            if "\n" in web_title:
+                web_title = web_title.replace("\n","",100000)
+            doc += "|{}|{}|\n".format(vuln_url.split("||")[0],web_title)
         
     with open(filename,"w") as f:
         f.write(doc)

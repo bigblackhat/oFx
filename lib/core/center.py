@@ -264,7 +264,7 @@ POC路径为{VULN_PATH}
 
                 start_time = time.time()
 
-                #### Alpha Future ####
+                #### Alpha Future Start ####
                 if self.CMD_ARGS.script == "all":
                     with open(self.CMD_ARGS.file,"r") as f:
                         target_list = [i.strip() for i in f.readlines() if "." in i]
@@ -286,7 +286,7 @@ POC路径为{VULN_PATH}
                             target_list.remove(i)
                         else:
                             AliveList.add(i)
-                #### Alpha Future ####
+                #### Alpha Future End ####
 
                 while not allpoc.empty():
                     POC,POC_Path = self.Load_POC(allpoc.get())

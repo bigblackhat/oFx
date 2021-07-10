@@ -149,6 +149,9 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Apache Flink|Apache Flink目录穿透 (CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE-2020-17519/poc.py``|
 |Apache Solr|Apache Solr 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
 |碧海威 L7|碧海威 L7 弱口令漏洞|``poc/Bithighway_碧海威/Weak_Pass_L7/poc.py``|
+|C-Lodop|C-Lodop 云打印机系统平台任意文件读取漏洞|``poc/C_Lodop/File_Read/poc.py``|
+|中国电信|电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞|``poc/China_TeleCOM_中国电信/RCE_F460_GateWay/poc.py``|
+||大唐电信AC集中管理平台默认口令|``poc/China_TeleCOM_中国电信/Weak_Pass_DaTang_AC_Manager/poc.py``|
 |common(通用)|URL存活检测|``poc/common/Url_Alive/poc.py``|
 ||git信息泄露|``poc/common/Git_Info_Disclosure/poc.py``|
 ||svn信息泄露|``poc/common/Svn_Info_Disclosure/poc.py``|
@@ -188,10 +191,11 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |TamronOS IPTV系统|TamronOS IPTV系统 后台配置敏感信息|``poc/TamronOS_IPTV/Info_Disclosure/poc.py``|
 ||TamronOS IPTV系统存在前台命令执行漏洞|``poc/TamronOS_IPTV/RCE_api_ping/poc.py``|
 ||TamronOS IPTV系统 submit 任意用户创建漏洞|``poc/TamronOS_IPTV/User_Add_Submit/poc.py``|
-|电信天翼|电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞|``poc/TianYi_天翼/RCE_F460_web_shell_cmd/poc.py``|
 |泛微 OA|泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
+|Weblogic|Weblogic SSRF (CVE-2014-4210)|``poc/Weblogic/CVE_2014_4210/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
+|ZeroShell防火墙|ZeroShell 3.9.0 远程命令执行漏洞|``poc/ZeroShell/RCE_kerbynet/poc.py``|
 
 ## 致谢清单
 

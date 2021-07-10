@@ -26,7 +26,9 @@ class POC(POCBase):
         Alibaba Nacos 存在一个由于不当处理User-Agent导致的未授权访问漏洞 。
         """,                                # 漏洞简要描述
 
-        "fofa-dork":"title:\"Nacos\"",                     # fofa搜索语句
+        "fofa-dork":"""
+            title="Nacos"
+            """,                     # fofa搜索语句
         "example" : "https://47.108.74.113/v1/auth/users?pageNo=1&pageSize=100",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
 

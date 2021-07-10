@@ -32,7 +32,12 @@ def get_title(htmlcode):
     title  
     """
     soup = BeautifulSoup(htmlcode, 'html.parser')
-    return str(soup.title)[7:-8]
+
+    end = str(soup.title).find("</title>")
+    title = str(soup.title)[7:end] + "<title>"
+    if "<title>" in title:
+        title = title.replace("<title>","",10000)
+    return title
 
 
 
