@@ -13,7 +13,6 @@ def Txt_output(filename,output_dict,target_list):
     loglogo("TXT格式报告输出至：%s"%(filename))
 
 doc = ""
-
 def Mkdn_output(filename,output_dict,target_list,actual_list,total_time):
     global doc
     doc += "<div align='center' ><font size='6'>检测报告</font></div>\n\n\n\
@@ -28,23 +27,21 @@ oFx :: order by jijue\n\
         for vuln_url in output_dict[poc_name]:
 
             web_title = vuln_url.split("||")[1].strip()
-            if "|" in web_title:
-                web_title = web_title.replace("|"," ",100000)
-            
-            if "\n" in web_title:
-                web_title = web_title.replace("\n","",100000)
-
-            if "\t" in web_title:
-                web_title = web_title.replace("\t","",100000)
-
-            if "\r" in web_title:
-                web_title = web_title.replace("\r","",100000)
-
-            if "`" in web_title:
-                web_title = web_title.replace("`","",100000)
 
             doc += "|{}|{}|\n".format(vuln_url.split("||")[0],web_title)
         
     with open(filename,"w") as f:
         f.write(doc)
     loglogo("Markdown格式报告输出至：%s"%(filename))
+
+csv_doc = ""
+def Csv_output(filename,output_dict):
+    global csv_doc
+    csv_doc += "漏洞类型,url,网站title\n"
+    for poc_name in output_dict:
+        for vuln_url in output_dict[poc_name]:
+            web_title = vuln_url.split("||")[1].strip()
+            csv_doc += "{poc_name},{vuln_url},{web_title}\n".format(poc_name=poc_name,vuln_url=vuln_url.split("||")[0],web_title=web_title)
+    with open(filename,"w") as f:
+        f.write(csv_doc)
+    loglogo("CSV格式报告输出至：%s" % (filename))

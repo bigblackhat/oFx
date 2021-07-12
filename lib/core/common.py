@@ -37,6 +37,25 @@ def get_title(htmlcode):
     title = str(soup.title)[7:end] + "<title>"
     if "<title>" in title:
         title = title.replace("<title>","",10000)
+
+    if "|" in title:
+        title = title.replace("|"," ",100000)
+
+    if "\n" in title:
+        title = title.replace("\n","",100000)
+
+    if "\t" in title:
+        title = title.replace("\t","",100000)
+
+    if "\r" in title:
+        title = title.replace("\r","",100000)
+
+    if "`" in title:
+        title = title.replace("`","",100000)
+
+    if "," in title:
+        title = title.replace(",","",100000)
+
     return title
 
 

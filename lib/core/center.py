@@ -15,7 +15,7 @@ from lib.core.common import run,GetCommand
 from lib.core.log import loglogo
 from lib.core.htmloutput import output_html
 from lib.fofa import get_ukey,fofa_login,ukey_save,fofa_search
-from lib.core.output import Mkdn_output,Txt_output
+from lib.core.output import Mkdn_output,Txt_output,Csv_output
 
 
 
@@ -312,6 +312,10 @@ POC路径为{VULN_PATH}
                         md_output = now + ".md" if self.CMD_ARGS.output == True else self.CMD_ARGS.output + ".md"
                         md_output = root_path+"/output/"+md_output
                         Mkdn_output(md_output,vulnoutput,target_list = target_list,actual_list = AliveList , total_time = total_time)
+                        
+                        csv_output = now + ".csv" if self.CMD_ARGS.output == True else self.CMD_ARGS.output + ".csv"
+                        csv_output = root_path+"/output/"+csv_output
+                        Csv_output(csv_output,vulnoutput)
                         
             
                     else:
