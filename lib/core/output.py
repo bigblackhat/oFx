@@ -33,6 +33,16 @@ oFx :: order by jijue\n\
             
             if "\n" in web_title:
                 web_title = web_title.replace("\n","",100000)
+
+            if "\t" in web_title:
+                web_title = web_title.replace("\t","",100000)
+
+            if "\r" in web_title:
+                web_title = web_title.replace("\r","",100000)
+
+            if "`" in web_title:
+                web_title = web_title.replace("`","",100000)
+
             doc += "|{}|{}|\n".format(vuln_url.split("||")[0],web_title)
         
     with open(filename,"w") as f:

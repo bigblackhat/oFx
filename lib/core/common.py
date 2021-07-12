@@ -128,10 +128,10 @@ def run(POC_Class,target,proxy=False,output=True,PocRemain="",Alive_mode = False
                 logvuln("POC 剩余 : %s ╭☞ Target 剩余 : %d Vuln %s | WebSite Title：%s "%(PocRemain,target.qsize(),target_url,vulntitle))
                 # logvuln("%s ╭☞ %d Vuln %s | WebSite Title：%s | Server Response : %s"%(PocRemain,target.qsize(),target_url,vulntitle,vuln[1]))
                 if poc_name in vulnoutput:
-                    vulnoutput[poc_name].append(target_url+" || 网站Title： "+vulntitle)
+                    vulnoutput[poc_name].append(target_url+" || "+vulntitle)
                 else:
                     vulnoutput.update({poc_name:list()})
-                    vulnoutput[poc_name].append(target_url+" || 网站Title： "+vulntitle)
+                    vulnoutput[poc_name].append(target_url+" || "+vulntitle)
                 lock.release()
             else:
                 lock.acquire()

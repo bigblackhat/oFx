@@ -1,5 +1,7 @@
 # coding:utf-8  
-import requests
+from urllib import request
+import ssl
+import chardet
 from lib.core.common import url_handle,get_random_ua
 from lib.core.poc import POCBase
 
@@ -10,11 +12,13 @@ class POC(POCBase):
     
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-03",        # POC创建时间
         "UpdateDate" : "2021-06-03",        # POC创建时间
         "PocDesc" : """
-        略  
+            v2
+            该POC支持中文，别的POC都不支持  
+            该POC不支持burp代理，或许别的代理也不支持，笔者没测那么多，见谅  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "url存活检测",                        # 漏洞名称
@@ -37,21 +41,38 @@ class POC(POCBase):
     def _verify(self):
         vuln = [False,""]
         url = self.target  # url自己按需调整
-
-        # proxies = None
         
         if url.startswith("http://") or url.startswith("https://"):
             headers = {"User-Agent":get_random_ua(),}
-            try:
-                req = requests.get(url,headers = headers,proxies = self.proxy,verify=False,timeout = self.timeout)  
 
-                if str(req.status_code)[0] == "1" or \
-                    str(req.status_code)[0] == "2" or \
-                        str(req.status_code)[0] == "3" :
-                            # str(req.status_code)[0] == "4" or \
-                            #     str(req.status_code)[0] == "5"\
+            try:
+                proxy_handler = request.ProxyHandler(self.proxy)
+                opener = request.build_opener(proxy_handler)
+                request.install_opener(opener)
+
+                # verify
+                context = ssl._create_unverified_context()
+
+                req = request.Request(url,headers = headers)
+                response = request.urlopen(req,timeout=self.timeout,context = context)
+                html = response.read()
+
+                status_code = response.getcode()
+
+                encode_mode = chardet.detect(html)["encoding"]
+
+                if encode_mode.lower() == "gbk" or encode_mode.lower() == "gb2312" or encode_mode.lower() == "gb18030":
+                    encode_mode = "gb18030"
+                html = html.decode(encode_mode)#.encode("utf-8")
+
+
+                if str(status_code)[0] == "1" or \
+                    str(status_code)[0] == "2" or \
+                        str(status_code)[0] == "3" :
+                            # str(status_code)[0] == "4" or \
+                            #     str(status_code)[0] == "5"\
                                     
-                    vuln = [True,req.text]
+                    vuln = [True,html]
             except Exception as e:
                 raise e
         else:
