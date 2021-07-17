@@ -146,15 +146,15 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/Unauth_Access/poc.py``|
 |Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Unauth_Access/poc.py``|
 |Apache CouchDB|Apache Couchdb 远程权限提升 (CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017-12635/poc.py``|
-|Apache Flink|Apache Flink目录穿透 (CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE-2020-17519/poc.py``|
+|Apache Flink|Apache Flink目录穿透 (CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``|
 |Apache Solr|Apache Solr 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
 |碧海威 L7|碧海威 L7 弱口令漏洞|``poc/Bithighway_碧海威/Weak_Pass_L7/poc.py``|
 |C-Lodop|C-Lodop 云打印机系统平台任意文件读取漏洞|``poc/C_Lodop/File_Read/poc.py``|
 |中国电信|电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞|``poc/China_TeleCOM_中国电信/RCE_F460_GateWay/poc.py``|
 ||大唐电信AC集中管理平台默认口令|``poc/China_TeleCOM_中国电信/Weak_Pass_DaTang_AC_Manager/poc.py``|
-|common(通用)|URL存活检测|``poc/common/Url_Alive/poc.py``|
-||git信息泄露|``poc/common/Git_Info_Disclosure/poc.py``|
+|common(通用)|git信息泄露|``poc/common/Git_Info_Disclosure/poc.py``|
 ||svn信息泄露|``poc/common/Svn_Info_Disclosure/poc.py``|
+||URL存活检测|``poc/common/Url_Alive/poc.py``|
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
 |DVR|DVR登录绕过漏洞|``poc/DVR/Login_Bypass/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
@@ -172,7 +172,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Jboss|Jboss未授权访问|``poc/Jboss/Unauth_Access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
-|金和OA|金和OA C6 download.jsp 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
+|金和OA|金和OA C6 download.jsp 任意文件读取漏洞|``poc/Jinher_金和OA/File_Read_download_jsp/poc.py``|
 |KEDACOM 数字系统接入网关|KEDACOM 数字系统接入网关 任意文件读取漏洞|``poc/KEDACOM_数字系统接入网关/File_Read/poc.py``|
 |Kyan网络监控设备|Kyan网络监控设备信息泄露|``poc/Kyan/Info_Disclosure/poc.py``|
 |蓝凌OA|蓝凌OA前台任意文件读取漏洞|``poc/Landray_蓝凌OA/File_Read_CNVD_2021_28277/poc.py``|
@@ -182,7 +182,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/MessageSolution/Info_Disclosure/poc.py``|
 |梨子项目管理系统|梨子项目管理系统 信息泄露漏洞|``poc/PearProject_梨子项目管理系统/Conf_Info_Disclosure_env/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
-|PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``g|
+|PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
 |Samsung|三星路由器本地文件包含|``poc/Samsung/Lfi_Samsung_Wlan_AP/poc.py``|
 ||三星 WLAN AP WEA453e路由器 远程命令执行漏洞|``poc/Samsung/RCE_Samsung_WLANAP_WEA453e/poc.py``|
@@ -191,7 +191,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |TamronOS IPTV系统|TamronOS IPTV系统 后台配置敏感信息|``poc/TamronOS_IPTV/Info_Disclosure/poc.py``|
 ||TamronOS IPTV系统存在前台命令执行漏洞|``poc/TamronOS_IPTV/RCE_api_ping/poc.py``|
 ||TamronOS IPTV系统 submit 任意用户创建漏洞|``poc/TamronOS_IPTV/User_Add_Submit/poc.py``|
-|泛微 OA|泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
+|泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
+||泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
 |Weblogic|Weblogic SSRF (CVE-2014-4210)|``poc/Weblogic/CVE_2014_4210/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
@@ -205,7 +206,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |-|
 |[AngelSword](https://github.com/Lucifer1993/AngelSword)|
 |[pocsuite3](https://github.com/knownsec/pocsuite3)|
-|[sqlmap](https://github.com/sqlmapproject/sqlmap) yyds|
+|[sqlmap](https://github.com/sqlmapproject/sqlmap) sqlmap永远滴神|
 |[vulhub](https://vulhub.org/)|
 
 
@@ -216,9 +217,9 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 
 ## 错误提交
 
-如果您在使用oFx的过程中遇到了一些笔者写代码时没有考虑到的问题或没有测试到的错误，欢迎通过邮箱告知笔者(ronginus@qq.com)  
+如果您在使用oFx的过程中遇到了一些笔者写代码时没有考虑到的问题或没有测试到的错误，欢迎通过邮箱告知笔者(ronginus@qq.com)或提Issues  
 
-邮件中需要包含触发错误的oFx命令，测试文件，您的运行环境（包括但不限于操作系统、python版本等），报错的字符串形式➕报错截图  
+提交BUG时，需要给到笔者触发错误的oFx命令，测试文件，您的运行环境（包括但不限于操作系统、python版本等），报错的字符串形式➕报错截图  
 
 
 ~~都看到这儿了，点个star再走呗~~
@@ -468,7 +469,6 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 <br>
 <br>
 <br>
-<br><br>
 <br>
 <br>
 <br>
@@ -476,7 +476,6 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 <br>
 <br>
 <br>
-<br><br>
 <br>
 <br>
 <br>
@@ -484,7 +483,12 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 <br>
 <br>
 <br>
-<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
