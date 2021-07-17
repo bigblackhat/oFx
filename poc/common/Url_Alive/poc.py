@@ -12,13 +12,15 @@ class POC(POCBase):
     
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "2",                    # POC版本，默认是1  
+        "version" : "3",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-03",        # POC创建时间
         "UpdateDate" : "2021-06-03",        # POC创建时间
         "PocDesc" : """
             v2
             该POC支持中文，别的POC都不支持  
             该POC不支持burp代理，或许别的代理也不支持，笔者没测那么多，见谅  
+            v3
+            部分优化
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "url存活检测",                        # 漏洞名称
@@ -63,7 +65,11 @@ class POC(POCBase):
 
                 if encode_mode.lower() == "gbk" or encode_mode.lower() == "gb2312" or encode_mode.lower() == "gb18030":
                     encode_mode = "gb18030"
-                html = html.decode(encode_mode)#.encode("utf-8")
+
+                try:
+                    html = html.decode(encode_mode)#.encode("utf-8")
+                except UnicodeDecodeError:
+                    pass
 
 
                 if str(status_code)[0] == "1" or \

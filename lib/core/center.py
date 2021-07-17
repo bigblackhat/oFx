@@ -294,7 +294,7 @@ POC路径为{VULN_PATH}
                     for i in AliveList:
                         qu.put(i)
                     run_threads(num_threads = self.CMD_ARGS.thread,thread_function = run,args=(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),False))
-                    # run(POC,qu,self.CMD_ARGS.proxy)
+                    # run(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),False)
                     self.Unload_POC(POC_Path)
                 
                 end_time = time.time()
@@ -315,7 +315,7 @@ POC路径为{VULN_PATH}
                         
                         csv_output = now + ".csv" if self.CMD_ARGS.output == True else self.CMD_ARGS.output + ".csv"
                         csv_output = root_path+"/output/"+csv_output
-                        Csv_output(csv_output,vulnoutput)
+                        Csv_output(csv_output,vulnoutput,target_list = target_list,actual_list = AliveList , total_time = total_time)
                         
             
                     else:
