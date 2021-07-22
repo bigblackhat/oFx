@@ -75,7 +75,7 @@ class oFxCenter():
 
         self.__proxy = {
         "http": "http://%s"%(self.CMD_ARGS.proxy),
-        "https": "https://%s"%(self.CMD_ARGS.proxy),
+        "https": "http://%s"%(self.CMD_ARGS.proxy),
         }
         self.getproxy()
     
