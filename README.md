@@ -31,6 +31,8 @@ oFx is for security testing purposes only
 oFx仅用于安全测试与研究目的
 ```
 
+
+
 ![show](img/3.png)
 
 黑底蓝字代表无漏洞  
@@ -516,3 +518,6 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 出于对萌新使用体验的考虑，我会将核心的输出信息更为中文   
 
 感谢读到这里，祝好祝顺  
+
+``访客数统计``
+![Visitor Count](https://profile-counter.glitch.me/bigblackhat-oFx/count.svg)
