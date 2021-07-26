@@ -171,6 +171,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||HIKVISION 流媒体管理服务器弱口令|``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``|
 ||HIKVISION 流媒体管理服务器任意文件读取|``poc/HIKVISION/File_Read_Stream_Media_Manager/poc.py``|
 |华为|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
+|汇文|汇文OPAC敏感信息泄露|``poc/HuiWen_汇文/Info_Disclosure/poc.py``|
+||汇文OPAC弱口令|``poc/HuiWen_汇文/Weak_Pass/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jboss/Unauth_Access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
@@ -212,6 +214,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |项目地址|
 |-|
 |[AngelSword](https://github.com/Lucifer1993/AngelSword)|
+|[edusrc_POC](https://github.com/Cl0udG0d/edusrc_POC)|
 |[pocsuite3](https://github.com/knownsec/pocsuite3)|
 |[sqlmap](https://github.com/sqlmapproject/sqlmap) sqlmap永远滴神|
 |[vulhub](https://vulhub.org/)|
