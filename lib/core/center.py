@@ -5,7 +5,6 @@ import queue
 import os
 import time
 
-
 from lib.core.data import root_path,lock
 from lib.core.common import get_local_version,get_latest_revision
 from lib.core.log import logvuln,logwarning,logunvuln,logverifyerror,logcritical  
@@ -323,6 +322,9 @@ POC路径为{VULN_PATH}
                 
                 # end_time = time.time()
                 loglogo("本次扫描消耗了: %d 秒"%(total_time))
-
+        
+        if self.CMD_ARGS.sound:
+            from playsound import playsound
+            playsound(root_path+"/data/95955.mp3")
 
             

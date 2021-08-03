@@ -220,6 +220,7 @@ def GetCommand():
     system.add_argument("--thread",default=10,type=int,help="指定线程数，默认为10，仅扫描时指定线程数有效")
     system.add_argument("--proxy",default=False,help="指定Http Proxy，仅扫描时指定线程数有效，Example：127.0.0.1:8080 OR http://127.0.0.1:8080")
     system.add_argument("--output",default=True,help="不用管，扫完了看output目录即可")
+    system.add_argument("--sound",default=False,help="扫完了会有铃声提醒，虚拟机里不一定能用")
     system.add_argument("--version",action="store_true",help="显示本地oFx版本，并根据网络状态给出最新版本号")
 
     developer = parser.add_argument_group("Developer(POC开发者工具箱)")
