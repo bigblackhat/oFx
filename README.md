@@ -162,8 +162,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |360|360天擎数据库未授权访问|``poc/360/TianQing_Unauth_Acceess/poc.py``|
 |Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/Unauth_Access/poc.py``|
 |Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Unauth_Access/poc.py``|
-|Apache CouchDB|Apache Couchdb 远程权限提升 (CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017-12635/poc.py``|
-|Apache Flink|Apache Flink目录穿透 (CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``|
+|Apache CouchDB|Apache Couchdb 远程权限提升(CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017_12635/poc.py``|
+|Apache Flink|Apache Flink目录穿透(CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``|
 |Apache Solr|Apache Solr 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
 |碧海威 L7|碧海威 L7 弱口令漏洞|``poc/Bithighway_碧海威/Weak_Pass_L7/poc.py``|
 |C-Lodop|C-Lodop 云打印机系统平台任意文件读取漏洞|``poc/C_Lodop/File_Read/poc.py``|
@@ -176,7 +176,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
 |赤兔CMS|赤兔CMS banner识别插件|``poc/CtCMS_赤兔CMS/Get_Banner/poc.py``|
 |D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_system_mgr_ShareCenter/poc.py``|
-|DVR|DVR登录绕过漏洞|``poc/DVR/Login_Bypass/poc.py``|
+|DVR|DVR登录绕过漏洞(CVE-2018-9995)|``poc/DVR/Login_Bypass_CVE_2018_9995/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/Code_Exec_Groovy_CVE-2015-1427/poc.py``|
@@ -184,6 +184,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||Elasticsearch写任意文件漏洞（WooYun-2015-110216）|``poc/Elasticsearch/File_Create_WooYun-2015-110216/poc.py``|
 |Eyou 亿邮电子邮件系统|亿邮电子邮件系统 远程命令执行|``poc/Eyou_亿邮/RCE_moni_detail/poc.py``|
 |F5|F5 BIG-IP任意文件读取(CVE-2020-5902)|``poc/F5_BIG_IP/File_Read_CVE_2020_5902/poc.py``|
+|菲力尔|FLIR-AX8 download.php 任意文件下载|``poc/FLIR_菲力尔/Download_File_AX8/poc.py``|
 |H3C SecPath 下一代防火墙|H3C SecPath 下一代防火墙 任意文件下载漏洞|``poc/H3C/File_Download_SecPath_WAF/poc.py``|
 |海康威视|HIKVISION 视频编码设备接入网关 任意文件下载|``poc/HIKVISION/File_Down_Gateway_downFile_php/poc.py``|
 ||HIKVISION 流媒体管理服务器弱口令|``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``|
@@ -192,6 +193,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |华为|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
 |汇文|汇文OPAC敏感信息泄露|``poc/HuiWen_汇文/Info_Disclosure/poc.py``|
 ||汇文OPAC弱口令|``poc/HuiWen_汇文/Weak_Pass/poc.py``|
+|蜂网互联|蜂网互联 企业级路由器v4.31 密码泄露漏洞|``poc/IFW8_蜂网互联/UPInfo_DisClosure_CVE_2019_16313/poc.py``|
+|Intelbras|Intelbras Wireless 未授权与密码泄露|``poc/Intelbras/UPInfo_Disclosure_CVE_2021_3017/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jboss/Unauth_Access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
 |Jenkins|Jenkins未授权访问|``poc/Jenkins/Unauth_Access/poc.py``|
@@ -207,6 +210,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||佑友防火墙 后台命令执行漏洞|``poc/MailGard_佑友/RCE_ping_FireWall/poc.py``|
 |迈普 ISG1000安全网关|迈普 ISG1000安全网关 任意文件下载漏洞|``poc/MaiPu_迈普/File_Download_webui/poc.py``|
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/MessageSolution/Info_Disclosure/poc.py``|
+|中科网威|中科网威 下一代防火墙控制系统 账号密码泄露漏洞|``poc/NetPower_中科网威/UPInfo_DisClosure_Firewall/poc.py``|
 |Node.js|Node.js目录穿越漏洞|``poc/Node.js/Dir_Traversal_CVE_2017_14849/poc.py``|
 |梨子项目管理系统|梨子项目管理系统 信息泄露漏洞|``poc/PearProject_梨子项目管理系统/Conf_Info_Disclosure_env/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
@@ -225,6 +229,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |TamronOS IPTV系统|TamronOS IPTV系统 后台配置敏感信息|``poc/TamronOS_IPTV/Info_Disclosure/poc.py``|
 ||TamronOS IPTV系统存在前台命令执行漏洞|``poc/TamronOS_IPTV/RCE_api_ping/poc.py``|
 ||TamronOS IPTV系统 submit 任意用户创建漏洞|``poc/TamronOS_IPTV/User_Add_Submit/poc.py``|
+|同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
 ||泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
 |Weblogic|Weblogic SSRF (CVE-2014-4210)|``poc/Weblogic/CVE_2014_4210/poc.py``|

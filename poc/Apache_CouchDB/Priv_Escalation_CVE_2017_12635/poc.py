@@ -17,7 +17,7 @@ class POC(POCBase):
         这就意味着初次扫描的结果就是最终结果，千万不要再批量扫一遍，结果会有很大的出入  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Apache Couchdb 远程权限提升 (CVE-2017-12635)",                        # 漏洞名称
+        "name" : "Apache Couchdb 远程权限提升(CVE-2017-12635)",                        # 漏洞名称
         "VulnID" : "CVE-2017-12635",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "Apache Couchdb",                     # 漏洞应用名称
         "AppVersion" : "version<=1.7.0 && version<=2.1.1",                  # 漏洞应用版本

