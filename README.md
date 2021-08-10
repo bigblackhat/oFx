@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-77-white.svg)]()
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -17,7 +17,7 @@
 简单的拒绝服务攻击(用Url存活检测POC)
 ```
 
-虽说是框架，但目前的规模仅是笔者自用及与身边小伙伴分享的工具  
+---
 
 #### Legal Disclaimer
 ```
@@ -31,7 +31,10 @@ oFx is for security testing purposes only
 oFx仅用于安全测试与研究目的
 ```
 
+---
 
+<br>
+<br>
 
 ![show](img/3.png)
 
@@ -50,6 +53,7 @@ oFx仅用于安全测试与研究目的
 ![show](img/11.png)
 Fofa会员一条搜索语句能提取一万条url，约11分钟跑完  
 
+---
 
 ## 使用方法  
 
@@ -217,7 +221,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
 |锐捷|锐捷EG网关 userAuth.php存在任意文件读取漏洞|``poc/Ruijie_锐捷/File_Read_EG_userAuth/poc.py``|
-||锐捷NBRNBR1300G 路由器 越权CLI命令执行漏洞|``poc/Ruijie_锐捷/RCE_NBR_1300G/poc.py``|
+||锐捷NBR 1300G 路由器 越权CLI命令执行漏洞|``poc/Ruijie_锐捷/RCE_NBR_1300G/poc.py``|
 ||锐捷NBR路由器 EWEB网管系统 远程命令执行漏洞|``poc/Ruijie_锐捷/RCE_EWEB_Manager_CNVD_2021_09650/poc.py``|
 ||锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露|``poc/Ruijie_锐捷/UPInfo_DisClosure_RG_UAC_CNVD_2021_14536/poc.py``|
 ||锐捷Smartweb管理系统 默认账户➕命令执行漏洞|``poc/Ruijie_锐捷/RCE_SmartWeb_WEB_VMS/poc.py``|

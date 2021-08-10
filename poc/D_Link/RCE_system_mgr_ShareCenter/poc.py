@@ -14,7 +14,8 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            v1:略  
+            v2:优化检测逻辑，降低误报率  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞",                        # 漏洞名称
@@ -55,7 +56,10 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "<?xml version" in req.text:#req.status_code == 200 and :
+            if "<?xml version" in req.text and \
+                req.status_code == 200 and \
+                    "account_mgr.cgi" in req.text and \
+                        "apkg_mgr.cgi" in req.text :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
