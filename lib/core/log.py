@@ -34,7 +34,10 @@ try:
         LOGGER_HANDLER.level_map[logging.getLevelName("ε(┬┬﹏┬┬)3")] = (None, "blue", False)
         LOGGER_HANDLER.level_map[logging.getLevelName("(*• . •*)?")] = (None, "cyan", False)
 except:
+    pass
+finally:
     STREAM_HANDLE = logging.StreamHandler()
+
 
 
 STREAM_HANDLE.setLevel(logging.DEBUG)
