@@ -34,6 +34,8 @@ class POCBase(object):
 
     def _honeypot_check(self,text):
         text = str(text)
+
+
         honeycode = """
      <title>NETZEN</title>
      <title>NOVIcam WEB</title>
@@ -60,7 +62,7 @@ class POCBase(object):
         if honeycode in text:
             return True
 
-            
+        ########## 可可爱爱的分割线 ############
 
         honeycode = """
 WWW-Authenticate: Basic realm="AXIS_00408CD0EC74"
@@ -87,6 +89,8 @@ WWW-Authenticate: Basic realm="TP-LINK Wireless Dual Band Gigabit Router WDR4300
         if honeycode in text:
             return True
 
+        ########## 可可爱爱的分割线 ############
+
 
         honeycode = """
 windows--2017
@@ -102,11 +106,35 @@ www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
         if honeycode in text:
             return True
 
+        ########## 可可爱爱的分割线 ############
+
 
         if "www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin" in text \
             and "var DEFAULT_PASSWD = \"admin\";" in text \
                 and "HDS-7204TVI-HDMI/K 192.168.100.89,Digital Video Recorder" in text\
                     and "\"tagline\" : \"You Know, for Search\"" in text:
+            return True
+
+        ########## 可可爱爱的分割线 ############
+
+        honeycode =  """
+var TAB_CODE=9
+var DEL_CODE=46
+var BS_CODE=8
+var SP_CODE=32
+var DOT_CODE=190
+var DOT2_CODE=110
+
+var IDX_ON=0
+var IDX_OFF=1
+
+var IDX_AP_MODE=0
+var IDX_CBRIDGE_MODE=1
+var IDX_WWAN_MODE=2
+var IDX_KAI_MODE=3
+var IDX_MBRIDGE_MODE=4
+"""
+        if honeycode in text:
             return True
 
         return False

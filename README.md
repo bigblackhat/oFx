@@ -1,20 +1,20 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-77-white.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-80-white.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
 
 一个应用于web安全领域的漏洞扫描框架，可被应用于但不限于如下场景：
 ```
-0Day/1Day全网概念验证(在没有懒得测试环境的情况下，直接写POC全网扫描，亲测很爽)
+0Day/1Day全网概念验证(在没有测试环境(各种商业、闭源软件)或懒得搭建测试环境的情况下，直接写POC全网扫描，亲测很爽)
 
 刷肉鸡(需要使用RCE/写文件等漏洞的POC)    
 
 企业内网或对外开放资产的安全评估  
 
-简单的拒绝服务攻击(用Url存活检测POC)
+简单的拒绝服务攻击(用Url存活检测POC)  
 ```
 
 ---
@@ -179,7 +179,10 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||URL存活检测|``poc/common/Url_Alive/poc.py``|
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
 |赤兔CMS|赤兔CMS banner识别插件|``poc/CtCMS_赤兔CMS/Get_Banner/poc.py``|
-|D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_system_mgr_ShareCenter/poc.py``|
+|D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_ShareCenter_system_mgr_cgi/poc.py``|
+||D-Link Dir-645 getcfg.php 账号密码泄露漏洞(CVE-2019-17506)|``poc/D_Link/UPInfo_Disclosure_getcfg_php/poc.py``|
+||D-Link AC管理系统默认账号密码|``poc/D_Link/Weak_Pass_AC_Manager/poc.py``|
+|DrayTek|DrayTek企业网络设备 远程命令执行(CVE-2020-8515)|``poc/DrayTek/RCE_CVE_2020_8515/poc.py``|
 |DVR|DVR登录绕过漏洞(CVE-2018-9995)|``poc/DVR/Login_Bypass_CVE_2018_9995/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
@@ -252,6 +255,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |[pocsuite3](https://github.com/knownsec/pocsuite3)|
 |[sqlmap](https://github.com/sqlmapproject/sqlmap) sqlmap永远滴神|
 |[vulhub](https://vulhub.org/)|
+|[xray](https://github.com/chaitin/xray/) 抄作业，冲冲冲|
 
 
 <br>
