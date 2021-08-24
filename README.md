@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-80-white.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-82-orange.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -164,6 +164,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |应用|漏洞名称|POC路径|
 |-|-|-|
 |360|360天擎数据库未授权访问|``poc/360/TianQing_Unauth_Acceess/poc.py``|
+|ACME|mini_httpd任意文件读取漏洞(CVE-2018-18778)|``poc/ACME/File_Read_mini_httpd_CVE_2018_18778/poc.py``|
 |Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/Unauth_Access/poc.py``|
 |Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Unauth_Access/poc.py``|
 |Apache CouchDB|Apache Couchdb 远程权限提升(CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017_12635/poc.py``|
@@ -236,6 +237,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |TamronOS IPTV系统|TamronOS IPTV系统 后台配置敏感信息|``poc/TamronOS_IPTV/Info_Disclosure/poc.py``|
 ||TamronOS IPTV系统存在前台命令执行漏洞|``poc/TamronOS_IPTV/RCE_api_ping/poc.py``|
 ||TamronOS IPTV系统 submit 任意用户创建漏洞|``poc/TamronOS_IPTV/User_Add_Submit/poc.py``|
+|TCC_斗象|斗象资产灯塔系统(ARL) 弱口令检测|``poc/TCC_斗象/Weak_Pass_ARL/poc.py``|
 |同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
 ||泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
@@ -252,6 +254,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |-|
 |[AngelSword](https://github.com/Lucifer1993/AngelSword)|
 |[edusrc_POC](https://github.com/Cl0udG0d/edusrc_POC)|
+|[iak_ARL](https://github.com/nu0l/iak-ARL)|
 |[pocsuite3](https://github.com/knownsec/pocsuite3)|
 |[sqlmap](https://github.com/sqlmapproject/sqlmap) sqlmap永远滴神|
 |[vulhub](https://vulhub.org/)|

@@ -16,7 +16,7 @@ from lib.core.htmloutput import output_html
 from lib.fofa import get_ukey,fofa_login,ukey_save,fofa_search
 from lib.core.output import Mkdn_output,Txt_output,Csv_output
 
-
+from requests import ConnectTimeout
 
 ScanMode = {
     "Single_Verify":1,
@@ -244,7 +244,14 @@ POC路径为{VULN_PATH}
                 POC,POC_Path = self.Load_POC(allpoc.get())
                 
                 single_mode = POC(self.CMD_ARGS.url,self.getproxy())
-                single_verify = single_mode._attack()
+                # 报错信息统一管理
+                try:
+                    single_verify = single_mode._attack()
+                except ConnectTimeout as e:
+                    err_msg = "目标连接超时，请重新确认目标是否存在"
+                    exit(err_msg)
+                except Exception as e:
+                    single_verify = [False,""]
                 if single_verify[0] == True:
                     print("URL: {url}  || POC: {script} \n服务器返回信息: \n{text} \n【漏洞存在】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
                 else:
