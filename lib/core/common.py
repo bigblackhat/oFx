@@ -225,7 +225,7 @@ def GetCommand():
 
     developer = parser.add_argument_group("Developer(POC开发者工具箱)")
     developer.add_argument("--add-poc",action="store_true",help="生成POC标准目录结构，该参数不需要跟值")
-    
+    developer.add_argument("--show-error",action = "store_true",help="single mode下展示详细报错信息")
     if len(sys.argv) == 1:
         sys.argv.append("-h")
     args=parser.parse_args()

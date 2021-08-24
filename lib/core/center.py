@@ -251,7 +251,10 @@ POC路径为{VULN_PATH}
                     err_msg = "目标连接超时，请重新确认目标是否存在"
                     exit(err_msg)
                 except Exception as e:
-                    single_verify = [False,""]
+                    if self.CMD_ARGS.show_error:
+                        raise e
+                    else:
+                        single_verify = [False,""]
                 if single_verify[0] == True:
                     print("URL: {url}  || POC: {script} \n服务器返回信息: \n{text} \n【漏洞存在】\n".format(url = self.CMD_ARGS.url,script = self.CMD_ARGS.script,text = single_verify[1]))
                 else:
