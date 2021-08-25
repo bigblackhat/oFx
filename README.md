@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-82-orange.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-84-orange.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -241,6 +241,8 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
 ||泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
+||泛微OA Beanshell 远程代码执行漏洞|``poc/Weaver_泛微OA/RCE_Beanshell/poc.py``|
+||泛微 E-cology WorkflowCenterTreeData.jsp文件 前台SQL注入漏洞|``poc/Weaver_泛微OA/Sql_Inj_E_cology_WorkflowCenterTreeData/poc.py``|
 |Weblogic|Weblogic SSRF (CVE-2014-4210)|``poc/Weblogic/CVE_2014_4210/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
