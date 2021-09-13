@@ -152,6 +152,7 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 |弱密码|Weak Password|Weak_Pass|
 |信息泄露|Information Disclosure|Info_Disclosure|
 |账号密码信息泄露|Username and Password Infomation Disclosure|UPInfo_DisClosure|
+|认证/凭证hash值 信息泄露|Auth Hash Infomation Disclosure|HashInfo_DisClosure|
 |配置信息泄露|Config Information Disclosure|Conf_Info_Disclosure|
 |后门|Backdoor|Backdoor|
 ||||
