@@ -201,6 +201,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||HIKVISION 流媒体管理服务器弱口令|``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``|
 ||HIKVISION 流媒体管理服务器任意文件读取|``poc/HIKVISION/File_Read_Stream_Media_Manager/poc.py``|
 |宏电|宏电 H8922 后台任意文件读取漏洞|``poc/Hongdian_宏电/Backstage_File_Read_CVE_2021_28152/poc.py``|
+|好视通|好视通视频会议平台 任意文件下载|``poc/HST_好视通/File_Download/poc.py``|
 |华为|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
 |汇文|汇文OPAC敏感信息泄露|``poc/HuiWen_汇文/Info_Disclosure/poc.py``|
 ||汇文OPAC弱口令|``poc/HuiWen_汇文/Weak_Pass/poc.py``|
@@ -229,6 +230,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Node.js|Node.js目录穿越漏洞|``poc/Node.js/Dir_Traversal_CVE_2017_14849/poc.py``|
 |梨子项目管理系统|梨子项目管理系统 信息泄露漏洞|``poc/PearProject_梨子项目管理系统/Conf_Info_Disclosure_env/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
+|PHPStudy|PHPStudy 后门检测|``poc/PHPStudy/Back_Door/poc.py``|
 |PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
 |锐捷|锐捷EG网关 userAuth.php存在任意文件读取漏洞|``poc/Ruijie_锐捷/File_Read_EG_userAuth/poc.py``|
@@ -241,6 +243,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Samsung|三星路由器本地文件包含|``poc/Samsung/Lfi_Samsung_Wlan_AP/poc.py``|
 ||三星 WLAN AP WEA453e路由器 远程命令执行漏洞|``poc/Samsung/RCE_Samsung_WLANAP_WEA453e/poc.py``|
 |致远OA|致远OA webmail.do 任意文件下载 (CNVD-2020-62422)|``poc/SeeYon_致远/File_Download/poc.py``|
+||致远OA ajax.do 任意文件上传|``poc/SeeYon_致远/File_Upload_ajax_do/poc.py``|
 |SonarQube|SonarQube api 信息泄露漏洞|``poc/SonarQube/Info_Disclosure_CVE_2020_27986/poc.py``|
 |SonicWall SSL-VPN|SonicWall SSL-VPN 远程命令执行漏洞|``poc/SonicWall_SSL_VPN/RCE_jarrewrite/poc.py``|
 |TamronOS IPTV系统|TamronOS IPTV系统 后台配置敏感信息|``poc/TamronOS_IPTV/Info_Disclosure/poc.py``|
@@ -254,10 +257,12 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 ||泛微 OA 8 前台SQL注入|``poc/Weaver_泛微OA/Sql_inj_E_cology_V8/poc.py``|
 ||泛微OA Beanshell 远程代码执行漏洞|``poc/Weaver_泛微OA/RCE_Beanshell/poc.py``|
 ||泛微 E-cology WorkflowCenterTreeData.jsp文件 前台SQL注入漏洞|``poc/Weaver_泛微OA/Sql_Inj_E_cology_WorkflowCenterTreeData/poc.py``|
+||泛微V9 前台文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_V9_uploadOperation/poc.py``|
 |Weblogic|Weblogic SSRF (CVE-2014-4210)|``poc/Weblogic/CVE_2014_4210/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
 |ZeroShell防火墙|ZeroShell 3.9.0 远程命令执行漏洞|``poc/ZeroShell/RCE_kerbynet/poc.py``|
+|Zyxel|Zyxel NBG2105身份验证绕过|``poc/Zyxel/Login_Pass_NBG2105/poc.py``|
 
 ## 致谢清单
 
