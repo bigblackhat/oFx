@@ -137,6 +137,7 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 |命令注入|Command Injection|Cmd_inj|
 |模板注入|Server-Side Template Injection|Ssti|
 |未授权访问|Unauthorized Access|UnAuth_Access|
+|访问控制绕过|Access-Control Bypass|ACbypass|
 |权限提升|Privilege escalation|Priv_Escalation|
 |命令执行|Command Execution|Cmd_Exec|
 |代码执行|Code Execution|Code_Exec|

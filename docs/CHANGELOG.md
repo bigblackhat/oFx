@@ -633,6 +633,21 @@
 * ``致远OA ajax.do 任意文件上传``
 * ``PHPStudy 后门检测``
 * ``好视通视频会议平台 任意文件下载``
+
+
+## version 2.20.6
+------------------
+>新增POC：
+* ``Apache Mod_jk 访问控制权限绕过(CVE-2018-11759)``
+* ``BSPHP 未授权访问 信息泄露漏洞``
+* ``DocCMS keyword SQL注入漏洞``
+* ``极通EWEBS应用虚拟化系统任意文件读取``
+* ``狮子鱼CMS ApiController.class.php SQL注入漏洞``
+* ``狮子鱼CMS ApigoodsController.class.php SQL注入漏洞``
+* ``ShopXO download 任意文件读取漏洞(CNVD-2021-15822)``
+* ``艾泰网络管理系统弱口令``
+* ``天玥运维网关/网御网络审计 Sql注入漏洞``
+* ``禅道8.2-9.2.1注入GetShell``
 ```
 ===============
 ｜以上为当前版本｜
