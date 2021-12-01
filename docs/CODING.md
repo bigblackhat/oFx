@@ -151,6 +151,7 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 |目录穿越|Directory Traversal|Dir_Traversal|
 |文件上传|File Upload|File_Upload|
 |弱密码|Weak Password|Weak_Pass|
+|日志泄露|Log Disclosure|Log_Disclosure|
 |信息泄露|Information Disclosure|Info_Disclosure|
 |账号密码信息泄露|Username and Password Infomation Disclosure|UPInfo_DisClosure|
 |认证/凭证hash值 信息泄露|Auth Hash Infomation Disclosure|HashInfo_DisClosure|

