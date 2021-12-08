@@ -71,7 +71,7 @@ echo "{flag}";
             if req0.status_code == 200 and "logo-eoffice.php" in req0.text:
                 req1 = requests.get(url1, proxies = self.proxy ,timeout = self.timeout,verify = False)
                 if req1.status_code == 200 and flag in req1.text:
-                # if req1.status_code == 200 and flag in req1.text:
+
                     vuln = [True,req1.text]
             else:
                 vuln = [False,req0.text]
