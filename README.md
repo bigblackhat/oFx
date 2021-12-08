@@ -198,7 +198,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Eyou 亿邮电子邮件系统|亿邮电子邮件系统 远程命令执行|``poc/Eyou_亿邮/RCE_moni_detail/poc.py``|
 |F5|F5 BIG-IP任意文件读取(CVE-2020-5902)|``poc/F5_BIG_IP/File_Read_CVE_2020_5902/poc.py``|
 |菲力尔|FLIR-AX8 download.php 任意文件下载|``poc/FLIR_菲力尔/Download_File_AX8/poc.py``|
-|Grafana|Grafana plugins 任意文件读取漏洞|``poc/Grafana/File_Read_plugins/poc.py``|
+|Grafana|Grafana plugins 任意文件读取漏洞(CVE-2021-43798)|``poc/Grafana/File_Read_plugins/poc.py``|
 |H2 数据库|H2 数据库 Web控制台未授权访问|``poc/H2_DataBase/UnAuth_Access/poc.py``|
 |H3C SecPath 下一代防火墙|H3C SecPath 下一代防火墙 任意文件下载漏洞|``poc/H3C/File_Download_SecPath_WAF/poc.py``|
 |海康威视|HIKVISION 视频编码设备接入网关 任意文件下载|``poc/HIKVISION/File_Down_Gateway_downFile_php/poc.py``|

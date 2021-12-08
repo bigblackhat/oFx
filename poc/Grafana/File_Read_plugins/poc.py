@@ -20,8 +20,8 @@ class POC(POCBase):
             这里笔者采用的是第二种方法
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Grafana plugins 任意文件读取漏洞",                        # 漏洞名称
-        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "name" : "Grafana plugins 任意文件读取漏洞(CVE-2021-43798)",                        # 漏洞名称
+        "VulnID" : "CVE-2021-43798",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "Grafana",                     # 漏洞应用名称
         "AppVersion" : "Grafana 8.x",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
