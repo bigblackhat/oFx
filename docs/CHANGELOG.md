@@ -672,6 +672,12 @@
 * ``Grafana plugins 任意文件读取漏洞``
 
 
+## version 2.21.1
+------------------
+>新增POC：
+* ``Jellyfin RemoteImageController.cs SSRF漏洞(CVE-2021-29490)``
+
+
 ```
 ===============
 ｜以上为当前版本｜
