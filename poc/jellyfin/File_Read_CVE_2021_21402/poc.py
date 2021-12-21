@@ -33,7 +33,9 @@ class POC(POCBase):
         在版本10.7.1中已修复此问题。解决方法是，用户可以通过在文件系统上实施严格的安全权限来限制某些访问，但是建议尽快进行更新。
         """,
 
-        "fofa-dork":"title=\"Jellyfin\"",
+        "fofa-dork":"""
+            title="Jellyfin"
+        """,
         "example" : "34.95.215.4",
         "exp_img" : "",
 

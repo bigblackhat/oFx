@@ -28,8 +28,8 @@ class POC(POCBase):
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-                    app="couchdb"
-                    """,                     # fofa搜索语句
+            app="couchdb"
+        """,                     # fofa搜索语句
         "example" : "http://104.248.136.47:7003",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
 

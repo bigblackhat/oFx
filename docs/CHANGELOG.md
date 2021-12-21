@@ -678,6 +678,27 @@
 * ``Jellyfin RemoteImageController.cs SSRF漏洞(CVE-2021-29490)``
 
 
+## version 2.22.5
+------------------
+>新增POC：
+* ``Apache Flink <= 1.9.1远程代码执行 CVE-2020-17518``
+* ``Apache Kylin|Apache Kylin 未授权配置泄露 CVE-2020-13937``
+* ``Apache Solr Velocity 注入远程命令执行漏洞 (CVE-2019-17558)``
+* ``radminpass.php文件暴露``
+* ``金蝶OA server_file 目录遍历漏洞``
+* ``MetaBase任意文件读取漏洞 CVE-2021-41277``
+* ``用友GRP-U8行政事业财务管理软件 SQL注入 CNNVD-201610-923``
+* ``radminpass.php文件暴露``
+* ``Jetty WEB-INF 敏感信息泄露漏洞（CVE-2021-28164）``
+* ``Jetty Utility Servlets ConcatServlet 双解码信息泄露漏洞 (CVE-2021-28169)``
+* ``CVE-2016-0638``
+* ``Weblogic < 10.3.6 'wls-wsat' XMLDecoder 反序列化漏洞（CVE-2017-10271）``
+* ``RCE_CVE-2018-3191``
+* ``Weblogic 管理控制台未授权远程命令执行漏洞（CVE-2020-14882，CVE-2020-14883）``
+
+> 新增了对DNS Log平台--Ceye的支持，oFx现已支持无回显漏洞的检测，具体细节见coding
+
+
 ```
 ===============
 ｜以上为当前版本｜

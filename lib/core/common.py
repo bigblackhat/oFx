@@ -1,5 +1,7 @@
 # coding:utf-8
 from __future__ import print_function
+from logging import fatal
+from typing import Text
 from bs4 import BeautifulSoup
 import sys
 import string
@@ -12,8 +14,9 @@ import requests
 import time
 import os
 import re
+import base64
 
-from lib.core.data import vulnoutput,unvulnoutput,unreachoutput,lock,AliveList
+from lib.core.data import vulnoutput,unvulnoutput,unreachoutput,lock,AliveList,root_path
 from lib.core.log import logverifyerror,logvuln,logunvuln
 
 from requests.exceptions import ConnectTimeout
@@ -102,6 +105,51 @@ def get_local_version(path):
     cp.read(path)
     return cp["info"]["version"]
 
+def get_ceye_dns():
+    """
+    根据你配置的dns，生成一个随机dns子域名  
+    该函数会检查info.ini配置是否正确，并通过ture/false来反馈给调用者  
+    如果配置读取失败会立即停止本次扫描并将错误信息打印到控制台提示用户  
+    
+    Returns:
+        [type]: [description]
+    """
+    cp = configparser.ConfigParser()
+    cp.read(root_path+"/info.ini")
+    dns = cp["ceye"]["dns"]
+    token = cp["ceye"]["token"]
+    flag = random_str()
+    
+    if len(dns) == 0 or len(token) == 0:
+        return False,"<title>ceye dns或token 配置为空，请重新确认</title>"
+    else:
+        return True,flag + "." + dns
+
+def verify_ceye_dns(flag):
+    """
+    接通ceye的dns的api  
+    内置sleep功能，必须在3秒以上，否则极其不稳定，考虑到批量扫描时对ceye的负载，我决定最少延时6秒   
+
+    Args:
+        flag ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+    cp = configparser.ConfigParser()
+    cp.read(root_path+"/info.ini")
+    token = cp["ceye"]["token"]
+    api_url = "http://api.ceye.io/v1/records?token="+token+"&type=dns"
+    
+    time.sleep(random.randint(6,10))
+    
+    req = requests.get(api_url,timeout=10)
+    if "User Not Exists" in req.text:
+        return "<title>ceye 配置错误，无法获取数据</title>"
+    elif flag.lower() in req.text.lower():
+        return True
+    else:
+        return False
 
 def get_latest_revision():
     lv = None
@@ -114,8 +162,6 @@ def get_latest_revision():
     except Exception:
         pass
     return lv
-
-
 
 
 def run(POC_Class,target,proxy=False,output=True,PocRemain="",Alive_mode = False):
@@ -230,3 +276,9 @@ def GetCommand():
         sys.argv.append("-h")
     args=parser.parse_args()
     return args 
+
+def Str2Base64(string):
+    """
+    str => base64
+    """
+    return base64.b64encode(str.encode(string)).decode()
