@@ -152,6 +152,19 @@ python3 oFx.py -s all -f scan/1.txt
 
 fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url但大部分情况下都不会是正好一万条结果，请放心食用  
 
+
+### Ceye配置
+
+近期的版本更新中，oFx添加了对Ceye的支持，目前已有一部分POC采用了该平台来辅助漏洞检测，默认下载oFx之后不配置该项并不影响oFx正常的功能使用，只是相关的POC无法按照预期运行而已，有需要可以配置下：  
+```ini
+; 在位于项目根目录下的info.ini文件中修改dns和token两项的值
+[ceye]
+; 从ceye中拿到以下的数据，缺一不可
+dns = ky7ir4.ceye.io
+
+token = 52ab656322dfc6d35840bcba87d296a0
+```
+
 ## POC支持清单<div id="PocSupport"></div>
 
 <br>
