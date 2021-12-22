@@ -160,9 +160,9 @@ fofa search模式会将从api中获取到的结果进行去重并重新排序，
 ; 在位于项目根目录下的info.ini文件中修改dns和token两项的值
 [ceye]
 ; 从ceye中拿到以下的数据，缺一不可
-dns = ky7ir4.ceye.io
+dns = xxxxxx.ceye.io
 
-token = 52ab656322dfc6d35840bcba87d296a0
+token = 52ab340912dfc6d334edbcba87234598
 ```
 
 ## POC支持清单<div id="PocSupport"></div>
