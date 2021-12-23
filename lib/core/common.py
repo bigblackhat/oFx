@@ -115,7 +115,7 @@ def get_ceye_dns():
         [type]: [description]
     """
     cp = configparser.ConfigParser()
-    cp.read(root_path+"/info.ini")
+    cp.read(root_path+"/lib/ceye.ini")
     dns = cp["ceye"]["dns"]
     token = cp["ceye"]["token"]
     flag = random_str()
@@ -137,7 +137,7 @@ def verify_ceye_dns(flag):
         [type]: [description]
     """
     cp = configparser.ConfigParser()
-    cp.read(root_path+"/info.ini")
+    cp.read(root_path+"/lib/ceye.ini")
     token = cp["ceye"]["token"]
     api_url = "http://api.ceye.io/v1/records?token="+token+"&type=dns"
     

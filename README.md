@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-128-orange.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-129-orange.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -187,6 +187,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 |Apache Mod_jk|Apache Mod_jk 访问控制权限绕过(CVE-2018-11759)|``poc/Apache_Mod_jk/ACbypass_CVE_2018_11759/poc.py``|
 |Apache Solr|Apache Solr Velocity 注入远程命令执行漏洞 (CVE-2019-17558)|``poc/Apache_Solr/CVE_2019_17558/poc.py``|
 ||Apache Solr 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
+||Apache Solr 远程命令执行 Log4j|``poc/Apache_Solr/RCE_Log4j_CVE_2021_44228/poc.py``|
 |碧海威 L7|碧海威 L7 弱口令漏洞|``poc/Bithighway_碧海威/Weak_Pass_L7/poc.py``|
 |BSPHP|BSPHP 未授权访问 信息泄露漏洞|``poc/BSPHP/Info_Disclosure/poc.py``|
 |C-Lodop|C-Lodop 云打印机系统平台任意文件读取漏洞|``poc/C_Lodop/File_Read/poc.py``|
