@@ -706,7 +706,7 @@
 
 
 ## version 2.23.5
-----
+------------------
 > 新增POC：
 * ``VMware vRealize Operations Manager SSRF漏洞 CVE-2021-21975``
 * ``Vmware vCenter 任意文件读取``
@@ -717,6 +717,11 @@
 * ``Apache ActiveMQ 远程代码执行漏洞(CVE-2016-3088)``
 * ``Fastjson 反序列化远程代码执行漏洞（CVE-2017-18349）``
 * ``Weblogic XMLDecoder反序列化漏洞（CVE-2017-3506）``
+
+
+## version 2.23.6
+------------------
+> 优化了一些小的问题
 ```
 ===============
 ｜以上为当前版本｜

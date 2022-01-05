@@ -140,6 +140,8 @@ class oFxCenter():
         for app in os.listdir(poc_path):
             if app == "demo":
                 continue
+            elif app == ".DS_Store":
+                continue
             app_path = poc_path +app
             for vulnname in os.listdir(app_path):
                 if vulnname.startswith("."):
