@@ -33,6 +33,8 @@ secret/
 FETURE.md
 
 *honeypot*.md
+lib/fofa.ini
+lib/ceye.ini
 
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
