@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-138-orange.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-142-orange.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -214,7 +214,9 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 ||DedeCMS 短文件名信息泄露|``poc/DedeCMS_织梦/Info_Disclosure_IIS_Short_Filename/poc.py``|
 |DocCMS|DocCMS keyword SQL注入漏洞|``poc/DocCMS/SQLi_keyword/poc.py``|
 |DrayTek|DrayTek企业网络设备 远程命令执行(CVE-2020-8515)|``poc/DrayTek/RCE_CVE_2020_8515/poc.py``|
+|Drupal!|Drupal!远程代码执行(CVE-2018-7600)|``poc/Drupal!/RCE_CVE_2018_7600/poc.py``|
 |DVR|DVR登录绕过漏洞(CVE-2018-9995)|``poc/DVR/Login_Bypass_CVE_2018_9995/poc.py``|
+|ECShop|ECShop 4.1.0前台 delete_cart_goods.php SQL注入(CNVD-2020-58823)|``poc/ECShop/SQLi_delete_cart_goods/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/Code_Exec_Groovy_CVE-2015-1427/poc.py``|
@@ -297,6 +299,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |启明星辰|天玥运维网关/网御网络审计 Sql注入漏洞|``poc/Venustech_启明星辰/SQLi_Reportguide/poc.py``|
 |VMware|Vmware vCenter 任意文件读取|``poc/VMware/File_read_vCenter/poc.py``|
 ||VMware vRealize Operations Manager SSRF漏洞 CVE-2021-21975|``poc/VMware/SSRF_vRealize_CVE_2021_21975/poc.py``|
+|VoIPmonitor|VoIPmonitor 未授权远程代码执行(CVE-2021-30461)|``poc/VoIPmonitor/RCE_CVE_2021_30461/poc.py``|
 |泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
 ||泛微OA E-Office V9文件上传漏洞(CNVD-2021-49104)|``poc/Weaver_泛微OA/File_Upload_E_Office_V9_CNVD_2021_49104/poc.py``|
 ||泛微 e-cology OA 数据库配置信息泄露漏洞|``poc/Weaver_泛微OA/Config_Info_Disclosure_DBconfigReader/poc.py``|
@@ -314,6 +317,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
 ||用友GRP-U8行政事业财务管理软件 SQL注入 CNNVD-201610-923|``poc/Yonyou_用友NC/Sqli_CNNVD_201610_923/poc.py``|
+|Zabbix|Zabbix弱口令|``poc/Zabbix/Weak_Pass/poc.py``|
 |禅道|禅道8.2-9.2.1注入GetShell|``poc/Zentao_禅道/Getshell_test/poc.py``|
 |ZeroShell防火墙|ZeroShell 3.9.0 远程命令执行漏洞|``poc/ZeroShell/RCE_kerbynet/poc.py``|
 |Zyxel|Zyxel NBG2105身份验证绕过|``poc/Zyxel/Login_Pass_NBG2105/poc.py``|
