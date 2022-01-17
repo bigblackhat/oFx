@@ -75,7 +75,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 > POC功能性测试
 
 使用方法  
-```sh
+```console
 ➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -u xxx.xxx.xxx.xxx:xx
 ```
 > 单个目标的漏洞验证详情(返回取决于漏洞本身，目前所有POC都是为了批量验证而设计的，single检测模式尚没有对返回结果做优化，后续会有调整)  
@@ -641,5 +641,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 
 感谢读到这里，祝好祝顺  
 
-``访客数统计``
-![Visitor Count](https://profile-counter.glitch.me/bigblackhat-oFx/count.svg)
+``访客数统计``  
+![Visitor Count](https://profile-counter.glitch.me/bigblackhat-oFx/count.svg)  
+``Star统计``  
+[![Stargazers over time](https://starchart.cc/bigblackhat/oFx.svg)](https://starchart.cc/bigblackhat/oFx)

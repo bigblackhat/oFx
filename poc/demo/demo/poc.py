@@ -11,17 +11,17 @@ class POC(POCBase):
     _info = {
         "author" : "jijue",                      # POC作者
         "version" : "1",                    # POC版本，默认是1  
-        "CreateDate" : "2021-06-09",        # POC创建时间
-        "UpdateDate" : "2021-06-09",        # POC创建时间
+        "CreateDate" : "2022-01-01",        # POC创建时间
+        "UpdateDate" : "2022-01-01",        # POC创建时间
         "PocDesc" : """
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "Demo",                        # 漏洞名称
-        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
-        "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+        "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
         
         """,                                # 漏洞简要描述
