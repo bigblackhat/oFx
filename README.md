@@ -211,7 +211,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_ShareCenter_system_mgr_cgi/poc.py``|
 ||D-Link Dir-645 getcfg.php 账号密码泄露漏洞(CVE-2019-17506)|``poc/D_Link/UPInfo_Disclosure_getcfg_php/poc.py``|
 ||D-Link AC管理系统默认账号密码|``poc/D_Link/Weak_Pass_AC_Manager/poc.py``|
-|织梦CMS|radminpass.php文件暴露|``poc/DedeCMS_织梦/RadminPass/poc.py``|
+|织梦CMS|织梦CMS radminpass.php文件暴露|``poc/DedeCMS_织梦/RadminPass/poc.py``|
 ||DedeCMS 短文件名信息泄露|``poc/DedeCMS_织梦/Info_Disclosure_IIS_Short_Filename/poc.py``|
 |DocCMS|DocCMS keyword SQL注入漏洞|``poc/DocCMS/SQLi_keyword/poc.py``|
 |DrayTek|DrayTek企业网络设备 远程命令执行(CVE-2020-8515)|``poc/DrayTek/RCE_CVE_2020_8515/poc.py``|
