@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-142-orange.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-146-orange.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -187,6 +187,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |Apache ActiveMQ|Apache ActiveMQ 远程代码执行漏洞(CVE-2016-3088)|``poc/Apache_ActiveMQ/RCE_FileServer_CVE_2016_3088/poc.py``|
 ||Apache ActiveMQ 弱口令 ➕ CVE-2015-5254|``poc/Apache_ActiveMQ/WeakPass/poc.py``|
 |Apache CouchDB|Apache Couchdb 远程权限提升(CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017_12635/poc.py``|
+|Apache Druid|Apache Druid任意文件读取复现(CVE-2021-36749)|``poc/Apache_Druid/File_Read_CVE_2021_36749/poc.py``|
 |Apache Flink|Apache Flink目录穿透(CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``|
 ||Apache Flink <= 1.9.1远程代码执行 CVE-2020-17518|``poc/Apache_Flink/RCE_CVE_2020_17518/poc.py``|
 |Apache Kylin|Apache Kylin 未授权配置泄露 CVE-2020-13937|``poc/Apache_Kylin/Conf_Info_Disclosure_CVE_2020_13937/poc.py``|
@@ -261,6 +262,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |迈普 ISG1000安全网关|迈普 ISG1000安全网关 任意文件下载漏洞|``poc/MaiPu_迈普/File_Download_webui/poc.py``|
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/MessageSolution/Info_Disclosure/poc.py``|
 |MetaBase|MetaBase任意文件读取漏洞 CVE-2021-41277|``poc/Metabase/File_Read_CVE_2021_41277/poc.py``|
+|MicroSoft|Windows HTTP协议栈远程代码执行漏洞(CVE-2022-21907)|poc/MicroSoft/RCE_CVE_2022_21907/poc.py|
 |蓝海卓越|蓝海卓越计费管理系统 任意文件读取|``poc/NatShell_蓝海卓越/File_Read/poc.py``|
 ||蓝海卓越计费管理系统 认证hash泄露|``poc/NatShell_蓝海卓越/HashInfo_DisClosure/poc.py``|
 |中科网威|中科网威 下一代防火墙控制系统 账号密码泄露漏洞|``poc/NetPower_中科网威/UPInfo_DisClosure_Firewall/poc.py``|
@@ -294,6 +296,8 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |TCC_斗象|斗象资产灯塔系统(ARL) 弱口令检测|``poc/TCC_斗象/Weak_Pass_ARL/poc.py``|
 |ThinkPHP|ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞|``poc/Thinkphp/RCE_5022_5129``|
 ||ThinkPHP5 5.0.23 远程代码执行漏洞|``poc/Thinkphp/RCE_5023/poc.py``|
+|通达OA|通达OA 计算机名探测插件|``poc/Tongda_通达OA/Computer_Name_Plugin/poc.py``|
+||通达OA 版本探测插件|``poc/Tongda_通达OA/Version_Info_Plugin/poc.py``|
 |同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |艾泰科技|艾泰网络管理系统弱口令|``poc/UTT_艾泰科技/WeakPass_Net_Manager_System/poc.py``|
 |启明星辰|天玥运维网关/网御网络审计 Sql注入漏洞|``poc/Venustech_启明星辰/SQLi_Reportguide/poc.py``|
