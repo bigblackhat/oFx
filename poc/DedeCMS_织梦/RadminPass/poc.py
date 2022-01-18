@@ -17,7 +17,7 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "radminpass.php文件暴露",                        # 漏洞名称
+        "name" : "织梦CMS radminpass.php文件暴露",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "dedecms",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本

