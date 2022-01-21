@@ -1,7 +1,7 @@
 # oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-146-orange.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-152-orange.svg)](#PocSupport)
 
 ## 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
@@ -269,6 +269,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |Node.js|Node.js目录穿越漏洞|``poc/Node.js/Dir_Traversal_CVE_2017_14849/poc.py``|
 ||Node.js命令注入漏洞（CVE-2021-21315）|``poc/Node.js/Cmd_inj_CVE_2021_21315/poc.py``|
 |新软科技|极通EWEBS应用虚拟化系统任意文件读取|``poc/NSoft_新软/FileRead_EWEBS/poc.py``|
+|OKI|OKI MC573未授权访问|``poc/OKI/UnAuth_MC573/poc.py``|
 |梨子项目管理系统|梨子项目管理系统 信息泄露漏洞|``poc/PearProject_梨子项目管理系统/Conf_Info_Disclosure_env/poc.py``|
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
 |PHPStudy|PHPStudy 后门检测|``poc/PHPStudy/Back_Door/poc.py``|
@@ -283,6 +284,8 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 |若依后台管理系统|若依后台管理系统 弱口令|``poc/RuoYi_若依/Weak_Pass/poc.py``|
 |Samsung|三星路由器本地文件包含|``poc/Samsung/Lfi_Samsung_Wlan_AP/poc.py``|
 ||三星 WLAN AP WEA453e路由器 远程命令执行漏洞|``poc/Samsung/RCE_Samsung_WLANAP_WEA453e/poc.py``|
+|Sangfor 深信服|深信服EDR终端检测响应平台RCE漏洞(CNVD-2020-46552)|``poc/SANGFOR_深信服/RCE_2020_EDR/poc.py``|
+|Sapido|Sapido BRC70n路由器远程代码执行漏洞|``poc/Sapido/RCE_BRC70n_Router/poc.py``|
 |致远OA|致远OA webmail.do 任意文件下载 (CNVD-2020-62422)|``poc/SeeYon_致远/File_Download/poc.py``|
 ||致远OA ajax.do 任意文件上传|``poc/SeeYon_致远/File_Upload_ajax_do/poc.py``|
 |狮子鱼CMS|狮子鱼CMS ApiController.class.php SQL注入漏洞|``poc/ShiZiYu_狮子鱼/Sqli_ApiController/poc.py``|
@@ -312,6 +315,9 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 ||泛微OA Beanshell 远程代码执行漏洞|``poc/Weaver_泛微OA/RCE_Beanshell/poc.py``|
 ||泛微 E-cology WorkflowCenterTreeData.jsp文件 前台SQL注入漏洞|``poc/Weaver_泛微OA/Sql_Inj_E_cology_WorkflowCenterTreeData/poc.py``|
 ||泛微V9 前台文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_V9_uploadOperation/poc.py``|
+||泛微 E-cology V9信息泄露|``poc/Weaver_泛微OA/Config_Info_Disclosure_E_Cology_V9/poc.py``|
+||泛微 E-Office存在前台文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_E_Office_ajax/poc.py``|
+||泛微 E-office V9.5 SQL注入漏洞|``poc/Weaver_泛微OA/SQLi_E_Office_v9dot5/poc.py``|
 |Weblogic|CVE-2016-0638|``poc/Weblogic/CVE_2016_0638/poc.py``|
 ||Weblogic < 10.3.6 'wls-wsat' XMLDecoder 反序列化漏洞（CVE-2017-10271）|``poc/Weblogic/CVE_2017_10271/poc.py``|
 ||RCE_CVE-2018-3191|``poc/Weblogic/RCE_CVE_2018_3191/poc.py``|
