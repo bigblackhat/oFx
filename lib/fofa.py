@@ -22,7 +22,7 @@ def fofa_login(user,key):
     _login = False
     try:
         # print "https://fofa.so/api/v1/info/my?email={user}&key={key}".format(user = user,key = key)
-        req = requests.get("https://fofa.so/api/v1/info/my?email={user}&key={key}".format(user = user,key = key))
+        req = requests.get("https://fofa.info/api/v1/info/my?email={user}&key={key}".format(user = user,key = key))
         if req and req.status_code == 200 and "username" in req.json():
             _login =  True
         else:
@@ -56,7 +56,7 @@ def fofa_search(user,key,dork,save_path):
     page = 100
     # dork = str(base64.b64decode(dork),encoding = "utf-8")
     for i in range(1,page+1):
-        url = "https://fofa.so/api/v1/search/all?email={user}&key={key}&qbase64={dork}&fields={resource}&page={page}".format(
+        url = "https://fofa.info/api/v1/search/all?email={user}&key={key}&qbase64={dork}&fields={resource}&page={page}".format(
                         user=user, key=key, dork=b64encode(dork.encode()).decode(), resource=resource, page=i)
         req = requests.get(url,timeout=80)
         # 返回结果为空
