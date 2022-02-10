@@ -155,10 +155,6 @@ python3 oFx.py -s all -f scan/1.txt
 20xx-xx-xx xx:xx:xx,xxx - INFO: 搜索完毕，结果保存至/root/oFx/scan/jboss001.txt，经去重共计9748条
 ```
 
-网速尚可情况下，测试30个线程的速度：
-![show](img/11.png)
-Fofa会员一条搜索语句能提取一万条url，约11分钟跑完  
-
 可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key    
 
 fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url(``高级会员最大也就一万条``)但大部分情况下都不会是正好一万条结果，请放心食用  
