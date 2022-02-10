@@ -77,7 +77,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 > 单个目标的漏洞验证详情(返回取决于漏洞本身，目前所有POC都是为了批量验证而设计的，single检测模式尚没有对返回结果做优化，后续会有调整)  
 
-![show](img/008.png)
+![show](img/001.png)  
 漏洞存在与否见最后一行  
 
 ### 🚗 批量扫描模式
@@ -96,13 +96,13 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 
 蓝字代表无漏洞  
-![show](img/1.png)
+![show](img/002.png)
 
 绿字代表存在漏洞  
-![show](img/4.png)
+![show](img/003.png)
 
 青字目标不可达  
-![show](img/2.png)
+![show](img/004.png)
 
 也可以通过``,``分隔同时指定多个poc
 ```sh
@@ -135,7 +135,7 @@ python3 oFx.py -s all -f scan/1.txt
 
 通过fofa提供的api接口获取资产清单  
 
-![show](img/009.png)
+![show](img/005.png)
 
 ```sh
 ➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
@@ -369,7 +369,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 
 ~~都看到这儿了，点个star再走呗~~
 
-![show](img/10.jpg)
+![show](img/006.jpg)
 
 <br>
 <br>
