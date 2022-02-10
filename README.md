@@ -7,6 +7,8 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
+<br>
+
 ## 🐈 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
 ```
@@ -27,7 +29,7 @@
 > 简单的拒绝服务攻击(用Url存活检测POC)  
 
 
----
+<br>
 
 ## 🚔 法律免责声明
 ```
@@ -37,6 +39,8 @@ oFx仅用于安全测试与研究目的
 Usage of oFx for attacking targets without prior mutual consent is illegal.
 oFx is for security testing purposes only
 ```
+
+<br>
 
 ## 📜 Licenses
 在原有协议LICENSE中追加以下免责声明。若与原有协议冲突均以免责声明为准。
@@ -49,8 +53,9 @@ oFx is for security testing purposes only
 
 在使用本工具前，请您务必审慎阅读、充分理解各条款内容，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。 除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。
 
-
-
+<br>
+<br>
+<br>
 
 # ☕️ 使用方法  
 
@@ -61,10 +66,16 @@ oFx is for security testing purposes only
 git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 
+<br>
+<br>
+
 ### 🍡 用前提醒
 使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很  
 
 另外，oFx如今可以良好的运行于Mac和Kali系统，相信其他linux也可以正常运行，但由于笔者没有Windows测试环境，因此在Windows上运行oFx可能会发生一些不可预测的错误，请避免在Windows上运行oFx  
+
+<br>
+<br>
 
 ### 🛵 单个url扫描模式
 
@@ -79,6 +90,9 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 ![show](img/001.png)  
 漏洞存在与否见最后一行  
+
+<br>
+<br>
 
 ### 🚗 批量扫描模式
 
@@ -116,6 +130,9 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 * 根据自己电脑性能和带宽给到50个或更多的线程数  
 * 睡前开始扫描或出门玩儿之前打开oFx进行全量POC测试  
 
+<br>
+<br>
+
 ### 🚂 单个目标的全量POC测试
 
 全量POC，顾名思义，遍历所有POC插件依次有序的对目标进行测试，接近于漏扫的概念，而且是一个专注于NDay的漏洞扫描器，因oFx的拓展性，非常适合手中掌握数量庞大的0Day的组织或个人（比如笔者自己），使得他可以将0Day库武器化。  
@@ -130,6 +147,8 @@ echo http://xxx.xxx.com > scan/1.txt
 python3 oFx.py -s all -f scan/1.txt
 ```
 
+<br>
+<br>
 
 ### 🐾 Fofa api 资产获取
 
@@ -159,6 +178,8 @@ python3 oFx.py -s all -f scan/1.txt
 
 fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url(``高级会员最大也就一万条``)但大部分情况下都不会是正好一万条结果，请放心食用  
 
+<br>
+<br>
 
 ### 🐾 Ceye配置
 
@@ -171,6 +192,10 @@ dns = xxxxxx.ceye.io
 
 token = 52ab340912dfc6d334edbcba87234598
 ```
+
+<br>
+<br>
+<br>
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
 
@@ -340,6 +365,10 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 
 </details>
 
+<br>
+<br>
+<br>
+
 # 🎄 致谢清单
 
 以下清单中的项目笔者都有参考或对笔者提供一定程度上的帮助，排名不分先后顺序，仅按照中文全拼首字母顺序排列  
@@ -364,7 +393,7 @@ oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的�
 
 如果您在使用oFx的过程中遇到了一些笔者写代码时没有考虑到的问题或没有测试到的错误，欢迎通过邮箱告知笔者(ronginus@qq.com)或提Issues  
 
-提交BUG时，需要给到笔者触发错误的oFx命令，测试文件，您的运行环境（包括但不限于操作系统、python版本等），报错的字符串形式➕报错截图  
+提交BUG时，需要给到笔者触发错误的oFx命令，测试文件，您的运行环境（包括但不限于操作系统、python版本等），报错的字符串形式 ➕ 报错截图  
 
 
 ~~都看到这儿了，点个star再走呗~~
