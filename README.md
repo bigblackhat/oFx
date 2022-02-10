@@ -1,75 +1,72 @@
-# ⚓️ oFx
+# 🌖 oFx
 
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-152-orange.svg)](#PocSupport)
+[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
+[![POC_NUM](https://img.shields.io/badge/poc_num-152-orange.svg)](#PocSupport)
+![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
+![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
 ## 🐈 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
-
-一个应用于web安全领域的漏洞扫描框架，可被应用于但不限于如下场景：
 ```
-0Day/1Day全网概念验证(在没有测试环境(各种商业、闭源软件)或懒得搭建测试环境的情况下，直接写POC全网扫描，亲测很爽)
+    _  ______
+    ___ |  ___|_  __
+/ _ \| |_  \ \/ /
+| (_) |  _|  >  <__ _Author : jijue
+\___/|_| __/_/\_\__ __ __Version : latest
 
-刷肉鸡(需要使用RCE/写文件等漏洞的POC)    
-
-企业内网或对外开放资产的安全评估  
-
-简单的拒绝服务攻击(用Url存活检测POC)  
+#*#*#  https://github.com/bigblackhat/oFx  #*#*#
 ```
+一个应用于web安全领域的漏洞批量扫描框架，可被应用于但不限于如下场景：
+
+> 0Day/1Day全网概念验证(在没有测试环境(各种商业、闭源软件)或懒得搭建测试环境的情况下，直接写POC全网扫描，亲测很爽)
+
+> 企业内网或对外开放资产的安全评估  
+
+> 简单的拒绝服务攻击(用Url存活检测POC)  
+
 
 ---
 
-#### Legal Disclaimer
+## 🚔 法律免责声明
 ```
+未经事先双方同意，使用oFx攻击目标是非法的。
+oFx仅用于安全测试与研究目的
+
 Usage of oFx for attacking targets without prior mutual consent is illegal.
 oFx is for security testing purposes only
 ```
 
-#### 法律免责声明
-```
-未经事先双方同意，使用oFx攻击目标是非法的。
-oFx仅用于安全测试与研究目的
-```
+## 📜 Licenses
+在原有协议LICENSE中追加以下免责声明。若与原有协议冲突均以免责声明为准。
 
----
+本工具禁止进行未授权商业用途，禁止二次开发后进行未授权商业用途。
 
-<br>
-<br>
+本工具仅面向合法授权的企业安全建设行为，在使用本工具进行检测时，您应确保该行为符合当地的法律法规，并且已经取得了足够的授权。
 
-![show](img/3.png)
+如您在使用本工具的过程中存在任何非法行为，您需自行承担相应后果，我们将不承担任何法律及连带责任。
 
-黑底蓝字代表无漏洞  
-![show](img/1.png)
-
-黑底绿字代表存在漏洞  
-![show](img/4.png)
-
-黑底青字目标不可达  
-![show](img/2.png)
+在使用本工具前，请您务必审慎阅读、充分理解各条款内容，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。 除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。
 
 
 
-网速尚可情况下，测试30个线程的速度：
-![show](img/11.png)
-Fofa会员一条搜索语句能提取一万条url，约11分钟跑完  
 
----
-
-## ☕️ 使用方法  
+# ☕️ 使用方法  
 
 
-### 部署
+### 🚀 部署
 
 ```
 git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 
-### 用前提醒
+### 🍡 用前提醒
 使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很  
 
 另外，oFx如今可以良好的运行于Mac和Kali系统，相信其他linux也可以正常运行，但由于笔者没有Windows测试环境，因此在Windows上运行oFx可能会发生一些不可预测的错误，请避免在Windows上运行oFx  
 
-### 单个url扫描模式
+### 🛵 单个url扫描模式
 
 单个url扫描模式的使用场景：
 > POC功能性测试
@@ -83,7 +80,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ![show](img/008.png)
 漏洞存在与否见最后一行  
 
-### 批量扫描模式
+### 🚗 批量扫描模式
 
 使用场景：  
 
@@ -97,6 +94,16 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```sh
 ➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py -f scan/jboss001.txt --thread 30
 ```
+
+蓝字代表无漏洞  
+![show](img/1.png)
+
+绿字代表存在漏洞  
+![show](img/4.png)
+
+青字目标不可达  
+![show](img/2.png)
+
 也可以通过``,``分隔同时指定多个poc
 ```sh
 ➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py,poc/Jenkins/Unauth_Access/poc.py,poc/Alibaba_Druid/Unauth_Access/poc.py -f scan/jboss001.txt --thread 30
@@ -109,7 +116,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 * 根据自己电脑性能和带宽给到50个或更多的线程数  
 * 睡前开始扫描或出门玩儿之前打开oFx进行全量POC测试  
 
-### 单个目标的全量POC测试
+### 🚂 单个目标的全量POC测试
 
 全量POC，顾名思义，遍历所有POC插件依次有序的对目标进行测试，接近于漏扫的概念，而且是一个专注于NDay的漏洞扫描器，因oFx的拓展性，非常适合手中掌握数量庞大的0Day的组织或个人（比如笔者自己），使得他可以将0Day库武器化。  
 
@@ -124,7 +131,7 @@ python3 oFx.py -s all -f scan/1.txt
 ```
 
 
-### Fofa api 资产获取
+### 👉 Fofa api 资产获取
 
 通过fofa提供的api接口获取资产清单  
 
@@ -148,12 +155,16 @@ python3 oFx.py -s all -f scan/1.txt
 20xx-xx-xx xx:xx:xx,xxx - INFO: 搜索完毕，结果保存至/root/oFx/scan/jboss001.txt，经去重共计9748条
 ```
 
+网速尚可情况下，测试30个线程的速度：
+![show](img/11.png)
+Fofa会员一条搜索语句能提取一万条url，约11分钟跑完  
+
 可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key    
 
-fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url但大部分情况下都不会是正好一万条结果，请放心食用  
+fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url(``高级会员最大也就一万条``)但大部分情况下都不会是正好一万条结果，请放心食用  
 
 
-### Ceye配置
+### 👉Ceye配置
 
 近期的版本更新中，oFx添加了对Ceye的支持，目前已有一部分POC采用了该平台来辅助漏洞检测，默认下载oFx之后不配置该项并不影响oFx正常的功能使用，只是相关的POC无法按照预期运行而已，有需要可以配置下：  
 ```ini
@@ -165,7 +176,7 @@ dns = xxxxxx.ceye.io
 token = 52ab340912dfc6d334edbcba87234598
 ```
 
-## 🐇 POC支持清单<div id="PocSupport"></div>
+# 🐇 POC支持清单<div id="PocSupport"></div>
 
 <br>
 
@@ -334,7 +345,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 
 </details>
 
-## 🌟 致谢清单
+# 🎄 致谢清单
 
 以下清单中的项目笔者都有参考或对笔者提供一定程度上的帮助，排名不分先后顺序，仅按照中文全拼首字母顺序排列  
 
@@ -354,7 +365,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 <br>
 
 
-## 🔨 错误提交
+# 🛠 错误提交
 
 如果您在使用oFx的过程中遇到了一些笔者写代码时没有考虑到的问题或没有测试到的错误，欢迎通过邮箱告知笔者(ronginus@qq.com)或提Issues  
 
