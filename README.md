@@ -1,9 +1,9 @@
-# oFx
+# ⚓️ oFx
 
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)  [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)  [![POC_NUM](https://img.shields.io/badge/poc_num-152-orange.svg)](#PocSupport)
 
-## 简介
+## 🐈 简介
 ``中文名：奥夫叉(谐音哈哈🦉)``  
 
 一个应用于web安全领域的漏洞扫描框架，可被应用于但不限于如下场景：
@@ -55,7 +55,7 @@ Fofa会员一条搜索语句能提取一万条url，约11分钟跑完
 
 ---
 
-## 使用方法  
+## ☕️ 使用方法  
 
 
 ### 部署
@@ -165,7 +165,7 @@ dns = xxxxxx.ceye.io
 token = 52ab340912dfc6d334edbcba87234598
 ```
 
-## POC支持清单<div id="PocSupport"></div>
+## 🐇 POC支持清单<div id="PocSupport"></div>
 
 <br>
 
@@ -334,7 +334,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 
 </details>
 
-## 致谢清单
+## 🌟 致谢清单
 
 以下清单中的项目笔者都有参考或对笔者提供一定程度上的帮助，排名不分先后顺序，仅按照中文全拼首字母顺序排列  
 
@@ -354,7 +354,7 @@ by the way,如果您希望笔者针对某个漏洞写出相应的POC支持可以
 <br>
 
 
-## 错误提交
+## 🔨 错误提交
 
 如果您在使用oFx的过程中遇到了一些笔者写代码时没有考虑到的问题或没有测试到的错误，欢迎通过邮箱告知笔者(ronginus@qq.com)或提Issues  
 
