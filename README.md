@@ -18,7 +18,6 @@
 | (_) |  _|  >  <__ _Author : jijue
 \___/|_| __/_/\_\__ __ __Version : latest
 
-#*#*#  https://github.com/bigblackhat/oFx  #*#*#
 ```
 一个应用于web安全领域的漏洞批量扫描框架，可被应用于但不限于如下场景：
 
@@ -137,7 +136,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 全量POC，顾名思义，遍历所有POC插件依次有序的对目标进行测试，接近于漏扫的概念，而且是一个专注于NDay的漏洞扫描器，因oFx的拓展性，非常适合手中掌握数量庞大的0Day的组织或个人（比如笔者自己），使得他可以将0Day库武器化。  
 
-没有被武器化的0Day库，就是一堆无用的文档和逻辑，没有哪个黑客会一边读着上千份文档一边日站吧。   
+没有被武器化的0Day库，就是一堆无用的文档和漏洞逻辑，没有哪个同行会一边读着上千份文档一边做渗透吧。   
 
 开始扫描：
 ```sh
@@ -152,7 +151,7 @@ python3 oFx.py -s all -f scan/1.txt
 
 ### 🐾 Fofa api 资产获取
 
-通过fofa提供的api接口获取资产清单  
+通过fofa提供的api接口获取资产清单并去重  
 
 ![show](img/005.png)
 
@@ -176,7 +175,6 @@ python3 oFx.py -s all -f scan/1.txt
 
 可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key    
 
-fofa search模式会将从api中获取到的结果进行去重并重新排序，因此虽然笔者设定逻辑为获取一万条url(``高级会员最大也就一万条``)但大部分情况下都不会是正好一万条结果，请放心食用  
 
 <br>
 <br>
@@ -190,18 +188,15 @@ fofa search模式会将从api中获取到的结果进行去重并重新排序，
 ; 从ceye中拿到以下的数据，缺一不可
 dns = xxxxxx.ceye.io
 
-token = 52ab340912dfc6d334edbcba87234598
+token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 <br>
-<br>
+
 <br>
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
 
-<br>
-
-oFx目前仅具备verify也就是漏洞识别的能力，并不负责漏洞的后续利用，以下漏洞目前已支持检测   
 
 <br>
 
