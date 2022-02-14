@@ -3,7 +3,7 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-152-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-154-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
@@ -265,6 +265,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |汇文|汇文OPAC敏感信息泄露|``poc/HuiWen_汇文/Info_Disclosure/poc.py``|
 ||汇文OPAC弱口令|``poc/HuiWen_汇文/Weak_Pass/poc.py``|
 |蜂网互联|蜂网互联 企业级路由器v4.31 密码泄露漏洞|``poc/IFW8_蜂网互联/UPInfo_DisClosure_CVE_2019_16313/poc.py``|
+|InfluxDB|InfluxDB指纹识别|``poc/InfluxDB/FingerPrint/poc.py``|
+||InfluxDB 未授权访问|``poc/InfluxDB/UnAuth_Access/poc.py``|
 |Intelbras|Intelbras Wireless 未授权与密码泄露|``poc/Intelbras/UPInfo_Disclosure_CVE_2021_3017/poc.py``|
 |Jboss|Jboss未授权访问|``poc/Jboss/Unauth_Access/poc.py``|
 |Jellyfin|Jellyfin任意文件读取|``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``|
