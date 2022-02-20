@@ -137,6 +137,7 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 |命令注入|Command Injection|Cmd_inj|
 |模板注入|Server-Side Template Injection|Ssti|
 |未授权访问|Unauthorized Access|UnAuth_Access|
+|任意用户登录|Any User Login|AnyUser_login|
 |访问控制绕过|Access-Control Bypass|ACbypass|
 |权限提升|Privilege escalation|Priv_Escalation|
 |命令执行|Command Execution|Cmd_Exec|
@@ -153,6 +154,7 @@ poc/Alibaba_Druid/UnAuth_Access/poc.py
 |弱密码|Weak Password|Weak_Pass|
 |日志泄露|Log Disclosure|Log_Disclosure|
 |信息泄露|Information Disclosure|Info_Disclosure|
+|物理路径泄露|Physical Path Disclosure|Physical Path Disclosure|
 |账号密码信息泄露|Username and Password Infomation Disclosure|UPInfo_DisClosure|
 |认证/凭证hash值 信息泄露|Auth Hash Infomation Disclosure|HashInfo_DisClosure|
 |配置信息泄露|Config Information Disclosure|Conf_Info_Disclosure|

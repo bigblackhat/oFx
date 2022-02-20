@@ -27,6 +27,12 @@
 
 > 简单的拒绝服务攻击(用Url存活检测POC)  
 
+特点：  
+* python、跨平台、并发能力强、扫描速度贼快
+* 作者持续更新，[POC库](#PocSupport)数量可观
+* 功能与时俱进，不断优化打磨
+* POC模板结构简洁，提供了专门面对开发者的小工具箱，适合用户自定义拓展POC，能够快速应对不同的安全场景
+* 所有POC均以不对目标产生任何负面影响的前提下编写的，旨在发现缺陷的同时不给目标业务造成任何负面影响，能灵活应用于企业与个人不同的安全需求
 
 <br>
 
@@ -212,6 +218,9 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Unauth_Access/poc.py``|
 |Apache ActiveMQ|Apache ActiveMQ 远程代码执行漏洞(CVE-2016-3088)|``poc/Apache_ActiveMQ/RCE_FileServer_CVE_2016_3088/poc.py``|
 ||Apache ActiveMQ 弱口令 ➕ CVE-2015-5254|``poc/Apache_ActiveMQ/WeakPass/poc.py``|
+||ActiveMQ物理路径泄漏漏洞|``poc/Apache_ActiveMQ/Physical_Path_Disclosure/poc.py``|
+|Apache_ApiSix|Apache APISIX Dashboard 身份验证绕过漏洞（CVE-2021-45232）|``poc/Apache_ApiSix/DashBoard_Auth_Bypass_CVE_2021_45232/poc.py``|
+||Apache APISIX 默认密钥漏洞（CVE-2020-13945）|``poc/Apache_ApiSix/Default_Key_CVE_2020_13945/poc.py``|
 |Apache CouchDB|Apache Couchdb 远程权限提升(CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017_12635/poc.py``|
 |Apache Druid|Apache Druid任意文件读取复现(CVE-2021-36749)|``poc/Apache_Druid/File_Read_CVE_2021_36749/poc.py``|
 |Apache Flink|Apache Flink目录穿透(CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``|
@@ -244,6 +253,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |Drupal!|Drupal!远程代码执行(CVE-2018-7600)|``poc/Drupal!/RCE_CVE_2018_7600/poc.py``|
 |DVR|DVR登录绕过漏洞(CVE-2018-9995)|``poc/DVR/Login_Bypass_CVE_2018_9995/poc.py``|
 |ECShop|ECShop 4.1.0前台 delete_cart_goods.php SQL注入(CNVD-2020-58823)|``poc/ECShop/SQLi_delete_cart_goods/poc.py``|
+||ECShop 2.x/3.x SQL 注入/远程代码执行漏洞|``poc/ECShop/RCE_2dotX_OR_3dotX/poc.py``|
 |ElasticSearch|ElasticSearch 未授权访问|``poc/Elasticsearch/Unauth_Access/poc.py``|
 ||ElasticSearch 命令执行漏洞（CVE-2014-3120）|``poc/Elasticsearch/Cmd_Exec_MVEL_CVE-2014-3120/poc.py``|
 ||ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）|``poc/Elasticsearch/Code_Exec_Groovy_CVE-2015-1427/poc.py``|
@@ -329,6 +339,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||ThinkPHP5 5.0.23 远程代码执行漏洞|``poc/Thinkphp/RCE_5023/poc.py``|
 |通达OA|通达OA 计算机名探测插件|``poc/Tongda_通达OA/Computer_Name_Plugin/poc.py``|
 ||通达OA 版本探测插件|``poc/Tongda_通达OA/Version_Info_Plugin/poc.py``|
+||通达OA2017 前台任意用户登录漏洞|``poc/Tongda_通达OA/AnyUser_Login_Version2017/poc.py``|
 |同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |艾泰科技|艾泰网络管理系统弱口令|``poc/UTT_艾泰科技/WeakPass_Net_Manager_System/poc.py``|
 |启明星辰|天玥运维网关/网御网络审计 Sql注入漏洞|``poc/Venustech_启明星辰/SQLi_Reportguide/poc.py``|
