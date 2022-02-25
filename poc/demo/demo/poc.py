@@ -45,7 +45,8 @@ class POC(POCBase):
         url = self.target + "" # url自己按需调整
         
 
-        headers = {"User-Agent":get_random_ua(),
+        headers = {
+                    "User-Agent":get_random_ua(),
                     "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }

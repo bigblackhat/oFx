@@ -14,7 +14,7 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        略  
+            略  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "Apache ActiveMQ 远程代码执行漏洞(CVE-2016-3088)",                        # 漏洞名称
@@ -27,7 +27,7 @@ class POC(POCBase):
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-        
+            app="APACHE-ActiveMQ"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  

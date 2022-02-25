@@ -3,7 +3,7 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-154-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-156-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
@@ -272,6 +272,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |宏电|宏电 H8922 后台任意文件读取漏洞|``poc/Hongdian_宏电/Backstage_File_Read_CVE_2021_28152/poc.py``|
 |好视通|好视通视频会议平台 任意文件下载|``poc/HST_好视通/File_Download/poc.py``|
 |华为|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
+||华为路由器敏感信息泄露 DG8045 Router 1.0|``poc/Huawei/Info_Disclosure_DG8045/poc.py``|
 |汇文|汇文OPAC敏感信息泄露|``poc/HuiWen_汇文/Info_Disclosure/poc.py``|
 ||汇文OPAC弱口令|``poc/HuiWen_汇文/Weak_Pass/poc.py``|
 |蜂网互联|蜂网互联 企业级路由器v4.31 密码泄露漏洞|``poc/IFW8_蜂网互联/UPInfo_DisClosure_CVE_2019_16313/poc.py``|
@@ -312,6 +313,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |PHP|php v8.1开发版后门检测|``poc/php/Backdoor_v8dev/poc.py``|
 |PHPStudy|PHPStudy 后门检测|``poc/PHPStudy/Back_Door/poc.py``|
 |PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``|
+|QZSec_齐治|齐治堡垒机 任意用户登录漏洞|``poc/QZSec_齐治/AnyUser_Login_Fortress_Machine/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
 |锐捷|锐捷EG网关 userAuth.php存在任意文件读取漏洞|``poc/Ruijie_锐捷/File_Read_EG_userAuth/poc.py``|
 ||锐捷NBR 1300G 路由器 越权CLI命令执行漏洞|``poc/Ruijie_锐捷/RCE_NBR_1300G/poc.py``|

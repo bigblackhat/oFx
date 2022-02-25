@@ -20,7 +20,7 @@ class POC(POCBase):
 
         "name" : "OKI MC573未授权访问",                        # 漏洞名称
         "VulnID" : "",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "MC573未授权访问",                     # 漏洞应用名称
+        "AppName" : "MC573",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2022-01-12",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
