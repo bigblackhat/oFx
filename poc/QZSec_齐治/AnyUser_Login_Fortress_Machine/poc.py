@@ -19,7 +19,7 @@ class POC(POCBase):
 
         "name" : "齐治堡垒机 任意用户登录漏洞",                        # 漏洞名称
         "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "",                     # 漏洞应用名称
+        "AppName" : "齐治堡垒机",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
