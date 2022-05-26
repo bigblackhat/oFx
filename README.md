@@ -7,6 +7,9 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
+![show](img/007.jpeg)
+笔者很喜欢海王三叉戟的造型，就画了一张作为oFx的LOGO吧
+
 <br>
 
 ## 🐈 简介
