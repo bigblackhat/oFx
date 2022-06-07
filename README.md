@@ -3,7 +3,7 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-156-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-157-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
@@ -244,6 +244,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||URL存活检测|``poc/common/Url_Alive/poc.py``|
 ||Apache列目录|``poc/common/Apache_Dir_List/poc.py``|
 |Confluence|Confluence Server Webwork OGNL注入 PreAuth-RCE(CVE-2021-26084)|``poc/Confluence/OGNL_Injection_CVE_2021_26084/poc.py``|
+|Confluence|Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26143）|``poc/Confluence/OGNL_Injection_CVE_2022_26143/poc.py``|
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
 |赤兔CMS|赤兔CMS banner识别插件|``poc/CtCMS_赤兔CMS/Get_Banner/poc.py``|
 |D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_ShareCenter_system_mgr_cgi/poc.py``|
