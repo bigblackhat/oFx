@@ -3,7 +3,7 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-157-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-159-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
@@ -216,6 +216,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |-|-|-|
 |360|360天擎数据库未授权访问|``poc/360/TianQing_Unauth_Acceess/poc.py``|
 |ACME|mini_httpd任意文件读取漏洞(CVE-2018-18778)|``poc/ACME/File_Read_mini_httpd_CVE_2018_18778/poc.py``|
+|Alibaba_Canal|Alibaba Canal 默认弱口令漏洞|``poc/Alibaba_Canal/Weak_Pass/poc.py``|
+||Alibaba Canal 信息泄露|``poc/Alibaba_Canal/Info_Disclosure/poc.py``|
 |Alibaba_Druid|Druid未授权访问|``poc/Alibaba_Druid/Unauth_Access/poc.py``|
 |Alibaba_Fastjson|Fastjson 反序列化远程代码执行漏洞（CVE-2017-18349）|``poc/Alibaba_FastJson/RCE_CVE_2017_18349/poc.py``|
 |Alibaba_Nacos|Nacos未授权访问|``poc/Alibaba_Nacos/Unauth_Access/poc.py``|
