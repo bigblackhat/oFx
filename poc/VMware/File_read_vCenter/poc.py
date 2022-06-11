@@ -28,6 +28,7 @@ class POC(POCBase):
 
         "fofa-dork":"""
             title="ID_VC_Welcome"
+            app="vmware-vCenter"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
