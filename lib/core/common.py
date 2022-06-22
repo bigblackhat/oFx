@@ -143,7 +143,7 @@ def verify_ceye_dns(flag):
     
     time.sleep(random.randint(6,10))
     
-    req = requests.get(api_url,timeout=10)
+    req = requests.get(api_url,timeout=15)
     if "User Not Exists" in req.text:
         return "<title>ceye 配置错误，无法获取数据</title>"
     elif flag.lower() in req.text.lower():
