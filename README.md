@@ -3,7 +3,7 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-160-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-162-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
@@ -246,7 +246,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||URL存活检测|``poc/common/Url_Alive/poc.py``|
 ||Apache列目录|``poc/common/Apache_Dir_List/poc.py``|
 |Confluence|Confluence Server Webwork OGNL注入 PreAuth-RCE(CVE-2021-26084)|``poc/Confluence/OGNL_Injection_CVE_2021_26084/poc.py``|
-|Confluence|Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26143）|``poc/Confluence/OGNL_Injection_CVE_2022_26143/poc.py``|
+||Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26143）|``poc/Confluence/OGNL_Injection_CVE_2022_26143/poc.py``|
+||Confluence 路径穿越与命令执行（CVE-2019-3396）|``poc/Confluence/Path_Travel_CVE_2019_3396/poc.py``|
 |Coremail|Coremail 配置信息泄露漏洞|``poc/Coremail/Conf_Info_Disclosure/poc.py``|
 |赤兔CMS|赤兔CMS banner识别插件|``poc/CtCMS_赤兔CMS/Get_Banner/poc.py``|
 |D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_ShareCenter_system_mgr_cgi/poc.py``|
@@ -321,6 +322,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``|
 |QZSec_齐治|齐治堡垒机 任意用户登录漏洞|``poc/QZSec_齐治/AnyUser_Login_Fortress_Machine/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
+|RLM|Reprise License Manager 14.2 信息泄露（CVE-2022-28365）|``poc/RLM/Info_Disclosure_CVE_2022_28365/poc.py``|
 |锐捷|锐捷EG网关 userAuth.php存在任意文件读取漏洞|``poc/Ruijie_锐捷/File_Read_EG_userAuth/poc.py``|
 ||锐捷NBR 1300G 路由器 越权CLI命令执行漏洞|``poc/Ruijie_锐捷/RCE_NBR_1300G/poc.py``|
 ||锐捷NBR路由器 EWEB网管系统 远程命令执行漏洞|``poc/Ruijie_锐捷/RCE_EWEB_Manager_CNVD_2021_09650/poc.py``|
