@@ -3,7 +3,7 @@
 > 新增如下POC：
 * ``Reprise License Manager 14.2 信息泄露（CVE-2022-28365）``
 * ``Confluence 路径穿越与命令执行（CVE-2019-3396）``
-
+> 添加requirements.txt
 
 ## version 2.27.7
 -------------------
