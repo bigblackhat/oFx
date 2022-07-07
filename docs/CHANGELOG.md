@@ -1,9 +1,16 @@
+## version 2.28.0
+-------------------
+> 新增如下POC：
+* ``蓝凌OA treexml.tmpl脚本 远程命令执行``
+
+
 ## version 2.27.9
 -------------------
 > 新增如下POC：
 * ``Reprise License Manager 14.2 信息泄露（CVE-2022-28365）``
 * ``Confluence 路径穿越与命令执行（CVE-2019-3396）``
 > 添加requirements.txt
+
 
 ## version 2.27.7
 -------------------
