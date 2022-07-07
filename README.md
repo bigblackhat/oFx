@@ -398,6 +398,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |[AngelSword](https://github.com/Lucifer1993/AngelSword)|
 |[edusrc_POC](https://github.com/Cl0udG0d/edusrc_POC)|
 |[iak_ARL](https://github.com/nu0l/iak-ARL)|
+|[Landray-OA-Treexml-Rce](https://github.com/tangxiaofeng7/Landray-OA-Treexml-Rce)|
 |[pocsuite3](https://github.com/knownsec/pocsuite3)|
 |[sqlmap](https://github.com/sqlmapproject/sqlmap) sqlmap永远滴神|
 |[vulhub](https://vulhub.org/)|
