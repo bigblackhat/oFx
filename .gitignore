@@ -22,6 +22,7 @@ Future_Alpha版/
 poc/ACTI_视频监控/
 poc/*/_*/
 poc/PRO/
+__pycache__
 
 reference.*  
 reference*.png

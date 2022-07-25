@@ -276,6 +276,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |海康威视|HIKVISION 视频编码设备接入网关 任意文件下载|``poc/HIKVISION/File_Down_Gateway_downFile_php/poc.py``|
 ||HIKVISION 流媒体管理服务器弱口令|``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``|
 ||HIKVISION 流媒体管理服务器任意文件读取|``poc/HIKVISION/File_Read_Stream_Media_Manager/poc.py``|
+||海康威视 IP摄像头未授权访问（CVE-2017-7921）|``poc/HIKVISION/UnAuth_Access_CVE_2017_7921/poc.py``|
 |宏电|宏电 H8922 后台任意文件读取漏洞|``poc/Hongdian_宏电/Backstage_File_Read_CVE_2021_28152/poc.py``|
 |好视通|好视通视频会议平台 任意文件下载|``poc/HST_好视通/File_Download/poc.py``|
 |华为|Huawei HG659 lib 任意文件读取漏洞|``poc/Huawei/File_Read_HG659_lib/poc.py``|
@@ -404,7 +405,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |[vulhub](https://vulhub.org/)|
 |[xray](https://github.com/chaitin/xray/) 抄作业，冲冲冲|
 
-
+另外还要感谢``JetBrains``  
+![JetBrains](img/008.png)
 <br>
 <br>
 <br>

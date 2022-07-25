@@ -73,7 +73,7 @@ def fofa_search(user,key,dork,save_path):
             err_msg += "搜索语句{dork}疑似存在语法错误\n请前往fofa web端测试搜索语句的有效性"
             err_msg += "\033[0m"
             exit(err_msg.format(dork=dork,))
-        elif "\"results\":[]," in req.text:
+        elif "\"results\":[]" in req.text:
             err_msg = "\n\033[35m"
             err_msg += "已无更多搜索结果\n开始保存文件"
             err_msg += "\033[0m"
