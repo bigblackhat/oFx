@@ -52,7 +52,7 @@ def fofa_search(user,key,dork,save_path):
     # print "in search"
     search_result = list()
     url_list = list()
-    resource = 'protocol,ip,port'
+    resource = 'protocol,ip,port,host'
     page = 100
     # dork = str(base64.b64decode(dork),encoding = "utf-8")
     for i in range(1,page+1):
@@ -91,12 +91,20 @@ def fofa_search(user,key,dork,save_path):
             continue
 
     for i in search_result:
-        if i[0] != "":
-            url = i[0]+"://"+i[1]+":"+i[2]
-        elif "443" in i[2]:
-            url = "https://" + i[1] + ":" + i[2]
-        else:
-            url = "http://" + i[1] + ":" + i[2]
+        if i[3] != "":  # 优先考虑protocol➕host的模式
+            if "http://" in i[3] or "https://" in i[3]:
+                url = i[3]
+            elif "443" in i[2]:  # 部分host字段没有带协议，需要自己加
+                url = "https://" + i[3]
+            else:
+                url = "http://" + i[3]
+        else:  # protocol➕ip➕port 作为兜底
+            if i[0] != "":
+                url = i[0]+"://"+i[1]+":"+i[2]
+            elif "443" in i[2]:
+                url = "https://" + i[1] + ":" + i[2]
+            else:
+                url = "http://" + i[1] + ":" + i[2]
         url_list.append(url)
     # print len(url_list)
     url_list = set(url_list)
