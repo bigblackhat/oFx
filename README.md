@@ -3,13 +3,15 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-163-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-164-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
 ![show](img/007.jpeg)
 笔者很喜欢海王三叉戟的造型，就画了一张作为oFx的LOGO吧
 
+
+2022HW专题：[点我点我](https://github.com/bigblackhat/ofx/docs/2022HW.md)
 <br>
 
 ## 🐈 简介
@@ -253,6 +255,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |D-Link|D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞|``poc/D_Link/RCE_ShareCenter_system_mgr_cgi/poc.py``|
 ||D-Link Dir-645 getcfg.php 账号密码泄露漏洞(CVE-2019-17506)|``poc/D_Link/UPInfo_Disclosure_getcfg_php/poc.py``|
 ||D-Link AC管理系统默认账号密码|``poc/D_Link/Weak_Pass_AC_Manager/poc.py``|
+|安恒信息|明御WAF登陆绕过|``poc/dbappsecurity_安恒信息/Login_ByPass_MingYu_WAF/poc.py``|
 |织梦CMS|织梦CMS radminpass.php文件暴露|``poc/DedeCMS_织梦/RadminPass/poc.py``|
 ||DedeCMS 短文件名信息泄露|``poc/DedeCMS_织梦/Info_Disclosure_IIS_Short_Filename/poc.py``|
 |DocCMS|DocCMS keyword SQL注入漏洞|``poc/DocCMS/SQLi_keyword/poc.py``|
