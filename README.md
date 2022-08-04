@@ -11,7 +11,7 @@
 笔者很喜欢海王三叉戟的造型，就画了一张作为oFx的LOGO吧
 
 
-2022HW专题：[点我点我](https://github.com/bigblackhat/ofx/docs/2022HW.md)
+2022HW专题：[点我点我](https://github.com/bigblackhat/oFx/blob/main/docs/2022HW.md)
 <br>
 
 ## 🐈 简介
