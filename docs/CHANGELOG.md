@@ -1,3 +1,10 @@
+## version 2.29.9
+-------------------
+> 新增如下POC：
+* 绿盟下一代防火墙 resourse.php 任意文件上传漏洞
+* 蓝凌OA sysFormulaSimulateByJS 未授权命令执行漏洞
+
+
 ## version 2.29.7
 -------------------
 > 新增如下POC：

@@ -4,11 +4,14 @@
 
 本文档为oFx的PoC脚本编写规范及要求说明，包含了PoC脚本编写的步骤以及相关的一些说明。一个优秀的 PoC 离不开反复的调试、测试。  
 
-目前oFx的POC编写为邀请制，仅笔者邀请者提交的POC贡献可被接受，其他有兴趣的小伙伴也可以提交代码贡献，笔者空闲时会抽时间阅读并测试，根据代码质量、漏洞危害程度等综合考量是否使用，POC通过者将会列入贡献感谢列表    
+任何有兴趣的同学都可以为oFx提交代码/POC贡献，笔者会及时抽时间阅读并测试，根据代码质量、漏洞危害程度等综合考量是否使用，代码/POC通过者将会列入贡献感谢列表    
 
-POC打包后，通过邮件发送至笔者的邮箱(ronginus@qq.com)，POC包内目录结构见下文[POC提交规范](#POCSubmitRule)
+代码/POC提交的两种方式：
 
-邮件标题为：``oFx_POC提交贡献：APP_NAME/VULN_NAME``
+1. POC打包后，通过邮件发送至笔者的邮箱(ronginus@qq.com)，POC包内目录结构见下文[POC提交规范](#POCSubmitRule)
+邮件标题为：oFx_POC提交贡献：APP_NAME/VULN_NAME
+
+2. 通过fork后添加POC，push上来，注意版本冲突
 
 ## POC编写规范<div id="PoCstandard"></div>
 
@@ -112,18 +115,30 @@ POC统一放在``poc/``目录下，以``应用名/漏洞名/poc.py``的三段式
 
 漏洞类型写简称，具体见下文[漏洞类型命名规范](#VulnNameRule)
 
-漏洞编号以CVE为主，没有CVE就CNVD或CNNVD或WOOYUN，实在没有且不影响分辨的话，可以不写编号  
+漏洞编号以CVE为主，没有CVE就CNVD或CNNVD或WOOYUN等权威组织/平台编号，实在没有且不影响分辨的话，可以直接以漏洞类型命名
+
+如果同一个应用存在两个及以上相同类型的漏洞，可以根据存在漏洞的文件或利用链等区分，格式为：``漏洞类型`` + ``_(下划线)`` + ``影响版本``/``文件名``/``参数``/``函数``/``链``
 
 举个栗子：
 ```
-Druid未授权访问
+oFx收录了Confluence两个OgNL注入漏洞，都是以CVE编号实现的漏洞区分
 
-如下：
+poc/Confluence/OGNL_Injection_CVE_2021_26084/poc.py
+poc/Confluence/OGNL_Injection_CVE_2022_26143/poc.py
 
-poc/Alibaba_Druid/UnAuth_Access/poc.py
+====================================
+
+阿里的Druid组件存在由配置不当造成的未授权访问，只有一个这样的漏洞，虽然跨越了多个版本，因此只需要以漏洞类型来命名
+
+poc/Alibaba_Druid/Unauth_Access/poc.py
+
+====================================
+
+而蓝凌OA的两个RCE漏洞，似乎没有相关CVE编号，则分别以函数名和文件名来命名的
+
+poc/Landray_蓝凌OA/RCE_sysFormulaSimulateByJS/poc.py
+poc/Landray_蓝凌OA/RCE_TreeXmlTMPL_Script/poc.py
 ```
-
-如果同一个应用存在两个及以上相同类型的漏洞，可以根据存在漏洞的文件或利用链等区分，格式为：``漏洞类型`` + ``_(下划线)`` + ``漏洞文件`` + ``_(下划线)`` + ``漏洞编号``  
 
 
 ### 漏洞类型命名规范<div id="VulnNameRule"></div>
@@ -188,7 +203,7 @@ __________POC提交文件夹必须包含以下文件__________
 
 考虑到每写一个POC都要手动的创建如上目录有点麻烦，因此笔者提供了一个POC目录结构生成器，食用方式如下：
 ```sh
-➜  oFx git:(main) ✗ python3 ofx.py --gen-poc
+➜  oFx git:(main) ✗ python3 ofx.py --add-poc
 
         _  ______
     ___ |  ___|_  __
@@ -222,4 +237,4 @@ POC路径为/Users/jijue/Documents/GitHub/oFx/poc/Apache_Example/RCE/
 
 1.单个目标测试，直到检测逻辑正确，具备漏洞检测能力为止，并确保漏报在百分之十以下  
 2.fofa搜索结果，批量测试，降低误报  
-3.用与漏洞不相关的目标进行大量测试（比如fofa语句：``"中国"``），进一步降低误报，公网上鱼龙混杂的web站点在POC误报率测试方面有大浪淘沙的属性  
+3.用与漏洞不相关的目标进行大量测试（比如fofa语句：``"中国"``），进一步降低误报，公网上鱼龙混杂的web站点在POC误报率测试方面有大浪淘沙的妙用  
