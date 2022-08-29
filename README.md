@@ -140,6 +140,8 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 * 根据自己电脑性能和带宽给到50个或更多的线程数  
 * 睡前开始扫描或出门玩儿之前打开oFx进行全量POC测试  
 
+偷偷说一句，因为全量POC测试是``依次运行所有POC对目标进行扫描``，也就是只有一个POC扫完全部目标以后才会调用下一个POC，所以对每一个目标来说可能几十秒甚至几分钟内只有一次恶意请求（时长取决于资产数量和线程数），oFx本身不使用爬虫、fuzzing等技术，不会对被测资产产生任何负载压力，所以即使客户明令禁止使用漏扫，也可以放心大胆的用oFx哦  
+
 <br>
 <br>
 
@@ -363,6 +365,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |启明星辰|天玥运维网关/网御网络审计 Sql注入漏洞|``poc/Venustech_启明星辰/SQLi_Reportguide/poc.py``|
 |VMware|Vmware vCenter 任意文件读取|``poc/VMware/File_read_vCenter/poc.py``|
 ||VMware vRealize Operations Manager SSRF漏洞 CVE-2021-21975|``poc/VMware/SSRF_vRealize_CVE_2021_21975/poc.py``|
+||VMware Workspace ONE Access Freemarker 服务器端模板注入(CVE-2022-22954)|``poc/VMware/CVE_2022_22954/poc.py``|
 |VoIPmonitor|VoIPmonitor 未授权远程代码执行(CVE-2021-30461)|``poc/VoIPmonitor/RCE_CVE_2021_30461/poc.py``|
 |泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
 ||泛微OA E-Office V9文件上传漏洞(CNVD-2021-49104)|``poc/Weaver_泛微OA/File_Upload_E_Office_V9_CNVD_2021_49104/poc.py``|

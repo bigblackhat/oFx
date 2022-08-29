@@ -14,7 +14,7 @@ output_path = root_path+"/output/"
 scan_path = root_path + "/scan/"
 poc_path = root_path + "/poc/"
 
-MAX_NUMBER_OF_THREADS = 50
+MAX_NUMBER_OF_THREADS = 100
 IS_WIN = True if (sys.platform in ["win32", "cygwin"] or os.name == "nt") else False
 PYVERSION = sys.version.split()[0].split(".")[0]
 

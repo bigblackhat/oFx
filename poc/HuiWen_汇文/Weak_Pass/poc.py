@@ -20,7 +20,7 @@ class POC(POCBase):
 
         "name" : "汇文OPAC弱口令",                        # 漏洞名称
         "VulnID" : "oFx-2021-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "汇文OPAC",                     # 漏洞应用名称
+        "AppName" : "汇文图书馆书目检索系统",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """

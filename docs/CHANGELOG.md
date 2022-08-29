@@ -1,8 +1,17 @@
+# version 2.30.1
+------------------
+> 优化如下POC：
+* ``ActiveMQ物理路径泄漏漏洞`` 
+> 新增如下POC：
+* ``VMware Workspace ONE Access Freemarker 服务器端模板注入(CVE-2022-22954)`` 作者：``zhaoqianqian1``
+> 解锁原定最大线程数50的限制，现在设定最大100个线程
+
+
 ## version 2.29.9
 -------------------
 > 新增如下POC：
-* 绿盟下一代防火墙 resourse.php 任意文件上传漏洞
-* 蓝凌OA sysFormulaSimulateByJS 未授权命令执行漏洞
+* ``绿盟下一代防火墙 resourse.php 任意文件上传漏洞``
+* ``蓝凌OA sysFormulaSimulateByJS 未授权命令执行漏洞``
 
 
 ## version 2.29.7

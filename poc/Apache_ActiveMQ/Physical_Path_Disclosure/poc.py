@@ -56,7 +56,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.put(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if  req.status_code == 500 and req.raw._original_response.reason != "Server Error":
+            if  req.status_code == 500 and "Server Error" not in req.raw._original_response.reason:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

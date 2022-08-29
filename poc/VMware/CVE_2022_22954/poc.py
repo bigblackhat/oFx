@@ -9,7 +9,7 @@ urllib3.disable_warnings()
 class POC(POCBase):
 
     _info = {
-        "author" : "zyh",                      # POC作者
+        "author" : "zhaoqianqian1",                      # POC作者
         "version" : "1",                    # POC版本，默认是1  
         "CreateDate" : "2022-01-01",        # POC创建时间
         "UpdateDate" : "2022-01-01",        # POC创建时间
