@@ -1,3 +1,22 @@
+# version 2.31.4
+------------------
+> 优化如下POC：
+* ``Apache APISIX 默认密钥漏洞（CVE-2020-13945）``
+* ``若依后台管理系统 弱口令``
+* ``锐捷RG-UAC/RG-ISG统一上网行为管理审计系统存在账号密码信息泄露``
+> 新增如下POC：
+* ``360天擎前台SQL注入``
+* ``Apache APISIX batch-requests 未授权RCE(CVE-2022-24112)``
+* ``Apache Druid 远程代码执行漏洞 (CVE-2021-25646)``
+* ``ZooKeeper未授权访问``
+* ``FTP匿名访问``
+* ``MemCache未授权访问``
+* ``MongoDB未授权访问``
+* ``Mysql弱口令``
+* ``VMware NSX Manager XStream 远程代码执行漏洞（CVE-2021-39144）``
+* ``维盟AC集中管理平台弱口令``
+
+
 # version 2.30.1
 ------------------
 > 优化如下POC：

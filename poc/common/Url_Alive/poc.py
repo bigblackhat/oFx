@@ -74,9 +74,9 @@ class POC(POCBase):
 
                 if str(status_code)[0] == "1" or \
                     str(status_code)[0] == "2" or \
-                        str(status_code)[0] == "3" :
-                            # str(status_code)[0] == "4" or \
-                            #     str(status_code)[0] == "5"\
+                        str(status_code)[0] == "3" or \
+                            str(status_code)[0] == "4" or \
+                                str(status_code)[0] == "5":
                                     
                     vuln = [True,html]
             except Exception as e:

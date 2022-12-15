@@ -30,8 +30,9 @@ class POC(POCBase):
         "CreateDate" : "2021-06-09",        # POC创建时间
         "UpdateDate" : "2021-06-09",        # POC创建时间
         "PocDesc" : """
-        出于专注与web领域的考虑，本POC仅简单支持检测redis未授权访问而已,
-        另外，redis连接比较慢，扫起来会比http要久很多，扫之前做好心理准备
+            V1:出于专注与web领域的考虑，本POC仅简单支持检测redis未授权访问而已,
+            另外，redis连接比较慢，扫起来会比http要久很多，扫之前做好心理准备
+            笔者尝试了写一个socket版本的POC，经多次测试对比，两种方案没有什么显著的区别，不论是耗时还是误报、漏报  
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "Redis未授权访问",                        # 漏洞名称
@@ -44,7 +45,7 @@ class POC(POCBase):
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-        app="redis"
+            app="redis"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  

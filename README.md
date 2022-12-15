@@ -219,6 +219,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |应用|漏洞名称|POC路径|
 |-|-|-|
 |360|360天擎数据库未授权访问|``poc/360/TianQing_Unauth_Acceess/poc.py``|
+||360天擎前台SQL注入|``poc/360/TianQing_SQLi/poc.py``|
 |ACME|mini_httpd任意文件读取漏洞(CVE-2018-18778)|``poc/ACME/File_Read_mini_httpd_CVE_2018_18778/poc.py``|
 |Alibaba_Canal|Alibaba Canal 默认弱口令漏洞|``poc/Alibaba_Canal/Weak_Pass/poc.py``|
 ||Alibaba Canal 信息泄露|``poc/Alibaba_Canal/Info_Disclosure/poc.py``|
@@ -229,9 +230,11 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||Apache ActiveMQ 弱口令 ➕ CVE-2015-5254|``poc/Apache_ActiveMQ/WeakPass/poc.py``|
 ||ActiveMQ物理路径泄漏漏洞|``poc/Apache_ActiveMQ/Physical_Path_Disclosure/poc.py``|
 |Apache_ApiSix|Apache APISIX Dashboard 身份验证绕过漏洞（CVE-2021-45232）|``poc/Apache_ApiSix/DashBoard_Auth_Bypass_CVE_2021_45232/poc.py``|
+||Apache APISIX batch-requests 未授权RCE(CVE-2022-24112)|``poc/Apache_ApiSix/RCE_CVE_2022_24112/poc.py``|
 ||Apache APISIX 默认密钥漏洞（CVE-2020-13945）|``poc/Apache_ApiSix/Default_Key_CVE_2020_13945/poc.py``|
 |Apache CouchDB|Apache Couchdb 远程权限提升(CVE-2017-12635)|``poc/Apache_CouchDB/Priv_Escalation_CVE-2017_12635/poc.py``|
 |Apache Druid|Apache Druid任意文件读取复现(CVE-2021-36749)|``poc/Apache_Druid/File_Read_CVE_2021_36749/poc.py``|
+||Apache Druid 远程代码执行漏洞 (CVE-2021-25646)|``poc/Apache_Druid/RCE_CVE_2021_25646/poc.py``|
 |Apache Flink|Apache Flink目录穿透(CVE-2020-17519)|``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``|
 ||Apache Flink <= 1.9.1远程代码执行 CVE-2020-17518|``poc/Apache_Flink/RCE_CVE_2020_17518/poc.py``|
 |Apache Kylin|Apache Kylin 未授权配置泄露 CVE-2020-13937|``poc/Apache_Kylin/Conf_Info_Disclosure_CVE_2020_13937/poc.py``|
@@ -239,6 +242,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |Apache Solr|Apache Solr Velocity 注入远程命令执行漏洞 (CVE-2019-17558)|``poc/Apache_Solr/CVE_2019_17558/poc.py``|
 ||Apache Solr 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
 ||Apache Solr 远程命令执行 Log4j|``poc/Apache_Solr/RCE_Log4j_CVE_2021_44228/poc.py``|
+|Apache ZooKeeper|ZooKeeper未授权访问|``poc/Apache_ZooKeeper/Unauth_Access/poc.py``|
 |碧海威 L7|碧海威 L7 弱口令漏洞|``poc/Bithighway_碧海威/Weak_Pass_L7/poc.py``|
 |BSPHP|BSPHP 未授权访问 信息泄露漏洞|``poc/BSPHP/Info_Disclosure/poc.py``|
 |C-Lodop|C-Lodop 云打印机系统平台任意文件读取漏洞|``poc/C_Lodop/File_Read/poc.py``|
@@ -275,6 +279,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |F5|F5 BIG-IP任意文件读取(CVE-2020-5902)|``poc/F5_BIG_IP/File_Read_CVE_2020_5902/poc.py``|
 ||CVE-2021-22986 RCE|``CVE-2021-22986 RCE``|
 |菲力尔|FLIR-AX8 download.php 任意文件下载|``poc/FLIR_菲力尔/Download_File_AX8/poc.py``|
+|FTP|FTP匿名访问|``poc/FTP/Anonymous_Access/poc.py``|
 |Grafana|Grafana plugins 任意文件读取漏洞(CVE-2021-43798)|``poc/Grafana/File_Read_plugins/poc.py``|
 |H2 数据库|H2 数据库 Web控制台未授权访问|``poc/H2_DataBase/UnAuth_Access/poc.py``|
 |H3C SecPath 下一代防火墙|H3C SecPath 下一代防火墙 任意文件下载漏洞|``poc/H3C/File_Download_SecPath_WAF/poc.py``|
@@ -314,9 +319,12 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |佑友|佑友防火墙 弱口令|``poc/MailGard_佑友/Weak_Pass_FireWall/poc.py``|
 ||佑友防火墙 后台命令执行漏洞|``poc/MailGard_佑友/RCE_ping_FireWall/poc.py``|
 |迈普 ISG1000安全网关|迈普 ISG1000安全网关 任意文件下载漏洞|``poc/MaiPu_迈普/File_Download_webui/poc.py``|
+|MemCache|MemCache未授权访问|``poc/MemCache/UnAuth_Access/poc.py``|
 |MessageSolution企业邮件归档管理系统|MessageSolution企业邮件归档管理系统 EEA 信息泄露|``poc/MessageSolution/Info_Disclosure/poc.py``|
 |MetaBase|MetaBase任意文件读取漏洞 CVE-2021-41277|``poc/Metabase/File_Read_CVE_2021_41277/poc.py``|
 |MicroSoft|Windows HTTP协议栈远程代码执行漏洞(CVE-2022-21907)|poc/MicroSoft/RCE_CVE_2022_21907/poc.py|
+|MongoDB|MongoDB未授权访问|``poc/MongoDB/Unauth_Access/poc.py``|
+|Mysql|Mysql弱口令|``poc/Mysql/WeakPass/poc.py``|
 |蓝海卓越|蓝海卓越计费管理系统 任意文件读取|``poc/NatShell_蓝海卓越/File_Read/poc.py``|
 ||蓝海卓越计费管理系统 认证hash泄露|``poc/NatShell_蓝海卓越/HashInfo_DisClosure/poc.py``|
 |中科网威|中科网威 下一代防火墙控制系统 账号密码泄露漏洞|``poc/NetPower_中科网威/UPInfo_DisClosure_Firewall/poc.py``|
@@ -366,7 +374,9 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |VMware|Vmware vCenter 任意文件读取|``poc/VMware/File_read_vCenter/poc.py``|
 ||VMware vRealize Operations Manager SSRF漏洞 CVE-2021-21975|``poc/VMware/SSRF_vRealize_CVE_2021_21975/poc.py``|
 ||VMware Workspace ONE Access Freemarker 服务器端模板注入(CVE-2022-22954)|``poc/VMware/CVE_2022_22954/poc.py``|
+||VMware NSX Manager XStream 远程代码执行漏洞（CVE-2021-39144）|``poc/VMware/RCE_NSX_Manager_XStream_CVE_2021_39144/poc.py``|
 |VoIPmonitor|VoIPmonitor 未授权远程代码执行(CVE-2021-30461)|``poc/VoIPmonitor/RCE_CVE_2021_30461/poc.py``|
+|WayOS 维盟|维盟AC集中管理平台弱口令|``poc/WayOS_维盟/WeakPass_AC_Manager/poc.py``|
 |泛微 OA|泛微云桥 e-Bridge 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Bridge/poc.py``|
 ||泛微OA E-Office V9文件上传漏洞(CNVD-2021-49104)|``poc/Weaver_泛微OA/File_Upload_E_Office_V9_CNVD_2021_49104/poc.py``|
 ||泛微 e-cology OA 数据库配置信息泄露漏洞|``poc/Weaver_泛微OA/Config_Info_Disclosure_DBconfigReader/poc.py``|

