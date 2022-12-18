@@ -367,6 +367,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |通达OA|通达OA 计算机名探测插件|``poc/Tongda_通达OA/Computer_Name_Plugin/poc.py``|
 ||通达OA 版本探测插件|``poc/Tongda_通达OA/Version_Info_Plugin/poc.py``|
 ||通达OA2017 前台任意用户登录漏洞|``poc/Tongda_通达OA/AnyUser_Login_Version2017/poc.py``|
+||通达OA v2017 video_file.php 任意文件下载漏洞|``poc/Tongda_通达OA/FileRead_video_file/poc.py``|
 |天融信|天融信-上网行为管理系统 static_convert.php 命令注入漏洞|``poc/TopSec_天融信/Common_Injection_static_convert/poc.py``|
 |同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |艾泰科技|艾泰网络管理系统弱口令|``poc/UTT_艾泰科技/WeakPass_Net_Manager_System/poc.py``|
@@ -388,6 +389,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||泛微 E-cology V9信息泄露|``poc/Weaver_泛微OA/Config_Info_Disclosure_E_Cology_V9/poc.py``|
 ||泛微 E-Office存在前台文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_E_Office_ajax/poc.py``|
 ||泛微 E-office V9.5 SQL注入漏洞|``poc/Weaver_泛微OA/SQLi_E_Office_v9dot5/poc.py``|
+||泛微OA E-Bridge saveYZJFile 任意文件读取漏洞|``poc/Weaver_泛微OA/FileRead_saveYZJFile/poc.py``|
 |Weblogic|CVE-2016-0638|``poc/Weblogic/CVE_2016_0638/poc.py``|
 ||Weblogic < 10.3.6 'wls-wsat' XMLDecoder 反序列化漏洞（CVE-2017-10271）|``poc/Weblogic/CVE_2017_10271/poc.py``|
 ||RCE_CVE-2018-3191|``poc/Weblogic/RCE_CVE_2018_3191/poc.py``|

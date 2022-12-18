@@ -1,3 +1,9 @@
+# version 2.21.6
+------------------
+新增如下POC：
+* ``泛微OA E-Bridge saveYZJFile 任意文件读取漏洞``
+* ``通达OA v2017 video_file.php 任意文件下载漏洞``
+
 # version 2.31.4
 ------------------
 > 优化如下POC：
