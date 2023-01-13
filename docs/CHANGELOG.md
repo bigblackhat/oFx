@@ -1,8 +1,25 @@
+# version 2.22.7
+------------------
+新增如下POC：
+* ``致远OA getSessionList.jsp Session泄漏漏洞``
+* ``致远OA A6 test.jsp SQL注入漏洞``
+* ``通达OA retrieve_pwd 任意用户登陆漏洞``
+* ``通达OA < v11.7 auth_mobi.php 在线用户登录漏洞``
+* ``通达OA v11.9 getdata 任意命令执行漏洞``
+* ``泛微OA E-Office officeserver.php 任意文件读取漏洞``
+* ``泛微OA weaver.common.Ctrl 任意文件上传漏洞``
+* ``泛微e-cology登陆绕过``
+* ``泛微云桥(e-bridge) addTaste存在sql注入漏洞``
+* ``万户ezoffice 前台sql注入``
+* ``用友 U8 OA test.jsp SQL注入漏洞``
+
+
 # version 2.21.6
 ------------------
 新增如下POC：
 * ``泛微OA E-Bridge saveYZJFile 任意文件读取漏洞``
 * ``通达OA v2017 video_file.php 任意文件下载漏洞``
+
 
 # version 2.31.4
 ------------------

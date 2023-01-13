@@ -19,7 +19,7 @@ class POC(POCBase):
         """,                                # POC描述，写更新描述，没有就不写
 
         "name" : "泛微OA E-Bridge saveYZJFile 任意文件读取漏洞",                        # 漏洞名称
-        "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "VulnID" : "CNVD-2020-59520",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "泛微云桥",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
@@ -27,6 +27,8 @@ class POC(POCBase):
             “泛微云桥e-bridge平台”是在原有微信集成平台的基础上，经过二次更新后的一款独立外部对接平台，其主要作用是实现泛微OA平台与微信企业号、阿里钉钉产品的信息对接能力。
             系统对接后，企业内部的OA信息通过微信企业号、阿里钉钉这一终端入口释放出来。
             泛微云桥e-bridge平台saveYZJFile文件可任意读取服务器文件，攻击者通过漏洞可以获取后台/数据库权限。
+            
+            【安全通告】泛微云桥存在任意文件读取漏洞-吉林农业大学信息化中心: https://nic.jlau.edu.cn/info/1013/1614.htm
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""

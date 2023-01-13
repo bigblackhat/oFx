@@ -353,6 +353,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |Sapido|Sapido BRC70n路由器远程代码执行漏洞|``poc/Sapido/RCE_BRC70n_Router/poc.py``|
 |致远OA|致远OA webmail.do 任意文件下载 (CNVD-2020-62422)|``poc/SeeYon_致远/File_Download/poc.py``|
 ||致远OA ajax.do 任意文件上传|``poc/SeeYon_致远/File_Upload_ajax_do/poc.py``|
+||致远OA getSessionList.jsp Session泄漏漏洞|``poc/SeeYon_致远/Session_Disclosure_getSessionList/poc.py``|
+||致远OA A6 test.jsp SQL注入漏洞|``poc/SeeYon_致远/SQLi_test_jsp/poc.py``|
 |狮子鱼CMS|狮子鱼CMS ApiController.class.php SQL注入漏洞|``poc/ShiZiYu_狮子鱼/Sqli_ApiController/poc.py``|
 ||狮子鱼CMS ApigoodsController.class.php SQL注入漏洞|``poc/ShiZiYu_狮子鱼/Sqli_ApigoodsController/poc.py``|
 |ShopXO|ShopXO download 任意文件读取漏洞(CNVD-2021-15822)|``poc/ShopXO/FileRead_CNVD_2021_15822/poc.py``|
@@ -368,6 +370,9 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||通达OA 版本探测插件|``poc/Tongda_通达OA/Version_Info_Plugin/poc.py``|
 ||通达OA2017 前台任意用户登录漏洞|``poc/Tongda_通达OA/AnyUser_Login_Version2017/poc.py``|
 ||通达OA v2017 video_file.php 任意文件下载漏洞|``poc/Tongda_通达OA/FileRead_video_file/poc.py``|
+||通达OA retrieve_pwd 任意用户登陆漏洞|``poc/Tongda_通达OA/AnyUser_Login_retrieve_pwd/poc.py``|
+||通达OA < v11.7 auth_mobi.php 在线用户登录漏洞|``poc/Tongda_通达OA/InfoDisclosure_auth_mobi/poc.py``|
+||通达OA v11.9 getdata 任意命令执行漏洞|``poc/Tongda_通达OA/RCE_getdata/poc.py``|
 |天融信|天融信-上网行为管理系统 static_convert.php 命令注入漏洞|``poc/TopSec_天融信/Common_Injection_static_convert/poc.py``|
 |同为股份|TVT数码科技 NVMS-1000 路径遍历漏洞|``poc/TVT_同为股份/Dir_Traversal_NVMS_1000/poc.py``|
 |艾泰科技|艾泰网络管理系统弱口令|``poc/UTT_艾泰科技/WeakPass_Net_Manager_System/poc.py``|
@@ -390,16 +395,22 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||泛微 E-Office存在前台文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_E_Office_ajax/poc.py``|
 ||泛微 E-office V9.5 SQL注入漏洞|``poc/Weaver_泛微OA/SQLi_E_Office_v9dot5/poc.py``|
 ||泛微OA E-Bridge saveYZJFile 任意文件读取漏洞|``poc/Weaver_泛微OA/FileRead_saveYZJFile/poc.py``|
+||泛微OA E-Office officeserver.php 任意文件读取漏洞|``poc/Weaver_泛微OA/File_Read_E_Office_officeserver/poc.py``|
+||泛微OA weaver.common.Ctrl 任意文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_weaver_common_ctrl/poc.py``|
+||泛微e-cology登陆绕过|``poc/Weaver_泛微OA/Login_Pass/poc.py``|
+||泛微云桥(e-bridge) addTaste存在sql注入漏洞|``poc/Weaver_泛微OA/SQLi_E_Bridge_addTaste/poc.py``|
 |Weblogic|CVE-2016-0638|``poc/Weblogic/CVE_2016_0638/poc.py``|
 ||Weblogic < 10.3.6 'wls-wsat' XMLDecoder 反序列化漏洞（CVE-2017-10271）|``poc/Weblogic/CVE_2017_10271/poc.py``|
 ||RCE_CVE-2018-3191|``poc/Weblogic/RCE_CVE_2018_3191/poc.py``|
 ||Weblogic SSRF (CVE-2014-4210)|``poc/Weblogic/SSRF_CVE_2014_4210/poc.py``|
 ||Weblogic 管理控制台未授权远程命令执行漏洞（CVE-2020-14882，CVE-2020-14883）|``poc/Weblogic/UnAuth_RCE_CVE_2020_14882/poc.py``|
 ||Weblogic XMLDecoder反序列化漏洞（CVE-2017-3506）|``poc/Weblogic/XMLDecoder_CVE_2017_3506/poc.py``|
+|whir_万户软件|万户ezoffice 前台sql注入|``poc/whir_万户软件/SQLi_EZOffice/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
 ||用友GRP-U8行政事业财务管理软件 SQL注入 CNNVD-201610-923|``poc/Yonyou_用友NC/Sqli_CNNVD_201610_923/poc.py``|
 ||用友 时空KSOA 前台文件上传漏洞|``poc/Yonyou_用友NC/File_Upload_KSOA/poc.py``|
+||用友 U8 OA test.jsp SQL注入漏洞|``poc/Yonyou_用友NC/SQLi_test_jsp/poc.py``|
 |Zabbix|Zabbix弱口令|``poc/Zabbix/Weak_Pass/poc.py``|
 |禅道|禅道8.2-9.2.1注入GetShell|``poc/Zentao_禅道/Getshell_test/poc.py``|
 |ZeroShell防火墙|ZeroShell 3.9.0 远程命令执行漏洞|``poc/ZeroShell/RCE_kerbynet/poc.py``|

@@ -18,6 +18,7 @@ output/
 log/
 scan/
 .vscode/
+.idea/
 Future_Alpha版/
 poc/ACTI_视频监控/
 poc/*/_*/
