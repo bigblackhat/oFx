@@ -130,7 +130,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 也可以通过``,``分隔同时指定多个poc
 ```sh
-➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py,poc/Jenkins/Unauth_Access/poc.py,poc/Alibaba_Druid/Unauth_Access/poc.py -f scan/jboss001.txt --thread 30
+➜  oFx git:(main) ✗ python3 ofx.py -s poc/Jboss/Jboss_Unauthorized_access/poc.py,poc/Jenkins/Unauth_Access_DashBoard/poc.py,poc/Alibaba_Druid/Unauth_Access_DashBoard/poc.py -f scan/jboss001.txt --thread 30
 ```
 最后还可以通过``-s all``指定全量POC进行测试
 ```sh
@@ -339,6 +339,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |PHPUnit|PHPUnit eval-stdin.php 远程命令执行漏洞|``poc/PHPUnit/RCE_eval_stdin/poc.py``|
 |QZSec_齐治|齐治堡垒机 任意用户登录漏洞|``poc/QZSec_齐治/AnyUser_Login_Fortress_Machine/poc.py``|
 |Redis|Redis未授权访问|``poc/Redis/Unauth_Access/poc.py``|
+||Redis Lua 沙箱逃逸和远程代码执行 (CVE-2022-0543)|``poc/Redis/RCE_Lua_Sandbox_Escape_CVE_2022_0543/poc.py``|
 |RLM|Reprise License Manager 14.2 信息泄露（CVE-2022-28365）|``poc/RLM/Info_Disclosure_CVE_2022_28365/poc.py``|
 |锐捷|锐捷EG网关 userAuth.php存在任意文件读取漏洞|``poc/Ruijie_锐捷/File_Read_EG_userAuth/poc.py``|
 ||锐捷NBR 1300G 路由器 越权CLI命令执行漏洞|``poc/Ruijie_锐捷/RCE_NBR_1300G/poc.py``|
