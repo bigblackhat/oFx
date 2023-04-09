@@ -407,6 +407,9 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||Weblogic 管理控制台未授权远程命令执行漏洞（CVE-2020-14882，CVE-2020-14883）|``poc/Weblogic/UnAuth_RCE_CVE_2020_14882/poc.py``|
 ||Weblogic XMLDecoder反序列化漏洞（CVE-2017-3506）|``poc/Weblogic/XMLDecoder_CVE_2017_3506/poc.py``|
 |whir_万户软件|万户ezoffice 前台sql注入|``poc/whir_万户软件/SQLi_EZOffice/poc.py``|
+||万户OA DownloadServlet 任意文件读取漏洞|``poc/whir_万户软件/FileDownload_DownloadServlet/poc.py``|
+||万户OA downloadhttp.jsp 任意文件下载漏洞|``poc/whir_万户软件/FileDownload_downloadhttp_jsp/poc.py``|
+|一米OA|一米OA getfile.jsp 任意文件读取漏洞|``poc/YimiOA/ReadFile_getfile/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
 ||用友GRP-U8行政事业财务管理软件 SQL注入 CNNVD-201610-923|``poc/Yonyou_用友NC/Sqli_CNNVD_201610_923/poc.py``|
@@ -442,7 +445,10 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |[vulhub](https://vulhub.org/)|
 |[xray](https://github.com/chaitin/xray/) 抄作业，冲冲冲|
 
-另外还要感谢``JetBrains``  
+
+# 😄 致谢JetBrains
+``oFx``项目一直以来都是在 ``JetBrains`` 公司旗下的``PyCharm``集成开发环境中进行开发，基于 free JetBrains Open Source license(s) 正版免费授权，在此表达我的谢意。
+
 ![JetBrains](img/008.png)
 <br>
 <br>

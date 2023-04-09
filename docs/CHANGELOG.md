@@ -1,3 +1,11 @@
+# version 2.23.2
+------------------
+新增：
+* ``一米OA getfile.jsp 任意文件读取漏洞``
+* ``万户OA downloadhttp.jsp 任意文件下载漏洞``
+* ``万户OA DownloadServlet 任意文件读取漏洞``
+
+
 # version 2.22.9
 ------------------
 新增：
