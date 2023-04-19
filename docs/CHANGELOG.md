@@ -1,3 +1,14 @@
+# version 2.23.8
+------------------
+新增：
+* ``致翔OA msglog.aspx SQL注入漏洞``
+* ``Zabbix SQL 注入漏洞(CVE-2016-10134)``
+* ``万户OA download_old.jsp 任意文件下载漏洞``
+* ``泛微OA E-Office mysql_config.ini 数据库信息泄漏``
+* ``泛微OA E-Weaver SignatureDownLoad 任意文件读取漏洞``
+优化：
+* ``Zabbix弱口令``
+
 # version 2.23.2
 ------------------
 新增：

@@ -400,6 +400,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||泛微OA weaver.common.Ctrl 任意文件上传漏洞|``poc/Weaver_泛微OA/File_Upload_weaver_common_ctrl/poc.py``|
 ||泛微e-cology登陆绕过|``poc/Weaver_泛微OA/Login_Pass/poc.py``|
 ||泛微云桥(e-bridge) addTaste存在sql注入漏洞|``poc/Weaver_泛微OA/SQLi_E_Bridge_addTaste/poc.py``|
+||泛微OA E-Office mysql_config.ini 数据库信息泄漏|``poc/Weaver_泛微OA/InfoDisclosure_mysql_config_ini/poc.py``|
+||泛微OA E-Weaver SignatureDownLoad 任意文件读取漏洞|``poc/Weaver_泛微OA/FileRead_SignatureDownLoad/poc.py``|
 |Weblogic|CVE-2016-0638|``poc/Weblogic/CVE_2016_0638/poc.py``|
 ||Weblogic < 10.3.6 'wls-wsat' XMLDecoder 反序列化漏洞（CVE-2017-10271）|``poc/Weblogic/CVE_2017_10271/poc.py``|
 ||RCE_CVE-2018-3191|``poc/Weblogic/RCE_CVE_2018_3191/poc.py``|
@@ -409,6 +411,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |whir_万户软件|万户ezoffice 前台sql注入|``poc/whir_万户软件/SQLi_EZOffice/poc.py``|
 ||万户OA DownloadServlet 任意文件读取漏洞|``poc/whir_万户软件/FileDownload_DownloadServlet/poc.py``|
 ||万户OA downloadhttp.jsp 任意文件下载漏洞|``poc/whir_万户软件/FileDownload_downloadhttp_jsp/poc.py``|
+||万户OA download_old.jsp 任意文件下载漏洞|``poc/whir_万户软件/FileDownload_download_old_jsp/poc.py``|
 |一米OA|一米OA getfile.jsp 任意文件读取漏洞|``poc/YimiOA/ReadFile_getfile/poc.py``|
 |用友NC|用友NC6.5 BeanShell RCE|``poc/Yonyou_用友NC/RCE_BeanShell_CNVD_2021_30167/poc.py``|
 ||用友ERP-NC 目录遍历漏洞|``poc/Yonyou_用友NC/Dir_List_ERP/poc.py``|
@@ -416,8 +419,10 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||用友 时空KSOA 前台文件上传漏洞|``poc/Yonyou_用友NC/File_Upload_KSOA/poc.py``|
 ||用友 U8 OA test.jsp SQL注入漏洞|``poc/Yonyou_用友NC/SQLi_test_jsp/poc.py``|
 |Zabbix|Zabbix弱口令|``poc/Zabbix/Weak_Pass/poc.py``|
+||Zabbix SQL 注入漏洞(CVE-2016-10134)|``poc/Zabbix/SQLi_CVE_2016_10134/poc.py``|
 |禅道|禅道8.2-9.2.1注入GetShell|``poc/Zentao_禅道/Getshell_test/poc.py``|
 |ZeroShell防火墙|ZeroShell 3.9.0 远程命令执行漏洞|``poc/ZeroShell/RCE_kerbynet/poc.py``|
+|ZXOA_致翔OA|致翔OA msglog.aspx SQL注入漏洞|``poc/ZXOA_致翔OA/SQLi_msglog_aspx/poc.py``|
 |Zyxel|Zyxel NBG2105身份验证绕过|``poc/Zyxel/Login_Pass_NBG2105/poc.py``|
 ||Zyxel 防火墙命令注入漏洞（CVE-2022-30525）|``poc/Zyxel/Command_Injection_CVE_2022_30525/poc.py``|
 
