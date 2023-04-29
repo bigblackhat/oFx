@@ -99,8 +99,16 @@ class oFxCenter():
 
             fofa_save_path = scan_path + input("请输入文件名保存结果（不要添加文件后缀）： ") + ".txt"
             FofaDork = input("请输入搜索语句：")
+            search_all = input("！是否需要获取全球最大数量资产( 是(y/Y) , 否(n/N/Enter) ):")
+            if search_all.lower() == "y":
+                search_all = True
+            elif search_all.lower() in ["n",""]:
+                search_all = False
+            else:
+                logwarning("输入错误！需要获取最大数量资产请输入：y/Y，不需要请输入：n/N或按Enter键")
+                exit()
             loglogo("Fofa搜索语句是：{fofadork}，开始对接 Fofa Api".format(fofadork = FofaDork))
-            FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,fofa_save_path)
+            FofaResultNum = fofa_search(FofaLogin[1],FofaLogin[2],FofaDork,search_all,fofa_save_path)
             if type(FofaResultNum) == int:
                 log_msg = "搜索完成，结果保存到 {path}，去重后，一共 {FofaResultNum}条".format(path = fofa_save_path,FofaResultNum = FofaResultNum)
                 logvuln(log_msg)
@@ -297,6 +305,7 @@ POC路径为{VULN_PATH}
                             target_list.remove(i)
                         else:
                             AliveList.add(i)
+                            # AliveList.append(i)
                 #### Alpha Future End ####
 
                 while not allpoc.empty():

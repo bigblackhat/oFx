@@ -3,7 +3,7 @@
 
 [![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-196-orange.svg)](#PocSupport)
+[![POC_NUM](https://img.shields.io/badge/poc_num-209-orange.svg)](#PocSupport)
 ![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
 ![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
 
@@ -239,6 +239,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||Apache Flink <= 1.9.1远程代码执行 CVE-2020-17518|``poc/Apache_Flink/RCE_CVE_2020_17518/poc.py``|
 |Apache Kylin|Apache Kylin 未授权配置泄露 CVE-2020-13937|``poc/Apache_Kylin/Conf_Info_Disclosure_CVE_2020_13937/poc.py``|
 |Apache Mod_jk|Apache Mod_jk 访问控制权限绕过(CVE-2018-11759)|``poc/Apache_Mod_jk/ACbypass_CVE_2018_11759/poc.py``|
+|Apache Shiro|Shiro 1.2.4 反序列化漏洞|``poc/Apache_Shiro/RCE_CVE_2016_4437/poc.py``|
+||Shiro指纹识别|``poc/Apache_Shiro/FingerPrint/poc.py``|
 |Apache Solr|Apache Solr Velocity 注入远程命令执行漏洞 (CVE-2019-17558)|``poc/Apache_Solr/CVE_2019_17558/poc.py``|
 ||Apache Solr 任意文件读取漏洞|``poc/Apache_Solr/File_Read/poc.py``|
 ||Apache Solr 远程命令执行 Log4j|``poc/Apache_Solr/RCE_Log4j_CVE_2021_44228/poc.py``|
@@ -356,6 +358,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||致远OA ajax.do 任意文件上传|``poc/SeeYon_致远/File_Upload_ajax_do/poc.py``|
 ||致远OA getSessionList.jsp Session泄漏漏洞|``poc/SeeYon_致远/Session_Disclosure_getSessionList/poc.py``|
 ||致远OA A6 test.jsp SQL注入漏洞|``poc/SeeYon_致远/SQLi_test_jsp/poc.py``|
+||Sophos Mobile OmaDsServlet XML实体注入(CVE-2022-3980)|``poc/Sophos/XXE_CVE_2022_3980/poc.py``|
 |狮子鱼CMS|狮子鱼CMS ApiController.class.php SQL注入漏洞|``poc/ShiZiYu_狮子鱼/Sqli_ApiController/poc.py``|
 ||狮子鱼CMS ApigoodsController.class.php SQL注入漏洞|``poc/ShiZiYu_狮子鱼/Sqli_ApigoodsController/poc.py``|
 |ShopXO|ShopXO download 任意文件读取漏洞(CNVD-2021-15822)|``poc/ShopXO/FileRead_CNVD_2021_15822/poc.py``|
@@ -365,6 +368,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||TamronOS IPTV系统存在前台命令执行漏洞|``poc/TamronOS_IPTV/RCE_api_ping/poc.py``|
 ||TamronOS IPTV系统 submit 任意用户创建漏洞|``poc/TamronOS_IPTV/User_Add_Submit/poc.py``|
 |TCC_斗象|斗象资产灯塔系统(ARL) 弱口令检测|``poc/TCC_斗象/Weak_Pass_ARL/poc.py``|
+||Omnia MPX Node 不安全的直接对象引用(CVE-2022-43326)|``poc/Telos_Alliance/IDOR_Omnia_MPX_Node_CVE_2022_43326/poc.py``|
 |ThinkPHP|ThinkPHP5 5.0.22/5.1.29 远程代码执行漏洞|``poc/Thinkphp/RCE_5022_5129``|
 ||ThinkPHP5 5.0.23 远程代码执行漏洞|``poc/Thinkphp/RCE_5023/poc.py``|
 |通达OA|通达OA 计算机名探测插件|``poc/Tongda_通达OA/Computer_Name_Plugin/poc.py``|
@@ -420,6 +424,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ||用友 U8 OA test.jsp SQL注入漏洞|``poc/Yonyou_用友NC/SQLi_test_jsp/poc.py``|
 |Zabbix|Zabbix弱口令|``poc/Zabbix/Weak_Pass/poc.py``|
 ||Zabbix SQL 注入漏洞(CVE-2016-10134)|``poc/Zabbix/SQLi_CVE_2016_10134/poc.py``|
+||Zabbix未授权访问|``poc/Zabbix/Auth_Bypass/poc.py``|
 |禅道|禅道8.2-9.2.1注入GetShell|``poc/Zentao_禅道/Getshell_test/poc.py``|
 |ZeroShell防火墙|ZeroShell 3.9.0 远程命令执行漏洞|``poc/ZeroShell/RCE_kerbynet/poc.py``|
 |ZXOA_致翔OA|致翔OA msglog.aspx SQL注入漏洞|``poc/ZXOA_致翔OA/SQLi_msglog_aspx/poc.py``|

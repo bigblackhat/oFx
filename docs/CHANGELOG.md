@@ -1,3 +1,16 @@
+# version 2.24.6
+-----------------
+新增：
+* ``Zabbix未授权访问``
+* ``Omnia MPX Node 不安全的直接对象引用(CVE-2022-43326)``
+* ``Sophos Mobile OmaDsServlet XML实体注入(CVE-2022-3980)``
+* ``Shiro指纹识别``
+* ``Shiro 1.2.4 反序列化漏洞``
+> 优化部分功能
+> 增加对dnslog.cn的支持（目前仅应用于log4shell，后续会应用到所有相关POC）
+> 新增fofa资产全量搜集功能
+
+
 # version 2.23.8
 ------------------
 新增：
@@ -8,6 +21,7 @@
 * ``泛微OA E-Weaver SignatureDownLoad 任意文件读取漏洞``
 优化：
 * ``Zabbix弱口令``
+
 
 # version 2.23.2
 ------------------

@@ -29,7 +29,7 @@ class POCBase(object):
         else: self.port = None
 
         self.proxy = proxy
-        self.timeout = 10
+        self.timeout = 45
 
 
     def _honeypot_check(self,text):
