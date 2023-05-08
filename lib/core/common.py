@@ -18,7 +18,10 @@ import base64
 import binascii
 import subprocess
 import uuid
-from Crypto.Cipher import AES
+try:
+    from Crypto.Cipher import AES
+except:
+    pass
 
 from lib.core.data import vulnoutput, unvulnoutput, unreachoutput, lock, AliveList, root_path, yso_path, \
     yso_tmpfile_path, dnslog_cn_session
