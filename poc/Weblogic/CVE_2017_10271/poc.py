@@ -28,7 +28,8 @@ class POC(POCBase):
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            
+            app="WebLogic-Server"
+            (body="Welcome to WebLogic Server") || (title=="Error 404--Not Found") || (((body="<h1>BEA WebLogic Server" || server="Weblogic" || body="content=\"WebLogic Server" || body="<h1>Welcome to Weblogic Application" || body="<h1>BEA WebLogic Server") && header!="couchdb" && header!="boa" && header!="RouterOS" && header!="X-Generator: Drupal") || (banner="Weblogic" && banner!="couchdb" && banner!="drupal" && banner!=" Apache,Tomcat,Jboss" && banner!="ReeCam IP Camera" && banner!="<h2>Blog Comments</h2>")) || (port="7001" && protocol=="weblogic")
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  

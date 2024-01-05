@@ -12,7 +12,7 @@ from lib.core.common import random_str
 
 class dnslog:
     def __init__(self):
-        type = "ceye.io"  # ceye.io ,dnslog.cn
+        type = ""  # ceye.io ,dnslog.cn
         self.dnsplat_obj = ""
 
     def get_dnslog(self):

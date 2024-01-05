@@ -25,7 +25,7 @@ class POC(POCBase):
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2020-12-29",                    # 漏洞公开的时间,不知道就写能查到的最早的文献日期，格式：xxxx-xx-xx
         "VulnDesc" : """
-        ElasticSearch 是一款Java编写的企业级搜索服务，启动此服务默认会开放9200端口，可被非法操作数据。
+            ElasticSearch 是一款Java编写的企业级搜索服务，启动此服务默认会开放9200端口，可被非法操作数据。
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""

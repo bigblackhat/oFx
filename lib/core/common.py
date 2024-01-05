@@ -189,7 +189,7 @@ def verify_ceye_dns(flag):
     token = cp["ceye"]["token"]
     api_url = "http://api.ceye.io/v1/records?token=" + token + "&type=dns"
 
-    time.sleep(random.randint(10, 15))
+    time.sleep(random.randint(15, 25))
 
     req = requests.get(api_url, timeout=50)
     if "User Not Exists" in req.text:

@@ -17,7 +17,7 @@ class POC(POCBase):
         原POC逻辑过于简单，导致大量误报，经笔者优化，相对缓解  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "蓝凌OA前台任意文件读取漏洞",                        # 漏洞名称
+        "name" : "蓝凌OA custom.jsp 前台任意文件读取漏洞",                        # 漏洞名称
         "VulnID" : "CNVD-2021-28277",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "蓝凌OA",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本

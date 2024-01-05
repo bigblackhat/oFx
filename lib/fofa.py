@@ -52,7 +52,7 @@ def ukey_save(user, key, save_path):
     cp.write(open(save_path, "w"))
 
 
-def gen_search_all(user, key, dork):
+def gen_search_all(user, key, dork, pass_china=False):
     all_dork = []
 
     if "country" in dork or "region" in dork:
@@ -75,6 +75,11 @@ def gen_search_all(user, key, dork):
     top5 = json_object["aggs"]["countries"]
     for i in top5:
         country = i["name_code"]
+        if country == "CN" and pass_china:
+            continue
+        if i["regions"] == None:
+            all_dork.append(f"{dork} && country=\"{country}\"")
+            continue
         for r in i["regions"]:
             region = "" if r["name"] == "Unknown" else r["name"]
             new_dork = dork + " && country = \"{country}\" && region = \"{region}\"".format(country=country,
@@ -115,18 +120,19 @@ def get_assets(user, key, dork):
     return search_result
 
 
-def fofa_search(user, key, dork, search_all, save_path):
+def fofa_search(user, key, dork, search_all, pass_china, save_path):
     # print "in search"
     search_result = list()
     url_list = list()
 
     if search_all:
-        all_dork = gen_search_all(user, key, dork)
+        all_dork = gen_search_all(user, key, dork, pass_china)
     else:
         all_dork = [dork]
     for i in all_dork:
         loglogo("目标国家/地区：{country}，行政区划：{region}".format(country=i.split("&&")[-2].strip().split("=")[1],
-                                                         region=i.split("&&")[-1].strip().split("=")[1])) if len(
+                                                                   region=i.split("&&")[-1].strip().split("=")[
+                                                                       1])) if len(
             all_dork) > 1 else ""
         search_result += get_assets(user=user, key=key, dork=i)
 

