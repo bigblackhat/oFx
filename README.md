@@ -249,6 +249,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 | 360                       | 360天擎数据库未授权访问                                                   | ``poc/360/TianQing_Unauth_Acceess/poc.py``                                 |
 |                           | 360天擎前台SQL注入                                                    | ``poc/360/TianQing_SQLi/poc.py``                                           |
 | ACME                      | mini_httpd任意文件读取漏洞(CVE-2018-18778)                              | ``poc/ACME/File_Read_mini_httpd_CVE_2018_18778/poc.py``                    |
+| Alibaba_Alist             | AList云盘 未授权访问                                                   | ``poc/Alibaba_Alist/UnAuth_Access/poc.py``                                 |
 | Alibaba_Canal             | Alibaba Canal 默认弱口令漏洞                                           | ``poc/Alibaba_Canal/Weak_Pass/poc.py``                                     |
 |                           | Alibaba Canal 信息泄露                                              | ``poc/Alibaba_Canal/Info_Disclosure/poc.py``                               |
 | Alibaba_Druid             | Druid未授权访问                                                      | ``poc/Alibaba_Druid/Unauth_Access/poc.py``                                 |
@@ -265,6 +266,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |                           | Apache Druid 远程代码执行漏洞 (CVE-2021-25646)                          | ``poc/Apache_Druid/RCE_CVE_2021_25646/poc.py``                             |
 | Apache Flink              | Apache Flink目录穿透(CVE-2020-17519)                                | ``poc/Apache_Flink/Dir_Traversal_CVE_2020_17519/poc.py``                   |
 |                           | Apache Flink <= 1.9.1远程代码执行 CVE-2020-17518                      | ``poc/Apache_Flink/RCE_CVE_2020_17518/poc.py``                             |
+| Apache_Hadoop             | Apache Hadoop反序列化漏洞(CVE-2021-25642)                             | ``poc/Apache_Hadoop/RCE_CVE_2021_25642/poc.py``                            |
 | Apache Kylin              | Apache Kylin 未授权配置泄露 CVE-2020-13937                             | ``poc/Apache_Kylin/Conf_Info_Disclosure_CVE_2020_13937/poc.py``            |
 | Apache Mod_jk             | Apache Mod_jk 访问控制权限绕过(CVE-2018-11759)                          | ``poc/Apache_Mod_jk/ACbypass_CVE_2018_11759/poc.py``                       |
 | Apache Shiro              | Shiro 1.2.4 反序列化漏洞                                              | ``poc/Apache_Shiro/RCE_CVE_2016_4437/poc.py``                              |
@@ -279,10 +281,12 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 | 中国电信                      | 电信天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞                           | ``poc/China_TeleCOM_中国电信/RCE_F460_GateWay/poc.py``                         |
 |                           | 大唐电信AC集中管理平台默认口令                                                | ``poc/China_TeleCOM_中国电信/Weak_Pass_DaTang_AC_Manager/poc.py``              |
 | 中国移动                      | 中国移动 禹路由 ExportSettings.sh 敏感信息泄露漏洞                             | ``poc/China_Mobile_中国移动/Info_Disclosure_Yu_routing_ExportSettings/poc.py`` |
+| CmsEasy                   | CmsEasy crossall_act.php SQL注入漏洞                                | ``poc/CmsEasy/SQLi_CrossAllAct_php/poc.py``                                |
 | common(通用)                | git信息泄露                                                         | ``poc/common/Git_Info_Disclosure/poc.py``                                  |
 |                           | svn信息泄露                                                         | ``poc/common/Svn_Info_Disclosure/poc.py``                                  |
 |                           | URL存活检测                                                         | ``poc/common/Url_Alive/poc.py``                                            |
 |                           | Apache列目录                                                       | ``poc/common/Apache_Dir_List/poc.py``                                      |
+|                           | 备份泄露/源码泄露                                                       | ``poc/common/CodeDisclosure/poc.py``                                       |
 | Confluence                | Confluence Server Webwork OGNL注入 PreAuth-RCE(CVE-2021-26084)    | ``poc/Confluence/OGNL_Injection_CVE_2021_26084/poc.py``                    |
 |                           | Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26143）                | ``poc/Confluence/OGNL_Injection_CVE_2022_26143/poc.py``                    |
 |                           | Confluence 路径穿越与命令执行（CVE-2019-3396）                             | ``poc/Confluence/Path_Travel_CVE_2019_3396/poc.py``                        |
@@ -291,10 +295,12 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 | D-Link                    | D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞              | ``poc/D_Link/RCE_ShareCenter_system_mgr_cgi/poc.py``                       |
 |                           | D-Link Dir-645 getcfg.php 账号密码泄露漏洞(CVE-2019-17506)              | ``poc/D_Link/UPInfo_Disclosure_getcfg_php/poc.py``                         |
 |                           | D-Link AC管理系统默认账号密码                                             | ``poc/D_Link/Weak_Pass_AC_Manager/poc.py``                                 |
-| 安恒信息                      | 明御WAF登陆绕过                                                       | ``poc/dbappsecurity_安恒信息/Login_ByPass_MingYu_WAF/poc.py``                  |
+| Dapr                      | Dapr Dashboard未授权访问(CVE-2022-38817)                             | ``poc/Dapr/Unauth_Access_DashBoard/poc.py``                                |
+| DBAppSecurity 安恒信息        | 明御WAF登陆绕过                                                       | ``poc/dbappsecurity_安恒信息/Login_ByPass_MingYu_WAF/poc.py``                  |
 | 织梦CMS                     | 织梦CMS radminpass.php文件暴露                                        | ``poc/DedeCMS_织梦/RadminPass/poc.py``                                       |
 |                           | DedeCMS 短文件名信息泄露                                                | ``poc/DedeCMS_织梦/Info_Disclosure_IIS_Short_Filename/poc.py``               |
 | DocCMS                    | DocCMS keyword SQL注入漏洞                                          | ``poc/DocCMS/SQLi_keyword/poc.py``                                         |
+| Docker                    | Docker Remote API未授权访问                                          | ``poc/Docker/Unauth_Remote_Api/poc.py``                                    |
 | DrayTek                   | DrayTek企业网络设备 远程命令执行(CVE-2020-8515)                             | ``poc/DrayTek/RCE_CVE_2020_8515/poc.py``                                   |
 | Drupal!                   | Drupal!远程代码执行(CVE-2018-7600)                                    | ``poc/Drupal!/RCE_CVE_2018_7600/poc.py``                                   |
 | DVR                       | DVR登录绕过漏洞(CVE-2018-9995)                                        | ``poc/DVR/Login_Bypass_CVE_2018_9995/poc.py``                              |
@@ -305,10 +311,14 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |                           | ElasticSearch Groovy 沙盒绕过 && 代码执行漏洞（CVE-2015-1427）              | ``poc/Elasticsearch/Code_Exec_Groovy_CVE-2015-1427/poc.py``                |
 |                           | ElasticSearch 目录穿越漏洞（CVE-2015-5531）                             | ``poc/Elasticsearch/Dir_Traversal_CVE-2015-5531/poc.py``                   |
 |                           | Elasticsearch写任意文件漏洞（WooYun-2015-110216）                        | ``poc/Elasticsearch/File_Create_WooYun-2015-110216/poc.py``                |
+| EnjoySCM_捷诚               | EnjoySCM UploadFile任意文件上传漏洞                                     | ``poc/EnjoySCM_捷诚/FileUpload_UploadFile/poc.py``                           |
 | Eyou 亿邮电子邮件系统             | 亿邮电子邮件系统 远程命令执行                                                 | ``poc/Eyou_亿邮/RCE_moni_detail/poc.py``                                     |
 | F5                        | F5 BIG-IP任意文件读取(CVE-2020-5902)                                  | ``poc/F5_BIG_IP/File_Read_CVE_2020_5902/poc.py``                           |
 |                           | CVE-2021-22986 RCE                                              | ``CVE-2021-22986 RCE``                                                     |
+| FineReport_帆软             | 帆软报表 V8 get_geo_json 任意文件读取漏洞                                   | ``poc/FineReport_帆软/FileRead8/poc.py``                                     |
 | 菲力尔                       | FLIR-AX8 download.php 任意文件下载                                    | ``poc/FLIR_菲力尔/Download_File_AX8/poc.py``                                  |
+| Fortinet_美国飞塔             | 飞塔(Fortinet)防火墙身份认证绕过漏洞(CVE-2022-40684)                         | ``poc/Fortinet_美国飞塔/Authentication_Bypass_FortiOS_CVE_2022_40648/poc.py``  |
+|                           | Fortigate SSL VPN fgt_lang 任意文件读取                               | ``poc/Fortinet_美国飞塔/FileRead_SSL_VPN/poc.py``                              |
 | FTP                       | FTP匿名访问                                                         | ``poc/FTP/Anonymous_Access/poc.py``                                        |
 | Grafana                   | Grafana plugins 任意文件读取漏洞(CVE-2021-43798)                        | ``poc/Grafana/File_Read_plugins/poc.py``                                   |
 | H2 数据库                    | H2 数据库 Web控制台未授权访问                                              | ``poc/H2_DataBase/UnAuth_Access/poc.py``                                   |
@@ -317,6 +327,8 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |                           | HIKVISION 流媒体管理服务器弱口令                                           | ``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``                    |
 |                           | HIKVISION 流媒体管理服务器任意文件读取                                        | ``poc/HIKVISION/File_Read_Stream_Media_Manager/poc.py``                    |
 |                           | 海康威视 IP摄像头未授权访问（CVE-2017-7921）                                  | ``poc/HIKVISION/UnAuth_Access_CVE_2017_7921/poc.py``                       |
+|                           | HIKVISION 综合安防管理平台 applyCT Fastjson远程命令执行漏洞                     | ``poc/HIKVISION/RCE_applyCT_FastJson/poc.py``                              |
+|                           | 海康威视 IP Camera 远程命令执行漏洞（CVE-2021-36260）                         | ``poc/HIKVISION/RCE_IP_Camera_CVE_2021_36260/poc.py``                      |
 | 宏电                        | 宏电 H8922 后台任意文件读取漏洞                                             | ``poc/Hongdian_宏电/Backstage_File_Read_CVE_2021_28152/poc.py``              |
 | 好视通                       | 好视通视频会议平台 任意文件下载                                                | ``poc/HST_好视通/File_Download/poc.py``                                       |
 | 华为                        | Huawei HG659 lib 任意文件读取漏洞                                       | ``poc/Huawei/File_Read_HG659_lib/poc.py``                                  |
