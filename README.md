@@ -288,7 +288,7 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 |                           | Apache列目录                                                       | ``poc/common/Apache_Dir_List/poc.py``                                      |
 |                           | 备份泄露/源码泄露                                                       | ``poc/common/CodeDisclosure/poc.py``                                       |
 | Confluence                | Confluence Server Webwork OGNL注入 PreAuth-RCE(CVE-2021-26084)    | ``poc/Confluence/OGNL_Injection_CVE_2021_26084/poc.py``                    |
-|                           | Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26143）                | ``poc/Confluence/OGNL_Injection_CVE_2022_26143/poc.py``                    |
+|                           | Atlassian Confluence OGNL表达式注入漏洞（CVE-2022-26134）                | ``poc/Confluence/OGNL_Injection_CVE_2022_26134/poc.py``                    |
 |                           | Confluence 路径穿越与命令执行（CVE-2019-3396）                             | ``poc/Confluence/Path_Travel_CVE_2019_3396/poc.py``                        |
 | Coremail                  | Coremail 配置信息泄露漏洞                                               | ``poc/Coremail/Conf_Info_Disclosure/poc.py``                               |
 | 赤兔CMS                     | 赤兔CMS banner识别插件                                                | ``poc/CtCMS_赤兔CMS/Get_Banner/poc.py``                                      |
