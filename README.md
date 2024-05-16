@@ -301,7 +301,7 @@ PROXY_FETCHER = [
 ]
 
 # proxyCheck时代理数量少于POOL_SIZE_MIN触发抓取
-POOL_SIZE_MIN = 50
+POOL_SIZE_MIN = 50  # 这里笔者觉得50会好一点
 ```
 4.启动proxypool
 ```shell
@@ -321,7 +321,9 @@ python proxyPool.py server
 ```shell
 python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 ```
-
+此时oFx就会通过proxypool的api接口获取一个代理，然后判断：  
+* 如果是国外的代理，就会抛弃并删除该代理，然后重新获取。    
+* 如果是国内代理，就会尝试进行访问测试，如果失败，同样抛弃并删除，但如果测试成功，则会引用该代理。  
 <br>
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
