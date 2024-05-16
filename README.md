@@ -185,7 +185,7 @@ python3 oFx.py -s all -f scan/1.txt
 ![show](img/005.png)
 
 #### Fofa全量资产获取
-
+oFx会尽可能获取最大数量的Fofa全球资产，一条有效语句理论上获取的资产数量最大能达到25万个。
 ```shell
 python3 ofx.py --fofa-search
 ....
@@ -214,7 +214,28 @@ python3 ofx.py --fofa-search
 20xx-xx-xx xx:xx:xx,xxx - INFO: 搜索完毕，结果保存至/root/oFx/scan/jboss001.txt，经去重共计9748条
 ```
 
-可以动态的修改user和key，无需打开配置文件调整，下次使用时直接生效不必重新输入user和key
+同时笔者贴心的提供了是否跳过中国大陆资产的选择，方便广大安全从业者的多样化需求：
+```shell
+➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
+
+2024-05-16 23:11:37,021 - ~o(〃'▽'〃)o: User : xxx@163.com | Key : xxx | Login Success
+请输入文件名保存结果（不要添加文件后缀）： port21
+请输入搜索语句：port="21"
+！是否需要获取全球最大数量资产( 是(y/Y) , 否(n/N/Enter) ): y
+是否跳过中国资产？yes: y/Y , no: n/N/Enter: y
+
+2024-05-16 23:11:58,487 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): Fofa搜索语句是：port="21"，开始对接 Fofa Api
+
+2024-05-16 23:12:00,633 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 目标国家/地区： "HK"，行政区划： "Hong Kong"
+
+2024-05-16 23:12:01,766 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 第1页获取成功
+
+2024-05-16 23:12:02,491 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 第2页获取成功
+.....
+```
+fofa的配置文件位置为：``lib/fofa.ini``  
+
+每次运行fofa搜索功能时，oFx都会尝试登陆，如果失败，会要求用户提供账号和key，此时再登陆成功，oFx会动态的修改配置文件中的user和key，无需打开配置文件调整，下次再使用时也直接生效不必重新输入user和key
 
 
 <br>
@@ -234,6 +255,72 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 <br>
+
+### 💦 proxypool
+
+近期的版本更新中，oFx提供了对proxypool的支持，proxypool是个http代理池工具，原本定位是用于爬虫使用，防止同一个ip访问次数过多被封ip，该功能也适用于我们漏扫场景，当我们对同一个站点或同一个单位的资产进行一定数量的扫描时，有极大的概率会被封。  
+
+proxypool本身有11个免费代理源，程序运行起来以后会定时采集免费代理并验证代理的可用性，同时可以由用户自己添加代理源以提高代理的数量和质量。
+
+项目地址：https://github.com/jhao104/proxy_pool  
+
+使用方法：  
+proxypool的使用方法可以参考项目文档，oFx与其对接的原理就是访问http://127.0.0.1:5000的api接口，有特殊需要可以自行调整
+
+下面仅描述本地启动proxypool并运行oFx与其对接的方法。  
+
+1.下载项目
+```shell
+git clone git@github.com:jhao104/proxy_pool.git
+```
+2.安装依赖
+```shell
+pip install -r requirements.txt
+```
+3.安装redis，然后修改api与数据库配置
+```python
+# setting.py 为项目配置文件
+
+# 配置API服务
+
+HOST = "0.0.0.0"               # IP
+PORT = 5000                    # 监听端口
+
+
+# 配置数据库
+
+DB_CONN = 'redis://:@127.0.0.1:8888/0'
+
+
+# 配置 ProxyFetcher
+
+PROXY_FETCHER = [
+    "freeProxy01",      # 这里是启用的代理抓取方法名，所有fetch方法位于fetcher/proxyFetcher.py
+    "freeProxy02",
+    # ....
+]
+
+# proxyCheck时代理数量少于POOL_SIZE_MIN触发抓取
+POOL_SIZE_MIN = 50
+```
+4.启动proxypool
+```shell
+# 如果已经具备运行条件, 可用通过proxyPool.py启动。
+# 程序分为: schedule 调度程序 和 server Api服务
+
+# 启动调度程序
+python proxyPool.py schedule
+
+# 启动webApi服务
+python proxyPool.py server
+
+```
+5.oFx对接proxypool  
+
+直接在后面跟上``--proxypool``参数即可。
+```shell
+python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
+```
 
 <br>
 

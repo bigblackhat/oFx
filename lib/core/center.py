@@ -55,32 +55,32 @@ class oFxCenter():
             print("目前使用的ofx是最新版本")
             exit()
 
-    def setproxy(self):
-        """
-        set the proxy for oFx running
-
-        return:None
-        """
-        if self.CMD_ARGS.proxy.startswith("http://"):
-            self.CMD_ARGS.proxy = self.CMD_ARGS.proxy[7:]
-        elif self.CMD_ARGS.proxy.startswith("https://"):
-            self.CMD_ARGS.proxy = self.CMD_ARGS.proxy[8:]
-        else:
-            pass
-
-        if self.CMD_ARGS.proxy.endswith("/"):
-            self.CMD_ARGS.proxy = self.CMD_ARGS.proxy[:-1]
-        else:
-            pass
-
-        self.__proxy = {
-            "http": "http://%s" % (self.CMD_ARGS.proxy),
-            "https": "http://%s" % (self.CMD_ARGS.proxy),
-        }
-        self.getproxy()
-
-    def getproxy(self):
-        return self.__proxy
+    # def setproxy(self):
+    #     """
+    #     set the proxy for oFx running
+    #
+    #     return:None
+    #     """
+    #     if self.CMD_ARGS.proxy.startswith("http://"):
+    #         self.CMD_ARGS.proxy = self.CMD_ARGS.proxy[7:]
+    #     elif self.CMD_ARGS.proxy.startswith("https://"):
+    #         self.CMD_ARGS.proxy = self.CMD_ARGS.proxy[8:]
+    #     else:
+    #         pass
+    #
+    #     if self.CMD_ARGS.proxy.endswith("/"):
+    #         self.CMD_ARGS.proxy = self.CMD_ARGS.proxy[:-1]
+    #     else:
+    #         pass
+    #
+    #     self.__proxy = {
+    #         "http": "http://%s" % (self.CMD_ARGS.proxy),
+    #         "https": "http://%s" % (self.CMD_ARGS.proxy),
+    #     }
+    #     self.getproxy()
+    #
+    # def getproxy(self):
+    #     return self.__proxy
 
     def fromfofa(self):
         # verify and get user and key
@@ -179,8 +179,13 @@ class oFxCenter():
         if self.CMD_ARGS.version == True:
             self.show_version()
 
-        if self.CMD_ARGS.proxy != False:
-            self.setproxy()
+        if self.CMD_ARGS.proxy == False and self.CMD_ARGS.proxypool == False:
+            # self.setproxy()
+            self.__proxy = None
+        elif self.CMD_ARGS.proxypool == True:
+            self.__proxy = "proxypool"
+        else:
+            self.__proxy = self.CMD_ARGS.proxy
 
         if self.CMD_ARGS.fofa_search:
             self.fromfofa()
@@ -261,7 +266,7 @@ POC路径为{VULN_PATH}
                 self.get_some_poc(self.CMD_ARGS.script)
                 POC, POC_Path = self.Load_POC(allpoc.get())
 
-                single_mode = POC(self.CMD_ARGS.url, self.getproxy())
+                single_mode = POC(self.CMD_ARGS.url, self.__proxy)
                 # 报错信息统一管理
                 try:
                     single_verify = single_mode._attack()
@@ -305,7 +310,7 @@ POC路径为{VULN_PATH}
                             AliveTest.put(i)
                     POC, POC_Path = self.Load_POC(root_path + "/poc/common/Url_Alive/")
                     run_threads(num_threads=self.CMD_ARGS.thread, thread_function=run,
-                                args=(POC, AliveTest, self.getproxy(), self.CMD_ARGS.output, str(allpoc.qsize()), True))
+                                args=(POC, AliveTest, self.__proxy, self.CMD_ARGS.output, str(allpoc.qsize()), True))
                     # run(POC,AliveTest,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),True)
                     self.Unload_POC(POC_Path)
                 else:
@@ -325,7 +330,7 @@ POC路径为{VULN_PATH}
                     for i in AliveList:
                         qu.put(i)
                     run_threads(num_threads=self.CMD_ARGS.thread, thread_function=run,
-                                args=(POC, qu, self.getproxy(), self.CMD_ARGS.output, str(allpoc.qsize()), False))
+                                args=(POC, qu, self.__proxy, self.CMD_ARGS.output, str(allpoc.qsize()), False))
                     # run(POC,qu,self.getproxy(),self.CMD_ARGS.output,str(allpoc.qsize()),False)
                     self.Unload_POC(POC_Path)
 
