@@ -44,7 +44,11 @@ class POCBase(object):
     def get_proxy_from_api(self):
         import requests, json
         while True:
-            req = requests.get("http://127.0.0.1:5010/get")
+            try:
+                req = requests.get("http://127.0.0.1:5010/get")
+            except Exception as e:
+                logwarning(f"代理获取失败，原因：{e}")
+                return None
             obj = json.loads(req.text)
             proxyurl = obj["proxy"]
 
@@ -70,6 +74,10 @@ class POCBase(object):
 
         return:None
         """
+        if proxy == None:
+            self.proxy = None
+            return
+
         if proxy.startswith("http://"):
             proxy = proxy[7:]
         elif proxy.startswith("https://"):

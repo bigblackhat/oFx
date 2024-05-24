@@ -5,6 +5,8 @@ import queue
 import os
 import time
 
+import requests
+
 from lib.core.data import root_path, lock
 from lib.core.common import get_local_version, get_latest_revision
 from lib.core.log import logvuln, logwarning, logunvuln, logverifyerror, logcritical
@@ -183,7 +185,13 @@ class oFxCenter():
             # self.setproxy()
             self.__proxy = None
         elif self.CMD_ARGS.proxypool == True:
-            self.__proxy = "proxypool"
+            try:
+                req = requests.get("http://127.0.0.1:5010/")
+                self.__proxy = "proxypool"
+            except:
+                logunvuln("ProxyPool连接失败，直接无代理测试")
+                self.__proxy = None
+                time.sleep(3)
         else:
             self.__proxy = self.CMD_ARGS.proxy
 
