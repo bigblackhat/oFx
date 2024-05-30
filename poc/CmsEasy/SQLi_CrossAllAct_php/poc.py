@@ -56,7 +56,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url, headers=headers, proxies=self.proxy, timeout=self.timeout, verify=False)
-            if "userid" in req.text and "username" in req.text and "password" in req.text and req.status_code == 200 and "text/html" in \
+            if "{\"userid\":\"" in req.text and "username" in req.text and "password" in req.text and req.status_code == 200 and "text/html" in \
                     req.headers["Content-Type"]:
                 vuln = [True, req.text]
             else:

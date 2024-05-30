@@ -185,7 +185,9 @@ python3 oFx.py -s all -f scan/1.txt
 ![show](img/005.png)
 
 #### Fofa全量资产获取
+
 oFx会尽可能获取最大数量的Fofa全球资产，一条有效语句理论上获取的资产数量最大能达到25万个。
+
 ```shell
 python3 ofx.py --fofa-search
 ....
@@ -215,6 +217,7 @@ python3 ofx.py --fofa-search
 ```
 
 同时笔者贴心的提供了是否跳过中国大陆资产的选择，方便广大安全从业者的多样化需求：
+
 ```shell
 ➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
 
@@ -233,7 +236,8 @@ python3 ofx.py --fofa-search
 2024-05-16 23:12:02,491 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 第2页获取成功
 .....
 ```
-fofa的配置文件位置为：``lib/fofa.ini``  
+
+fofa的配置文件位置为：``lib/fofa.ini``
 
 每次运行fofa搜索功能时，oFx都会尝试登陆，如果失败，会要求用户提供账号和key，此时再登陆成功，oFx会动态的修改配置文件中的user和key，无需打开配置文件调整，下次再使用时也直接生效不必重新输入user和key
 
@@ -258,44 +262,47 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ### 💦 proxypool
 
-近期的版本更新中，oFx提供了对proxypool的支持，proxypool是个http代理池工具，原本定位是用于爬虫使用，防止同一个ip访问次数过多被封ip，该功能也适用于我们漏扫场景，当我们对同一个站点或同一个单位的资产进行一定数量的扫描时，有极大的概率会被封。  
+近期的版本更新中，oFx提供了对proxypool的支持，proxypool是个http代理池工具，原本定位是用于爬虫使用，防止同一个ip访问次数过多被封ip，该功能也适用于我们漏扫场景，当我们对同一个站点或同一个单位的资产进行一定数量的扫描时，有极大的概率会被封。
 
 proxypool本身有11个免费代理源，程序运行起来以后会定时采集免费代理并验证代理的可用性，同时可以由用户自己添加代理源以提高代理的数量和质量。
 
-项目地址：https://github.com/jhao104/proxy_pool  
+项目地址：https://github.com/jhao104/proxy_pool
 
 使用方法：  
 proxypool的使用方法可以参考项目文档，oFx与其对接的原理就是访问http://127.0.0.1:5000的api接口，有特殊需要可以自行调整
 
-下面仅描述本地启动proxypool并运行oFx与其对接的方法。  
+下面仅描述本地启动proxypool并运行oFx与其对接的方法。
 
 1.下载项目
+
 ```shell
 git clone git@github.com:jhao104/proxy_pool.git
 ```
+
 2.安装依赖
+
 ```shell
 pip install -r requirements.txt
 ```
+
 3.安装redis，然后修改api与数据库配置
+
 ```python
 # setting.py 为项目配置文件
 
 # 配置API服务
 
-HOST = "0.0.0.0"               # IP
-PORT = 5000                    # 监听端口
-
+HOST = "0.0.0.0"  # IP
+PORT = 5000  # 监听端口
 
 # 配置数据库
 
 DB_CONN = 'redis://:@127.0.0.1:8888/0'
 
-
 # 配置 ProxyFetcher
 
 PROXY_FETCHER = [
-    "freeProxy01",      # 这里是启用的代理抓取方法名，所有fetch方法位于fetcher/proxyFetcher.py
+    "freeProxy01",  # 这里是启用的代理抓取方法名，所有fetch方法位于fetcher/proxyFetcher.py
     "freeProxy02",
     # ....
 ]
@@ -303,7 +310,9 @@ PROXY_FETCHER = [
 # proxyCheck时代理数量少于POOL_SIZE_MIN触发抓取
 POOL_SIZE_MIN = 50  # 这里笔者觉得50会好一点
 ```
+
 4.启动proxypool
+
 ```shell
 # 如果已经具备运行条件, 可用通过proxyPool.py启动。
 # 程序分为: schedule 调度程序 和 server Api服务
@@ -315,16 +324,20 @@ python proxyPool.py schedule
 python proxyPool.py server
 
 ```
-5.oFx对接proxypool  
+
+5.oFx对接proxypool
 
 直接在后面跟上``--proxypool``参数即可。
+
 ```shell
 python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 ```
-此时oFx就会通过proxypool的api接口获取一个代理，然后判断：  
-* 如果是国外的代理，就会抛弃并删除该代理，然后重新获取。    
+
+此时oFx就会通过proxypool的api接口获取一个代理，然后判断：
+
+* 如果是国外的代理，就会抛弃并删除该代理，然后重新获取。
 * 如果是国内代理，就会尝试进行访问测试，如果失败，同样抛弃并删除，但如果测试成功，则会引用该代理。  
-<br>
+  <br>
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
 
@@ -338,6 +351,7 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 | 360                       | 360天擎数据库未授权访问                                                   | ``poc/360/TianQing_Unauth_Acceess/poc.py``                                 |
 |                           | 360天擎前台SQL注入                                                    | ``poc/360/TianQing_SQLi/poc.py``                                           |
 | ACME                      | mini_httpd任意文件读取漏洞(CVE-2018-18778)                              | ``poc/ACME/File_Read_mini_httpd_CVE_2018_18778/poc.py``                    |
+| AJ_Report                 | AJ-Report 身份验证绕过和远程代码执行 (CNVD-2024-15077)                       | ``poc/AJ_Report/RCE_CNVD_2024_15077/poc.py``                               |
 | Alibaba_Alist             | AList云盘 未授权访问                                                   | ``poc/Alibaba_Alist/UnAuth_Access/poc.py``                                 |
 | Alibaba_Canal             | Alibaba Canal 默认弱口令漏洞                                           | ``poc/Alibaba_Canal/Weak_Pass/poc.py``                                     |
 |                           | Alibaba Canal 信息泄露                                              | ``poc/Alibaba_Canal/Info_Disclosure/poc.py``                               |

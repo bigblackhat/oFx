@@ -57,7 +57,7 @@ class POC(POCBase):
             检测逻辑，漏洞存在则修改vuln值为True，漏洞不存在则不动
             """
             req = requests.get(url,headers = headers , proxies = self.proxy ,timeout = self.timeout,verify = False)
-            if "Routes" in req.text or "hosts" in req.text and req.status_code == 200:
+            if ("Routes" in req.text or "hosts" in req.text) and req.status_code == 200 and "application/octet-stream" in req.headers["Content-Type"]:
                 vuln = [True,req.text]
             else:
                 vuln = [False,req.text]
