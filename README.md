@@ -341,10 +341,12 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
 
+<!--
 <br>
 
 <details>
 <summary>支持的漏洞列表 [点击展开] </summary>  
+-->
 
 | 应用                        | 漏洞名称                                                            | POC路径                                                                      |
 |---------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------------|
@@ -450,6 +452,7 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 |                           | Jetty指纹识别                                                       | ``poc/Jetty/FingerPrint/poc.py``                                           |
 |                           | Jetty WEB-INF 敏感信息泄露漏洞（CVE-2021-28164）                          | ``poc/Jetty/Info_Disclosure_CVE_2021_28164/poc.py``                        |
 |                           | Jetty Utility Servlets ConcatServlet 双解码信息泄露漏洞 (CVE-2021-28169) | ``poc/Jetty/Info_Disclosure_CVE_2021_28169/poc.py``                        |
+| JimuReport                | JimuReport FreeMarker 服务端模板注入命令执行（CVE-2023-4450）                | ``poc/JimuReport/RCE_CVE_2023_4450/poc.py``                                |
 | 金和OA                      | 金和OA C6 download.jsp 任意文件读取漏洞                                   | ``poc/Jinher_金和OA/File_Read_download_jsp/poc.py``                          |
 | KEDACOM 数字系统接入网关          | KEDACOM 数字系统接入网关 任意文件读取漏洞                                       | ``poc/KEDACOM_数字系统接入网关/File_Read/poc.py``                                  |
 | 金蝶OA                      | 金蝶协同办公系统 fileDownload.do 任意文件下载漏洞                               | ``poc/Kingdee_金蝶/File_Down_fileDownload_do/poc.py``                        |
