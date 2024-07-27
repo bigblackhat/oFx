@@ -1,16 +1,21 @@
 # 🌖 oFx
+![oFx](https://socialify.git.ci/bigblackhat/oFx/image?description=1&font=Rokkitt&forks=1&issues=1&language=1&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark)
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-GPLv3-brown.svg)](https://github.com/bigblackhat/oFx/blob/main/LICENSE)
-[![POC_NUM](https://img.shields.io/badge/poc_num-209-orange.svg)](#PocSupport)
-![GitHub Repo stars](https://img.shields.io/github/stars/bigblackhat/ofx?color=gree)
-![GitHub forks](https://img.shields.io/github/forks/bigblackhat/oFx?color=blue)
+[//]: # ([![Python 3.x]&#40;https://img.shields.io/badge/python-3.x-yellow.svg&#41;]&#40;https://www.python.org/&#41;)
 
-![show](img/007.jpeg)
-笔者很喜欢海王三叉戟的造型，就画了一张作为oFx的LOGO吧
+[//]: # ([![License]&#40;https://img.shields.io/badge/license-GPLv3-brown.svg&#41;]&#40;https://github.com/bigblackhat/oFx/blob/main/LICENSE&#41;)
 
-2022HW专题：[点我点我](https://github.com/bigblackhat/oFx/blob/main/docs/2022HW.md)
-<br>
+[//]: # ([![POC_NUM]&#40;https://img.shields.io/badge/poc_num-209-orange.svg&#41;]&#40;#PocSupport&#41;)
+
+[//]: # (![GitHub Repo stars]&#40;https://img.shields.io/github/stars/bigblackhat/ofx?color=gree&#41;)
+
+[//]: # (![GitHub forks]&#40;https://img.shields.io/github/forks/bigblackhat/oFx?color=blue&#41;)
+
+[//]: # (![show]&#40;img/007.jpeg&#41;)
+
+[//]: # (笔者很喜欢海王三叉戟的造型，就画了一张作为oFx的LOGO吧)
+
+[//]: # (2022HW专题：[点我点我]&#40;https://github.com/bigblackhat/oFx/blob/main/docs/2022HW.md&#41;)
 
 ## 🐈 简介
 
@@ -31,7 +36,6 @@
 
 > 企业内网或对外开放资产的安全评估
 
-> 简单的拒绝服务攻击(用Url存活检测POC)
 
 特点：
 
@@ -40,6 +44,8 @@
 * 功能与时俱进，不断优化打磨
 * POC模板结构简洁，提供了专门面对开发者的小工具箱，适合用户自定义拓展POC，能够快速应对不同的安全场景
 * 所有POC均以不对目标产生任何负面影响的前提下编写的，旨在发现缺陷的同时不给目标业务造成任何负面影响，能灵活应用于企业与个人不同的安全需求
+
+安全声明：注意，这不是一个黑客工具，仅用于获得企业、单位、组织授权情况下的安全漏洞验证以及安全从业者学习使用，开发者不承担任何相关非法活动的法律责任。
 
 <br>
 
@@ -107,10 +113,20 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 > 返回取决于漏洞本身，目前所有POC都是为了批量验证而设计的，single检测模式尚没有对返回结果做优化，后续会有调整)
 
 ![show](img/001.png)  
+
 漏洞存在与否见最后一行
 
 <br>
 <br>
+
+### ⭕漏洞利用
+
+-e，写webshell、反弹shell等。
+
+目前支持漏洞利用的POC：
+```
+禅道8.2-9.2.1注入GetShell
+```
 
 ### 🚗 批量扫描模式
 
@@ -184,62 +200,20 @@ python3 oFx.py -s all -f scan/1.txt
 
 ![show](img/005.png)
 
-#### Fofa全量资产获取
-
-oFx会尽可能获取最大数量的Fofa全球资产，一条有效语句理论上获取的资产数量最大能达到25万个。
-
-```shell
-python3 ofx.py --fofa-search
-....
-请输入文件名保存结果（不要添加文件后缀）： xxx
-请输入搜索语句：xxx
-！是否需要获取全球最大数量资产( 是(y/Y) , 否(n/N/Enter) ):
-```
-
-按``Y``进行全球资产尽可能多的获取，按``N``或``Enter``键则常规获取最大一万条。
-
-```sh
-➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
-
-20xx-xx-xx xx:xx:xx,xxx - INFO: User : xxx@163.com | Key : xxx | 登陆成功
-请输入结果保存文件名(不必加文件后缀)：jboss001
-请输入搜索语句：app="Jboss"
-
-20xx-xx-xx xx:xx:xx,xxx - INFO: Fofa搜索语句为：app="Jboss"，开始与Fofa Api对接
-第1页获取成功
-第2页获取成功
-第3页获取成功
-...
-第99页获取成功
-第100页获取成功
-
-20xx-xx-xx xx:xx:xx,xxx - INFO: 搜索完毕，结果保存至/root/oFx/scan/jboss001.txt，经去重共计9748条
-```
-
-同时笔者贴心的提供了是否跳过中国大陆资产的选择，方便广大安全从业者的多样化需求：
-
-```shell
-➜  oFx git:(main) ✗ python3 ofx.py --fofa-search
-
-2024-05-16 23:11:37,021 - ~o(〃'▽'〃)o: User : xxx@163.com | Key : xxx | Login Success
-请输入文件名保存结果（不要添加文件后缀）： port21
-请输入搜索语句：port="21"
-！是否需要获取全球最大数量资产( 是(y/Y) , 否(n/N/Enter) ): y
-是否跳过中国资产？yes: y/Y , no: n/N/Enter: y
-
-2024-05-16 23:11:58,487 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): Fofa搜索语句是：port="21"，开始对接 Fofa Api
-
-2024-05-16 23:12:00,633 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 目标国家/地区： "HK"，行政区划： "Hong Kong"
-
-2024-05-16 23:12:01,766 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 第1页获取成功
-
-2024-05-16 23:12:02,491 - (∩ᵒ̴̶̷̤⌔ᵒ̴̶̷̤∩): 第2页获取成功
-.....
-```
+Fofa Search分成三种模式：  
+1）默认模式，即：一条dork语句最大获取1w个资产  
+2）自适应模式，即：根据fofa结果，自适应获取当前dork在全球保有量最多的5个国家与其5个行政区划的资产，理论上一条有效dork语句最多可以获得25w资产  
+3）中国全境模式，即：根据中国全境行政区划（以Fofa官方设计为准），获取所有资产，理论上一条有效dork语句最多可以获得31w资产
 
 fofa的配置文件位置为：``lib/fofa.ini``
 
-每次运行fofa搜索功能时，oFx都会尝试登陆，如果失败，会要求用户提供账号和key，此时再登陆成功，oFx会动态的修改配置文件中的user和key，无需打开配置文件调整，下次再使用时也直接生效不必重新输入user和key
+```
+备注：
+每次运行fofa搜索功能时，oFx都会尝试登陆。
+如果失败，会要求用户提供账号和key，此时再登陆成功，oFx会动态的修改配置文件中的user和key，无需打开配置文件调整，下次再使用时也直接生效不必重新输入user和key
+
+在获取资产过程中，如果因报错中断或手动关闭程序，并不影响在此之前获取到的资产保存，可以根据  scan/运行fofa-search后指定的文件名.txt  去找。
+```
 
 
 <br>
@@ -337,7 +311,7 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 
 * 如果是国外的代理，就会抛弃并删除该代理，然后重新获取。
 * 如果是国内代理，就会尝试进行访问测试，如果失败，同样抛弃并删除，但如果测试成功，则会引用该代理。  
-  <br>
+
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
 
