@@ -18,6 +18,7 @@ import base64
 import binascii
 import subprocess
 import uuid
+
 try:
     from Crypto.Cipher import AES
 except:
@@ -123,6 +124,31 @@ def get_local_version(path):
     cp.read(path)
     return cp["info"]["version"]
 
+def create_file(path):
+    with open(path,"w") as f:
+        pass
+
+def append_file(path,content):
+    with open(path,"a+") as f:
+        f.write(content)
+
+def read_file(path):
+    with open(path,"r") as f:
+        return f.read()
+
+def clear_file(path):
+    with open(path,"w") as f:
+        pass
+def delete_file(path):
+    try:
+        os.remove(path)
+        # print(f"文件 {path} 已成功删除。")
+    except FileNotFoundError:
+        print(f"文件 {path} 未找到。")
+    except PermissionError:
+        print(f"没有权限删除文件 {path}。")
+    except Exception as e:
+        print(f"删除文件时发生错误: {e}")
 
 session = dnslog_cn_session
 _dnslogCN_flag = ""
@@ -281,7 +307,8 @@ def run(POC_Class, target, proxy=False, output=True, PocRemain="", Alive_mode=Fa
         except ConnectionError as e:
             lock.acquire()
             logverifyerror(
-                "POC 剩余 : %s ╭☞ %d Connection error %s Error details：%s " % (PocRemain, target.qsize(), target, str(e)))
+                "POC 剩余 : %s ╭☞ %d Connection error %s Error details：%s " % (
+                PocRemain, target.qsize(), target, str(e)))
             unreachoutput.append(target_url + " || Error details" + str(e))
             lock.release()
             pass
@@ -298,7 +325,8 @@ def run(POC_Class, target, proxy=False, output=True, PocRemain="", Alive_mode=Fa
         except BaseException as e:
             lock.acquire()
             logverifyerror(
-                "POC 剩余 : %s ╭☞ %d unknown mistake %s Error details：%s " % (PocRemain, target.qsize(), target, str(e)))
+                "POC 剩余 : %s ╭☞ %d unknown mistake %s Error details：%s " % (
+                PocRemain, target.qsize(), target, str(e)))
             unreachoutput.append(target_url + " || Error details" + str(e))
             lock.release()
             pass
@@ -315,17 +343,20 @@ def GetCommand():
     # target = parser.add_argument_group("TARGET")
     target = parser.add_mutually_exclusive_group()
     target.add_argument("-u", "--url", type=str, help="指定单个url，该模式不支持多POC或全量POC (e.g. www.baidu.com)")
-    target.add_argument("-f", "--file", type=str, help="指定存有url列表的文件路径，该模式支持多POC或全量POC (e.g. /root/urllist.txt)")
+    target.add_argument("-f", "--file", type=str,
+                        help="指定存有url列表的文件路径，该模式支持多POC或全量POC (e.g. /root/urllist.txt)")
 
     script = parser.add_argument_group("Script")
     script.add_argument("-s", "--script", type=str,
                         help="指定POC相对路径，格式见readme.md (e.g. -s poc/jellyfin/jellyfin_fileread_scan/poc.py OR -s all)")
+    exploit = parser.add_argument_group("Exploit")
+    exploit.add_argument("-e", "--exploit", action="store_true", help="启动利用模式，格式：-e")
 
     system = parser.add_argument_group("System")
     system.add_argument("--thread", default=10, type=int, help="指定线程数，默认为10，仅扫描时指定线程数有效")
     system.add_argument("--proxy", default=False,
                         help="指定Http Proxy，仅扫描时指定线程数有效，Example：127.0.0.1:8080 OR http://127.0.0.1:8080")
-    system.add_argument("--proxypool",action="store_true",help="启用代理池，与--proxy参数互斥")
+    system.add_argument("--proxypool", action="store_true", help="启用代理池，与--proxy参数互斥")
     system.add_argument("--output", default=True, help="不建议使用该参数指定输出地址，建议扫完了看output目录即可")
     system.add_argument("--sound", action="store_true", help="扫完了会有铃声提醒，不推荐使用该参数")
     system.add_argument("--version", action="store_true", help="显示本地oFx版本，并根据网络状态给出最新版本号")

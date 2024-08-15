@@ -1,5 +1,6 @@
-# 🌖 oFx
-![oFx](https://socialify.git.ci/bigblackhat/oFx/image?description=1&font=Rokkitt&forks=1&issues=1&language=1&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Dark)
+[//]: # (# 🌖 oFx)
+
+![ofx](https://socialify.git.ci/bigblackhat/ofx/image?description=1&font=Rokkitt&forks=1&issues=1&logo=https%3A%2F%2Fimg.icons8.com%2F%3Fsize%3D100%26id%3DF83fTNEFxxFm%26format%3Dpng%26color%3D000000&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Light)
 
 [//]: # ([![Python 3.x]&#40;https://img.shields.io/badge/python-3.x-yellow.svg&#41;]&#40;https://www.python.org/&#41;)
 
@@ -22,11 +23,11 @@
 ``中文名：奥夫叉(谐音哈哈🦉)``
 
 ```
-    _  ______
-    ___ |  ___|_  __
-/ _ \| |_  \ \/ /
-| (_) |  _|  >  <__ _Author : jijue
-\___/|_| __/_/\_\__ __ __Version : latest
+     ______
+ ___ |  ___|_  __
+/ _ \| |___\ \/ /
+| (_)  | __|\  \     __ _Author : jijue
+\___/|_|   /_/\_\__ __ __Version : latest
 
 ```
 
@@ -48,32 +49,6 @@
 安全声明：注意，这不是一个黑客工具，仅用于获得企业、单位、组织授权情况下的安全漏洞验证以及安全从业者学习使用，开发者不承担任何相关非法活动的法律责任。
 
 <br>
-
-## 🚔 法律免责声明
-
-```
-未经事先双方同意，使用oFx攻击目标是非法的。
-oFx仅用于安全测试与研究目的
-
-Usage of oFx for attacking targets without prior mutual consent is illegal.
-oFx is for security testing purposes only
-```
-
-<br>
-
-## 📜 Licenses
-
-在原有协议LICENSE中追加以下免责声明。若与原有协议冲突均以免责声明为准。
-
-本工具禁止进行未授权商业用途，禁止二次开发后进行未授权商业用途。
-
-本工具仅面向合法授权的企业安全建设行为，在使用本工具进行检测时，您应确保该行为符合当地的法律法规，并且已经取得了足够的授权。
-
-如您在使用本工具的过程中存在任何非法行为，您需自行承担相应后果，我们将不承担任何法律及连带责任。
-
-在使用本工具前，请您务必审慎阅读、充分理解各条款内容，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。
-除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。
-
 <br>
 <br>
 <br>
@@ -112,7 +87,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 > 单个目标的漏洞验证详情(
 > 返回取决于漏洞本身，目前所有POC都是为了批量验证而设计的，single检测模式尚没有对返回结果做优化，后续会有调整)
 
-![show](img/001.png)  
+![show](img/001.png)
 
 漏洞存在与否见最后一行
 
@@ -124,9 +99,13 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 -e，写webshell、反弹shell等。
 
 目前支持漏洞利用的POC：
+
 ```
-禅道8.2-9.2.1注入GetShell
+禅道8.2-9.2.1注入GetShell       写Webshell
+CVE-2024-36401 未授权RCE        反弹shell
 ```
+
+由于笔者有选择困难症，还没想好漏洞利用功能的交互方式，暂时先这么用着吧
 
 ### 🚗 批量扫描模式
 
@@ -214,7 +193,6 @@ fofa的配置文件位置为：``lib/fofa.ini``
 
 在获取资产过程中，如果因报错中断或手动关闭程序，并不影响在此之前获取到的资产保存，可以根据  scan/运行fofa-search后指定的文件名.txt  去找。
 ```
-
 
 <br>
 <br>
@@ -310,8 +288,7 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 此时oFx就会通过proxypool的api接口获取一个代理，然后判断：
 
 * 如果是国外的代理，就会抛弃并删除该代理，然后重新获取。
-* 如果是国内代理，就会尝试进行访问测试，如果失败，同样抛弃并删除，但如果测试成功，则会引用该代理。  
-
+* 如果是国内代理，就会尝试进行访问测试，如果失败，同样抛弃并删除，但如果测试成功，则会引用该代理。
 
 # 🐇 POC支持清单<div id="PocSupport"></div>
 
@@ -399,6 +376,7 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 | Fortinet_美国飞塔             | 飞塔(Fortinet)防火墙身份认证绕过漏洞(CVE-2022-40684)                         | ``poc/Fortinet_美国飞塔/Authentication_Bypass_FortiOS_CVE_2022_40648/poc.py``  |
 |                           | Fortigate SSL VPN fgt_lang 任意文件读取                               | ``poc/Fortinet_美国飞塔/FileRead_SSL_VPN/poc.py``                              |
 | FTP                       | FTP匿名访问                                                         | ``poc/FTP/Anonymous_Access/poc.py``                                        |
+| GeoServer                 | CVE-2024-36401 未授权RCE                                           | `poc/GeoServer/RCE_CVE_2024_36401/poc.py`                                  |
 | Grafana                   | Grafana plugins 任意文件读取漏洞(CVE-2021-43798)                        | ``poc/Grafana/File_Read_plugins/poc.py``                                   |
 | H2 数据库                    | H2 数据库 Web控制台未授权访问                                              | ``poc/H2_DataBase/UnAuth_Access/poc.py``                                   |
 | H3C SecPath 下一代防火墙        | H3C SecPath 下一代防火墙 任意文件下载漏洞                                     | ``poc/H3C/File_Download_SecPath_WAF/poc.py``                               |
@@ -558,7 +536,29 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 
 <br>
 <br>
-<br>
+
+## 🚔 法律免责声明
+
+```
+未经事先双方同意，使用oFx攻击目标是非法的。
+oFx仅用于安全测试与研究目的
+
+Usage of oFx for attacking targets without prior mutual consent is illegal.
+oFx is for security testing purposes only
+```
+
+## 📜 Licenses
+
+在原有协议LICENSE中追加以下免责声明。若与原有协议冲突均以免责声明为准。
+
+本工具禁止进行未授权商业用途，禁止二次开发后进行未授权商业用途。
+
+本工具仅面向合法授权的企业安全建设行为，在使用本工具进行检测时，您应确保该行为符合当地的法律法规，并且已经取得了足够的授权。
+
+如您在使用本工具的过程中存在任何非法行为，您需自行承担相应后果，我们将不承担任何法律及连带责任。
+
+在使用本工具前，请您务必审慎阅读、充分理解各条款内容，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。
+除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。
 
 # 🎄 致谢清单
 
@@ -581,9 +581,6 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 license(s) 正版免费授权，在此表达我的谢意。
 
 ![JetBrains](img/008.png)
-<br>
-<br>
-<br>
 
 # 🛠 错误提交
 

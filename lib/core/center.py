@@ -6,7 +6,7 @@ import os
 import time
 
 import requests
-
+import lib.core.data
 from lib.core.data import root_path, lock
 from lib.core.common import get_local_version, get_latest_revision
 from lib.core.log import logvuln, logwarning, logunvuln, logverifyerror, logcritical
@@ -102,25 +102,29 @@ class oFxCenter():
 
             fofa_save_path = scan_path + input("请输入文件名保存结果（不要添加文件后缀）： ") + ".txt"
             FofaDork = input("请输入搜索语句：")
-            search_all = input("！是否需要获取全球最大数量资产( 是(y/Y) , 否(n/N/Enter) ): ")
-            if search_all.lower() == "y":
-                search_all = True
-            elif search_all.lower() in ["n", ""]:
-                search_all = False
-            else:
-                logwarning("输入错误！需要获取最大数量资产请输入：y/Y，不需要请输入：n/N或按Enter键")
+            search_model = input("！请选择搜索模式：1）默认100页；2）自适应最大化；3）中国全境；4）退出 > ")
+            try:
+                search_model = int(search_model.strip())
+            except Exception as e:
+                print(e)
+            if search_model == 1 or search_model == 2 or search_model == 3:
+                pass
+            elif search_model==4:
                 exit()
-            pass_china = input("是否跳过中国资产？yes: y/Y , no: n/N/Enter: ")
+            else:
+                logwarning("输入错误！")
+                exit()
+            pass_china = input("是否跳过中国资产？跳过: y，不跳过: n/Enter: ")
             if pass_china.lower() == "y":
                 pass_china = True
             elif pass_china.lower() in ["n", ""]:
                 pass_china = False
             else:
-                logwarning("输入错误！需要跳过中国资产请输入：y/Y，不需要请输入：n/N或按Enter键")
+                logwarning("输入错误！")
                 exit()
 
             loglogo("Fofa搜索语句是：{fofadork}，开始对接 Fofa Api".format(fofadork=FofaDork))
-            FofaResultNum = fofa_search(FofaLogin[1], FofaLogin[2], FofaDork, search_all, pass_china, fofa_save_path)
+            FofaResultNum = fofa_search(FofaLogin[1], FofaLogin[2], FofaDork, search_model, pass_china, fofa_save_path)
             if type(FofaResultNum) == int:
                 log_msg = "搜索完成，结果保存到 {path}，去重后，一共 {FofaResultNum}条".format(path=fofa_save_path,
                                                                                             FofaResultNum=FofaResultNum)
@@ -176,7 +180,7 @@ class oFxCenter():
                 self.addpoc(vuln_path)
 
     def command_parser(self):
-        global AliveList, AliveTest
+        global AliveList, AliveTest, exploitModle
         self.CMD_ARGS = GetCommand()
         if self.CMD_ARGS.version == True:
             self.show_version()
@@ -261,6 +265,8 @@ POC路径为{VULN_PATH}
                      \nMust provide -s parameter to specify POC or [-s all] to load all POC")
                 exit()
 
+            if self.CMD_ARGS.exploit:
+                lib.core.data.exploitModle = True
             # single mode
             if self.getmode() == 1:
 
