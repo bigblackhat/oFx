@@ -352,12 +352,13 @@ def GetCommand():
     exploit = parser.add_argument_group("Exploit")
     exploit.add_argument("-e", "--exploit", action="store_true", help="启动利用模式，格式：-e")
 
-    system = parser.add_argument_group("System")
+    system = parser.add_argument_group("System(扫描配置)")
     system.add_argument("--thread", default=10, type=int, help="指定线程数，默认为10，仅扫描时指定线程数有效")
     system.add_argument("--proxy", default=False,
                         help="指定Http Proxy，仅扫描时指定线程数有效，Example：127.0.0.1:8080 OR http://127.0.0.1:8080")
     system.add_argument("--proxypool", action="store_true", help="启用代理池，与--proxy参数互斥")
     system.add_argument("--output", default=True, help="不建议使用该参数指定输出地址，建议扫完了看output目录即可")
+    system.add_argument("--skipalive",action="store_true",help="取消全量扫描模式的前置存活检测")
     system.add_argument("--sound", action="store_true", help="扫完了会有铃声提醒，不推荐使用该参数")
     system.add_argument("--version", action="store_true", help="显示本地oFx版本，并根据网络状态给出最新版本号")
 

@@ -106,10 +106,11 @@ class oFxCenter():
             try:
                 search_model = int(search_model.strip())
             except Exception as e:
-                print(e)
+                # print(e)
+                search_model = 1
             if search_model == 1 or search_model == 2 or search_model == 3:
                 pass
-            elif search_model==4:
+            elif search_model == 4:
                 exit()
             else:
                 logwarning("输入错误！")
@@ -265,8 +266,10 @@ POC路径为{VULN_PATH}
                      \nMust provide -s parameter to specify POC or [-s all] to load all POC")
                 exit()
 
-            if self.CMD_ARGS.exploit:
+            if self.CMD_ARGS.exploit:  # 漏洞利用模式
                 lib.core.data.exploitModle = True
+            if self.CMD_ARGS.skipalive:  # 跳过存活检测
+                lib.core.data.skipAlive = True
             # single mode
             if self.getmode() == 1:
 
@@ -313,7 +316,7 @@ POC路径为{VULN_PATH}
                 start_time = time.time()
 
                 #### Alpha Future Start ####
-                if self.CMD_ARGS.script == "all":
+                if self.CMD_ARGS.script == "all" and lib.core.data.skipAlive == False:
                     with open(self.CMD_ARGS.file, "r") as f:
                         target_list = [i.strip() for i in f.readlines() if "." in i]
                         target_list = set(target_list)

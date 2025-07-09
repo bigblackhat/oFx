@@ -38,7 +38,7 @@ class POCBase(object):
             proxy = self.get_proxy_from_api()
             self.setproxy(proxy)
         else:
-            self.proxy = {"http": "http://" + proxy}
+            self.proxy = {"http": proxy}  # socks代理：socks://xx.x.x.x:xxx, http代理：http://xx.x.x.x:xx
         self.timeout = 45
 
     def get_proxy_from_api(self):

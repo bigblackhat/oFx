@@ -55,7 +55,7 @@
 
 # ☕️ 使用方法
 
-### 🚀 部署
+## 🚀 部署
 
 ```
 git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
@@ -64,7 +64,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 <br>
 <br>
 
-### 🍡 用前提醒
+## 🍡 用前提醒
 
 使用前提醒，oFx默认每次运行都会有报告和log的输出，分别在output和log文件夹下，出于缓解存储压力的考虑，笔者设定的规则为每次运行时都会删除12小时以前的输出文件，如果该输出文件对使用者有剩余价值，请在运行结束后及时将输出文件移出当前目录或更名为中/英文形式，如果有重要信息被删除，就再扫一遍吧，也快得很
 
@@ -73,7 +73,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 <br>
 <br>
 
-### 🛵 单个url扫描模式
+## 🛵 单个url扫描模式
 
 单个url扫描模式的使用场景：
 > POC功能性测试
@@ -94,7 +94,7 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 <br>
 <br>
 
-### ⭕漏洞利用
+## ⭕漏洞利用
 
 -e，写webshell、反弹shell等。
 
@@ -103,11 +103,12 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 ```
 禅道8.2-9.2.1注入GetShell       写Webshell
 CVE-2024-36401 未授权RCE        反弹shell
+Nacos未授权访问                  创建账户：crow/crow
 ```
 
 由于笔者有选择困难症，还没想好漏洞利用功能的交互方式，暂时先这么用着吧
 
-### 🚗 批量扫描模式
+## 🚗 批量扫描模式
 
 使用场景：
 
@@ -155,7 +156,7 @@ CVE-2024-36401 未授权RCE        反弹shell
 <br>
 <br>
 
-### 🚂 单个目标的全量POC测试
+## 🚂 单个目标的全量POC测试
 
 全量POC，顾名思义，遍历所有POC插件依次有序的对目标进行测试，接近于漏扫的概念，而且是一个专注于NDay的漏洞扫描器，因oFx的拓展性，非常适合手中掌握数量庞大的0Day的组织或个人（比如笔者自己），使得他可以将0Day库武器化。
 
@@ -173,7 +174,7 @@ python3 oFx.py -s all -f scan/1.txt
 <br>
 <br>
 
-### 🐾 Fofa api 资产获取
+## 🐾 Fofa api 资产获取
 
 通过fofa提供的api接口获取资产清单并去重
 
@@ -197,7 +198,7 @@ fofa的配置文件位置为：``lib/fofa.ini``
 <br>
 <br>
 
-### 🐾 Ceye配置
+## 🐾 Ceye配置
 
 近期的版本更新中，oFx添加了对Ceye的支持，目前已有一部分POC采用了该平台来辅助漏洞检测，默认下载oFx之后不配置该项并不影响oFx正常的功能使用，只是相关的POC无法按照预期运行而已，有需要可以配置下：
 
@@ -211,6 +212,14 @@ token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 <br>
+
+## 代理
+
+设置代理需要使用`--proxy`参数。
+
+http代理：`--proxy http://1.1.1.1:8080`
+
+socks5代理：`--proxy socks5://1.1.1.1:1234`
 
 ### 💦 proxypool
 
@@ -380,6 +389,8 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 | Grafana                   | Grafana plugins 任意文件读取漏洞(CVE-2021-43798)                        | ``poc/Grafana/File_Read_plugins/poc.py``                                   |
 | H2 数据库                    | H2 数据库 Web控制台未授权访问                                              | ``poc/H2_DataBase/UnAuth_Access/poc.py``                                   |
 | H3C SecPath 下一代防火墙        | H3C SecPath 下一代防火墙 任意文件下载漏洞                                     | ``poc/H3C/File_Download_SecPath_WAF/poc.py``                               |
+| HanWang 汉王                | 汉王e脸通综合管理平台 queryManyPeopleGroupList接口SQL注入                     | `poc/HanWang/SQLi_queryManyPeopleGroupList/poc.py`                         |
+|                           | 汉王e脸通综合管理平台 getGroupEmployee SQL注入                              | `poc/HanWang/SQLi_getGroupEmployee/poc.py`                                 |
 | 海康威视                      | HIKVISION 视频编码设备接入网关 任意文件下载                                     | ``poc/HIKVISION/File_Down_Gateway_downFile_php/poc.py``                    |
 |                           | HIKVISION 流媒体管理服务器弱口令                                           | ``poc/HIKVISION/Weak_Pass_Stream_Media_Manager/poc.py``                    |
 |                           | HIKVISION 流媒体管理服务器任意文件读取                                        | ``poc/HIKVISION/File_Read_Stream_Media_Manager/poc.py``                    |
@@ -388,13 +399,17 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 |                           | 海康威视 IP Camera 远程命令执行漏洞（CVE-2021-36260）                         | ``poc/HIKVISION/RCE_IP_Camera_CVE_2021_36260/poc.py``                      |
 | 宏电                        | 宏电 H8922 后台任意文件读取漏洞                                             | ``poc/Hongdian_宏电/Backstage_File_Read_CVE_2021_28152/poc.py``              |
 | 好视通                       | 好视通视频会议平台 任意文件下载                                                | ``poc/HST_好视通/File_Download/poc.py``                                       |
+| 华天动力                      | 华天动力OA 8000版 workFlowService SQL注入漏洞                            | `poc/HT_华天动力OA/SQLi_workFlowService/poc.py`                                |
 | 华为                        | Huawei HG659 lib 任意文件读取漏洞                                       | ``poc/Huawei/File_Read_HG659_lib/poc.py``                                  |
 |                           | 华为路由器敏感信息泄露 DG8045 Router 1.0                                   | ``poc/Huawei/Info_Disclosure_DG8045/poc.py``                               |
+| 华域                        | 华域Reporter组件 命令注入漏洞                                             | `poc/HuaYuLab/Cmd_inj_Report/poc.py`                                       |
 | 汇文                        | 汇文OPAC敏感信息泄露                                                    | ``poc/HuiWen_汇文/Info_Disclosure/poc.py``                                   |
 |                           | 汇文OPAC弱口令                                                       | ``poc/HuiWen_汇文/Weak_Pass/poc.py``                                         |
 | 蜂网互联                      | 蜂网互联 企业级路由器v4.31 密码泄露漏洞                                         | ``poc/IFW8_蜂网互联/UPInfo_DisClosure_CVE_2019_16313/poc.py``                  |
+| 爱快                        | iKuai路由器 login/user处sql注入                                       | `poc/iKuai8_爱快/SQLi_Login_user/poc.py`                                     |
 | InfluxDB                  | InfluxDB指纹识别                                                    | ``poc/InfluxDB/FingerPrint/poc.py``                                        |
 |                           | InfluxDB 未授权访问                                                  | ``poc/InfluxDB/UnAuth_Access/poc.py``                                      |
+| 红帆                        | 红帆OA ioFileExport.aspx 任意文件读取漏洞                                 | `poc/ioffice_红帆/FileRead_ioFileExport_aspx/poc.py`                         |
 | Intelbras                 | Intelbras Wireless 未授权与密码泄露                                     | ``poc/Intelbras/UPInfo_Disclosure_CVE_2021_3017/poc.py``                   |
 | Jboss                     | Jboss未授权访问                                                      | ``poc/Jboss/Unauth_Access/poc.py``                                         |
 | Jellyfin                  | Jellyfin任意文件读取                                                  | ``poc/jellyfin/File_Read_CVE_2021_21402/poc.py``                           |
@@ -406,6 +421,8 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 |                           | Jetty Utility Servlets ConcatServlet 双解码信息泄露漏洞 (CVE-2021-28169) | ``poc/Jetty/Info_Disclosure_CVE_2021_28169/poc.py``                        |
 | JimuReport                | JimuReport FreeMarker 服务端模板注入命令执行（CVE-2023-4450）                | ``poc/JimuReport/RCE_CVE_2023_4450/poc.py``                                |
 | 金和OA                      | 金和OA C6 download.jsp 任意文件读取漏洞                                   | ``poc/Jinher_金和OA/File_Read_download_jsp/poc.py``                          |
+| Joomla                    | Joomla！Rest api 信息泄露（CVE-2023-23752）                            | `poc/Joomla!/Info_Disclosure_CVE_2023_23752/poc.py`                        |
+|                           | Joomla! 未授权访问漏洞(CVE-2023-23752)                                 | `poc/Joomla!/UnAuthAccess_CVE_2023_23752/poc.py`                           |
 | KEDACOM 数字系统接入网关          | KEDACOM 数字系统接入网关 任意文件读取漏洞                                       | ``poc/KEDACOM_数字系统接入网关/File_Read/poc.py``                                  |
 | 金蝶OA                      | 金蝶协同办公系统 fileDownload.do 任意文件下载漏洞                               | ``poc/Kingdee_金蝶/File_Down_fileDownload_do/poc.py``                        |
 |                           | 金蝶OA server_file 目录遍历漏洞                                         | ``poc/Kingdee_金蝶/Dir_List_server_file/poc.py``                             |
@@ -422,12 +439,18 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 | MemCache                  | MemCache未授权访问                                                   | ``poc/MemCache/UnAuth_Access/poc.py``                                      |
 | MessageSolution企业邮件归档管理系统 | MessageSolution企业邮件归档管理系统 EEA 信息泄露                              | ``poc/MessageSolution/Info_Disclosure/poc.py``                             |
 | MetaBase                  | MetaBase任意文件读取漏洞 CVE-2021-41277                                 | ``poc/Metabase/File_Read_CVE_2021_41277/poc.py``                           |
+|                           | CVE-2023-38646 Metabase RCE                                     | `poc/Metabase/RCE_CVE_2023_38646/poc.py`                                   |
+| MetInfo                   | MetInfo任意文件读取漏洞                                                 | `poc/MetInfo/FileRead_thumb/poc.py`                                        |
 | MicroSoft                 | Windows HTTP协议栈远程代码执行漏洞(CVE-2022-21907)                         | poc/MicroSoft/RCE_CVE_2022_21907/poc.py                                    |
 | MongoDB                   | MongoDB未授权访问                                                    | ``poc/MongoDB/Unauth_Access/poc.py``                                       |
 | Mysql                     | Mysql弱口令                                                        | ``poc/Mysql/WeakPass/poc.py``                                              |
 | 蓝海卓越                      | 蓝海卓越计费管理系统 任意文件读取                                               | ``poc/NatShell_蓝海卓越/File_Read/poc.py``                                     |
 |                           | 蓝海卓越计费管理系统 认证hash泄露                                             | ``poc/NatShell_蓝海卓越/HashInfo_DisClosure/poc.py``                           |
+| 网康                        | 网康下一代防火墙 checkProcessNumber 远程命令执行                              | `poc/NetentSec_网康/RCE_checkProcessNumber/poc.py`                           |
+|                           | 网康下一代防火墙 doSetStatus 反序列化RCE                                    | `poc/NetentSec_网康/RCE_doSetStatus/poc.py`                                  |
+|                           | 网康下一代防火墙 version参数 前台RCE                                        | `poc/NetentSec_网康/RCE_Version/poc.py`                                      |
 | 中科网威                      | 中科网威 下一代防火墙控制系统 账号密码泄露漏洞                                        | ``poc/NetPower_中科网威/UPInfo_DisClosure_Firewall/poc.py``                    |
+| Nexus                     | Nexus Repository Manager 3 远程命令执行漏洞（CVE-2019-7238）              | `poc/Nexus/RCE_CVE_2019_7238/poc.py`                                       |
 | Node.js                   | Node.js目录穿越漏洞                                                   | ``poc/Node.js/Dir_Traversal_CVE_2017_14849/poc.py``                        |
 |                           | Node.js命令注入漏洞（CVE-2021-21315）                                   | ``poc/Node.js/Cmd_inj_CVE_2021_21315/poc.py``                              |
 | 绿盟                        | 绿盟下一代防火墙 resourse.php 任意文件上传漏洞                                  | ``poc/nsfocus_绿盟/File_upload_NF/poc.py``                                   |

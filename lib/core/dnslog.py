@@ -68,7 +68,7 @@ class DnsLogApi(object):
         all_log = self.get_all_log()
         for i in all_log:
             if flag.lower() in i.lower():
-                return True
+                return True,i.lower()
 
 
 class CeyeApi(object):

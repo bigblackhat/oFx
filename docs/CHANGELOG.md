@@ -1,3 +1,25 @@
+## version 2.28.2
+
+-----------------
+新增：
+* `目标存活扫描（基于Socket）`
+* `汉王e脸通综合管理平台 queryManyPeopleGroupList接口SQL注入`
+* `汉王e脸通综合管理平台 getGroupEmployee SQL注入`
+* `华天动力OA 8000版 workFlowService SQL注入漏洞`
+* `华域Reporter组件 命令注入漏洞`
+* `iKuai路由器 login/user处sql注入`
+* `红帆OA ioFileExport.aspx 任意文件读取漏洞`
+* `Joomla！Rest api 信息泄露（CVE-2023-23752）`
+* `Joomla! 未授权访问漏洞(CVE-2023-23752)`
+* `CVE-2023-38646 Metabase RCE`
+* `MetInfo任意文件读取漏洞`
+* `网康下一代防火墙 checkProcessNumber 远程命令执行`
+* `网康下一代防火墙 doSetStatus 反序列化RCE`
+* `网康下一代防火墙 version参数 前台RCE`
+* `Nexus Repository Manager 3 远程命令执行漏洞（CVE-2019-7238）`
+
+优化部分细节
+
 ## version 2.26.6
 
 -----------------

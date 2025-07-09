@@ -38,3 +38,4 @@ AliveList = set()
 dnslog_cn_session = requests.session()
 
 exploitModle = False
+skipAlive = False
