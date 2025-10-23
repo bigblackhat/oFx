@@ -316,32 +316,6 @@ python3 ofx.py -s all -f xxx.txt --proxypool --thread 50
 在使用本工具前，请您务必审慎阅读、充分理解各条款内容，限制、免责条款或者其他涉及您重大权益的条款可能会以加粗、加下划线等形式提示您重点注意。
 除非您已充分阅读、完全理解并接受本协议所有条款，否则，请您不要使用本工具。您的使用行为或者您以其他任何明示或者默示方式表示接受本协议的，即视为您已阅读并同意本协议的约束。
 
-[//]: # (# 🎄 致谢清单)
-
-[//]: # ()
-[//]: # (以下清单中的项目笔者都有参考或对笔者提供一定程度上的帮助，排名不分先后顺序，仅按照中文全拼首字母顺序排列)
-
-[//]: # ()
-[//]: # (| 项目地址                                                                              |)
-
-[//]: # (|-----------------------------------------------------------------------------------|)
-
-[//]: # (| [AngelSword]&#40;https://github.com/Lucifer1993/AngelSword&#41;                           |)
-
-[//]: # (| [edusrc_POC]&#40;https://github.com/Cl0udG0d/edusrc_POC&#41;                              |)
-
-[//]: # (| [iak_ARL]&#40;https://github.com/nu0l/iak-ARL&#41;                                        |)
-
-[//]: # (| [Landray-OA-Treexml-Rce]&#40;https://github.com/tangxiaofeng7/Landray-OA-Treexml-Rce&#41; |)
-
-[//]: # (| [pocsuite3]&#40;https://github.com/knownsec/pocsuite3&#41;                                |)
-
-[//]: # (| [sqlmap]&#40;https://github.com/sqlmapproject/sqlmap&#41; sqlmap永远滴神                      |)
-
-[//]: # (| [vulhub]&#40;https://vulhub.org/&#41;                                                     |)
-
-[//]: # (| [xray]&#40;https://github.com/chaitin/xray/&#41; 抄作业，冲冲冲                                  |)
-
 # 😄 致谢JetBrains
 
 ``oFx``项目一直以来都是在 ``JetBrains`` 公司旗下的``PyCharm``集成开发环境中进行开发，基于 free JetBrains Open Source
@@ -349,25 +323,11 @@ license(s) 正版免费授权，在此表达我的谢意。
 
 ![JetBrains](img/008.png)
 
-# 🛠 错误提交
 
-如果您在使用oFx的过程中遇到了一些笔者写代码时没有考虑到的问题或没有测试到的错误，欢迎通过邮箱告知笔者(ronginus@qq.com)
-或提Issues
+[//]: # (~~都看到这儿了，点个star再走呗~~)
 
-提交BUG时，需要给到笔者触发错误的oFx命令，测试文件，您的运行环境（包括但不限于操作系统、python版本等），报错的字符串形式 ➕ 报错截图
-
-~~都看到这儿了，点个star再走呗~~
-
-![show](img/006.jpg)
-
-
-
-
-
-
-访客数统计
-
-![Visitor Count](https://profile-counter.glitch.me/bigblackhat-oFx/count.svg)  
+[//]: # ()
+[//]: # (![show]&#40;img/006.jpg&#41;)
 
 Star统计  
 
