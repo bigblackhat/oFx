@@ -1,7 +1,5 @@
 ![ofx](https://socialify.git.ci/bigblackhat/ofx/image?description=1&font=Rokkitt&forks=1&issues=1&logo=https%3A%2F%2Fimg.icons8.com%2F%3Fsize%3D100%26id%3DF83fTNEFxxFm%26format%3Dpng%26color%3D000000&name=1&pattern=Floating%20Cogs&pulls=1&stargazers=1&theme=Light)
 
-[![Python 3.x](https://img.shields.io/badge/python-3.x-yellow.svg)](https://www.python.org/)
-
 oFx是一个开源的、开箱即用的漏洞批量验证框架。无需任何编程基础，只需一条命令即可快速验证、扫描漏洞
 
 ## 🐈 项目优势
@@ -57,8 +55,6 @@ git clone --depth 1 https://github.com/bigblackhat/oFx.git oFx
 
 ### 💻 系统兼容性
 - ✅ **推荐系统**：Mac、Kali Linux、Windows
-- ✅ **其他Linux发行版**：应该可以正常运行
-- ❓ **Windows系统**：可能存在不可预测错误
 
 ---
 
